@@ -15,7 +15,7 @@ public interface imsEweiShopCreditshopGoodsMapper {
     int updateByPrimaryKeySelective(imsEweiShopCreditshopGoodsWithBLOBs record);
 
     int updateByPrimaryKeyWithBLOBs(imsEweiShopCreditshopGoodsWithBLOBs record);
-
+    //cbx
     int updateByPrimaryKey(imsEweiShopCreditshopGoods record);
 
 }
