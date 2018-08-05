@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.carryit.base.besttmwuu.dao.imsEweiShopSnsPostMapper">
+<mapper namespace="com.carryit.base.besttmwuu.dao.ImsEweiShopSnsPostMapper">
   <resultMap id="BaseResultMap" type="com.carryit.base.besttmwuu.entity.imsEweiShopSnsPost">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="uniacid" jdbcType="INTEGER" property="uniacid" />
@@ -27,7 +27,7 @@
     <result column="checktime" jdbcType="INTEGER" property="checktime" />
     <result column="isadmin" jdbcType="TINYINT" property="isadmin" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.carryit.base.besttmwuu.entity.imsEweiShopSnsPostWithBLOBs">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.carryit.base.besttmwuu.entity.ImsEweiShopSnsPostWithBLOBs">
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
     <result column="images" jdbcType="LONGVARCHAR" property="images" />
   </resultMap>
@@ -51,7 +51,7 @@
     delete from ims_ewei_shop_sns_post
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopSnsPostWithBLOBs">
+  <insert id="insert" parameterType="com.carryit.base.besttmwuu.entity.ImsEweiShopSnsPostWithBLOBs">
     insert into ims_ewei_shop_sns_post (id, uniacid, bid, 
       pid, rpid, openid, 
       avatar, nickname, title, 
@@ -71,7 +71,7 @@
       #{checktime,jdbcType=INTEGER}, #{isadmin,jdbcType=TINYINT}, #{content,jdbcType=LONGVARCHAR}, 
       #{images,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopSnsPostWithBLOBs">
+  <insert id="insertSelective" parameterType="com.carryit.base.besttmwuu.entity.ImsEweiShopSnsPostWithBLOBs">
     insert into ims_ewei_shop_sns_post
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -234,7 +234,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopSnsPostWithBLOBs">
+  <update id="updateByPrimaryKeySelective" parameterType="com.carryit.base.besttmwuu.entity.ImsEweiShopSnsPostWithBLOBs">
     update ims_ewei_shop_sns_post
     <set>
       <if test="uniacid != null">
@@ -315,7 +315,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopSnsPostWithBLOBs">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.carryit.base.besttmwuu.entity.ImsEweiShopSnsPostWithBLOBs">
     update ims_ewei_shop_sns_post
     set uniacid = #{uniacid,jdbcType=INTEGER},
       bid = #{bid,jdbcType=INTEGER},
@@ -371,4 +371,14 @@
       isadmin = #{isadmin,jdbcType=TINYINT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="getimsEweiShopSnsPostWithBLOBs" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ims_ewei_shop_sns_post
+    where id=2
+  </select>
+
 </mapper>

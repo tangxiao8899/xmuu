@@ -1,6 +1,6 @@
 package com.carryit.base.besttmwuu.entity;
 
-public class imsEweiShopSnsPostWithBLOBs extends imsEweiShopSnsPost {
+public class ImsEweiShopSnsPostWithBLOBs extends imsEweiShopSnsPost {
     private String content;
 
     private String images;
