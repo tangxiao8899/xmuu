@@ -1,6 +1,6 @@
 package com.carryit.base.besttmwuu.entity;
 
-public class imsMcMembers WithBLOBs extends imsMcMembers {
+public class imsMcMembersWithBLOBs extends imsMcMembers {
     private String bio;
 
     private String interest;

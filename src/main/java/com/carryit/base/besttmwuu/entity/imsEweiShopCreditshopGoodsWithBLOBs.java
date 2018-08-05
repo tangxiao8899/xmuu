@@ -1,6 +1,6 @@
 package com.carryit.base.besttmwuu.entity;
 
-public class imsEweiShopCreditshopGoods WithBLOBs extends imsEweiShopCreditshopGoods {
+public class imsEweiShopCreditshopGoodsWithBLOBs extends imsEweiShopCreditshopGoods {
     private String detail;
 
     private String showlevels;

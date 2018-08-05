@@ -1,6 +1,6 @@
 package com.carryit.base.besttmwuu.entity;
 
-public class imsEweiShopMember WithBLOBs extends imsEweiShopMember {
+public class imsEweiShopMemberWithBLOBs extends imsEweiShopMember {
     private String content;
 
     private String noticeset;

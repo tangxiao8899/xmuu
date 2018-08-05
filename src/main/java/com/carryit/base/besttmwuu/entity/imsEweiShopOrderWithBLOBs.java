@@ -1,6 +1,6 @@
 package com.carryit.base.besttmwuu.entity;
 
-public class imsEweiShopOrder WithBLOBs extends imsEweiShopOrder {
+public class imsEweiShopOrderWithBLOBs extends imsEweiShopOrder {
     private String carrier;
 
     private String virtualInfo;

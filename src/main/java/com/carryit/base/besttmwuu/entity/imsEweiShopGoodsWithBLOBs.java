@@ -1,6 +1,6 @@
 package com.carryit.base.besttmwuu.entity;
 
-public class imsEweiShopGoods WithBLOBs extends imsEweiShopGoods {
+public class imsEweiShopGoodsWithBLOBs extends imsEweiShopGoods {
     private String content;
 
     private String thumbUrl;

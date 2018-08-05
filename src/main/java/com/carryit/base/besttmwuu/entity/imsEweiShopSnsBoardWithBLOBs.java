@@ -1,6 +1,6 @@
 package com.carryit.base.besttmwuu.entity;
 
-public class imsEweiShopSnsBoard WithBLOBs extends imsEweiShopSnsBoard {
+public class imsEweiShopSnsBoardWithBLOBs extends imsEweiShopSnsBoard {
     private String showgroups;
 
     private String showlevels;

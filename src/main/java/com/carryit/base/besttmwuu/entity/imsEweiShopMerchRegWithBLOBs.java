@@ -1,6 +1,6 @@
 package com.carryit.base.besttmwuu.entity;
 
-public class imsEweiShopMerchReg WithBLOBs extends imsEweiShopMerchReg {
+public class imsEweiShopMerchRegWithBLOBs extends imsEweiShopMerchReg {
     private String diyformdata;
 
     private String diyformfields;
