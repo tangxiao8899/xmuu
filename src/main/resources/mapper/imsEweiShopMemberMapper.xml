@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.carryit.base.besttmwuu.dao.imsEweiShopMember Mapper">
-  <resultMap id="BaseResultMap" type="com.carryit.base.besttmwuu.entity.imsEweiShopMember ">
+<mapper namespace="com.carryit.base.besttmwuu.dao.imsEweiShopMemberMapper">
+  <resultMap id="BaseResultMap" type="com.carryit.base.besttmwuu.entity.imsEweiShopMember">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="uniacid" jdbcType="INTEGER" property="uniacid" />
     <result column="uid" jdbcType="INTEGER" property="uid" />
@@ -87,7 +87,7 @@
     <result column="membercardactive" jdbcType="BIT" property="membercardactive" />
     <result column="levelendtime" jdbcType="INTEGER" property="levelendtime" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.carryit.base.besttmwuu.entity.imsEweiShopMember WithBLOBs">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.carryit.base.besttmwuu.entity.imsEweiShopMemberWithBLOBs">
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
     <result column="noticeset" jdbcType="LONGVARCHAR" property="noticeset" />
     <result column="diymemberfields" jdbcType="LONGVARCHAR" property="diymemberfields" />
@@ -128,15 +128,15 @@
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
-    from "ims_ewei_shop_member"
+    from ims_ewei_shop_member
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from "ims_ewei_shop_member"
+    delete from ims_ewei_shop_member
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopMember WithBLOBs">
-    insert into "ims_ewei_shop_member" (id, uniacid, uid, 
+  <insert id="insert" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopMemberWithBLOBs">
+    insert into ims_ewei_shop_member (id, uniacid, uid, 
       groupid, level, agentid, 
       openid, realname, mobile, 
       pwd, weixin, createtime, 
@@ -207,8 +207,8 @@
       #{diyaagentfields,jdbcType=LONGVARCHAR}, #{diyauthordata,jdbcType=LONGVARCHAR}, 
       #{diyauthorfields,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopMember WithBLOBs">
-    insert into "ims_ewei_shop_member"
+  <insert id="insertSelective" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopMemberWithBLOBs">
+    insert into ims_ewei_shop_member
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -808,8 +808,8 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopMember WithBLOBs">
-    update "ims_ewei_shop_member"
+  <update id="updateByPrimaryKeySelective" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopMemberWithBLOBs">
+    update ims_ewei_shop_member
     <set>
       <if test="uniacid != null">
         uniacid = #{uniacid,jdbcType=INTEGER},
@@ -1108,8 +1108,8 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopMember WithBLOBs">
-    update "ims_ewei_shop_member"
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopMemberWithBLOBs">
+    update ims_ewei_shop_member
     set uniacid = #{uniacid,jdbcType=INTEGER},
       uid = #{uid,jdbcType=INTEGER},
       groupid = #{groupid,jdbcType=INTEGER},
@@ -1210,8 +1210,8 @@
       diyauthorfields = #{diyauthorfields,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopMember ">
-    update "ims_ewei_shop_member"
+  <update id="updateByPrimaryKey" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopMember">
+    update ims_ewei_shop_member
     set uniacid = #{uniacid,jdbcType=INTEGER},
       uid = #{uid,jdbcType=INTEGER},
       groupid = #{groupid,jdbcType=INTEGER},

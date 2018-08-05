@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.carryit.base.besttmwuu.dao.imsEweiShopMemberLevel Mapper">
-  <resultMap id="BaseResultMap" type="com.carryit.base.besttmwuu.entity.imsEweiShopMemberLevel ">
+<mapper namespace="com.carryit.base.besttmwuu.dao.imsEweiShopMemberLevelMapper">
+  <resultMap id="BaseResultMap" type="com.carryit.base.besttmwuu.entity.imsEweiShopMemberLevel">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="uniacid" jdbcType="INTEGER" property="uniacid" />
     <result column="level" jdbcType="INTEGER" property="level" />
@@ -18,7 +18,7 @@
     <result column="totalpeople" jdbcType="INTEGER" property="totalpeople" />
     <result column="teampercent" jdbcType="DECIMAL" property="teampercent" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.carryit.base.besttmwuu.entity.imsEweiShopMemberLevel ">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.carryit.base.besttmwuu.entity.imsEweiShopMemberLevel">
     <result column="goodsids" jdbcType="LONGVARCHAR" property="goodsids" />
   </resultMap>
   <sql id="Base_Column_List">
@@ -33,15 +33,15 @@
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
-    from "ims_ewei_shop_member_level"
+    from ims_ewei_shop_member_level
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from "ims_ewei_shop_member_level"
+    delete from ims_ewei_shop_member_level
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopMemberLevel">
-    insert into "ims_ewei_shop_member_level" (id, uniacid, level, 
+    insert into ims_ewei_shop_member_level (id, uniacid, level, 
       levelname, ordermoney, ordercount, 
       discount, enabled, enabledadd, 
       buygoods, childrennum, upgoods, 
@@ -55,7 +55,7 @@
       #{goodsids,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopMemberLevel">
-    insert into "ims_ewei_shop_member_level"
+    insert into ims_ewei_shop_member_level
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -157,8 +157,8 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopMemberLevel ">
-    update "ims_ewei_shop_member_level"
+  <update id="updateByPrimaryKeySelective" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopMemberLevel">
+    update ims_ewei_shop_member_level
     <set>
       <if test="uniacid != null">
         uniacid = #{uniacid,jdbcType=INTEGER},
@@ -208,8 +208,8 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopMemberLevel ">
-    update "ims_ewei_shop_member_level"
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopMemberLevel">
+    update ims_ewei_shop_member_level
     set uniacid = #{uniacid,jdbcType=INTEGER},
       level = #{level,jdbcType=INTEGER},
       levelname = #{levelname,jdbcType=VARCHAR},
@@ -227,8 +227,8 @@
       goodsids = #{goodsids,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopMemberLevel ">
-    update "ims_ewei_shop_member_level"
+  <update id="updateByPrimaryKey" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopMemberLevel">
+    update ims_ewei_shop_member_level
     set uniacid = #{uniacid,jdbcType=INTEGER},
       level = #{level,jdbcType=INTEGER},
       levelname = #{levelname,jdbcType=VARCHAR},

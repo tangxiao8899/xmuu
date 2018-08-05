@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.carryit.base.besttmwuu.dao.imsEweiShopCreditshopGoods Mapper">
-  <resultMap id="BaseResultMap" type="com.carryit.base.besttmwuu.entity.imsEweiShopCreditshopGoods ">
+<mapper namespace="com.carryit.base.besttmwuu.dao.imsEweiShopCreditshopGoodsMapper">
+  <resultMap id="BaseResultMap" type="com.carryit.base.besttmwuu.entity.imsEweiShopCreditshopGoods">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="uniacid" jdbcType="INTEGER" property="uniacid" />
     <result column="displayorder" jdbcType="INTEGER" property="displayorder" />
@@ -76,7 +76,7 @@
     <result column="packettotal" jdbcType="INTEGER" property="packettotal" />
     <result column="packetsurplus" jdbcType="INTEGER" property="packetsurplus" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.carryit.base.besttmwuu.entity.imsEweiShopCreditshopGoods WithBLOBs">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.carryit.base.besttmwuu.entity.imsEweiShopCreditshopGoodsWithBLOBs">
     <result column="detail" jdbcType="LONGVARCHAR" property="detail" />
     <result column="showlevels" jdbcType="LONGVARCHAR" property="showlevels" />
     <result column="buylevels" jdbcType="LONGVARCHAR" property="buylevels" />
@@ -107,15 +107,15 @@
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
-    from "ims_ewei_shop_creditshop_goods"
+    from ims_ewei_shop_creditshop_goods
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from "ims_ewei_shop_creditshop_goods"
+    delete from ims_ewei_shop_creditshop_goods
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopCreditshopGoods WithBLOBs">
-    insert into "ims_ewei_shop_creditshop_goods" (id, uniacid, displayorder, 
+  <insert id="insert" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopCreditshopGoodsWithBLOBs">
+    insert into ims_ewei_shop_creditshop_goods (id, uniacid, displayorder, 
       title, cate, thumb, 
       price, type, credit, 
       money, total, totalday, 
@@ -172,8 +172,8 @@
       #{subdetail,jdbcType=LONGVARCHAR}, #{noticedetail,jdbcType=LONGVARCHAR}, #{goodsdetail,jdbcType=LONGVARCHAR}, 
       #{storeids,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopCreditshopGoods WithBLOBs">
-    insert into "ims_ewei_shop_creditshop_goods"
+  <insert id="insertSelective" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopCreditshopGoodsWithBLOBs">
+    insert into ims_ewei_shop_creditshop_goods
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -671,8 +671,8 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopCreditshopGoods WithBLOBs">
-    update "ims_ewei_shop_creditshop_goods"
+  <update id="updateByPrimaryKeySelective" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopCreditshopGoodsWithBLOBs">
+    update ims_ewei_shop_creditshop_goods
     <set>
       <if test="uniacid != null">
         uniacid = #{uniacid,jdbcType=INTEGER},
@@ -920,8 +920,8 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopCreditshopGoods WithBLOBs">
-    update "ims_ewei_shop_creditshop_goods"
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopCreditshopGoodsWithBLOBs">
+    update ims_ewei_shop_creditshop_goods
     set uniacid = #{uniacid,jdbcType=INTEGER},
       displayorder = #{displayorder,jdbcType=INTEGER},
       title = #{title,jdbcType=VARCHAR},
@@ -1005,8 +1005,8 @@
       storeids = #{storeids,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopCreditshopGoods ">
-    update "ims_ewei_shop_creditshop_goods"
+  <update id="updateByPrimaryKey" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopCreditshopGoods">
+    update ims_ewei_shop_creditshop_goods
     set uniacid = #{uniacid,jdbcType=INTEGER},
       displayorder = #{displayorder,jdbcType=INTEGER},
       title = #{title,jdbcType=VARCHAR},

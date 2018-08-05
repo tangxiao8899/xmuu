@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.carryit.base.besttmwuu.dao.imsEweiShopSnsBoardFollow Mapper">
-  <resultMap id="BaseResultMap" type="com.carryit.base.besttmwuu.entity.imsEweiShopSnsBoardFollow ">
+<mapper namespace="com.carryit.base.besttmwuu.dao.imsEweiShopSnsBoardFollowMapper">
+  <resultMap id="BaseResultMap" type="com.carryit.base.besttmwuu.entity.imsEweiShopSnsBoardFollow">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="uniacid" jdbcType="INTEGER" property="uniacid" />
     <result column="bid" jdbcType="INTEGER" property="bid" />
@@ -14,21 +14,21 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from "ims_ewei_shop_sns_board_follow"
+    from ims_ewei_shop_sns_board_follow
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from "ims_ewei_shop_sns_board_follow"
+    delete from ims_ewei_shop_sns_board_follow
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopSnsBoardFollow">
-    insert into "ims_ewei_shop_sns_board_follow" (id, uniacid, bid, 
+    insert into ims_ewei_shop_sns_board_follow (id, uniacid, bid, 
       openid, createtime)
     values (#{id,jdbcType=INTEGER}, #{uniacid,jdbcType=INTEGER}, #{bid,jdbcType=INTEGER}, 
       #{openid,jdbcType=VARCHAR}, #{createtime,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopSnsBoardFollow">
-    insert into "ims_ewei_shop_sns_board_follow"
+    insert into ims_ewei_shop_sns_board_follow
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -64,8 +64,8 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopSnsBoardFollow ">
-    update "ims_ewei_shop_sns_board_follow"
+  <update id="updateByPrimaryKeySelective" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopSnsBoardFollow">
+    update ims_ewei_shop_sns_board_follow
     <set>
       <if test="uniacid != null">
         uniacid = #{uniacid,jdbcType=INTEGER},
@@ -82,8 +82,8 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopSnsBoardFollow ">
-    update "ims_ewei_shop_sns_board_follow"
+  <update id="updateByPrimaryKey" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopSnsBoardFollow">
+    update ims_ewei_shop_sns_board_follow
     set uniacid = #{uniacid,jdbcType=INTEGER},
       bid = #{bid,jdbcType=INTEGER},
       openid = #{openid,jdbcType=VARCHAR},

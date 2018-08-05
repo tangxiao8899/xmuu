@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.carryit.base.besttmwuu.dao.imsEweiShopSnsBoard Mapper">
-  <resultMap id="BaseResultMap" type="com.carryit.base.besttmwuu.entity.imsEweiShopSnsBoard ">
+<mapper namespace="com.carryit.base.besttmwuu.dao.imsEweiShopSnsBoardMapper">
+  <resultMap id="BaseResultMap" type="com.carryit.base.besttmwuu.entity.imsEweiShopSnsBoard">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="uniacid" jdbcType="INTEGER" property="uniacid" />
     <result column="cid" jdbcType="INTEGER" property="cid" />
@@ -36,7 +36,7 @@
     <result column="notpartner" jdbcType="TINYINT" property="notpartner" />
     <result column="notpartnerpost" jdbcType="TINYINT" property="notpartnerpost" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.carryit.base.besttmwuu.entity.imsEweiShopSnsBoard WithBLOBs">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.carryit.base.besttmwuu.entity.imsEweiShopSnsBoardWithBLOBs">
     <result column="showgroups" jdbcType="LONGVARCHAR" property="showgroups" />
     <result column="showlevels" jdbcType="LONGVARCHAR" property="showlevels" />
     <result column="postgroups" jdbcType="LONGVARCHAR" property="postgroups" />
@@ -64,15 +64,15 @@
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
-    from "ims_ewei_shop_sns_board"
+    from ims_ewei_shop_sns_board
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from "ims_ewei_shop_sns_board"
+    delete from ims_ewei_shop_sns_board
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopSnsBoard WithBLOBs">
-    insert into "ims_ewei_shop_sns_board" (id, uniacid, cid, 
+  <insert id="insert" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopSnsBoardWithBLOBs">
+    insert into ims_ewei_shop_sns_board (id, uniacid, cid, 
       title, logo, desc, 
       displayorder, enabled, postcredit, 
       replycredit, bestcredit, bestboardcredit, 
@@ -103,8 +103,8 @@
       #{showsnslevels,jdbcType=LONGVARCHAR}, #{postsnslevels,jdbcType=LONGVARCHAR}, #{showpartnerlevels,jdbcType=LONGVARCHAR}, 
       #{postpartnerlevels,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopSnsBoard WithBLOBs">
-    insert into "ims_ewei_shop_sns_board"
+  <insert id="insertSelective" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopSnsBoardWithBLOBs">
+    insert into ims_ewei_shop_sns_board
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -368,8 +368,8 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopSnsBoard WithBLOBs">
-    update "ims_ewei_shop_sns_board"
+  <update id="updateByPrimaryKeySelective" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopSnsBoardWithBLOBs">
+    update ims_ewei_shop_sns_board
     <set>
       <if test="uniacid != null">
         uniacid = #{uniacid,jdbcType=INTEGER},
@@ -500,8 +500,8 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopSnsBoard WithBLOBs">
-    update "ims_ewei_shop_sns_board"
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopSnsBoardWithBLOBs">
+    update ims_ewei_shop_sns_board
     set uniacid = #{uniacid,jdbcType=INTEGER},
       cid = #{cid,jdbcType=INTEGER},
       title = #{title,jdbcType=VARCHAR},
@@ -546,8 +546,8 @@
       postpartnerlevels = #{postpartnerlevels,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopSnsBoard ">
-    update "ims_ewei_shop_sns_board"
+  <update id="updateByPrimaryKey" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopSnsBoard">
+    update ims_ewei_shop_sns_board
     set uniacid = #{uniacid,jdbcType=INTEGER},
       cid = #{cid,jdbcType=INTEGER},
       title = #{title,jdbcType=VARCHAR},

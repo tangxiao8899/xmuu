@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.carryit.base.besttmwuu.dao.imsMcMembers Mapper">
-  <resultMap id="BaseResultMap" type="com.carryit.base.besttmwuu.entity.imsMcMembers ">
+<mapper namespace="com.carryit.base.besttmwuu.dao.imsMcMembersMapper">
+  <resultMap id="BaseResultMap" type="com.carryit.base.besttmwuu.entity.imsMcMembers">
     <id column="uid" jdbcType="INTEGER" property="uid" />
     <result column="uniacid" jdbcType="INTEGER" property="uniacid" />
     <result column="mobile" jdbcType="VARCHAR" property="mobile" />
@@ -54,7 +54,7 @@
     <result column="taobao" jdbcType="VARCHAR" property="taobao" />
     <result column="site" jdbcType="VARCHAR" property="site" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.carryit.base.besttmwuu.entity.imsMcMembers WithBLOBs">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.carryit.base.besttmwuu.entity.imsMcMembersWithBLOBs">
     <result column="bio" jdbcType="LONGVARCHAR" property="bio" />
     <result column="interest" jdbcType="LONGVARCHAR" property="interest" />
   </resultMap>
@@ -74,15 +74,15 @@
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
-    from "ims_mc_members"
+    from ims_mc_members
     where uid = #{uid,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from "ims_mc_members"
+    delete from ims_mc_members
     where uid = #{uid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.carryit.base.besttmwuu.entity.imsMcMembers WithBLOBs">
-    insert into "ims_mc_members" (uid, uniacid, mobile, 
+  <insert id="insert" parameterType="com.carryit.base.besttmwuu.entity.imsMcMembersWithBLOBs">
+    insert into ims_mc_members (uid, uniacid, mobile, 
       email, password, salt, 
       groupid, credit1, credit2, 
       credit3, credit4, credit5, 
@@ -119,8 +119,8 @@
       #{taobao,jdbcType=VARCHAR}, #{site,jdbcType=VARCHAR}, #{bio,jdbcType=LONGVARCHAR}, 
       #{interest,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.carryit.base.besttmwuu.entity.imsMcMembers WithBLOBs">
-    insert into "ims_mc_members"
+  <insert id="insertSelective" parameterType="com.carryit.base.besttmwuu.entity.imsMcMembersWithBLOBs">
+    insert into ims_mc_members
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="uid != null">
         uid,
@@ -444,8 +444,8 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.carryit.base.besttmwuu.entity.imsMcMembers WithBLOBs">
-    update "ims_mc_members"
+  <update id="updateByPrimaryKeySelective" parameterType="com.carryit.base.besttmwuu.entity.imsMcMembersWithBLOBs">
+    update ims_mc_members
     <set>
       <if test="uniacid != null">
         uniacid = #{uniacid,jdbcType=INTEGER},
@@ -606,8 +606,8 @@
     </set>
     where uid = #{uid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.carryit.base.besttmwuu.entity.imsMcMembers WithBLOBs">
-    update "ims_mc_members"
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.carryit.base.besttmwuu.entity.imsMcMembersWithBLOBs">
+    update ims_mc_members
     set uniacid = #{uniacid,jdbcType=INTEGER},
       mobile = #{mobile,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
@@ -662,8 +662,8 @@
       interest = #{interest,jdbcType=LONGVARCHAR}
     where uid = #{uid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.carryit.base.besttmwuu.entity.imsMcMembers ">
-    update "ims_mc_members"
+  <update id="updateByPrimaryKey" parameterType="com.carryit.base.besttmwuu.entity.imsMcMembers">
+    update ims_mc_members
     set uniacid = #{uniacid,jdbcType=INTEGER},
       mobile = #{mobile,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
