@@ -11,6 +11,15 @@ public class Board implements Serializable {
     private String banner; //banner图地址
     private Integer topic; //话题数
     private Integer concerns;//关注数
+    private Boolean follow; //是否关注
+
+    public Boolean getFollow() {
+        return follow;
+    }
+
+    public void setFollow(Boolean follow) {
+        this.follow = follow;
+    }
 
     public Integer getId() {
         return id;
