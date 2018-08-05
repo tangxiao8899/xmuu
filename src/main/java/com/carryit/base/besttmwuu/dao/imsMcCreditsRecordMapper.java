@@ -2,7 +2,7 @@ package com.carryit.base.besttmwuu.dao;
 
 import com.carryit.base.besttmwuu.entity.imsMcCreditsRecord;
 
-public interface imsMcCreditsRecord Mapper {
+public interface imsMcCreditsRecordMapper {
     int deleteByPrimaryKey(Integer id);
 
     int insert(imsMcCreditsRecord record);

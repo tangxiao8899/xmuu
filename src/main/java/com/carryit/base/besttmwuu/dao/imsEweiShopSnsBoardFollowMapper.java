@@ -2,7 +2,7 @@ package com.carryit.base.besttmwuu.dao;
 
 import com.carryit.base.besttmwuu.entity.imsEweiShopSnsBoardFollow;
 
-public interface imsEweiShopSnsBoardFollow Mapper {
+public interface imsEweiShopSnsBoardFollowMapper {
     int deleteByPrimaryKey(Integer id);
 
     int insert(imsEweiShopSnsBoardFollow record);

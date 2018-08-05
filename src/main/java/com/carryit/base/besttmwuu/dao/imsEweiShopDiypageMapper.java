@@ -2,7 +2,7 @@ package com.carryit.base.besttmwuu.dao;
 
 import com.carryit.base.besttmwuu.entity.imsEweiShopDiypage;
 
-public interface imsEweiShopDiypage Mapper {
+public interface imsEweiShopDiypageMapper {
     int deleteByPrimaryKey(Integer id);
 
     int insert(imsEweiShopDiypage record);

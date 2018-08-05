@@ -2,7 +2,7 @@ package com.carryit.base.besttmwuu.dao;
 
 import com.carryit.base.besttmwuu.entity.imsEweiShopMemberLevel;
 
-public interface imsEweiShopMemberLevel Mapper {
+public interface imsEweiShopMemberLevelMapper {
     int deleteByPrimaryKey(Integer id);
 
     int insert(imsEweiShopMemberLevel record);

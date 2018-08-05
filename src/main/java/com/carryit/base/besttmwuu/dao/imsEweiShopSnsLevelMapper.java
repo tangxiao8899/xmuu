@@ -2,7 +2,7 @@ package com.carryit.base.besttmwuu.dao;
 
 import com.carryit.base.besttmwuu.entity.imsEweiShopSnsLevel;
 
-public interface imsEweiShopSnsLevel Mapper {
+public interface imsEweiShopSnsLevelMapper {
     int deleteByPrimaryKey(Integer id);
 
     int insert(imsEweiShopSnsLevel record);

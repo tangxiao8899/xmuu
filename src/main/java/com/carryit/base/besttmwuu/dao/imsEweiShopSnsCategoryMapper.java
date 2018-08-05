@@ -2,7 +2,7 @@ package com.carryit.base.besttmwuu.dao;
 
 import com.carryit.base.besttmwuu.entity.imsEweiShopSnsCategory;
 
-public interface imsEweiShopSnsCategory Mapper {
+public interface imsEweiShopSnsCategoryMapper {
     int deleteByPrimaryKey(Integer id);
 
     int insert(imsEweiShopSnsCategory record);

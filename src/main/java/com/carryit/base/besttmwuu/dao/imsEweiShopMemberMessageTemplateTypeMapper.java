@@ -2,7 +2,7 @@ package com.carryit.base.besttmwuu.dao;
 
 import com.carryit.base.besttmwuu.entity.imsEweiShopMemberMessageTemplateType;
 
-public interface imsEweiShopMemberMessageTemplateType Mapper {
+public interface imsEweiShopMemberMessageTemplateTypeMapper {
     int deleteByPrimaryKey(Integer id);
 
     int insert(imsEweiShopMemberMessageTemplateType record);

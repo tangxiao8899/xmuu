@@ -2,7 +2,7 @@ package com.carryit.base.besttmwuu.dao;
 
 import com.carryit.base.besttmwuu.entity.imsEweiShopZrbglobonus;
 
-public interface imsEweiShopZrbglobonus Mapper {
+public interface imsEweiShopZrbglobonusMapper {
     int deleteByPrimaryKey(Integer id);
 
     int insert(imsEweiShopZrbglobonus record);
