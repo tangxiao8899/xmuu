@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.carryit.base.besttmwuu.dao.imsEweiShopSnsCategoryMapper">
+  <resultMap id="BaseResultMap" type="com.carryit.base.besttmwuu.entity.imsEweiShopSnsCategory">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="uniacid" jdbcType="INTEGER" property="uniacid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="thumb" jdbcType="VARCHAR" property="thumb" />
+    <result column="displayorder" jdbcType="TINYINT" property="displayorder" />
+    <result column="enabled" jdbcType="BIT" property="enabled" />
+    <result column="advimg" jdbcType="VARCHAR" property="advimg" />
+    <result column="advurl" jdbcType="VARCHAR" property="advurl" />
+    <result column="isrecommand" jdbcType="TINYINT" property="isrecommand" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, uniacid, name, thumb, displayorder, enabled, advimg, advurl, isrecommand
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ims_ewei_shop_sns_category
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ims_ewei_shop_sns_category
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopSnsCategory">
+    insert into ims_ewei_shop_sns_category (id, uniacid, name, 
+      thumb, displayorder, enabled, 
+      advimg, advurl, isrecommand
+      )
+    values (#{id,jdbcType=INTEGER}, #{uniacid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{thumb,jdbcType=VARCHAR}, #{displayorder,jdbcType=TINYINT}, #{enabled,jdbcType=BIT}, 
+      #{advimg,jdbcType=VARCHAR}, #{advurl,jdbcType=VARCHAR}, #{isrecommand,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopSnsCategory">
+    insert into ims_ewei_shop_sns_category
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="uniacid != null">
+        uniacid,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="thumb != null">
+        thumb,
+      </if>
+      <if test="displayorder != null">
+        displayorder,
+      </if>
+      <if test="enabled != null">
+        enabled,
+      </if>
+      <if test="advimg != null">
+        advimg,
+      </if>
+      <if test="advurl != null">
+        advurl,
+      </if>
+      <if test="isrecommand != null">
+        isrecommand,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="uniacid != null">
+        #{uniacid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="thumb != null">
+        #{thumb,jdbcType=VARCHAR},
+      </if>
+      <if test="displayorder != null">
+        #{displayorder,jdbcType=TINYINT},
+      </if>
+      <if test="enabled != null">
+        #{enabled,jdbcType=BIT},
+      </if>
+      <if test="advimg != null">
+        #{advimg,jdbcType=VARCHAR},
+      </if>
+      <if test="advurl != null">
+        #{advurl,jdbcType=VARCHAR},
+      </if>
+      <if test="isrecommand != null">
+        #{isrecommand,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopSnsCategory">
+    update ims_ewei_shop_sns_category
+    <set>
+      <if test="uniacid != null">
+        uniacid = #{uniacid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="thumb != null">
+        thumb = #{thumb,jdbcType=VARCHAR},
+      </if>
+      <if test="displayorder != null">
+        displayorder = #{displayorder,jdbcType=TINYINT},
+      </if>
+      <if test="enabled != null">
+        enabled = #{enabled,jdbcType=BIT},
+      </if>
+      <if test="advimg != null">
+        advimg = #{advimg,jdbcType=VARCHAR},
+      </if>
+      <if test="advurl != null">
+        advurl = #{advurl,jdbcType=VARCHAR},
+      </if>
+      <if test="isrecommand != null">
+        isrecommand = #{isrecommand,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopSnsCategory">
+    update ims_ewei_shop_sns_category
+    set uniacid = #{uniacid,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      thumb = #{thumb,jdbcType=VARCHAR},
+      displayorder = #{displayorder,jdbcType=TINYINT},
+      enabled = #{enabled,jdbcType=BIT},
+      advimg = #{advimg,jdbcType=VARCHAR},
+      advurl = #{advurl,jdbcType=VARCHAR},
+      isrecommand = #{isrecommand,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

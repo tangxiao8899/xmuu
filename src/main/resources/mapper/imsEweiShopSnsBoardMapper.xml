@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.carryit.base.besttmwuu.dao.imsEweiShopSnsBoardMapper">
+  <resultMap id="BaseResultMap" type="com.carryit.base.besttmwuu.entity.imsEweiShopSnsBoard">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="uniacid" jdbcType="INTEGER" property="uniacid" />
+    <result column="cid" jdbcType="INTEGER" property="cid" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="logo" jdbcType="VARCHAR" property="logo" />
+    <result column="desc" jdbcType="VARCHAR" property="desc" />
+    <result column="displayorder" jdbcType="INTEGER" property="displayorder" />
+    <result column="enabled" jdbcType="INTEGER" property="enabled" />
+    <result column="postcredit" jdbcType="INTEGER" property="postcredit" />
+    <result column="replycredit" jdbcType="INTEGER" property="replycredit" />
+    <result column="bestcredit" jdbcType="INTEGER" property="bestcredit" />
+    <result column="bestboardcredit" jdbcType="INTEGER" property="bestboardcredit" />
+    <result column="notagent" jdbcType="TINYINT" property="notagent" />
+    <result column="notagentpost" jdbcType="TINYINT" property="notagentpost" />
+    <result column="topcredit" jdbcType="INTEGER" property="topcredit" />
+    <result column="topboardcredit" jdbcType="INTEGER" property="topboardcredit" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="noimage" jdbcType="TINYINT" property="noimage" />
+    <result column="novoice" jdbcType="TINYINT" property="novoice" />
+    <result column="needfollow" jdbcType="TINYINT" property="needfollow" />
+    <result column="needpostfollow" jdbcType="TINYINT" property="needpostfollow" />
+    <result column="share_title" jdbcType="VARCHAR" property="shareTitle" />
+    <result column="share_icon" jdbcType="VARCHAR" property="shareIcon" />
+    <result column="share_desc" jdbcType="VARCHAR" property="shareDesc" />
+    <result column="keyword" jdbcType="VARCHAR" property="keyword" />
+    <result column="isrecommand" jdbcType="TINYINT" property="isrecommand" />
+    <result column="banner" jdbcType="VARCHAR" property="banner" />
+    <result column="needcheck" jdbcType="TINYINT" property="needcheck" />
+    <result column="needcheckmanager" jdbcType="TINYINT" property="needcheckmanager" />
+    <result column="needcheckreply" jdbcType="INTEGER" property="needcheckreply" />
+    <result column="needcheckreplymanager" jdbcType="INTEGER" property="needcheckreplymanager" />
+    <result column="notpartner" jdbcType="TINYINT" property="notpartner" />
+    <result column="notpartnerpost" jdbcType="TINYINT" property="notpartnerpost" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.carryit.base.besttmwuu.entity.imsEweiShopSnsBoardWithBLOBs">
+    <result column="showgroups" jdbcType="LONGVARCHAR" property="showgroups" />
+    <result column="showlevels" jdbcType="LONGVARCHAR" property="showlevels" />
+    <result column="postgroups" jdbcType="LONGVARCHAR" property="postgroups" />
+    <result column="postlevels" jdbcType="LONGVARCHAR" property="postlevels" />
+    <result column="showagentlevels" jdbcType="LONGVARCHAR" property="showagentlevels" />
+    <result column="postagentlevels" jdbcType="LONGVARCHAR" property="postagentlevels" />
+    <result column="showsnslevels" jdbcType="LONGVARCHAR" property="showsnslevels" />
+    <result column="postsnslevels" jdbcType="LONGVARCHAR" property="postsnslevels" />
+    <result column="showpartnerlevels" jdbcType="LONGVARCHAR" property="showpartnerlevels" />
+    <result column="postpartnerlevels" jdbcType="LONGVARCHAR" property="postpartnerlevels" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, uniacid, cid, title, logo, desc, displayorder, enabled, postcredit, replycredit, 
+    bestcredit, bestboardcredit, notagent, notagentpost, topcredit, topboardcredit, status, 
+    noimage, novoice, needfollow, needpostfollow, share_title, share_icon, share_desc, 
+    keyword, isrecommand, banner, needcheck, needcheckmanager, needcheckreply, needcheckreplymanager, 
+    notpartner, notpartnerpost
+  </sql>
+  <sql id="Blob_Column_List">
+    showgroups, showlevels, postgroups, postlevels, showagentlevels, postagentlevels, 
+    showsnslevels, postsnslevels, showpartnerlevels, postpartnerlevels
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ims_ewei_shop_sns_board
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ims_ewei_shop_sns_board
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopSnsBoardWithBLOBs">
+    insert into ims_ewei_shop_sns_board (id, uniacid, cid, 
+      title, logo, desc, 
+      displayorder, enabled, postcredit, 
+      replycredit, bestcredit, bestboardcredit, 
+      notagent, notagentpost, topcredit, 
+      topboardcredit, status, noimage, 
+      novoice, needfollow, needpostfollow, 
+      share_title, share_icon, share_desc, 
+      keyword, isrecommand, banner, 
+      needcheck, needcheckmanager, needcheckreply, 
+      needcheckreplymanager, notpartner, notpartnerpost, 
+      showgroups, showlevels, postgroups, 
+      postlevels, showagentlevels, postagentlevels, 
+      showsnslevels, postsnslevels, showpartnerlevels, 
+      postpartnerlevels)
+    values (#{id,jdbcType=INTEGER}, #{uniacid,jdbcType=INTEGER}, #{cid,jdbcType=INTEGER}, 
+      #{title,jdbcType=VARCHAR}, #{logo,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR}, 
+      #{displayorder,jdbcType=INTEGER}, #{enabled,jdbcType=INTEGER}, #{postcredit,jdbcType=INTEGER}, 
+      #{replycredit,jdbcType=INTEGER}, #{bestcredit,jdbcType=INTEGER}, #{bestboardcredit,jdbcType=INTEGER}, 
+      #{notagent,jdbcType=TINYINT}, #{notagentpost,jdbcType=TINYINT}, #{topcredit,jdbcType=INTEGER}, 
+      #{topboardcredit,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, #{noimage,jdbcType=TINYINT}, 
+      #{novoice,jdbcType=TINYINT}, #{needfollow,jdbcType=TINYINT}, #{needpostfollow,jdbcType=TINYINT}, 
+      #{shareTitle,jdbcType=VARCHAR}, #{shareIcon,jdbcType=VARCHAR}, #{shareDesc,jdbcType=VARCHAR}, 
+      #{keyword,jdbcType=VARCHAR}, #{isrecommand,jdbcType=TINYINT}, #{banner,jdbcType=VARCHAR}, 
+      #{needcheck,jdbcType=TINYINT}, #{needcheckmanager,jdbcType=TINYINT}, #{needcheckreply,jdbcType=INTEGER}, 
+      #{needcheckreplymanager,jdbcType=INTEGER}, #{notpartner,jdbcType=TINYINT}, #{notpartnerpost,jdbcType=TINYINT}, 
+      #{showgroups,jdbcType=LONGVARCHAR}, #{showlevels,jdbcType=LONGVARCHAR}, #{postgroups,jdbcType=LONGVARCHAR}, 
+      #{postlevels,jdbcType=LONGVARCHAR}, #{showagentlevels,jdbcType=LONGVARCHAR}, #{postagentlevels,jdbcType=LONGVARCHAR}, 
+      #{showsnslevels,jdbcType=LONGVARCHAR}, #{postsnslevels,jdbcType=LONGVARCHAR}, #{showpartnerlevels,jdbcType=LONGVARCHAR}, 
+      #{postpartnerlevels,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopSnsBoardWithBLOBs">
+    insert into ims_ewei_shop_sns_board
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="uniacid != null">
+        uniacid,
+      </if>
+      <if test="cid != null">
+        cid,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="logo != null">
+        logo,
+      </if>
+      <if test="desc != null">
+        desc,
+      </if>
+      <if test="displayorder != null">
+        displayorder,
+      </if>
+      <if test="enabled != null">
+        enabled,
+      </if>
+      <if test="postcredit != null">
+        postcredit,
+      </if>
+      <if test="replycredit != null">
+        replycredit,
+      </if>
+      <if test="bestcredit != null">
+        bestcredit,
+      </if>
+      <if test="bestboardcredit != null">
+        bestboardcredit,
+      </if>
+      <if test="notagent != null">
+        notagent,
+      </if>
+      <if test="notagentpost != null">
+        notagentpost,
+      </if>
+      <if test="topcredit != null">
+        topcredit,
+      </if>
+      <if test="topboardcredit != null">
+        topboardcredit,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="noimage != null">
+        noimage,
+      </if>
+      <if test="novoice != null">
+        novoice,
+      </if>
+      <if test="needfollow != null">
+        needfollow,
+      </if>
+      <if test="needpostfollow != null">
+        needpostfollow,
+      </if>
+      <if test="shareTitle != null">
+        share_title,
+      </if>
+      <if test="shareIcon != null">
+        share_icon,
+      </if>
+      <if test="shareDesc != null">
+        share_desc,
+      </if>
+      <if test="keyword != null">
+        keyword,
+      </if>
+      <if test="isrecommand != null">
+        isrecommand,
+      </if>
+      <if test="banner != null">
+        banner,
+      </if>
+      <if test="needcheck != null">
+        needcheck,
+      </if>
+      <if test="needcheckmanager != null">
+        needcheckmanager,
+      </if>
+      <if test="needcheckreply != null">
+        needcheckreply,
+      </if>
+      <if test="needcheckreplymanager != null">
+        needcheckreplymanager,
+      </if>
+      <if test="notpartner != null">
+        notpartner,
+      </if>
+      <if test="notpartnerpost != null">
+        notpartnerpost,
+      </if>
+      <if test="showgroups != null">
+        showgroups,
+      </if>
+      <if test="showlevels != null">
+        showlevels,
+      </if>
+      <if test="postgroups != null">
+        postgroups,
+      </if>
+      <if test="postlevels != null">
+        postlevels,
+      </if>
+      <if test="showagentlevels != null">
+        showagentlevels,
+      </if>
+      <if test="postagentlevels != null">
+        postagentlevels,
+      </if>
+      <if test="showsnslevels != null">
+        showsnslevels,
+      </if>
+      <if test="postsnslevels != null">
+        postsnslevels,
+      </if>
+      <if test="showpartnerlevels != null">
+        showpartnerlevels,
+      </if>
+      <if test="postpartnerlevels != null">
+        postpartnerlevels,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="uniacid != null">
+        #{uniacid,jdbcType=INTEGER},
+      </if>
+      <if test="cid != null">
+        #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null">
+        #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="desc != null">
+        #{desc,jdbcType=VARCHAR},
+      </if>
+      <if test="displayorder != null">
+        #{displayorder,jdbcType=INTEGER},
+      </if>
+      <if test="enabled != null">
+        #{enabled,jdbcType=INTEGER},
+      </if>
+      <if test="postcredit != null">
+        #{postcredit,jdbcType=INTEGER},
+      </if>
+      <if test="replycredit != null">
+        #{replycredit,jdbcType=INTEGER},
+      </if>
+      <if test="bestcredit != null">
+        #{bestcredit,jdbcType=INTEGER},
+      </if>
+      <if test="bestboardcredit != null">
+        #{bestboardcredit,jdbcType=INTEGER},
+      </if>
+      <if test="notagent != null">
+        #{notagent,jdbcType=TINYINT},
+      </if>
+      <if test="notagentpost != null">
+        #{notagentpost,jdbcType=TINYINT},
+      </if>
+      <if test="topcredit != null">
+        #{topcredit,jdbcType=INTEGER},
+      </if>
+      <if test="topboardcredit != null">
+        #{topboardcredit,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="noimage != null">
+        #{noimage,jdbcType=TINYINT},
+      </if>
+      <if test="novoice != null">
+        #{novoice,jdbcType=TINYINT},
+      </if>
+      <if test="needfollow != null">
+        #{needfollow,jdbcType=TINYINT},
+      </if>
+      <if test="needpostfollow != null">
+        #{needpostfollow,jdbcType=TINYINT},
+      </if>
+      <if test="shareTitle != null">
+        #{shareTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="shareIcon != null">
+        #{shareIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="shareDesc != null">
+        #{shareDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="keyword != null">
+        #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="isrecommand != null">
+        #{isrecommand,jdbcType=TINYINT},
+      </if>
+      <if test="banner != null">
+        #{banner,jdbcType=VARCHAR},
+      </if>
+      <if test="needcheck != null">
+        #{needcheck,jdbcType=TINYINT},
+      </if>
+      <if test="needcheckmanager != null">
+        #{needcheckmanager,jdbcType=TINYINT},
+      </if>
+      <if test="needcheckreply != null">
+        #{needcheckreply,jdbcType=INTEGER},
+      </if>
+      <if test="needcheckreplymanager != null">
+        #{needcheckreplymanager,jdbcType=INTEGER},
+      </if>
+      <if test="notpartner != null">
+        #{notpartner,jdbcType=TINYINT},
+      </if>
+      <if test="notpartnerpost != null">
+        #{notpartnerpost,jdbcType=TINYINT},
+      </if>
+      <if test="showgroups != null">
+        #{showgroups,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="showlevels != null">
+        #{showlevels,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="postgroups != null">
+        #{postgroups,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="postlevels != null">
+        #{postlevels,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="showagentlevels != null">
+        #{showagentlevels,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="postagentlevels != null">
+        #{postagentlevels,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="showsnslevels != null">
+        #{showsnslevels,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="postsnslevels != null">
+        #{postsnslevels,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="showpartnerlevels != null">
+        #{showpartnerlevels,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="postpartnerlevels != null">
+        #{postpartnerlevels,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopSnsBoardWithBLOBs">
+    update ims_ewei_shop_sns_board
+    <set>
+      <if test="uniacid != null">
+        uniacid = #{uniacid,jdbcType=INTEGER},
+      </if>
+      <if test="cid != null">
+        cid = #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null">
+        logo = #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="desc != null">
+        desc = #{desc,jdbcType=VARCHAR},
+      </if>
+      <if test="displayorder != null">
+        displayorder = #{displayorder,jdbcType=INTEGER},
+      </if>
+      <if test="enabled != null">
+        enabled = #{enabled,jdbcType=INTEGER},
+      </if>
+      <if test="postcredit != null">
+        postcredit = #{postcredit,jdbcType=INTEGER},
+      </if>
+      <if test="replycredit != null">
+        replycredit = #{replycredit,jdbcType=INTEGER},
+      </if>
+      <if test="bestcredit != null">
+        bestcredit = #{bestcredit,jdbcType=INTEGER},
+      </if>
+      <if test="bestboardcredit != null">
+        bestboardcredit = #{bestboardcredit,jdbcType=INTEGER},
+      </if>
+      <if test="notagent != null">
+        notagent = #{notagent,jdbcType=TINYINT},
+      </if>
+      <if test="notagentpost != null">
+        notagentpost = #{notagentpost,jdbcType=TINYINT},
+      </if>
+      <if test="topcredit != null">
+        topcredit = #{topcredit,jdbcType=INTEGER},
+      </if>
+      <if test="topboardcredit != null">
+        topboardcredit = #{topboardcredit,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="noimage != null">
+        noimage = #{noimage,jdbcType=TINYINT},
+      </if>
+      <if test="novoice != null">
+        novoice = #{novoice,jdbcType=TINYINT},
+      </if>
+      <if test="needfollow != null">
+        needfollow = #{needfollow,jdbcType=TINYINT},
+      </if>
+      <if test="needpostfollow != null">
+        needpostfollow = #{needpostfollow,jdbcType=TINYINT},
+      </if>
+      <if test="shareTitle != null">
+        share_title = #{shareTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="shareIcon != null">
+        share_icon = #{shareIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="shareDesc != null">
+        share_desc = #{shareDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="keyword != null">
+        keyword = #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="isrecommand != null">
+        isrecommand = #{isrecommand,jdbcType=TINYINT},
+      </if>
+      <if test="banner != null">
+        banner = #{banner,jdbcType=VARCHAR},
+      </if>
+      <if test="needcheck != null">
+        needcheck = #{needcheck,jdbcType=TINYINT},
+      </if>
+      <if test="needcheckmanager != null">
+        needcheckmanager = #{needcheckmanager,jdbcType=TINYINT},
+      </if>
+      <if test="needcheckreply != null">
+        needcheckreply = #{needcheckreply,jdbcType=INTEGER},
+      </if>
+      <if test="needcheckreplymanager != null">
+        needcheckreplymanager = #{needcheckreplymanager,jdbcType=INTEGER},
+      </if>
+      <if test="notpartner != null">
+        notpartner = #{notpartner,jdbcType=TINYINT},
+      </if>
+      <if test="notpartnerpost != null">
+        notpartnerpost = #{notpartnerpost,jdbcType=TINYINT},
+      </if>
+      <if test="showgroups != null">
+        showgroups = #{showgroups,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="showlevels != null">
+        showlevels = #{showlevels,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="postgroups != null">
+        postgroups = #{postgroups,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="postlevels != null">
+        postlevels = #{postlevels,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="showagentlevels != null">
+        showagentlevels = #{showagentlevels,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="postagentlevels != null">
+        postagentlevels = #{postagentlevels,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="showsnslevels != null">
+        showsnslevels = #{showsnslevels,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="postsnslevels != null">
+        postsnslevels = #{postsnslevels,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="showpartnerlevels != null">
+        showpartnerlevels = #{showpartnerlevels,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="postpartnerlevels != null">
+        postpartnerlevels = #{postpartnerlevels,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopSnsBoardWithBLOBs">
+    update ims_ewei_shop_sns_board
+    set uniacid = #{uniacid,jdbcType=INTEGER},
+      cid = #{cid,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      logo = #{logo,jdbcType=VARCHAR},
+      desc = #{desc,jdbcType=VARCHAR},
+      displayorder = #{displayorder,jdbcType=INTEGER},
+      enabled = #{enabled,jdbcType=INTEGER},
+      postcredit = #{postcredit,jdbcType=INTEGER},
+      replycredit = #{replycredit,jdbcType=INTEGER},
+      bestcredit = #{bestcredit,jdbcType=INTEGER},
+      bestboardcredit = #{bestboardcredit,jdbcType=INTEGER},
+      notagent = #{notagent,jdbcType=TINYINT},
+      notagentpost = #{notagentpost,jdbcType=TINYINT},
+      topcredit = #{topcredit,jdbcType=INTEGER},
+      topboardcredit = #{topboardcredit,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT},
+      noimage = #{noimage,jdbcType=TINYINT},
+      novoice = #{novoice,jdbcType=TINYINT},
+      needfollow = #{needfollow,jdbcType=TINYINT},
+      needpostfollow = #{needpostfollow,jdbcType=TINYINT},
+      share_title = #{shareTitle,jdbcType=VARCHAR},
+      share_icon = #{shareIcon,jdbcType=VARCHAR},
+      share_desc = #{shareDesc,jdbcType=VARCHAR},
+      keyword = #{keyword,jdbcType=VARCHAR},
+      isrecommand = #{isrecommand,jdbcType=TINYINT},
+      banner = #{banner,jdbcType=VARCHAR},
+      needcheck = #{needcheck,jdbcType=TINYINT},
+      needcheckmanager = #{needcheckmanager,jdbcType=TINYINT},
+      needcheckreply = #{needcheckreply,jdbcType=INTEGER},
+      needcheckreplymanager = #{needcheckreplymanager,jdbcType=INTEGER},
+      notpartner = #{notpartner,jdbcType=TINYINT},
+      notpartnerpost = #{notpartnerpost,jdbcType=TINYINT},
+      showgroups = #{showgroups,jdbcType=LONGVARCHAR},
+      showlevels = #{showlevels,jdbcType=LONGVARCHAR},
+      postgroups = #{postgroups,jdbcType=LONGVARCHAR},
+      postlevels = #{postlevels,jdbcType=LONGVARCHAR},
+      showagentlevels = #{showagentlevels,jdbcType=LONGVARCHAR},
+      postagentlevels = #{postagentlevels,jdbcType=LONGVARCHAR},
+      showsnslevels = #{showsnslevels,jdbcType=LONGVARCHAR},
+      postsnslevels = #{postsnslevels,jdbcType=LONGVARCHAR},
+      showpartnerlevels = #{showpartnerlevels,jdbcType=LONGVARCHAR},
+      postpartnerlevels = #{postpartnerlevels,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopSnsBoard">
+    update ims_ewei_shop_sns_board
+    set uniacid = #{uniacid,jdbcType=INTEGER},
+      cid = #{cid,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      logo = #{logo,jdbcType=VARCHAR},
+      desc = #{desc,jdbcType=VARCHAR},
+      displayorder = #{displayorder,jdbcType=INTEGER},
+      enabled = #{enabled,jdbcType=INTEGER},
+      postcredit = #{postcredit,jdbcType=INTEGER},
+      replycredit = #{replycredit,jdbcType=INTEGER},
+      bestcredit = #{bestcredit,jdbcType=INTEGER},
+      bestboardcredit = #{bestboardcredit,jdbcType=INTEGER},
+      notagent = #{notagent,jdbcType=TINYINT},
+      notagentpost = #{notagentpost,jdbcType=TINYINT},
+      topcredit = #{topcredit,jdbcType=INTEGER},
+      topboardcredit = #{topboardcredit,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT},
+      noimage = #{noimage,jdbcType=TINYINT},
+      novoice = #{novoice,jdbcType=TINYINT},
+      needfollow = #{needfollow,jdbcType=TINYINT},
+      needpostfollow = #{needpostfollow,jdbcType=TINYINT},
+      share_title = #{shareTitle,jdbcType=VARCHAR},
+      share_icon = #{shareIcon,jdbcType=VARCHAR},
+      share_desc = #{shareDesc,jdbcType=VARCHAR},
+      keyword = #{keyword,jdbcType=VARCHAR},
+      isrecommand = #{isrecommand,jdbcType=TINYINT},
+      banner = #{banner,jdbcType=VARCHAR},
+      needcheck = #{needcheck,jdbcType=TINYINT},
+      needcheckmanager = #{needcheckmanager,jdbcType=TINYINT},
+      needcheckreply = #{needcheckreply,jdbcType=INTEGER},
+      needcheckreplymanager = #{needcheckreplymanager,jdbcType=INTEGER},
+      notpartner = #{notpartner,jdbcType=TINYINT},
+      notpartnerpost = #{notpartnerpost,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

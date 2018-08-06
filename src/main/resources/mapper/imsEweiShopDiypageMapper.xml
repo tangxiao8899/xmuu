@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.carryit.base.besttmwuu.dao.imsEweiShopDiypageMapper">
+  <resultMap id="BaseResultMap" type="com.carryit.base.besttmwuu.entity.imsEweiShopDiypage">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="uniacid" jdbcType="INTEGER" property="uniacid" />
+    <result column="type" jdbcType="BIT" property="type" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="createtime" jdbcType="INTEGER" property="createtime" />
+    <result column="lastedittime" jdbcType="INTEGER" property="lastedittime" />
+    <result column="keyword" jdbcType="VARCHAR" property="keyword" />
+    <result column="diymenu" jdbcType="INTEGER" property="diymenu" />
+    <result column="merch" jdbcType="INTEGER" property="merch" />
+    <result column="diyadv" jdbcType="INTEGER" property="diyadv" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.carryit.base.besttmwuu.entity.imsEweiShopDiypage">
+    <result column="data" jdbcType="LONGVARCHAR" property="data" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, uniacid, type, name, createtime, lastedittime, keyword, diymenu, merch, diyadv
+  </sql>
+  <sql id="Blob_Column_List">
+    data
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ims_ewei_shop_diypage
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ims_ewei_shop_diypage
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopDiypage">
+    insert into ims_ewei_shop_diypage (id, uniacid, type, 
+      name, createtime, lastedittime, 
+      keyword, diymenu, merch, 
+      diyadv, data)
+    values (#{id,jdbcType=INTEGER}, #{uniacid,jdbcType=INTEGER}, #{type,jdbcType=BIT}, 
+      #{name,jdbcType=VARCHAR}, #{createtime,jdbcType=INTEGER}, #{lastedittime,jdbcType=INTEGER}, 
+      #{keyword,jdbcType=VARCHAR}, #{diymenu,jdbcType=INTEGER}, #{merch,jdbcType=INTEGER}, 
+      #{diyadv,jdbcType=INTEGER}, #{data,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopDiypage">
+    insert into ims_ewei_shop_diypage
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="uniacid != null">
+        uniacid,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="lastedittime != null">
+        lastedittime,
+      </if>
+      <if test="keyword != null">
+        keyword,
+      </if>
+      <if test="diymenu != null">
+        diymenu,
+      </if>
+      <if test="merch != null">
+        merch,
+      </if>
+      <if test="diyadv != null">
+        diyadv,
+      </if>
+      <if test="data != null">
+        data,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="uniacid != null">
+        #{uniacid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=BIT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=INTEGER},
+      </if>
+      <if test="lastedittime != null">
+        #{lastedittime,jdbcType=INTEGER},
+      </if>
+      <if test="keyword != null">
+        #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="diymenu != null">
+        #{diymenu,jdbcType=INTEGER},
+      </if>
+      <if test="merch != null">
+        #{merch,jdbcType=INTEGER},
+      </if>
+      <if test="diyadv != null">
+        #{diyadv,jdbcType=INTEGER},
+      </if>
+      <if test="data != null">
+        #{data,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopDiypage">
+    update ims_ewei_shop_diypage
+    <set>
+      <if test="uniacid != null">
+        uniacid = #{uniacid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=BIT},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=INTEGER},
+      </if>
+      <if test="lastedittime != null">
+        lastedittime = #{lastedittime,jdbcType=INTEGER},
+      </if>
+      <if test="keyword != null">
+        keyword = #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="diymenu != null">
+        diymenu = #{diymenu,jdbcType=INTEGER},
+      </if>
+      <if test="merch != null">
+        merch = #{merch,jdbcType=INTEGER},
+      </if>
+      <if test="diyadv != null">
+        diyadv = #{diyadv,jdbcType=INTEGER},
+      </if>
+      <if test="data != null">
+        data = #{data,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopDiypage">
+    update ims_ewei_shop_diypage
+    set uniacid = #{uniacid,jdbcType=INTEGER},
+      type = #{type,jdbcType=BIT},
+      name = #{name,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=INTEGER},
+      lastedittime = #{lastedittime,jdbcType=INTEGER},
+      keyword = #{keyword,jdbcType=VARCHAR},
+      diymenu = #{diymenu,jdbcType=INTEGER},
+      merch = #{merch,jdbcType=INTEGER},
+      diyadv = #{diyadv,jdbcType=INTEGER},
+      data = #{data,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopDiypage">
+    update ims_ewei_shop_diypage
+    set uniacid = #{uniacid,jdbcType=INTEGER},
+      type = #{type,jdbcType=BIT},
+      name = #{name,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=INTEGER},
+      lastedittime = #{lastedittime,jdbcType=INTEGER},
+      keyword = #{keyword,jdbcType=VARCHAR},
+      diymenu = #{diymenu,jdbcType=INTEGER},
+      merch = #{merch,jdbcType=INTEGER},
+      diyadv = #{diyadv,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
