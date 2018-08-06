@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.carryit.base.besttmwuu.dao.BoardDao">
+
+
+    <select id="getBoardByCid" resultType="com.carryit.base.besttmwuu.entity.Board" parameterType="Integer">
+        select id,cid,title,logo,banner,(select count(*) from ims_ewei_shop_sns_board_follow bf where bf.bid =b.id ) concerns from ims_ewei_shop_sns_board b where cid = #{id}
+
+    </select>
+
+    <select id="getBoardById" resultType="com.carryit.base.besttmwuu.entity.Board" parameterType="Integer">
+        select id,cid,title,logo,banner from ims_ewei_shop_sns_board b where id = #{bid}
+
+    </select>
+</mapper>
