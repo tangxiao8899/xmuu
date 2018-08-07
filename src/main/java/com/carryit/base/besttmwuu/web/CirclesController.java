@@ -62,6 +62,8 @@ public class CirclesController {
             bf =  boardFollowService.getBoardByUid(uid,bid);//查询该用户是否关注该圈子
             if(bf!=null){
                 board.setFollow(true);
+            }else{
+                board.setFollow(false);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -69,5 +71,4 @@ public class CirclesController {
         return board;
 
     }
-
 }
