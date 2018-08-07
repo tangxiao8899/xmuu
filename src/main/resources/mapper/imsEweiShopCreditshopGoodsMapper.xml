@@ -1,0 +1,1084 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.carryit.base.besttmwuu.dao.imsEweiShopCreditshopGoodsMapper">
+  <resultMap id="BaseResultMap" type="com.carryit.base.besttmwuu.entity.imsEweiShopCreditshopGoods">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="uniacid" jdbcType="INTEGER" property="uniacid" />
+    <result column="displayorder" jdbcType="INTEGER" property="displayorder" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="cate" jdbcType="INTEGER" property="cate" />
+    <result column="thumb" jdbcType="VARCHAR" property="thumb" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="credit" jdbcType="INTEGER" property="credit" />
+    <result column="money" jdbcType="DECIMAL" property="money" />
+    <result column="total" jdbcType="INTEGER" property="total" />
+    <result column="totalday" jdbcType="INTEGER" property="totalday" />
+    <result column="chance" jdbcType="INTEGER" property="chance" />
+    <result column="chanceday" jdbcType="INTEGER" property="chanceday" />
+    <result column="rate1" jdbcType="INTEGER" property="rate1" />
+    <result column="rate2" jdbcType="INTEGER" property="rate2" />
+    <result column="endtime" jdbcType="INTEGER" property="endtime" />
+    <result column="joins" jdbcType="INTEGER" property="joins" />
+    <result column="views" jdbcType="INTEGER" property="views" />
+    <result column="createtime" jdbcType="INTEGER" property="createtime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="deleted" jdbcType="TINYINT" property="deleted" />
+    <result column="vip" jdbcType="TINYINT" property="vip" />
+    <result column="istop" jdbcType="TINYINT" property="istop" />
+    <result column="isrecommand" jdbcType="TINYINT" property="isrecommand" />
+    <result column="istime" jdbcType="TINYINT" property="istime" />
+    <result column="timestart" jdbcType="INTEGER" property="timestart" />
+    <result column="timeend" jdbcType="INTEGER" property="timeend" />
+    <result column="share_title" jdbcType="VARCHAR" property="shareTitle" />
+    <result column="share_icon" jdbcType="VARCHAR" property="shareIcon" />
+    <result column="share_desc" jdbcType="VARCHAR" property="shareDesc" />
+    <result column="followneed" jdbcType="TINYINT" property="followneed" />
+    <result column="followtext" jdbcType="VARCHAR" property="followtext" />
+    <result column="subtitle" jdbcType="VARCHAR" property="subtitle" />
+    <result column="usedetail" jdbcType="VARCHAR" property="usedetail" />
+    <result column="isendtime" jdbcType="TINYINT" property="isendtime" />
+    <result column="usecredit2" jdbcType="TINYINT" property="usecredit2" />
+    <result column="area" jdbcType="VARCHAR" property="area" />
+    <result column="dispatch" jdbcType="DECIMAL" property="dispatch" />
+    <result column="noticeopenid" jdbcType="VARCHAR" property="noticeopenid" />
+    <result column="noticetype" jdbcType="TINYINT" property="noticetype" />
+    <result column="isverify" jdbcType="TINYINT" property="isverify" />
+    <result column="goodstype" jdbcType="TINYINT" property="goodstype" />
+    <result column="couponid" jdbcType="INTEGER" property="couponid" />
+    <result column="goodsid" jdbcType="INTEGER" property="goodsid" />
+    <result column="merchid" jdbcType="INTEGER" property="merchid" />
+    <result column="productprice" jdbcType="DECIMAL" property="productprice" />
+    <result column="mincredit" jdbcType="DECIMAL" property="mincredit" />
+    <result column="minmoney" jdbcType="DECIMAL" property="minmoney" />
+    <result column="maxcredit" jdbcType="DECIMAL" property="maxcredit" />
+    <result column="maxmoney" jdbcType="DECIMAL" property="maxmoney" />
+    <result column="dispatchtype" jdbcType="TINYINT" property="dispatchtype" />
+    <result column="dispatchid" jdbcType="INTEGER" property="dispatchid" />
+    <result column="verifytype" jdbcType="TINYINT" property="verifytype" />
+    <result column="verifynum" jdbcType="INTEGER" property="verifynum" />
+    <result column="grant1" jdbcType="DECIMAL" property="grant1" />
+    <result column="grant2" jdbcType="DECIMAL" property="grant2" />
+    <result column="goodssn" jdbcType="VARCHAR" property="goodssn" />
+    <result column="productsn" jdbcType="VARCHAR" property="productsn" />
+    <result column="weight" jdbcType="INTEGER" property="weight" />
+    <result column="showtotal" jdbcType="TINYINT" property="showtotal" />
+    <result column="totalcnf" jdbcType="TINYINT" property="totalcnf" />
+    <result column="usetime" jdbcType="INTEGER" property="usetime" />
+    <result column="hasoption" jdbcType="TINYINT" property="hasoption" />
+    <result column="noticedetailshow" jdbcType="TINYINT" property="noticedetailshow" />
+    <result column="detailshow" jdbcType="TINYINT" property="detailshow" />
+    <result column="packetmoney" jdbcType="DECIMAL" property="packetmoney" />
+    <result column="surplusmoney" jdbcType="DECIMAL" property="surplusmoney" />
+    <result column="packetlimit" jdbcType="DECIMAL" property="packetlimit" />
+    <result column="packettype" jdbcType="TINYINT" property="packettype" />
+    <result column="minpacketmoney" jdbcType="DECIMAL" property="minpacketmoney" />
+    <result column="packettotal" jdbcType="INTEGER" property="packettotal" />
+    <result column="packetsurplus" jdbcType="INTEGER" property="packetsurplus" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.carryit.base.besttmwuu.entity.imsEweiShopCreditshopGoodsWithBLOBs">
+    <result column="detail" jdbcType="LONGVARCHAR" property="detail" />
+    <result column="showlevels" jdbcType="LONGVARCHAR" property="showlevels" />
+    <result column="buylevels" jdbcType="LONGVARCHAR" property="buylevels" />
+    <result column="showgroups" jdbcType="LONGVARCHAR" property="showgroups" />
+    <result column="buygroups" jdbcType="LONGVARCHAR" property="buygroups" />
+    <result column="subdetail" jdbcType="LONGVARCHAR" property="subdetail" />
+    <result column="noticedetail" jdbcType="LONGVARCHAR" property="noticedetail" />
+    <result column="goodsdetail" jdbcType="LONGVARCHAR" property="goodsdetail" />
+    <result column="storeids" jdbcType="LONGVARCHAR" property="storeids" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, uniacid, displayorder, title, cate, thumb, price, type, credit, money, total, 
+    totalday, chance, chanceday, rate1, rate2, endtime, joins, views, createtime, status, 
+    deleted, vip, istop, isrecommand, istime, timestart, timeend, share_title, share_icon, 
+    share_desc, followneed, followtext, subtitle, usedetail, isendtime, usecredit2, area, 
+    dispatch, noticeopenid, noticetype, isverify, goodstype, couponid, goodsid, merchid, 
+    productprice, mincredit, minmoney, maxcredit, maxmoney, dispatchtype, dispatchid, 
+    verifytype, verifynum, grant1, grant2, goodssn, productsn, weight, showtotal, totalcnf, 
+    usetime, hasoption, noticedetailshow, detailshow, packetmoney, surplusmoney, packetlimit, 
+    packettype, minpacketmoney, packettotal, packetsurplus
+  </sql>
+  <sql id="Blob_Column_List">
+    detail, showlevels, buylevels, showgroups, buygroups, subdetail, noticedetail, goodsdetail, 
+    storeids
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ims_ewei_shop_creditshop_goods
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ims_ewei_shop_creditshop_goods
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopCreditshopGoodsWithBLOBs">
+    insert into ims_ewei_shop_creditshop_goods (id, uniacid, displayorder, 
+      title, cate, thumb, 
+      price, type, credit, 
+      money, total, totalday, 
+      chance, chanceday, rate1, 
+      rate2, endtime, joins, 
+      views, createtime, status, 
+      deleted, vip, istop, 
+      isrecommand, istime, timestart, 
+      timeend, share_title, share_icon, 
+      share_desc, followneed, followtext, 
+      subtitle, usedetail, isendtime, 
+      usecredit2, area, dispatch, 
+      noticeopenid, noticetype, isverify, 
+      goodstype, couponid, goodsid, 
+      merchid, productprice, mincredit, 
+      minmoney, maxcredit, maxmoney, 
+      dispatchtype, dispatchid, verifytype, 
+      verifynum, grant1, grant2, 
+      goodssn, productsn, weight, 
+      showtotal, totalcnf, usetime, 
+      hasoption, noticedetailshow, detailshow, 
+      packetmoney, surplusmoney, packetlimit, 
+      packettype, minpacketmoney, packettotal, 
+      packetsurplus, detail, showlevels, 
+      buylevels, showgroups, buygroups, 
+      subdetail, noticedetail, goodsdetail, 
+      storeids)
+    values (#{id,jdbcType=INTEGER}, #{uniacid,jdbcType=INTEGER}, #{displayorder,jdbcType=INTEGER}, 
+      #{title,jdbcType=VARCHAR}, #{cate,jdbcType=INTEGER}, #{thumb,jdbcType=VARCHAR}, 
+      #{price,jdbcType=DECIMAL}, #{type,jdbcType=TINYINT}, #{credit,jdbcType=INTEGER}, 
+      #{money,jdbcType=DECIMAL}, #{total,jdbcType=INTEGER}, #{totalday,jdbcType=INTEGER}, 
+      #{chance,jdbcType=INTEGER}, #{chanceday,jdbcType=INTEGER}, #{rate1,jdbcType=INTEGER}, 
+      #{rate2,jdbcType=INTEGER}, #{endtime,jdbcType=INTEGER}, #{joins,jdbcType=INTEGER}, 
+      #{views,jdbcType=INTEGER}, #{createtime,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, 
+      #{deleted,jdbcType=TINYINT}, #{vip,jdbcType=TINYINT}, #{istop,jdbcType=TINYINT}, 
+      #{isrecommand,jdbcType=TINYINT}, #{istime,jdbcType=TINYINT}, #{timestart,jdbcType=INTEGER}, 
+      #{timeend,jdbcType=INTEGER}, #{shareTitle,jdbcType=VARCHAR}, #{shareIcon,jdbcType=VARCHAR}, 
+      #{shareDesc,jdbcType=VARCHAR}, #{followneed,jdbcType=TINYINT}, #{followtext,jdbcType=VARCHAR}, 
+      #{subtitle,jdbcType=VARCHAR}, #{usedetail,jdbcType=VARCHAR}, #{isendtime,jdbcType=TINYINT}, 
+      #{usecredit2,jdbcType=TINYINT}, #{area,jdbcType=VARCHAR}, #{dispatch,jdbcType=DECIMAL}, 
+      #{noticeopenid,jdbcType=VARCHAR}, #{noticetype,jdbcType=TINYINT}, #{isverify,jdbcType=TINYINT}, 
+      #{goodstype,jdbcType=TINYINT}, #{couponid,jdbcType=INTEGER}, #{goodsid,jdbcType=INTEGER}, 
+      #{merchid,jdbcType=INTEGER}, #{productprice,jdbcType=DECIMAL}, #{mincredit,jdbcType=DECIMAL}, 
+      #{minmoney,jdbcType=DECIMAL}, #{maxcredit,jdbcType=DECIMAL}, #{maxmoney,jdbcType=DECIMAL}, 
+      #{dispatchtype,jdbcType=TINYINT}, #{dispatchid,jdbcType=INTEGER}, #{verifytype,jdbcType=TINYINT}, 
+      #{verifynum,jdbcType=INTEGER}, #{grant1,jdbcType=DECIMAL}, #{grant2,jdbcType=DECIMAL}, 
+      #{goodssn,jdbcType=VARCHAR}, #{productsn,jdbcType=VARCHAR}, #{weight,jdbcType=INTEGER}, 
+      #{showtotal,jdbcType=TINYINT}, #{totalcnf,jdbcType=TINYINT}, #{usetime,jdbcType=INTEGER}, 
+      #{hasoption,jdbcType=TINYINT}, #{noticedetailshow,jdbcType=TINYINT}, #{detailshow,jdbcType=TINYINT}, 
+      #{packetmoney,jdbcType=DECIMAL}, #{surplusmoney,jdbcType=DECIMAL}, #{packetlimit,jdbcType=DECIMAL}, 
+      #{packettype,jdbcType=TINYINT}, #{minpacketmoney,jdbcType=DECIMAL}, #{packettotal,jdbcType=INTEGER}, 
+      #{packetsurplus,jdbcType=INTEGER}, #{detail,jdbcType=LONGVARCHAR}, #{showlevels,jdbcType=LONGVARCHAR}, 
+      #{buylevels,jdbcType=LONGVARCHAR}, #{showgroups,jdbcType=LONGVARCHAR}, #{buygroups,jdbcType=LONGVARCHAR}, 
+      #{subdetail,jdbcType=LONGVARCHAR}, #{noticedetail,jdbcType=LONGVARCHAR}, #{goodsdetail,jdbcType=LONGVARCHAR}, 
+      #{storeids,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopCreditshopGoodsWithBLOBs">
+    insert into ims_ewei_shop_creditshop_goods
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="uniacid != null">
+        uniacid,
+      </if>
+      <if test="displayorder != null">
+        displayorder,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="cate != null">
+        cate,
+      </if>
+      <if test="thumb != null">
+        thumb,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="credit != null">
+        credit,
+      </if>
+      <if test="money != null">
+        money,
+      </if>
+      <if test="total != null">
+        total,
+      </if>
+      <if test="totalday != null">
+        totalday,
+      </if>
+      <if test="chance != null">
+        chance,
+      </if>
+      <if test="chanceday != null">
+        chanceday,
+      </if>
+      <if test="rate1 != null">
+        rate1,
+      </if>
+      <if test="rate2 != null">
+        rate2,
+      </if>
+      <if test="endtime != null">
+        endtime,
+      </if>
+      <if test="joins != null">
+        joins,
+      </if>
+      <if test="views != null">
+        views,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+      <if test="vip != null">
+        vip,
+      </if>
+      <if test="istop != null">
+        istop,
+      </if>
+      <if test="isrecommand != null">
+        isrecommand,
+      </if>
+      <if test="istime != null">
+        istime,
+      </if>
+      <if test="timestart != null">
+        timestart,
+      </if>
+      <if test="timeend != null">
+        timeend,
+      </if>
+      <if test="shareTitle != null">
+        share_title,
+      </if>
+      <if test="shareIcon != null">
+        share_icon,
+      </if>
+      <if test="shareDesc != null">
+        share_desc,
+      </if>
+      <if test="followneed != null">
+        followneed,
+      </if>
+      <if test="followtext != null">
+        followtext,
+      </if>
+      <if test="subtitle != null">
+        subtitle,
+      </if>
+      <if test="usedetail != null">
+        usedetail,
+      </if>
+      <if test="isendtime != null">
+        isendtime,
+      </if>
+      <if test="usecredit2 != null">
+        usecredit2,
+      </if>
+      <if test="area != null">
+        area,
+      </if>
+      <if test="dispatch != null">
+        dispatch,
+      </if>
+      <if test="noticeopenid != null">
+        noticeopenid,
+      </if>
+      <if test="noticetype != null">
+        noticetype,
+      </if>
+      <if test="isverify != null">
+        isverify,
+      </if>
+      <if test="goodstype != null">
+        goodstype,
+      </if>
+      <if test="couponid != null">
+        couponid,
+      </if>
+      <if test="goodsid != null">
+        goodsid,
+      </if>
+      <if test="merchid != null">
+        merchid,
+      </if>
+      <if test="productprice != null">
+        productprice,
+      </if>
+      <if test="mincredit != null">
+        mincredit,
+      </if>
+      <if test="minmoney != null">
+        minmoney,
+      </if>
+      <if test="maxcredit != null">
+        maxcredit,
+      </if>
+      <if test="maxmoney != null">
+        maxmoney,
+      </if>
+      <if test="dispatchtype != null">
+        dispatchtype,
+      </if>
+      <if test="dispatchid != null">
+        dispatchid,
+      </if>
+      <if test="verifytype != null">
+        verifytype,
+      </if>
+      <if test="verifynum != null">
+        verifynum,
+      </if>
+      <if test="grant1 != null">
+        grant1,
+      </if>
+      <if test="grant2 != null">
+        grant2,
+      </if>
+      <if test="goodssn != null">
+        goodssn,
+      </if>
+      <if test="productsn != null">
+        productsn,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="showtotal != null">
+        showtotal,
+      </if>
+      <if test="totalcnf != null">
+        totalcnf,
+      </if>
+      <if test="usetime != null">
+        usetime,
+      </if>
+      <if test="hasoption != null">
+        hasoption,
+      </if>
+      <if test="noticedetailshow != null">
+        noticedetailshow,
+      </if>
+      <if test="detailshow != null">
+        detailshow,
+      </if>
+      <if test="packetmoney != null">
+        packetmoney,
+      </if>
+      <if test="surplusmoney != null">
+        surplusmoney,
+      </if>
+      <if test="packetlimit != null">
+        packetlimit,
+      </if>
+      <if test="packettype != null">
+        packettype,
+      </if>
+      <if test="minpacketmoney != null">
+        minpacketmoney,
+      </if>
+      <if test="packettotal != null">
+        packettotal,
+      </if>
+      <if test="packetsurplus != null">
+        packetsurplus,
+      </if>
+      <if test="detail != null">
+        detail,
+      </if>
+      <if test="showlevels != null">
+        showlevels,
+      </if>
+      <if test="buylevels != null">
+        buylevels,
+      </if>
+      <if test="showgroups != null">
+        showgroups,
+      </if>
+      <if test="buygroups != null">
+        buygroups,
+      </if>
+      <if test="subdetail != null">
+        subdetail,
+      </if>
+      <if test="noticedetail != null">
+        noticedetail,
+      </if>
+      <if test="goodsdetail != null">
+        goodsdetail,
+      </if>
+      <if test="storeids != null">
+        storeids,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="uniacid != null">
+        #{uniacid,jdbcType=INTEGER},
+      </if>
+      <if test="displayorder != null">
+        #{displayorder,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="cate != null">
+        #{cate,jdbcType=INTEGER},
+      </if>
+      <if test="thumb != null">
+        #{thumb,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="credit != null">
+        #{credit,jdbcType=INTEGER},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="total != null">
+        #{total,jdbcType=INTEGER},
+      </if>
+      <if test="totalday != null">
+        #{totalday,jdbcType=INTEGER},
+      </if>
+      <if test="chance != null">
+        #{chance,jdbcType=INTEGER},
+      </if>
+      <if test="chanceday != null">
+        #{chanceday,jdbcType=INTEGER},
+      </if>
+      <if test="rate1 != null">
+        #{rate1,jdbcType=INTEGER},
+      </if>
+      <if test="rate2 != null">
+        #{rate2,jdbcType=INTEGER},
+      </if>
+      <if test="endtime != null">
+        #{endtime,jdbcType=INTEGER},
+      </if>
+      <if test="joins != null">
+        #{joins,jdbcType=INTEGER},
+      </if>
+      <if test="views != null">
+        #{views,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=TINYINT},
+      </if>
+      <if test="vip != null">
+        #{vip,jdbcType=TINYINT},
+      </if>
+      <if test="istop != null">
+        #{istop,jdbcType=TINYINT},
+      </if>
+      <if test="isrecommand != null">
+        #{isrecommand,jdbcType=TINYINT},
+      </if>
+      <if test="istime != null">
+        #{istime,jdbcType=TINYINT},
+      </if>
+      <if test="timestart != null">
+        #{timestart,jdbcType=INTEGER},
+      </if>
+      <if test="timeend != null">
+        #{timeend,jdbcType=INTEGER},
+      </if>
+      <if test="shareTitle != null">
+        #{shareTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="shareIcon != null">
+        #{shareIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="shareDesc != null">
+        #{shareDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="followneed != null">
+        #{followneed,jdbcType=TINYINT},
+      </if>
+      <if test="followtext != null">
+        #{followtext,jdbcType=VARCHAR},
+      </if>
+      <if test="subtitle != null">
+        #{subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="usedetail != null">
+        #{usedetail,jdbcType=VARCHAR},
+      </if>
+      <if test="isendtime != null">
+        #{isendtime,jdbcType=TINYINT},
+      </if>
+      <if test="usecredit2 != null">
+        #{usecredit2,jdbcType=TINYINT},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="dispatch != null">
+        #{dispatch,jdbcType=DECIMAL},
+      </if>
+      <if test="noticeopenid != null">
+        #{noticeopenid,jdbcType=VARCHAR},
+      </if>
+      <if test="noticetype != null">
+        #{noticetype,jdbcType=TINYINT},
+      </if>
+      <if test="isverify != null">
+        #{isverify,jdbcType=TINYINT},
+      </if>
+      <if test="goodstype != null">
+        #{goodstype,jdbcType=TINYINT},
+      </if>
+      <if test="couponid != null">
+        #{couponid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsid != null">
+        #{goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="merchid != null">
+        #{merchid,jdbcType=INTEGER},
+      </if>
+      <if test="productprice != null">
+        #{productprice,jdbcType=DECIMAL},
+      </if>
+      <if test="mincredit != null">
+        #{mincredit,jdbcType=DECIMAL},
+      </if>
+      <if test="minmoney != null">
+        #{minmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="maxcredit != null">
+        #{maxcredit,jdbcType=DECIMAL},
+      </if>
+      <if test="maxmoney != null">
+        #{maxmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="dispatchtype != null">
+        #{dispatchtype,jdbcType=TINYINT},
+      </if>
+      <if test="dispatchid != null">
+        #{dispatchid,jdbcType=INTEGER},
+      </if>
+      <if test="verifytype != null">
+        #{verifytype,jdbcType=TINYINT},
+      </if>
+      <if test="verifynum != null">
+        #{verifynum,jdbcType=INTEGER},
+      </if>
+      <if test="grant1 != null">
+        #{grant1,jdbcType=DECIMAL},
+      </if>
+      <if test="grant2 != null">
+        #{grant2,jdbcType=DECIMAL},
+      </if>
+      <if test="goodssn != null">
+        #{goodssn,jdbcType=VARCHAR},
+      </if>
+      <if test="productsn != null">
+        #{productsn,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=INTEGER},
+      </if>
+      <if test="showtotal != null">
+        #{showtotal,jdbcType=TINYINT},
+      </if>
+      <if test="totalcnf != null">
+        #{totalcnf,jdbcType=TINYINT},
+      </if>
+      <if test="usetime != null">
+        #{usetime,jdbcType=INTEGER},
+      </if>
+      <if test="hasoption != null">
+        #{hasoption,jdbcType=TINYINT},
+      </if>
+      <if test="noticedetailshow != null">
+        #{noticedetailshow,jdbcType=TINYINT},
+      </if>
+      <if test="detailshow != null">
+        #{detailshow,jdbcType=TINYINT},
+      </if>
+      <if test="packetmoney != null">
+        #{packetmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="surplusmoney != null">
+        #{surplusmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="packetlimit != null">
+        #{packetlimit,jdbcType=DECIMAL},
+      </if>
+      <if test="packettype != null">
+        #{packettype,jdbcType=TINYINT},
+      </if>
+      <if test="minpacketmoney != null">
+        #{minpacketmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="packettotal != null">
+        #{packettotal,jdbcType=INTEGER},
+      </if>
+      <if test="packetsurplus != null">
+        #{packetsurplus,jdbcType=INTEGER},
+      </if>
+      <if test="detail != null">
+        #{detail,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="showlevels != null">
+        #{showlevels,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="buylevels != null">
+        #{buylevels,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="showgroups != null">
+        #{showgroups,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="buygroups != null">
+        #{buygroups,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="subdetail != null">
+        #{subdetail,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="noticedetail != null">
+        #{noticedetail,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="goodsdetail != null">
+        #{goodsdetail,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="storeids != null">
+        #{storeids,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopCreditshopGoodsWithBLOBs">
+    update ims_ewei_shop_creditshop_goods
+    <set>
+      <if test="uniacid != null">
+        uniacid = #{uniacid,jdbcType=INTEGER},
+      </if>
+      <if test="displayorder != null">
+        displayorder = #{displayorder,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="cate != null">
+        cate = #{cate,jdbcType=INTEGER},
+      </if>
+      <if test="thumb != null">
+        thumb = #{thumb,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="credit != null">
+        credit = #{credit,jdbcType=INTEGER},
+      </if>
+      <if test="money != null">
+        money = #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="total != null">
+        total = #{total,jdbcType=INTEGER},
+      </if>
+      <if test="totalday != null">
+        totalday = #{totalday,jdbcType=INTEGER},
+      </if>
+      <if test="chance != null">
+        chance = #{chance,jdbcType=INTEGER},
+      </if>
+      <if test="chanceday != null">
+        chanceday = #{chanceday,jdbcType=INTEGER},
+      </if>
+      <if test="rate1 != null">
+        rate1 = #{rate1,jdbcType=INTEGER},
+      </if>
+      <if test="rate2 != null">
+        rate2 = #{rate2,jdbcType=INTEGER},
+      </if>
+      <if test="endtime != null">
+        endtime = #{endtime,jdbcType=INTEGER},
+      </if>
+      <if test="joins != null">
+        joins = #{joins,jdbcType=INTEGER},
+      </if>
+      <if test="views != null">
+        views = #{views,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=TINYINT},
+      </if>
+      <if test="vip != null">
+        vip = #{vip,jdbcType=TINYINT},
+      </if>
+      <if test="istop != null">
+        istop = #{istop,jdbcType=TINYINT},
+      </if>
+      <if test="isrecommand != null">
+        isrecommand = #{isrecommand,jdbcType=TINYINT},
+      </if>
+      <if test="istime != null">
+        istime = #{istime,jdbcType=TINYINT},
+      </if>
+      <if test="timestart != null">
+        timestart = #{timestart,jdbcType=INTEGER},
+      </if>
+      <if test="timeend != null">
+        timeend = #{timeend,jdbcType=INTEGER},
+      </if>
+      <if test="shareTitle != null">
+        share_title = #{shareTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="shareIcon != null">
+        share_icon = #{shareIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="shareDesc != null">
+        share_desc = #{shareDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="followneed != null">
+        followneed = #{followneed,jdbcType=TINYINT},
+      </if>
+      <if test="followtext != null">
+        followtext = #{followtext,jdbcType=VARCHAR},
+      </if>
+      <if test="subtitle != null">
+        subtitle = #{subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="usedetail != null">
+        usedetail = #{usedetail,jdbcType=VARCHAR},
+      </if>
+      <if test="isendtime != null">
+        isendtime = #{isendtime,jdbcType=TINYINT},
+      </if>
+      <if test="usecredit2 != null">
+        usecredit2 = #{usecredit2,jdbcType=TINYINT},
+      </if>
+      <if test="area != null">
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="dispatch != null">
+        dispatch = #{dispatch,jdbcType=DECIMAL},
+      </if>
+      <if test="noticeopenid != null">
+        noticeopenid = #{noticeopenid,jdbcType=VARCHAR},
+      </if>
+      <if test="noticetype != null">
+        noticetype = #{noticetype,jdbcType=TINYINT},
+      </if>
+      <if test="isverify != null">
+        isverify = #{isverify,jdbcType=TINYINT},
+      </if>
+      <if test="goodstype != null">
+        goodstype = #{goodstype,jdbcType=TINYINT},
+      </if>
+      <if test="couponid != null">
+        couponid = #{couponid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsid != null">
+        goodsid = #{goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="merchid != null">
+        merchid = #{merchid,jdbcType=INTEGER},
+      </if>
+      <if test="productprice != null">
+        productprice = #{productprice,jdbcType=DECIMAL},
+      </if>
+      <if test="mincredit != null">
+        mincredit = #{mincredit,jdbcType=DECIMAL},
+      </if>
+      <if test="minmoney != null">
+        minmoney = #{minmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="maxcredit != null">
+        maxcredit = #{maxcredit,jdbcType=DECIMAL},
+      </if>
+      <if test="maxmoney != null">
+        maxmoney = #{maxmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="dispatchtype != null">
+        dispatchtype = #{dispatchtype,jdbcType=TINYINT},
+      </if>
+      <if test="dispatchid != null">
+        dispatchid = #{dispatchid,jdbcType=INTEGER},
+      </if>
+      <if test="verifytype != null">
+        verifytype = #{verifytype,jdbcType=TINYINT},
+      </if>
+      <if test="verifynum != null">
+        verifynum = #{verifynum,jdbcType=INTEGER},
+      </if>
+      <if test="grant1 != null">
+        grant1 = #{grant1,jdbcType=DECIMAL},
+      </if>
+      <if test="grant2 != null">
+        grant2 = #{grant2,jdbcType=DECIMAL},
+      </if>
+      <if test="goodssn != null">
+        goodssn = #{goodssn,jdbcType=VARCHAR},
+      </if>
+      <if test="productsn != null">
+        productsn = #{productsn,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=INTEGER},
+      </if>
+      <if test="showtotal != null">
+        showtotal = #{showtotal,jdbcType=TINYINT},
+      </if>
+      <if test="totalcnf != null">
+        totalcnf = #{totalcnf,jdbcType=TINYINT},
+      </if>
+      <if test="usetime != null">
+        usetime = #{usetime,jdbcType=INTEGER},
+      </if>
+      <if test="hasoption != null">
+        hasoption = #{hasoption,jdbcType=TINYINT},
+      </if>
+      <if test="noticedetailshow != null">
+        noticedetailshow = #{noticedetailshow,jdbcType=TINYINT},
+      </if>
+      <if test="detailshow != null">
+        detailshow = #{detailshow,jdbcType=TINYINT},
+      </if>
+      <if test="packetmoney != null">
+        packetmoney = #{packetmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="surplusmoney != null">
+        surplusmoney = #{surplusmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="packetlimit != null">
+        packetlimit = #{packetlimit,jdbcType=DECIMAL},
+      </if>
+      <if test="packettype != null">
+        packettype = #{packettype,jdbcType=TINYINT},
+      </if>
+      <if test="minpacketmoney != null">
+        minpacketmoney = #{minpacketmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="packettotal != null">
+        packettotal = #{packettotal,jdbcType=INTEGER},
+      </if>
+      <if test="packetsurplus != null">
+        packetsurplus = #{packetsurplus,jdbcType=INTEGER},
+      </if>
+      <if test="detail != null">
+        detail = #{detail,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="showlevels != null">
+        showlevels = #{showlevels,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="buylevels != null">
+        buylevels = #{buylevels,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="showgroups != null">
+        showgroups = #{showgroups,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="buygroups != null">
+        buygroups = #{buygroups,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="subdetail != null">
+        subdetail = #{subdetail,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="noticedetail != null">
+        noticedetail = #{noticedetail,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="goodsdetail != null">
+        goodsdetail = #{goodsdetail,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="storeids != null">
+        storeids = #{storeids,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopCreditshopGoodsWithBLOBs">
+    update ims_ewei_shop_creditshop_goods
+    set uniacid = #{uniacid,jdbcType=INTEGER},
+      displayorder = #{displayorder,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      cate = #{cate,jdbcType=INTEGER},
+      thumb = #{thumb,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      type = #{type,jdbcType=TINYINT},
+      credit = #{credit,jdbcType=INTEGER},
+      money = #{money,jdbcType=DECIMAL},
+      total = #{total,jdbcType=INTEGER},
+      totalday = #{totalday,jdbcType=INTEGER},
+      chance = #{chance,jdbcType=INTEGER},
+      chanceday = #{chanceday,jdbcType=INTEGER},
+      rate1 = #{rate1,jdbcType=INTEGER},
+      rate2 = #{rate2,jdbcType=INTEGER},
+      endtime = #{endtime,jdbcType=INTEGER},
+      joins = #{joins,jdbcType=INTEGER},
+      views = #{views,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT},
+      deleted = #{deleted,jdbcType=TINYINT},
+      vip = #{vip,jdbcType=TINYINT},
+      istop = #{istop,jdbcType=TINYINT},
+      isrecommand = #{isrecommand,jdbcType=TINYINT},
+      istime = #{istime,jdbcType=TINYINT},
+      timestart = #{timestart,jdbcType=INTEGER},
+      timeend = #{timeend,jdbcType=INTEGER},
+      share_title = #{shareTitle,jdbcType=VARCHAR},
+      share_icon = #{shareIcon,jdbcType=VARCHAR},
+      share_desc = #{shareDesc,jdbcType=VARCHAR},
+      followneed = #{followneed,jdbcType=TINYINT},
+      followtext = #{followtext,jdbcType=VARCHAR},
+      subtitle = #{subtitle,jdbcType=VARCHAR},
+      usedetail = #{usedetail,jdbcType=VARCHAR},
+      isendtime = #{isendtime,jdbcType=TINYINT},
+      usecredit2 = #{usecredit2,jdbcType=TINYINT},
+      area = #{area,jdbcType=VARCHAR},
+      dispatch = #{dispatch,jdbcType=DECIMAL},
+      noticeopenid = #{noticeopenid,jdbcType=VARCHAR},
+      noticetype = #{noticetype,jdbcType=TINYINT},
+      isverify = #{isverify,jdbcType=TINYINT},
+      goodstype = #{goodstype,jdbcType=TINYINT},
+      couponid = #{couponid,jdbcType=INTEGER},
+      goodsid = #{goodsid,jdbcType=INTEGER},
+      merchid = #{merchid,jdbcType=INTEGER},
+      productprice = #{productprice,jdbcType=DECIMAL},
+      mincredit = #{mincredit,jdbcType=DECIMAL},
+      minmoney = #{minmoney,jdbcType=DECIMAL},
+      maxcredit = #{maxcredit,jdbcType=DECIMAL},
+      maxmoney = #{maxmoney,jdbcType=DECIMAL},
+      dispatchtype = #{dispatchtype,jdbcType=TINYINT},
+      dispatchid = #{dispatchid,jdbcType=INTEGER},
+      verifytype = #{verifytype,jdbcType=TINYINT},
+      verifynum = #{verifynum,jdbcType=INTEGER},
+      grant1 = #{grant1,jdbcType=DECIMAL},
+      grant2 = #{grant2,jdbcType=DECIMAL},
+      goodssn = #{goodssn,jdbcType=VARCHAR},
+      productsn = #{productsn,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=INTEGER},
+      showtotal = #{showtotal,jdbcType=TINYINT},
+      totalcnf = #{totalcnf,jdbcType=TINYINT},
+      usetime = #{usetime,jdbcType=INTEGER},
+      hasoption = #{hasoption,jdbcType=TINYINT},
+      noticedetailshow = #{noticedetailshow,jdbcType=TINYINT},
+      detailshow = #{detailshow,jdbcType=TINYINT},
+      packetmoney = #{packetmoney,jdbcType=DECIMAL},
+      surplusmoney = #{surplusmoney,jdbcType=DECIMAL},
+      packetlimit = #{packetlimit,jdbcType=DECIMAL},
+      packettype = #{packettype,jdbcType=TINYINT},
+      minpacketmoney = #{minpacketmoney,jdbcType=DECIMAL},
+      packettotal = #{packettotal,jdbcType=INTEGER},
+      packetsurplus = #{packetsurplus,jdbcType=INTEGER},
+      detail = #{detail,jdbcType=LONGVARCHAR},
+      showlevels = #{showlevels,jdbcType=LONGVARCHAR},
+      buylevels = #{buylevels,jdbcType=LONGVARCHAR},
+      showgroups = #{showgroups,jdbcType=LONGVARCHAR},
+      buygroups = #{buygroups,jdbcType=LONGVARCHAR},
+      subdetail = #{subdetail,jdbcType=LONGVARCHAR},
+      noticedetail = #{noticedetail,jdbcType=LONGVARCHAR},
+      goodsdetail = #{goodsdetail,jdbcType=LONGVARCHAR},
+      storeids = #{storeids,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopCreditshopGoods">
+    update ims_ewei_shop_creditshop_goods
+    set uniacid = #{uniacid,jdbcType=INTEGER},
+      displayorder = #{displayorder,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      cate = #{cate,jdbcType=INTEGER},
+      thumb = #{thumb,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      type = #{type,jdbcType=TINYINT},
+      credit = #{credit,jdbcType=INTEGER},
+      money = #{money,jdbcType=DECIMAL},
+      total = #{total,jdbcType=INTEGER},
+      totalday = #{totalday,jdbcType=INTEGER},
+      chance = #{chance,jdbcType=INTEGER},
+      chanceday = #{chanceday,jdbcType=INTEGER},
+      rate1 = #{rate1,jdbcType=INTEGER},
+      rate2 = #{rate2,jdbcType=INTEGER},
+      endtime = #{endtime,jdbcType=INTEGER},
+      joins = #{joins,jdbcType=INTEGER},
+      views = #{views,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT},
+      deleted = #{deleted,jdbcType=TINYINT},
+      vip = #{vip,jdbcType=TINYINT},
+      istop = #{istop,jdbcType=TINYINT},
+      isrecommand = #{isrecommand,jdbcType=TINYINT},
+      istime = #{istime,jdbcType=TINYINT},
+      timestart = #{timestart,jdbcType=INTEGER},
+      timeend = #{timeend,jdbcType=INTEGER},
+      share_title = #{shareTitle,jdbcType=VARCHAR},
+      share_icon = #{shareIcon,jdbcType=VARCHAR},
+      share_desc = #{shareDesc,jdbcType=VARCHAR},
+      followneed = #{followneed,jdbcType=TINYINT},
+      followtext = #{followtext,jdbcType=VARCHAR},
+      subtitle = #{subtitle,jdbcType=VARCHAR},
+      usedetail = #{usedetail,jdbcType=VARCHAR},
+      isendtime = #{isendtime,jdbcType=TINYINT},
+      usecredit2 = #{usecredit2,jdbcType=TINYINT},
+      area = #{area,jdbcType=VARCHAR},
+      dispatch = #{dispatch,jdbcType=DECIMAL},
+      noticeopenid = #{noticeopenid,jdbcType=VARCHAR},
+      noticetype = #{noticetype,jdbcType=TINYINT},
+      isverify = #{isverify,jdbcType=TINYINT},
+      goodstype = #{goodstype,jdbcType=TINYINT},
+      couponid = #{couponid,jdbcType=INTEGER},
+      goodsid = #{goodsid,jdbcType=INTEGER},
+      merchid = #{merchid,jdbcType=INTEGER},
+      productprice = #{productprice,jdbcType=DECIMAL},
+      mincredit = #{mincredit,jdbcType=DECIMAL},
+      minmoney = #{minmoney,jdbcType=DECIMAL},
+      maxcredit = #{maxcredit,jdbcType=DECIMAL},
+      maxmoney = #{maxmoney,jdbcType=DECIMAL},
+      dispatchtype = #{dispatchtype,jdbcType=TINYINT},
+      dispatchid = #{dispatchid,jdbcType=INTEGER},
+      verifytype = #{verifytype,jdbcType=TINYINT},
+      verifynum = #{verifynum,jdbcType=INTEGER},
+      grant1 = #{grant1,jdbcType=DECIMAL},
+      grant2 = #{grant2,jdbcType=DECIMAL},
+      goodssn = #{goodssn,jdbcType=VARCHAR},
+      productsn = #{productsn,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=INTEGER},
+      showtotal = #{showtotal,jdbcType=TINYINT},
+      totalcnf = #{totalcnf,jdbcType=TINYINT},
+      usetime = #{usetime,jdbcType=INTEGER},
+      hasoption = #{hasoption,jdbcType=TINYINT},
+      noticedetailshow = #{noticedetailshow,jdbcType=TINYINT},
+      detailshow = #{detailshow,jdbcType=TINYINT},
+      packetmoney = #{packetmoney,jdbcType=DECIMAL},
+      surplusmoney = #{surplusmoney,jdbcType=DECIMAL},
+      packetlimit = #{packetlimit,jdbcType=DECIMAL},
+      packettype = #{packettype,jdbcType=TINYINT},
+      minpacketmoney = #{minpacketmoney,jdbcType=DECIMAL},
+      packettotal = #{packettotal,jdbcType=INTEGER},
+      packetsurplus = #{packetsurplus,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

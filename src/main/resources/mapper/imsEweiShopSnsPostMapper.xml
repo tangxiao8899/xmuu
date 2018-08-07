@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.carryit.base.besttmwuu.dao.ImsEweiShopSnsPostMapper">
+  <resultMap id="BaseResultMap" type="com.carryit.base.besttmwuu.entity.imsEweiShopSnsPost">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="uniacid" jdbcType="INTEGER" property="uniacid" />
+    <result column="bid" jdbcType="INTEGER" property="bid" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="rpid" jdbcType="INTEGER" property="rpid" />
+    <result column="openid" jdbcType="VARCHAR" property="openid" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="voice" jdbcType="VARCHAR" property="voice" />
+    <result column="createtime" jdbcType="INTEGER" property="createtime" />
+    <result column="replytime" jdbcType="INTEGER" property="replytime" />
+    <result column="credit" jdbcType="INTEGER" property="credit" />
+    <result column="views" jdbcType="INTEGER" property="views" />
+    <result column="islock" jdbcType="BIT" property="islock" />
+    <result column="istop" jdbcType="BIT" property="istop" />
+    <result column="isboardtop" jdbcType="BIT" property="isboardtop" />
+    <result column="isbest" jdbcType="BIT" property="isbest" />
+    <result column="isboardbest" jdbcType="TINYINT" property="isboardbest" />
+    <result column="deleted" jdbcType="TINYINT" property="deleted" />
+    <result column="deletedtime" jdbcType="INTEGER" property="deletedtime" />
+    <result column="checked" jdbcType="TINYINT" property="checked" />
+    <result column="checktime" jdbcType="INTEGER" property="checktime" />
+    <result column="isadmin" jdbcType="TINYINT" property="isadmin" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.carryit.base.besttmwuu.entity.ImsEweiShopSnsPostWithBLOBs">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+    <result column="images" jdbcType="LONGVARCHAR" property="images" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, uniacid, bid, pid, rpid, openid, avatar, nickname, title, voice, createtime, 
+    replytime, credit, views, islock, istop, isboardtop, isbest, isboardbest, deleted, 
+    deletedtime, checked, checktime, isadmin
+  </sql>
+  <sql id="Blob_Column_List">
+    content, images
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ims_ewei_shop_sns_post
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ims_ewei_shop_sns_post
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.carryit.base.besttmwuu.entity.ImsEweiShopSnsPostWithBLOBs">
+    insert into ims_ewei_shop_sns_post (id, uniacid, bid, 
+      pid, rpid, openid, 
+      avatar, nickname, title, 
+      voice, createtime, replytime, 
+      credit, views, islock, 
+      istop, isboardtop, isbest, isboardbest, 
+      deleted, deletedtime, checked, 
+      checktime, isadmin, content, 
+      images)
+    values (#{id,jdbcType=INTEGER}, #{uniacid,jdbcType=INTEGER}, #{bid,jdbcType=INTEGER}, 
+      #{pid,jdbcType=INTEGER}, #{rpid,jdbcType=INTEGER}, #{openid,jdbcType=VARCHAR}, 
+      #{avatar,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{voice,jdbcType=VARCHAR}, #{createtime,jdbcType=INTEGER}, #{replytime,jdbcType=INTEGER}, 
+      #{credit,jdbcType=INTEGER}, #{views,jdbcType=INTEGER}, #{islock,jdbcType=BIT}, 
+      #{istop,jdbcType=BIT}, #{isboardtop,jdbcType=BIT}, #{isbest,jdbcType=BIT}, #{isboardbest,jdbcType=TINYINT}, 
+      #{deleted,jdbcType=TINYINT}, #{deletedtime,jdbcType=INTEGER}, #{checked,jdbcType=TINYINT}, 
+      #{checktime,jdbcType=INTEGER}, #{isadmin,jdbcType=TINYINT}, #{content,jdbcType=LONGVARCHAR}, 
+      #{images,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.carryit.base.besttmwuu.entity.ImsEweiShopSnsPostWithBLOBs">
+    insert into ims_ewei_shop_sns_post
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="uniacid != null">
+        uniacid,
+      </if>
+      <if test="bid != null">
+        bid,
+      </if>
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="rpid != null">
+        rpid,
+      </if>
+      <if test="openid != null">
+        openid,
+      </if>
+      <if test="avatar != null">
+        avatar,
+      </if>
+      <if test="nickname != null">
+        nickname,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="voice != null">
+        voice,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="replytime != null">
+        replytime,
+      </if>
+      <if test="credit != null">
+        credit,
+      </if>
+      <if test="views != null">
+        views,
+      </if>
+      <if test="islock != null">
+        islock,
+      </if>
+      <if test="istop != null">
+        istop,
+      </if>
+      <if test="isboardtop != null">
+        isboardtop,
+      </if>
+      <if test="isbest != null">
+        isbest,
+      </if>
+      <if test="isboardbest != null">
+        isboardbest,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+      <if test="deletedtime != null">
+        deletedtime,
+      </if>
+      <if test="checked != null">
+        checked,
+      </if>
+      <if test="checktime != null">
+        checktime,
+      </if>
+      <if test="isadmin != null">
+        isadmin,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="images != null">
+        images,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="uniacid != null">
+        #{uniacid,jdbcType=INTEGER},
+      </if>
+      <if test="bid != null">
+        #{bid,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="rpid != null">
+        #{rpid,jdbcType=INTEGER},
+      </if>
+      <if test="openid != null">
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="voice != null">
+        #{voice,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=INTEGER},
+      </if>
+      <if test="replytime != null">
+        #{replytime,jdbcType=INTEGER},
+      </if>
+      <if test="credit != null">
+        #{credit,jdbcType=INTEGER},
+      </if>
+      <if test="views != null">
+        #{views,jdbcType=INTEGER},
+      </if>
+      <if test="islock != null">
+        #{islock,jdbcType=BIT},
+      </if>
+      <if test="istop != null">
+        #{istop,jdbcType=BIT},
+      </if>
+      <if test="isboardtop != null">
+        #{isboardtop,jdbcType=BIT},
+      </if>
+      <if test="isbest != null">
+        #{isbest,jdbcType=BIT},
+      </if>
+      <if test="isboardbest != null">
+        #{isboardbest,jdbcType=TINYINT},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=TINYINT},
+      </if>
+      <if test="deletedtime != null">
+        #{deletedtime,jdbcType=INTEGER},
+      </if>
+      <if test="checked != null">
+        #{checked,jdbcType=TINYINT},
+      </if>
+      <if test="checktime != null">
+        #{checktime,jdbcType=INTEGER},
+      </if>
+      <if test="isadmin != null">
+        #{isadmin,jdbcType=TINYINT},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="images != null">
+        #{images,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.carryit.base.besttmwuu.entity.ImsEweiShopSnsPostWithBLOBs">
+    update ims_ewei_shop_sns_post
+    <set>
+      <if test="uniacid != null">
+        uniacid = #{uniacid,jdbcType=INTEGER},
+      </if>
+      <if test="bid != null">
+        bid = #{bid,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null">
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="rpid != null">
+        rpid = #{rpid,jdbcType=INTEGER},
+      </if>
+      <if test="openid != null">
+        openid = #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        avatar = #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="voice != null">
+        voice = #{voice,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=INTEGER},
+      </if>
+      <if test="replytime != null">
+        replytime = #{replytime,jdbcType=INTEGER},
+      </if>
+      <if test="credit != null">
+        credit = #{credit,jdbcType=INTEGER},
+      </if>
+      <if test="views != null">
+        views = #{views,jdbcType=INTEGER},
+      </if>
+      <if test="islock != null">
+        islock = #{islock,jdbcType=BIT},
+      </if>
+      <if test="istop != null">
+        istop = #{istop,jdbcType=BIT},
+      </if>
+      <if test="isboardtop != null">
+        isboardtop = #{isboardtop,jdbcType=BIT},
+      </if>
+      <if test="isbest != null">
+        isbest = #{isbest,jdbcType=BIT},
+      </if>
+      <if test="isboardbest != null">
+        isboardbest = #{isboardbest,jdbcType=TINYINT},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=TINYINT},
+      </if>
+      <if test="deletedtime != null">
+        deletedtime = #{deletedtime,jdbcType=INTEGER},
+      </if>
+      <if test="checked != null">
+        checked = #{checked,jdbcType=TINYINT},
+      </if>
+      <if test="checktime != null">
+        checktime = #{checktime,jdbcType=INTEGER},
+      </if>
+      <if test="isadmin != null">
+        isadmin = #{isadmin,jdbcType=TINYINT},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="images != null">
+        images = #{images,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.carryit.base.besttmwuu.entity.ImsEweiShopSnsPostWithBLOBs">
+    update ims_ewei_shop_sns_post
+    set uniacid = #{uniacid,jdbcType=INTEGER},
+      bid = #{bid,jdbcType=INTEGER},
+      pid = #{pid,jdbcType=INTEGER},
+      rpid = #{rpid,jdbcType=INTEGER},
+      openid = #{openid,jdbcType=VARCHAR},
+      avatar = #{avatar,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      voice = #{voice,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=INTEGER},
+      replytime = #{replytime,jdbcType=INTEGER},
+      credit = #{credit,jdbcType=INTEGER},
+      views = #{views,jdbcType=INTEGER},
+      islock = #{islock,jdbcType=BIT},
+      istop = #{istop,jdbcType=BIT},
+      isboardtop = #{isboardtop,jdbcType=BIT},
+      isbest = #{isbest,jdbcType=BIT},
+      isboardbest = #{isboardbest,jdbcType=TINYINT},
+      deleted = #{deleted,jdbcType=TINYINT},
+      deletedtime = #{deletedtime,jdbcType=INTEGER},
+      checked = #{checked,jdbcType=TINYINT},
+      checktime = #{checktime,jdbcType=INTEGER},
+      isadmin = #{isadmin,jdbcType=TINYINT},
+      content = #{content,jdbcType=LONGVARCHAR},
+      images = #{images,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopSnsPost">
+    update ims_ewei_shop_sns_post
+    set uniacid = #{uniacid,jdbcType=INTEGER},
+      bid = #{bid,jdbcType=INTEGER},
+      pid = #{pid,jdbcType=INTEGER},
+      rpid = #{rpid,jdbcType=INTEGER},
+      openid = #{openid,jdbcType=VARCHAR},
+      avatar = #{avatar,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      voice = #{voice,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=INTEGER},
+      replytime = #{replytime,jdbcType=INTEGER},
+      credit = #{credit,jdbcType=INTEGER},
+      views = #{views,jdbcType=INTEGER},
+      islock = #{islock,jdbcType=BIT},
+      istop = #{istop,jdbcType=BIT},
+      isboardtop = #{isboardtop,jdbcType=BIT},
+      isbest = #{isbest,jdbcType=BIT},
+      isboardbest = #{isboardbest,jdbcType=TINYINT},
+      deleted = #{deleted,jdbcType=TINYINT},
+      deletedtime = #{deletedtime,jdbcType=INTEGER},
+      checked = #{checked,jdbcType=TINYINT},
+      checktime = #{checktime,jdbcType=INTEGER},
+      isadmin = #{isadmin,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="getimsEweiShopSnsPostWithBLOBs" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ims_ewei_shop_sns_post
+    where id=2
+  </select>
+
+</mapper>
