@@ -25,7 +25,7 @@ public class IndexController {
         String startTime = todayDateString+" 00:00:00";
         //获取当天24点的时间
         String endTime = todayDateString+" 23:59:59";
-       //List<UserDTO> userDTOList = wealthService.onTheList(startTime,endTime);
+       List<UserDTO> userDTOList = wealthService.onTheList(startTime,endTime);
         return null;
     }
 
