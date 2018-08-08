@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.carryit.base.besttmwuu.dao.imsEweiShopSnsLevelMapper">
+  <resultMap id="BaseResultMap" type="com.carryit.base.besttmwuu.entity.imsEweiShopSnsLevel">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="uniacid" jdbcType="INTEGER" property="uniacid" />
+    <result column="levelname" jdbcType="VARCHAR" property="levelname" />
+    <result column="credit" jdbcType="INTEGER" property="credit" />
+    <result column="enabled" jdbcType="TINYINT" property="enabled" />
+    <result column="post" jdbcType="INTEGER" property="post" />
+    <result column="color" jdbcType="VARCHAR" property="color" />
+    <result column="bg" jdbcType="VARCHAR" property="bg" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, uniacid, levelname, credit, enabled, post, color, bg
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ims_ewei_shop_sns_level
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ims_ewei_shop_sns_level
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopSnsLevel">
+    insert into ims_ewei_shop_sns_level (id, uniacid, levelname, 
+      credit, enabled, post, 
+      color, bg)
+    values (#{id,jdbcType=INTEGER}, #{uniacid,jdbcType=INTEGER}, #{levelname,jdbcType=VARCHAR}, 
+      #{credit,jdbcType=INTEGER}, #{enabled,jdbcType=TINYINT}, #{post,jdbcType=INTEGER}, 
+      #{color,jdbcType=VARCHAR}, #{bg,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopSnsLevel">
+    insert into ims_ewei_shop_sns_level
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="uniacid != null">
+        uniacid,
+      </if>
+      <if test="levelname != null">
+        levelname,
+      </if>
+      <if test="credit != null">
+        credit,
+      </if>
+      <if test="enabled != null">
+        enabled,
+      </if>
+      <if test="post != null">
+        post,
+      </if>
+      <if test="color != null">
+        color,
+      </if>
+      <if test="bg != null">
+        bg,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="uniacid != null">
+        #{uniacid,jdbcType=INTEGER},
+      </if>
+      <if test="levelname != null">
+        #{levelname,jdbcType=VARCHAR},
+      </if>
+      <if test="credit != null">
+        #{credit,jdbcType=INTEGER},
+      </if>
+      <if test="enabled != null">
+        #{enabled,jdbcType=TINYINT},
+      </if>
+      <if test="post != null">
+        #{post,jdbcType=INTEGER},
+      </if>
+      <if test="color != null">
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="bg != null">
+        #{bg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopSnsLevel">
+    update ims_ewei_shop_sns_level
+    <set>
+      <if test="uniacid != null">
+        uniacid = #{uniacid,jdbcType=INTEGER},
+      </if>
+      <if test="levelname != null">
+        levelname = #{levelname,jdbcType=VARCHAR},
+      </if>
+      <if test="credit != null">
+        credit = #{credit,jdbcType=INTEGER},
+      </if>
+      <if test="enabled != null">
+        enabled = #{enabled,jdbcType=TINYINT},
+      </if>
+      <if test="post != null">
+        post = #{post,jdbcType=INTEGER},
+      </if>
+      <if test="color != null">
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="bg != null">
+        bg = #{bg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopSnsLevel">
+    update ims_ewei_shop_sns_level
+    set uniacid = #{uniacid,jdbcType=INTEGER},
+      levelname = #{levelname,jdbcType=VARCHAR},
+      credit = #{credit,jdbcType=INTEGER},
+      enabled = #{enabled,jdbcType=TINYINT},
+      post = #{post,jdbcType=INTEGER},
+      color = #{color,jdbcType=VARCHAR},
+      bg = #{bg,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
