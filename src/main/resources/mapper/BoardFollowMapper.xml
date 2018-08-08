@@ -7,4 +7,9 @@
         select id,bid,openid uid,createtime from ims_ewei_shop_sns_board_follow  where bid = #{bid} and openid =#{uid}
 
     </select>
+
+    <delete id="delete">
+        delete from ims_ewei_shop_sns_board_follow
+        where bid = #{bid} and openid = #{uid}
+    </delete>
 </mapper>

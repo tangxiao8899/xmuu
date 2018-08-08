@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface BoardFollowDao {
 
     BoardFollow getBoardByUid(@Param("uid") int uid, @Param("bid")int bid);
+
+    void delete(@Param("uid") int uid, @Param("bid") int bid);
 }

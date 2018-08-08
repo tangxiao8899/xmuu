@@ -70,4 +70,31 @@ public class CirclesController {
 
     }
 
+    /*
+    * 关注与取消关注
+    * */
+    @RequestMapping("/onAndOff")
+    public Board onAndOff(int uid,int bid,String follow){
+        Board board =  new Board();
+
+        BoardFollow bf = null;
+
+        try {
+            if(uid!=0&bid!=0&follow!=null){
+                if("0".equals(follow)){
+                    //取消关注
+                    boardFollowService.delete(uid,bid);
+                }else if("1".equals(follow)){
+                    //关注
+
+                    //boardFollowService.add();
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return board;
+
+    }
 }
