@@ -20,4 +20,9 @@ public class BoardFollowServiceImpl implements BoardFollowService {
     public void delete(int uid, int bid) {
         boardFollowDao.delete(uid,bid);
     }
+
+    @Override
+    public void add(int uid, int bid, long time) {
+        boardFollowDao.add(uid,bid,time);
+    }
 }

@@ -10,4 +10,6 @@ public interface BoardFollowDao {
     BoardFollow getBoardByUid(@Param("uid") int uid, @Param("bid")int bid);
 
     void delete(@Param("uid") int uid, @Param("bid") int bid);
+
+    void add(@Param("uid")int uid, @Param("bid") int bid, @Param("time") long time);
 }

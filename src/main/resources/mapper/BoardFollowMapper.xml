@@ -12,4 +12,9 @@
         delete from ims_ewei_shop_sns_board_follow
         where bid = #{bid} and openid = #{uid}
     </delete>
+
+    <insert id="add">
+        insert into ims_ewei_shop_sns_board_follow (bid,openid,createtime)
+        values (#{bid},#{uid},#{time})
+    </insert>
 </mapper>
