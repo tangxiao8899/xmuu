@@ -4,7 +4,7 @@
 
 
     <select id="onTheList" resultType="com.carryit.base.besttmwuu.entity.UserDTO">
-        select  from t_wealth  where updateTime >= str_to_date(#{startTime},'%Y-%m-%d %H:%i:%s') and updateTime <= str_to_date(#{endTime},'%Y-%m-%d %H:%i:%s') order by number DESC limit 3
+        select  m.realname realName from t_wealth w LEFT JOIN ims_ewei_shop_member m ON w.udi=m.uid  where updateTime &gt;= str_to_date(#{startTime},'%Y-%m-%d %H:%i:%s') and updateTime &lt;= str_to_date(#{endTime},'%Y-%m-%d %H:%i:%s') order by number DESC limit 3
 
     </select>
 </mapper>
