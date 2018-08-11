@@ -34,20 +34,19 @@ public class MemberController {
 
         member= memberService.getMemberById(uid);
 
-
-        member.getId();
-        member.getAvatar();
-        member.getRealName();
-        member.getCity();
-        member.getNickName();
-        member.getLevelName();
+//        member.getId();
+//        member.getAvatar();
+//        member.getRealName();
+//        member.getCity();
+//        member.getNickName();
+//        member.getLevelName();
 
         return member;
     }
 
     //财富值
     @RequestMapping(value = "/wealth")
-    public String Wealth(int uid){
+    public Object Wealth(int uid){
         Member member =new Member();
         member=memberService.getWealthById(uid);
         String Wealth=member.getCredit2();
@@ -56,7 +55,7 @@ public class MemberController {
 
     //诚信值
     @RequestMapping(value = "sincerity")
-    public Sincerity Sincerity(int uid){
+    public Object Sincerity(int uid){
         Sincerity sincerity=new Sincerity();
 
         sincerity=sincerityService.getNumberById(uid);
