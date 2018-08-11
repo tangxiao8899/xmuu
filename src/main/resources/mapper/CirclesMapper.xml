@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.carryit.base.besttmwuu.dao.CirclesDao">
+
+
+    <select id="getCircles" resultType="com.carryit.base.besttmwuu.entity.Circles">
+        select id,name from ims_ewei_shop_sns_category
+
+    </select>
+</mapper>
