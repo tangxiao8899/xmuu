@@ -7,7 +7,7 @@ public class CommonResp implements Serializable {
 
 	public static final String OK = "ok";
 
-	public static final int CODE_SUCCESS = 1;
+	public static final int CODE_SUCCESS = 200;
 
 	public static final int CODE_FAIL = 2;
 
@@ -22,9 +22,9 @@ public class CommonResp implements Serializable {
 	public int code;
 	public String msg;
 	// public String time = DateUtil.getCurrDateString();
-	public int page = 1;
+	// public int page = 1;
 
-	public boolean isSuccess() {
-		return code == CODE_SUCCESS; // 1 成功
-	}
+//	public boolean isSuccess() {
+//		return code == CODE_SUCCESS; // 200 成功
+//	}
 }

@@ -37,7 +37,7 @@ public abstract class BaseController<Req extends CommonRequest, Resp extends Dom
 
 	public boolean check(String json, boolean skip) {
 		System.out.println("=校验逻辑=");
-		commonReq = (CommonRequest) JSON.parseObject(json, CommonRequest.class);
+		//commonReq = (CommonRequest) JSON.parseObject(json, CommonRequest.class);
 		return true;
 	}
 
@@ -78,8 +78,23 @@ public abstract class BaseController<Req extends CommonRequest, Resp extends Dom
 		return faild(CommonResp.CODE_FAIL, msg);
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public JSONObject faild(int code, String msg) {
+		return faild(code, msg, isHttpArraysJson);
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public JSONObject faild(String msg, boolean isHttpArraysJson) {
+		JSONObject result;
+		if (isHttpArraysJson) {
+			result = BaseController.doArraysResp(new ArrayList(), CommonResp.CODE_FAIL, msg);
+		} else {
+			result = BaseController.doObjResp(new Object(), CommonResp.CODE_FAIL, msg);
+		}
+		return result;
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public JSONObject faild(int code, String msg, boolean isHttpArraysJson) {
 		JSONObject result;
 		if (isHttpArraysJson) {
 			result = BaseController.doArraysResp(new ArrayList(), code, msg);
@@ -114,6 +129,26 @@ public abstract class BaseController<Req extends CommonRequest, Resp extends Dom
 
 	public static <T> JSONObject doObjResp(T resp, String msg) {
 		return doObjResp(resp, CommonResp.CODE_SUCCESS, msg);
+	}
+
+	/**
+	 * 只提示成功|失败
+	 * 
+	 * @param msg
+	 * @return
+	 */
+	public static <T> JSONObject doObjRespSuccess(String msg) {
+		return doObjResp(null, CommonResp.CODE_SUCCESS, msg);
+	}
+
+	/**
+	 * 只提示成功|失败
+	 * 
+	 * @param msg
+	 * @return
+	 */
+	public static <T> JSONObject doArraysRespSuccess(String msg) {
+		return doArraysResp(null, CommonResp.CODE_SUCCESS, msg);
 	}
 
 	/**
