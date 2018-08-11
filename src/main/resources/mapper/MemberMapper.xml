@@ -6,7 +6,7 @@
 	<select id="getMemberById" resultType="com.carryit.base.besttmwuu.entity.Member"
 		parameterType="Integer">
 		<!-- select b.levelname levelName from ims_ewei_shop_member a left join 
-			ims_ewei_shop_member_level b on a.level = b.level where a.uid = #{uid} -- 
+			ims_ewei_shop_member_level b on a.level = b.level where a.uid = #{uid}
 			select id,avatar,realName,city,nickName from ims_ewei_shop_member m where 
 			id = #{uid} -->
 		SELECT avatar,realName,city,nickName,b.levelname levelName FROM
