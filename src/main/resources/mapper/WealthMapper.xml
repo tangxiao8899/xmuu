@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.carryit.base.besttmwuu.dao.BoardFollowDao">
+
+
+    <select id="onTheList" resultType="com.carryit.base.besttmwuu.entity.UserDTO">
+        select  m.realname realName from t_wealth w LEFT JOIN ims_ewei_shop_member m ON w.udi=m.uid  where updateTime &gt;= str_to_date(#{startTime},'%Y-%m-%d %H:%i:%s') and updateTime &lt;= str_to_date(#{endTime},'%Y-%m-%d %H:%i:%s') order by number DESC limit 3
+
+    </select>
+</mapper>

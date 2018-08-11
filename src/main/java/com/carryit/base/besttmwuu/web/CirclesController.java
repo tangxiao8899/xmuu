@@ -12,8 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @RestController
 @RequestMapping("/circle")
@@ -62,6 +61,8 @@ public class CirclesController {
             bf =  boardFollowService.getBoardByUid(uid,bid);//查询该用户是否关注该圈子
             if(bf!=null){
                 board.setFollow(true);
+            }else{
+                board.setFollow(false);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -70,4 +71,30 @@ public class CirclesController {
 
     }
 
+    /*
+    * 关注与取消关注
+    * */
+    @RequestMapping("/onAndOff")
+    public Map<String,String> onAndOff(int uid, int bid, String follow){
+        Map<String,String> map = new HashMap<>();
+        try {
+            if(uid!=0&bid!=0&follow!=null){
+                if("0".equals(follow)){
+                    //取消关注
+                    boardFollowService.delete(uid,bid);
+                    map.put("code","0");
+                }else if("1".equals(follow)){
+                    //关注
+
+                    boardFollowService.add(uid,bid,new Date().getTime());
+                    map.put("code","1");
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return map;
+
+    }
 }
