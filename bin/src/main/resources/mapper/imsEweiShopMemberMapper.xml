@@ -1,0 +1,1300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.carryit.base.besttmwuu.dao.imsEweiShopMemberMapper">
+  <resultMap id="BaseResultMap" type="com.carryit.base.besttmwuu.entity.imsEweiShopMember">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="uniacid" jdbcType="INTEGER" property="uniacid" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="groupid" jdbcType="INTEGER" property="groupid" />
+    <result column="level" jdbcType="INTEGER" property="level" />
+    <result column="agentid" jdbcType="INTEGER" property="agentid" />
+    <result column="openid" jdbcType="VARCHAR" property="openid" />
+    <result column="realname" jdbcType="VARCHAR" property="realname" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="pwd" jdbcType="VARCHAR" property="pwd" />
+    <result column="weixin" jdbcType="VARCHAR" property="weixin" />
+    <result column="createtime" jdbcType="INTEGER" property="createtime" />
+    <result column="agenttime" jdbcType="INTEGER" property="agenttime" />
+    <result column="status" jdbcType="BIT" property="status" />
+    <result column="isagent" jdbcType="BIT" property="isagent" />
+    <result column="clickcount" jdbcType="INTEGER" property="clickcount" />
+    <result column="agentlevel" jdbcType="INTEGER" property="agentlevel" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="credit1" jdbcType="DECIMAL" property="credit1" />
+    <result column="credit2" jdbcType="DECIMAL" property="credit2" />
+    <result column="birthyear" jdbcType="VARCHAR" property="birthyear" />
+    <result column="birthmonth" jdbcType="VARCHAR" property="birthmonth" />
+    <result column="birthday" jdbcType="VARCHAR" property="birthday" />
+    <result column="gender" jdbcType="TINYINT" property="gender" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="area" jdbcType="VARCHAR" property="area" />
+    <result column="childtime" jdbcType="INTEGER" property="childtime" />
+    <result column="inviter" jdbcType="INTEGER" property="inviter" />
+    <result column="agentnotupgrade" jdbcType="INTEGER" property="agentnotupgrade" />
+    <result column="agentselectgoods" jdbcType="TINYINT" property="agentselectgoods" />
+    <result column="agentblack" jdbcType="INTEGER" property="agentblack" />
+    <result column="fixagentid" jdbcType="TINYINT" property="fixagentid" />
+    <result column="diymemberid" jdbcType="INTEGER" property="diymemberid" />
+    <result column="diymemberdataid" jdbcType="INTEGER" property="diymemberdataid" />
+    <result column="diycommissionid" jdbcType="INTEGER" property="diycommissionid" />
+    <result column="diycommissiondataid" jdbcType="INTEGER" property="diycommissiondataid" />
+    <result column="isblack" jdbcType="INTEGER" property="isblack" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="commission_total" jdbcType="DECIMAL" property="commissionTotal" />
+    <result column="endtime2" jdbcType="INTEGER" property="endtime2" />
+    <result column="ispartner" jdbcType="TINYINT" property="ispartner" />
+    <result column="partnertime" jdbcType="INTEGER" property="partnertime" />
+    <result column="partnerstatus" jdbcType="TINYINT" property="partnerstatus" />
+    <result column="partnerblack" jdbcType="TINYINT" property="partnerblack" />
+    <result column="partnerlevel" jdbcType="INTEGER" property="partnerlevel" />
+    <result column="partnernotupgrade" jdbcType="TINYINT" property="partnernotupgrade" />
+    <result column="diyglobonusid" jdbcType="INTEGER" property="diyglobonusid" />
+    <result column="isaagent" jdbcType="TINYINT" property="isaagent" />
+    <result column="aagentlevel" jdbcType="INTEGER" property="aagentlevel" />
+    <result column="aagenttime" jdbcType="INTEGER" property="aagenttime" />
+    <result column="aagentstatus" jdbcType="TINYINT" property="aagentstatus" />
+    <result column="aagentblack" jdbcType="TINYINT" property="aagentblack" />
+    <result column="aagentnotupgrade" jdbcType="TINYINT" property="aagentnotupgrade" />
+    <result column="aagenttype" jdbcType="TINYINT" property="aagenttype" />
+    <result column="diyaagentid" jdbcType="INTEGER" property="diyaagentid" />
+    <result column="salt" jdbcType="VARCHAR" property="salt" />
+    <result column="mobileverify" jdbcType="TINYINT" property="mobileverify" />
+    <result column="mobileuser" jdbcType="TINYINT" property="mobileuser" />
+    <result column="carrier_mobile" jdbcType="VARCHAR" property="carrierMobile" />
+    <result column="isauthor" jdbcType="BIT" property="isauthor" />
+    <result column="authortime" jdbcType="INTEGER" property="authortime" />
+    <result column="authorstatus" jdbcType="BIT" property="authorstatus" />
+    <result column="authorblack" jdbcType="BIT" property="authorblack" />
+    <result column="authorlevel" jdbcType="INTEGER" property="authorlevel" />
+    <result column="authornotupgrade" jdbcType="BIT" property="authornotupgrade" />
+    <result column="diyauthorid" jdbcType="INTEGER" property="diyauthorid" />
+    <result column="authorid" jdbcType="INTEGER" property="authorid" />
+    <result column="comefrom" jdbcType="VARCHAR" property="comefrom" />
+    <result column="openid_qq" jdbcType="VARCHAR" property="openidQq" />
+    <result column="openid_wx" jdbcType="VARCHAR" property="openidWx" />
+    <result column="diymaxcredit" jdbcType="TINYINT" property="diymaxcredit" />
+    <result column="maxcredit" jdbcType="INTEGER" property="maxcredit" />
+    <result column="datavalue" jdbcType="VARCHAR" property="datavalue" />
+    <result column="openid_wa" jdbcType="VARCHAR" property="openidWa" />
+    <result column="nickname_wechat" jdbcType="VARCHAR" property="nicknameWechat" />
+    <result column="avatar_wechat" jdbcType="VARCHAR" property="avatarWechat" />
+    <result column="updateaddress" jdbcType="BIT" property="updateaddress" />
+    <result column="membercardid" jdbcType="VARCHAR" property="membercardid" />
+    <result column="membercardcode" jdbcType="VARCHAR" property="membercardcode" />
+    <result column="membershipnumber" jdbcType="VARCHAR" property="membershipnumber" />
+    <result column="membercardactive" jdbcType="BIT" property="membercardactive" />
+    <result column="levelendtime" jdbcType="INTEGER" property="levelendtime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.carryit.base.besttmwuu.entity.imsEweiShopMemberWithBLOBs">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+    <result column="noticeset" jdbcType="LONGVARCHAR" property="noticeset" />
+    <result column="diymemberfields" jdbcType="LONGVARCHAR" property="diymemberfields" />
+    <result column="diymemberdata" jdbcType="LONGVARCHAR" property="diymemberdata" />
+    <result column="diycommissionfields" jdbcType="LONGVARCHAR" property="diycommissionfields" />
+    <result column="diycommissiondata" jdbcType="LONGVARCHAR" property="diycommissiondata" />
+    <result column="diyglobonusdata" jdbcType="LONGVARCHAR" property="diyglobonusdata" />
+    <result column="diyglobonusfields" jdbcType="LONGVARCHAR" property="diyglobonusfields" />
+    <result column="aagentprovinces" jdbcType="LONGVARCHAR" property="aagentprovinces" />
+    <result column="aagentcitys" jdbcType="LONGVARCHAR" property="aagentcitys" />
+    <result column="aagentareas" jdbcType="LONGVARCHAR" property="aagentareas" />
+    <result column="diyaagentdata" jdbcType="LONGVARCHAR" property="diyaagentdata" />
+    <result column="diyaagentfields" jdbcType="LONGVARCHAR" property="diyaagentfields" />
+    <result column="diyauthordata" jdbcType="LONGVARCHAR" property="diyauthordata" />
+    <result column="diyauthorfields" jdbcType="LONGVARCHAR" property="diyauthorfields" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, uniacid, uid, groupid, level, agentid, openid, realname, mobile, pwd, weixin, 
+    createtime, agenttime, status, isagent, clickcount, agentlevel, nickname, credit1, 
+    credit2, birthyear, birthmonth, birthday, gender, avatar, province, city, area, childtime, 
+    inviter, agentnotupgrade, agentselectgoods, agentblack, fixagentid, diymemberid, 
+    diymemberdataid, diycommissionid, diycommissiondataid, isblack, username, commission_total, 
+    endtime2, ispartner, partnertime, partnerstatus, partnerblack, partnerlevel, partnernotupgrade, 
+    diyglobonusid, isaagent, aagentlevel, aagenttime, aagentstatus, aagentblack, aagentnotupgrade, 
+    aagenttype, diyaagentid, salt, mobileverify, mobileuser, carrier_mobile, isauthor, 
+    authortime, authorstatus, authorblack, authorlevel, authornotupgrade, diyauthorid, 
+    authorid, comefrom, openid_qq, openid_wx, diymaxcredit, maxcredit, datavalue, openid_wa, 
+    nickname_wechat, avatar_wechat, updateaddress, membercardid, membercardcode, membershipnumber, 
+    membercardactive, levelendtime
+  </sql>
+  <sql id="Blob_Column_List">
+    content, noticeset, diymemberfields, diymemberdata, diycommissionfields, diycommissiondata, 
+    diyglobonusdata, diyglobonusfields, aagentprovinces, aagentcitys, aagentareas, diyaagentdata, 
+    diyaagentfields, diyauthordata, diyauthorfields
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ims_ewei_shop_member
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ims_ewei_shop_member
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopMemberWithBLOBs">
+    insert into ims_ewei_shop_member (id, uniacid, uid, 
+      groupid, level, agentid, 
+      openid, realname, mobile, 
+      pwd, weixin, createtime, 
+      agenttime, status, isagent, 
+      clickcount, agentlevel, nickname, 
+      credit1, credit2, birthyear, 
+      birthmonth, birthday, gender, 
+      avatar, province, city, 
+      area, childtime, inviter, 
+      agentnotupgrade, agentselectgoods, agentblack, 
+      fixagentid, diymemberid, diymemberdataid, 
+      diycommissionid, diycommissiondataid, isblack, 
+      username, commission_total, endtime2, 
+      ispartner, partnertime, partnerstatus, 
+      partnerblack, partnerlevel, partnernotupgrade, 
+      diyglobonusid, isaagent, aagentlevel, 
+      aagenttime, aagentstatus, aagentblack, 
+      aagentnotupgrade, aagenttype, diyaagentid, 
+      salt, mobileverify, mobileuser, 
+      carrier_mobile, isauthor, authortime, 
+      authorstatus, authorblack, authorlevel, 
+      authornotupgrade, diyauthorid, authorid, 
+      comefrom, openid_qq, openid_wx, 
+      diymaxcredit, maxcredit, datavalue, 
+      openid_wa, nickname_wechat, avatar_wechat, 
+      updateaddress, membercardid, membercardcode, 
+      membershipnumber, membercardactive, levelendtime, 
+      content, noticeset, diymemberfields, 
+      diymemberdata, diycommissionfields, 
+      diycommissiondata, diyglobonusdata, 
+      diyglobonusfields, aagentprovinces, 
+      aagentcitys, aagentareas, diyaagentdata, 
+      diyaagentfields, diyauthordata, 
+      diyauthorfields)
+    values (#{id,jdbcType=INTEGER}, #{uniacid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, 
+      #{groupid,jdbcType=INTEGER}, #{level,jdbcType=INTEGER}, #{agentid,jdbcType=INTEGER}, 
+      #{openid,jdbcType=VARCHAR}, #{realname,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{pwd,jdbcType=VARCHAR}, #{weixin,jdbcType=VARCHAR}, #{createtime,jdbcType=INTEGER}, 
+      #{agenttime,jdbcType=INTEGER}, #{status,jdbcType=BIT}, #{isagent,jdbcType=BIT}, 
+      #{clickcount,jdbcType=INTEGER}, #{agentlevel,jdbcType=INTEGER}, #{nickname,jdbcType=VARCHAR}, 
+      #{credit1,jdbcType=DECIMAL}, #{credit2,jdbcType=DECIMAL}, #{birthyear,jdbcType=VARCHAR}, 
+      #{birthmonth,jdbcType=VARCHAR}, #{birthday,jdbcType=VARCHAR}, #{gender,jdbcType=TINYINT}, 
+      #{avatar,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{area,jdbcType=VARCHAR}, #{childtime,jdbcType=INTEGER}, #{inviter,jdbcType=INTEGER}, 
+      #{agentnotupgrade,jdbcType=INTEGER}, #{agentselectgoods,jdbcType=TINYINT}, #{agentblack,jdbcType=INTEGER}, 
+      #{fixagentid,jdbcType=TINYINT}, #{diymemberid,jdbcType=INTEGER}, #{diymemberdataid,jdbcType=INTEGER}, 
+      #{diycommissionid,jdbcType=INTEGER}, #{diycommissiondataid,jdbcType=INTEGER}, #{isblack,jdbcType=INTEGER}, 
+      #{username,jdbcType=VARCHAR}, #{commissionTotal,jdbcType=DECIMAL}, #{endtime2,jdbcType=INTEGER}, 
+      #{ispartner,jdbcType=TINYINT}, #{partnertime,jdbcType=INTEGER}, #{partnerstatus,jdbcType=TINYINT}, 
+      #{partnerblack,jdbcType=TINYINT}, #{partnerlevel,jdbcType=INTEGER}, #{partnernotupgrade,jdbcType=TINYINT}, 
+      #{diyglobonusid,jdbcType=INTEGER}, #{isaagent,jdbcType=TINYINT}, #{aagentlevel,jdbcType=INTEGER}, 
+      #{aagenttime,jdbcType=INTEGER}, #{aagentstatus,jdbcType=TINYINT}, #{aagentblack,jdbcType=TINYINT}, 
+      #{aagentnotupgrade,jdbcType=TINYINT}, #{aagenttype,jdbcType=TINYINT}, #{diyaagentid,jdbcType=INTEGER}, 
+      #{salt,jdbcType=VARCHAR}, #{mobileverify,jdbcType=TINYINT}, #{mobileuser,jdbcType=TINYINT}, 
+      #{carrierMobile,jdbcType=VARCHAR}, #{isauthor,jdbcType=BIT}, #{authortime,jdbcType=INTEGER}, 
+      #{authorstatus,jdbcType=BIT}, #{authorblack,jdbcType=BIT}, #{authorlevel,jdbcType=INTEGER}, 
+      #{authornotupgrade,jdbcType=BIT}, #{diyauthorid,jdbcType=INTEGER}, #{authorid,jdbcType=INTEGER}, 
+      #{comefrom,jdbcType=VARCHAR}, #{openidQq,jdbcType=VARCHAR}, #{openidWx,jdbcType=VARCHAR}, 
+      #{diymaxcredit,jdbcType=TINYINT}, #{maxcredit,jdbcType=INTEGER}, #{datavalue,jdbcType=VARCHAR}, 
+      #{openidWa,jdbcType=VARCHAR}, #{nicknameWechat,jdbcType=VARCHAR}, #{avatarWechat,jdbcType=VARCHAR}, 
+      #{updateaddress,jdbcType=BIT}, #{membercardid,jdbcType=VARCHAR}, #{membercardcode,jdbcType=VARCHAR}, 
+      #{membershipnumber,jdbcType=VARCHAR}, #{membercardactive,jdbcType=BIT}, #{levelendtime,jdbcType=INTEGER}, 
+      #{content,jdbcType=LONGVARCHAR}, #{noticeset,jdbcType=LONGVARCHAR}, #{diymemberfields,jdbcType=LONGVARCHAR}, 
+      #{diymemberdata,jdbcType=LONGVARCHAR}, #{diycommissionfields,jdbcType=LONGVARCHAR}, 
+      #{diycommissiondata,jdbcType=LONGVARCHAR}, #{diyglobonusdata,jdbcType=LONGVARCHAR}, 
+      #{diyglobonusfields,jdbcType=LONGVARCHAR}, #{aagentprovinces,jdbcType=LONGVARCHAR}, 
+      #{aagentcitys,jdbcType=LONGVARCHAR}, #{aagentareas,jdbcType=LONGVARCHAR}, #{diyaagentdata,jdbcType=LONGVARCHAR}, 
+      #{diyaagentfields,jdbcType=LONGVARCHAR}, #{diyauthordata,jdbcType=LONGVARCHAR}, 
+      #{diyauthorfields,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopMemberWithBLOBs">
+    insert into ims_ewei_shop_member
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="uniacid != null">
+        uniacid,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="groupid != null">
+        groupid,
+      </if>
+      <if test="level != null">
+        level,
+      </if>
+      <if test="agentid != null">
+        agentid,
+      </if>
+      <if test="openid != null">
+        openid,
+      </if>
+      <if test="realname != null">
+        realname,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="pwd != null">
+        pwd,
+      </if>
+      <if test="weixin != null">
+        weixin,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="agenttime != null">
+        agenttime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="isagent != null">
+        isagent,
+      </if>
+      <if test="clickcount != null">
+        clickcount,
+      </if>
+      <if test="agentlevel != null">
+        agentlevel,
+      </if>
+      <if test="nickname != null">
+        nickname,
+      </if>
+      <if test="credit1 != null">
+        credit1,
+      </if>
+      <if test="credit2 != null">
+        credit2,
+      </if>
+      <if test="birthyear != null">
+        birthyear,
+      </if>
+      <if test="birthmonth != null">
+        birthmonth,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="avatar != null">
+        avatar,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="area != null">
+        area,
+      </if>
+      <if test="childtime != null">
+        childtime,
+      </if>
+      <if test="inviter != null">
+        inviter,
+      </if>
+      <if test="agentnotupgrade != null">
+        agentnotupgrade,
+      </if>
+      <if test="agentselectgoods != null">
+        agentselectgoods,
+      </if>
+      <if test="agentblack != null">
+        agentblack,
+      </if>
+      <if test="fixagentid != null">
+        fixagentid,
+      </if>
+      <if test="diymemberid != null">
+        diymemberid,
+      </if>
+      <if test="diymemberdataid != null">
+        diymemberdataid,
+      </if>
+      <if test="diycommissionid != null">
+        diycommissionid,
+      </if>
+      <if test="diycommissiondataid != null">
+        diycommissiondataid,
+      </if>
+      <if test="isblack != null">
+        isblack,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="commissionTotal != null">
+        commission_total,
+      </if>
+      <if test="endtime2 != null">
+        endtime2,
+      </if>
+      <if test="ispartner != null">
+        ispartner,
+      </if>
+      <if test="partnertime != null">
+        partnertime,
+      </if>
+      <if test="partnerstatus != null">
+        partnerstatus,
+      </if>
+      <if test="partnerblack != null">
+        partnerblack,
+      </if>
+      <if test="partnerlevel != null">
+        partnerlevel,
+      </if>
+      <if test="partnernotupgrade != null">
+        partnernotupgrade,
+      </if>
+      <if test="diyglobonusid != null">
+        diyglobonusid,
+      </if>
+      <if test="isaagent != null">
+        isaagent,
+      </if>
+      <if test="aagentlevel != null">
+        aagentlevel,
+      </if>
+      <if test="aagenttime != null">
+        aagenttime,
+      </if>
+      <if test="aagentstatus != null">
+        aagentstatus,
+      </if>
+      <if test="aagentblack != null">
+        aagentblack,
+      </if>
+      <if test="aagentnotupgrade != null">
+        aagentnotupgrade,
+      </if>
+      <if test="aagenttype != null">
+        aagenttype,
+      </if>
+      <if test="diyaagentid != null">
+        diyaagentid,
+      </if>
+      <if test="salt != null">
+        salt,
+      </if>
+      <if test="mobileverify != null">
+        mobileverify,
+      </if>
+      <if test="mobileuser != null">
+        mobileuser,
+      </if>
+      <if test="carrierMobile != null">
+        carrier_mobile,
+      </if>
+      <if test="isauthor != null">
+        isauthor,
+      </if>
+      <if test="authortime != null">
+        authortime,
+      </if>
+      <if test="authorstatus != null">
+        authorstatus,
+      </if>
+      <if test="authorblack != null">
+        authorblack,
+      </if>
+      <if test="authorlevel != null">
+        authorlevel,
+      </if>
+      <if test="authornotupgrade != null">
+        authornotupgrade,
+      </if>
+      <if test="diyauthorid != null">
+        diyauthorid,
+      </if>
+      <if test="authorid != null">
+        authorid,
+      </if>
+      <if test="comefrom != null">
+        comefrom,
+      </if>
+      <if test="openidQq != null">
+        openid_qq,
+      </if>
+      <if test="openidWx != null">
+        openid_wx,
+      </if>
+      <if test="diymaxcredit != null">
+        diymaxcredit,
+      </if>
+      <if test="maxcredit != null">
+        maxcredit,
+      </if>
+      <if test="datavalue != null">
+        datavalue,
+      </if>
+      <if test="openidWa != null">
+        openid_wa,
+      </if>
+      <if test="nicknameWechat != null">
+        nickname_wechat,
+      </if>
+      <if test="avatarWechat != null">
+        avatar_wechat,
+      </if>
+      <if test="updateaddress != null">
+        updateaddress,
+      </if>
+      <if test="membercardid != null">
+        membercardid,
+      </if>
+      <if test="membercardcode != null">
+        membercardcode,
+      </if>
+      <if test="membershipnumber != null">
+        membershipnumber,
+      </if>
+      <if test="membercardactive != null">
+        membercardactive,
+      </if>
+      <if test="levelendtime != null">
+        levelendtime,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="noticeset != null">
+        noticeset,
+      </if>
+      <if test="diymemberfields != null">
+        diymemberfields,
+      </if>
+      <if test="diymemberdata != null">
+        diymemberdata,
+      </if>
+      <if test="diycommissionfields != null">
+        diycommissionfields,
+      </if>
+      <if test="diycommissiondata != null">
+        diycommissiondata,
+      </if>
+      <if test="diyglobonusdata != null">
+        diyglobonusdata,
+      </if>
+      <if test="diyglobonusfields != null">
+        diyglobonusfields,
+      </if>
+      <if test="aagentprovinces != null">
+        aagentprovinces,
+      </if>
+      <if test="aagentcitys != null">
+        aagentcitys,
+      </if>
+      <if test="aagentareas != null">
+        aagentareas,
+      </if>
+      <if test="diyaagentdata != null">
+        diyaagentdata,
+      </if>
+      <if test="diyaagentfields != null">
+        diyaagentfields,
+      </if>
+      <if test="diyauthordata != null">
+        diyauthordata,
+      </if>
+      <if test="diyauthorfields != null">
+        diyauthorfields,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="uniacid != null">
+        #{uniacid,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="groupid != null">
+        #{groupid,jdbcType=INTEGER},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="agentid != null">
+        #{agentid,jdbcType=INTEGER},
+      </if>
+      <if test="openid != null">
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null">
+        #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null">
+        #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="weixin != null">
+        #{weixin,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=INTEGER},
+      </if>
+      <if test="agenttime != null">
+        #{agenttime,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="isagent != null">
+        #{isagent,jdbcType=BIT},
+      </if>
+      <if test="clickcount != null">
+        #{clickcount,jdbcType=INTEGER},
+      </if>
+      <if test="agentlevel != null">
+        #{agentlevel,jdbcType=INTEGER},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="credit1 != null">
+        #{credit1,jdbcType=DECIMAL},
+      </if>
+      <if test="credit2 != null">
+        #{credit2,jdbcType=DECIMAL},
+      </if>
+      <if test="birthyear != null">
+        #{birthyear,jdbcType=VARCHAR},
+      </if>
+      <if test="birthmonth != null">
+        #{birthmonth,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=TINYINT},
+      </if>
+      <if test="avatar != null">
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="childtime != null">
+        #{childtime,jdbcType=INTEGER},
+      </if>
+      <if test="inviter != null">
+        #{inviter,jdbcType=INTEGER},
+      </if>
+      <if test="agentnotupgrade != null">
+        #{agentnotupgrade,jdbcType=INTEGER},
+      </if>
+      <if test="agentselectgoods != null">
+        #{agentselectgoods,jdbcType=TINYINT},
+      </if>
+      <if test="agentblack != null">
+        #{agentblack,jdbcType=INTEGER},
+      </if>
+      <if test="fixagentid != null">
+        #{fixagentid,jdbcType=TINYINT},
+      </if>
+      <if test="diymemberid != null">
+        #{diymemberid,jdbcType=INTEGER},
+      </if>
+      <if test="diymemberdataid != null">
+        #{diymemberdataid,jdbcType=INTEGER},
+      </if>
+      <if test="diycommissionid != null">
+        #{diycommissionid,jdbcType=INTEGER},
+      </if>
+      <if test="diycommissiondataid != null">
+        #{diycommissiondataid,jdbcType=INTEGER},
+      </if>
+      <if test="isblack != null">
+        #{isblack,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="commissionTotal != null">
+        #{commissionTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="endtime2 != null">
+        #{endtime2,jdbcType=INTEGER},
+      </if>
+      <if test="ispartner != null">
+        #{ispartner,jdbcType=TINYINT},
+      </if>
+      <if test="partnertime != null">
+        #{partnertime,jdbcType=INTEGER},
+      </if>
+      <if test="partnerstatus != null">
+        #{partnerstatus,jdbcType=TINYINT},
+      </if>
+      <if test="partnerblack != null">
+        #{partnerblack,jdbcType=TINYINT},
+      </if>
+      <if test="partnerlevel != null">
+        #{partnerlevel,jdbcType=INTEGER},
+      </if>
+      <if test="partnernotupgrade != null">
+        #{partnernotupgrade,jdbcType=TINYINT},
+      </if>
+      <if test="diyglobonusid != null">
+        #{diyglobonusid,jdbcType=INTEGER},
+      </if>
+      <if test="isaagent != null">
+        #{isaagent,jdbcType=TINYINT},
+      </if>
+      <if test="aagentlevel != null">
+        #{aagentlevel,jdbcType=INTEGER},
+      </if>
+      <if test="aagenttime != null">
+        #{aagenttime,jdbcType=INTEGER},
+      </if>
+      <if test="aagentstatus != null">
+        #{aagentstatus,jdbcType=TINYINT},
+      </if>
+      <if test="aagentblack != null">
+        #{aagentblack,jdbcType=TINYINT},
+      </if>
+      <if test="aagentnotupgrade != null">
+        #{aagentnotupgrade,jdbcType=TINYINT},
+      </if>
+      <if test="aagenttype != null">
+        #{aagenttype,jdbcType=TINYINT},
+      </if>
+      <if test="diyaagentid != null">
+        #{diyaagentid,jdbcType=INTEGER},
+      </if>
+      <if test="salt != null">
+        #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileverify != null">
+        #{mobileverify,jdbcType=TINYINT},
+      </if>
+      <if test="mobileuser != null">
+        #{mobileuser,jdbcType=TINYINT},
+      </if>
+      <if test="carrierMobile != null">
+        #{carrierMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="isauthor != null">
+        #{isauthor,jdbcType=BIT},
+      </if>
+      <if test="authortime != null">
+        #{authortime,jdbcType=INTEGER},
+      </if>
+      <if test="authorstatus != null">
+        #{authorstatus,jdbcType=BIT},
+      </if>
+      <if test="authorblack != null">
+        #{authorblack,jdbcType=BIT},
+      </if>
+      <if test="authorlevel != null">
+        #{authorlevel,jdbcType=INTEGER},
+      </if>
+      <if test="authornotupgrade != null">
+        #{authornotupgrade,jdbcType=BIT},
+      </if>
+      <if test="diyauthorid != null">
+        #{diyauthorid,jdbcType=INTEGER},
+      </if>
+      <if test="authorid != null">
+        #{authorid,jdbcType=INTEGER},
+      </if>
+      <if test="comefrom != null">
+        #{comefrom,jdbcType=VARCHAR},
+      </if>
+      <if test="openidQq != null">
+        #{openidQq,jdbcType=VARCHAR},
+      </if>
+      <if test="openidWx != null">
+        #{openidWx,jdbcType=VARCHAR},
+      </if>
+      <if test="diymaxcredit != null">
+        #{diymaxcredit,jdbcType=TINYINT},
+      </if>
+      <if test="maxcredit != null">
+        #{maxcredit,jdbcType=INTEGER},
+      </if>
+      <if test="datavalue != null">
+        #{datavalue,jdbcType=VARCHAR},
+      </if>
+      <if test="openidWa != null">
+        #{openidWa,jdbcType=VARCHAR},
+      </if>
+      <if test="nicknameWechat != null">
+        #{nicknameWechat,jdbcType=VARCHAR},
+      </if>
+      <if test="avatarWechat != null">
+        #{avatarWechat,jdbcType=VARCHAR},
+      </if>
+      <if test="updateaddress != null">
+        #{updateaddress,jdbcType=BIT},
+      </if>
+      <if test="membercardid != null">
+        #{membercardid,jdbcType=VARCHAR},
+      </if>
+      <if test="membercardcode != null">
+        #{membercardcode,jdbcType=VARCHAR},
+      </if>
+      <if test="membershipnumber != null">
+        #{membershipnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="membercardactive != null">
+        #{membercardactive,jdbcType=BIT},
+      </if>
+      <if test="levelendtime != null">
+        #{levelendtime,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="noticeset != null">
+        #{noticeset,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="diymemberfields != null">
+        #{diymemberfields,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="diymemberdata != null">
+        #{diymemberdata,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="diycommissionfields != null">
+        #{diycommissionfields,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="diycommissiondata != null">
+        #{diycommissiondata,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="diyglobonusdata != null">
+        #{diyglobonusdata,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="diyglobonusfields != null">
+        #{diyglobonusfields,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="aagentprovinces != null">
+        #{aagentprovinces,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="aagentcitys != null">
+        #{aagentcitys,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="aagentareas != null">
+        #{aagentareas,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="diyaagentdata != null">
+        #{diyaagentdata,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="diyaagentfields != null">
+        #{diyaagentfields,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="diyauthordata != null">
+        #{diyauthordata,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="diyauthorfields != null">
+        #{diyauthorfields,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopMemberWithBLOBs">
+    update ims_ewei_shop_member
+    <set>
+      <if test="uniacid != null">
+        uniacid = #{uniacid,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="groupid != null">
+        groupid = #{groupid,jdbcType=INTEGER},
+      </if>
+      <if test="level != null">
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="agentid != null">
+        agentid = #{agentid,jdbcType=INTEGER},
+      </if>
+      <if test="openid != null">
+        openid = #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null">
+        realname = #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null">
+        pwd = #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="weixin != null">
+        weixin = #{weixin,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=INTEGER},
+      </if>
+      <if test="agenttime != null">
+        agenttime = #{agenttime,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="isagent != null">
+        isagent = #{isagent,jdbcType=BIT},
+      </if>
+      <if test="clickcount != null">
+        clickcount = #{clickcount,jdbcType=INTEGER},
+      </if>
+      <if test="agentlevel != null">
+        agentlevel = #{agentlevel,jdbcType=INTEGER},
+      </if>
+      <if test="nickname != null">
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="credit1 != null">
+        credit1 = #{credit1,jdbcType=DECIMAL},
+      </if>
+      <if test="credit2 != null">
+        credit2 = #{credit2,jdbcType=DECIMAL},
+      </if>
+      <if test="birthyear != null">
+        birthyear = #{birthyear,jdbcType=VARCHAR},
+      </if>
+      <if test="birthmonth != null">
+        birthmonth = #{birthmonth,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=TINYINT},
+      </if>
+      <if test="avatar != null">
+        avatar = #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="childtime != null">
+        childtime = #{childtime,jdbcType=INTEGER},
+      </if>
+      <if test="inviter != null">
+        inviter = #{inviter,jdbcType=INTEGER},
+      </if>
+      <if test="agentnotupgrade != null">
+        agentnotupgrade = #{agentnotupgrade,jdbcType=INTEGER},
+      </if>
+      <if test="agentselectgoods != null">
+        agentselectgoods = #{agentselectgoods,jdbcType=TINYINT},
+      </if>
+      <if test="agentblack != null">
+        agentblack = #{agentblack,jdbcType=INTEGER},
+      </if>
+      <if test="fixagentid != null">
+        fixagentid = #{fixagentid,jdbcType=TINYINT},
+      </if>
+      <if test="diymemberid != null">
+        diymemberid = #{diymemberid,jdbcType=INTEGER},
+      </if>
+      <if test="diymemberdataid != null">
+        diymemberdataid = #{diymemberdataid,jdbcType=INTEGER},
+      </if>
+      <if test="diycommissionid != null">
+        diycommissionid = #{diycommissionid,jdbcType=INTEGER},
+      </if>
+      <if test="diycommissiondataid != null">
+        diycommissiondataid = #{diycommissiondataid,jdbcType=INTEGER},
+      </if>
+      <if test="isblack != null">
+        isblack = #{isblack,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="commissionTotal != null">
+        commission_total = #{commissionTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="endtime2 != null">
+        endtime2 = #{endtime2,jdbcType=INTEGER},
+      </if>
+      <if test="ispartner != null">
+        ispartner = #{ispartner,jdbcType=TINYINT},
+      </if>
+      <if test="partnertime != null">
+        partnertime = #{partnertime,jdbcType=INTEGER},
+      </if>
+      <if test="partnerstatus != null">
+        partnerstatus = #{partnerstatus,jdbcType=TINYINT},
+      </if>
+      <if test="partnerblack != null">
+        partnerblack = #{partnerblack,jdbcType=TINYINT},
+      </if>
+      <if test="partnerlevel != null">
+        partnerlevel = #{partnerlevel,jdbcType=INTEGER},
+      </if>
+      <if test="partnernotupgrade != null">
+        partnernotupgrade = #{partnernotupgrade,jdbcType=TINYINT},
+      </if>
+      <if test="diyglobonusid != null">
+        diyglobonusid = #{diyglobonusid,jdbcType=INTEGER},
+      </if>
+      <if test="isaagent != null">
+        isaagent = #{isaagent,jdbcType=TINYINT},
+      </if>
+      <if test="aagentlevel != null">
+        aagentlevel = #{aagentlevel,jdbcType=INTEGER},
+      </if>
+      <if test="aagenttime != null">
+        aagenttime = #{aagenttime,jdbcType=INTEGER},
+      </if>
+      <if test="aagentstatus != null">
+        aagentstatus = #{aagentstatus,jdbcType=TINYINT},
+      </if>
+      <if test="aagentblack != null">
+        aagentblack = #{aagentblack,jdbcType=TINYINT},
+      </if>
+      <if test="aagentnotupgrade != null">
+        aagentnotupgrade = #{aagentnotupgrade,jdbcType=TINYINT},
+      </if>
+      <if test="aagenttype != null">
+        aagenttype = #{aagenttype,jdbcType=TINYINT},
+      </if>
+      <if test="diyaagentid != null">
+        diyaagentid = #{diyaagentid,jdbcType=INTEGER},
+      </if>
+      <if test="salt != null">
+        salt = #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileverify != null">
+        mobileverify = #{mobileverify,jdbcType=TINYINT},
+      </if>
+      <if test="mobileuser != null">
+        mobileuser = #{mobileuser,jdbcType=TINYINT},
+      </if>
+      <if test="carrierMobile != null">
+        carrier_mobile = #{carrierMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="isauthor != null">
+        isauthor = #{isauthor,jdbcType=BIT},
+      </if>
+      <if test="authortime != null">
+        authortime = #{authortime,jdbcType=INTEGER},
+      </if>
+      <if test="authorstatus != null">
+        authorstatus = #{authorstatus,jdbcType=BIT},
+      </if>
+      <if test="authorblack != null">
+        authorblack = #{authorblack,jdbcType=BIT},
+      </if>
+      <if test="authorlevel != null">
+        authorlevel = #{authorlevel,jdbcType=INTEGER},
+      </if>
+      <if test="authornotupgrade != null">
+        authornotupgrade = #{authornotupgrade,jdbcType=BIT},
+      </if>
+      <if test="diyauthorid != null">
+        diyauthorid = #{diyauthorid,jdbcType=INTEGER},
+      </if>
+      <if test="authorid != null">
+        authorid = #{authorid,jdbcType=INTEGER},
+      </if>
+      <if test="comefrom != null">
+        comefrom = #{comefrom,jdbcType=VARCHAR},
+      </if>
+      <if test="openidQq != null">
+        openid_qq = #{openidQq,jdbcType=VARCHAR},
+      </if>
+      <if test="openidWx != null">
+        openid_wx = #{openidWx,jdbcType=VARCHAR},
+      </if>
+      <if test="diymaxcredit != null">
+        diymaxcredit = #{diymaxcredit,jdbcType=TINYINT},
+      </if>
+      <if test="maxcredit != null">
+        maxcredit = #{maxcredit,jdbcType=INTEGER},
+      </if>
+      <if test="datavalue != null">
+        datavalue = #{datavalue,jdbcType=VARCHAR},
+      </if>
+      <if test="openidWa != null">
+        openid_wa = #{openidWa,jdbcType=VARCHAR},
+      </if>
+      <if test="nicknameWechat != null">
+        nickname_wechat = #{nicknameWechat,jdbcType=VARCHAR},
+      </if>
+      <if test="avatarWechat != null">
+        avatar_wechat = #{avatarWechat,jdbcType=VARCHAR},
+      </if>
+      <if test="updateaddress != null">
+        updateaddress = #{updateaddress,jdbcType=BIT},
+      </if>
+      <if test="membercardid != null">
+        membercardid = #{membercardid,jdbcType=VARCHAR},
+      </if>
+      <if test="membercardcode != null">
+        membercardcode = #{membercardcode,jdbcType=VARCHAR},
+      </if>
+      <if test="membershipnumber != null">
+        membershipnumber = #{membershipnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="membercardactive != null">
+        membercardactive = #{membercardactive,jdbcType=BIT},
+      </if>
+      <if test="levelendtime != null">
+        levelendtime = #{levelendtime,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="noticeset != null">
+        noticeset = #{noticeset,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="diymemberfields != null">
+        diymemberfields = #{diymemberfields,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="diymemberdata != null">
+        diymemberdata = #{diymemberdata,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="diycommissionfields != null">
+        diycommissionfields = #{diycommissionfields,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="diycommissiondata != null">
+        diycommissiondata = #{diycommissiondata,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="diyglobonusdata != null">
+        diyglobonusdata = #{diyglobonusdata,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="diyglobonusfields != null">
+        diyglobonusfields = #{diyglobonusfields,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="aagentprovinces != null">
+        aagentprovinces = #{aagentprovinces,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="aagentcitys != null">
+        aagentcitys = #{aagentcitys,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="aagentareas != null">
+        aagentareas = #{aagentareas,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="diyaagentdata != null">
+        diyaagentdata = #{diyaagentdata,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="diyaagentfields != null">
+        diyaagentfields = #{diyaagentfields,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="diyauthordata != null">
+        diyauthordata = #{diyauthordata,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="diyauthorfields != null">
+        diyauthorfields = #{diyauthorfields,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopMemberWithBLOBs">
+    update ims_ewei_shop_member
+    set uniacid = #{uniacid,jdbcType=INTEGER},
+      uid = #{uid,jdbcType=INTEGER},
+      groupid = #{groupid,jdbcType=INTEGER},
+      level = #{level,jdbcType=INTEGER},
+      agentid = #{agentid,jdbcType=INTEGER},
+      openid = #{openid,jdbcType=VARCHAR},
+      realname = #{realname,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      pwd = #{pwd,jdbcType=VARCHAR},
+      weixin = #{weixin,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=INTEGER},
+      agenttime = #{agenttime,jdbcType=INTEGER},
+      status = #{status,jdbcType=BIT},
+      isagent = #{isagent,jdbcType=BIT},
+      clickcount = #{clickcount,jdbcType=INTEGER},
+      agentlevel = #{agentlevel,jdbcType=INTEGER},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      credit1 = #{credit1,jdbcType=DECIMAL},
+      credit2 = #{credit2,jdbcType=DECIMAL},
+      birthyear = #{birthyear,jdbcType=VARCHAR},
+      birthmonth = #{birthmonth,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=TINYINT},
+      avatar = #{avatar,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      childtime = #{childtime,jdbcType=INTEGER},
+      inviter = #{inviter,jdbcType=INTEGER},
+      agentnotupgrade = #{agentnotupgrade,jdbcType=INTEGER},
+      agentselectgoods = #{agentselectgoods,jdbcType=TINYINT},
+      agentblack = #{agentblack,jdbcType=INTEGER},
+      fixagentid = #{fixagentid,jdbcType=TINYINT},
+      diymemberid = #{diymemberid,jdbcType=INTEGER},
+      diymemberdataid = #{diymemberdataid,jdbcType=INTEGER},
+      diycommissionid = #{diycommissionid,jdbcType=INTEGER},
+      diycommissiondataid = #{diycommissiondataid,jdbcType=INTEGER},
+      isblack = #{isblack,jdbcType=INTEGER},
+      username = #{username,jdbcType=VARCHAR},
+      commission_total = #{commissionTotal,jdbcType=DECIMAL},
+      endtime2 = #{endtime2,jdbcType=INTEGER},
+      ispartner = #{ispartner,jdbcType=TINYINT},
+      partnertime = #{partnertime,jdbcType=INTEGER},
+      partnerstatus = #{partnerstatus,jdbcType=TINYINT},
+      partnerblack = #{partnerblack,jdbcType=TINYINT},
+      partnerlevel = #{partnerlevel,jdbcType=INTEGER},
+      partnernotupgrade = #{partnernotupgrade,jdbcType=TINYINT},
+      diyglobonusid = #{diyglobonusid,jdbcType=INTEGER},
+      isaagent = #{isaagent,jdbcType=TINYINT},
+      aagentlevel = #{aagentlevel,jdbcType=INTEGER},
+      aagenttime = #{aagenttime,jdbcType=INTEGER},
+      aagentstatus = #{aagentstatus,jdbcType=TINYINT},
+      aagentblack = #{aagentblack,jdbcType=TINYINT},
+      aagentnotupgrade = #{aagentnotupgrade,jdbcType=TINYINT},
+      aagenttype = #{aagenttype,jdbcType=TINYINT},
+      diyaagentid = #{diyaagentid,jdbcType=INTEGER},
+      salt = #{salt,jdbcType=VARCHAR},
+      mobileverify = #{mobileverify,jdbcType=TINYINT},
+      mobileuser = #{mobileuser,jdbcType=TINYINT},
+      carrier_mobile = #{carrierMobile,jdbcType=VARCHAR},
+      isauthor = #{isauthor,jdbcType=BIT},
+      authortime = #{authortime,jdbcType=INTEGER},
+      authorstatus = #{authorstatus,jdbcType=BIT},
+      authorblack = #{authorblack,jdbcType=BIT},
+      authorlevel = #{authorlevel,jdbcType=INTEGER},
+      authornotupgrade = #{authornotupgrade,jdbcType=BIT},
+      diyauthorid = #{diyauthorid,jdbcType=INTEGER},
+      authorid = #{authorid,jdbcType=INTEGER},
+      comefrom = #{comefrom,jdbcType=VARCHAR},
+      openid_qq = #{openidQq,jdbcType=VARCHAR},
+      openid_wx = #{openidWx,jdbcType=VARCHAR},
+      diymaxcredit = #{diymaxcredit,jdbcType=TINYINT},
+      maxcredit = #{maxcredit,jdbcType=INTEGER},
+      datavalue = #{datavalue,jdbcType=VARCHAR},
+      openid_wa = #{openidWa,jdbcType=VARCHAR},
+      nickname_wechat = #{nicknameWechat,jdbcType=VARCHAR},
+      avatar_wechat = #{avatarWechat,jdbcType=VARCHAR},
+      updateaddress = #{updateaddress,jdbcType=BIT},
+      membercardid = #{membercardid,jdbcType=VARCHAR},
+      membercardcode = #{membercardcode,jdbcType=VARCHAR},
+      membershipnumber = #{membershipnumber,jdbcType=VARCHAR},
+      membercardactive = #{membercardactive,jdbcType=BIT},
+      levelendtime = #{levelendtime,jdbcType=INTEGER},
+      content = #{content,jdbcType=LONGVARCHAR},
+      noticeset = #{noticeset,jdbcType=LONGVARCHAR},
+      diymemberfields = #{diymemberfields,jdbcType=LONGVARCHAR},
+      diymemberdata = #{diymemberdata,jdbcType=LONGVARCHAR},
+      diycommissionfields = #{diycommissionfields,jdbcType=LONGVARCHAR},
+      diycommissiondata = #{diycommissiondata,jdbcType=LONGVARCHAR},
+      diyglobonusdata = #{diyglobonusdata,jdbcType=LONGVARCHAR},
+      diyglobonusfields = #{diyglobonusfields,jdbcType=LONGVARCHAR},
+      aagentprovinces = #{aagentprovinces,jdbcType=LONGVARCHAR},
+      aagentcitys = #{aagentcitys,jdbcType=LONGVARCHAR},
+      aagentareas = #{aagentareas,jdbcType=LONGVARCHAR},
+      diyaagentdata = #{diyaagentdata,jdbcType=LONGVARCHAR},
+      diyaagentfields = #{diyaagentfields,jdbcType=LONGVARCHAR},
+      diyauthordata = #{diyauthordata,jdbcType=LONGVARCHAR},
+      diyauthorfields = #{diyauthorfields,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopMember">
+    update ims_ewei_shop_member
+    set uniacid = #{uniacid,jdbcType=INTEGER},
+      uid = #{uid,jdbcType=INTEGER},
+      groupid = #{groupid,jdbcType=INTEGER},
+      level = #{level,jdbcType=INTEGER},
+      agentid = #{agentid,jdbcType=INTEGER},
+      openid = #{openid,jdbcType=VARCHAR},
+      realname = #{realname,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      pwd = #{pwd,jdbcType=VARCHAR},
+      weixin = #{weixin,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=INTEGER},
+      agenttime = #{agenttime,jdbcType=INTEGER},
+      status = #{status,jdbcType=BIT},
+      isagent = #{isagent,jdbcType=BIT},
+      clickcount = #{clickcount,jdbcType=INTEGER},
+      agentlevel = #{agentlevel,jdbcType=INTEGER},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      credit1 = #{credit1,jdbcType=DECIMAL},
+      credit2 = #{credit2,jdbcType=DECIMAL},
+      birthyear = #{birthyear,jdbcType=VARCHAR},
+      birthmonth = #{birthmonth,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=TINYINT},
+      avatar = #{avatar,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      childtime = #{childtime,jdbcType=INTEGER},
+      inviter = #{inviter,jdbcType=INTEGER},
+      agentnotupgrade = #{agentnotupgrade,jdbcType=INTEGER},
+      agentselectgoods = #{agentselectgoods,jdbcType=TINYINT},
+      agentblack = #{agentblack,jdbcType=INTEGER},
+      fixagentid = #{fixagentid,jdbcType=TINYINT},
+      diymemberid = #{diymemberid,jdbcType=INTEGER},
+      diymemberdataid = #{diymemberdataid,jdbcType=INTEGER},
+      diycommissionid = #{diycommissionid,jdbcType=INTEGER},
+      diycommissiondataid = #{diycommissiondataid,jdbcType=INTEGER},
+      isblack = #{isblack,jdbcType=INTEGER},
+      username = #{username,jdbcType=VARCHAR},
+      commission_total = #{commissionTotal,jdbcType=DECIMAL},
+      endtime2 = #{endtime2,jdbcType=INTEGER},
+      ispartner = #{ispartner,jdbcType=TINYINT},
+      partnertime = #{partnertime,jdbcType=INTEGER},
+      partnerstatus = #{partnerstatus,jdbcType=TINYINT},
+      partnerblack = #{partnerblack,jdbcType=TINYINT},
+      partnerlevel = #{partnerlevel,jdbcType=INTEGER},
+      partnernotupgrade = #{partnernotupgrade,jdbcType=TINYINT},
+      diyglobonusid = #{diyglobonusid,jdbcType=INTEGER},
+      isaagent = #{isaagent,jdbcType=TINYINT},
+      aagentlevel = #{aagentlevel,jdbcType=INTEGER},
+      aagenttime = #{aagenttime,jdbcType=INTEGER},
+      aagentstatus = #{aagentstatus,jdbcType=TINYINT},
+      aagentblack = #{aagentblack,jdbcType=TINYINT},
+      aagentnotupgrade = #{aagentnotupgrade,jdbcType=TINYINT},
+      aagenttype = #{aagenttype,jdbcType=TINYINT},
+      diyaagentid = #{diyaagentid,jdbcType=INTEGER},
+      salt = #{salt,jdbcType=VARCHAR},
+      mobileverify = #{mobileverify,jdbcType=TINYINT},
+      mobileuser = #{mobileuser,jdbcType=TINYINT},
+      carrier_mobile = #{carrierMobile,jdbcType=VARCHAR},
+      isauthor = #{isauthor,jdbcType=BIT},
+      authortime = #{authortime,jdbcType=INTEGER},
+      authorstatus = #{authorstatus,jdbcType=BIT},
+      authorblack = #{authorblack,jdbcType=BIT},
+      authorlevel = #{authorlevel,jdbcType=INTEGER},
+      authornotupgrade = #{authornotupgrade,jdbcType=BIT},
+      diyauthorid = #{diyauthorid,jdbcType=INTEGER},
+      authorid = #{authorid,jdbcType=INTEGER},
+      comefrom = #{comefrom,jdbcType=VARCHAR},
+      openid_qq = #{openidQq,jdbcType=VARCHAR},
+      openid_wx = #{openidWx,jdbcType=VARCHAR},
+      diymaxcredit = #{diymaxcredit,jdbcType=TINYINT},
+      maxcredit = #{maxcredit,jdbcType=INTEGER},
+      datavalue = #{datavalue,jdbcType=VARCHAR},
+      openid_wa = #{openidWa,jdbcType=VARCHAR},
+      nickname_wechat = #{nicknameWechat,jdbcType=VARCHAR},
+      avatar_wechat = #{avatarWechat,jdbcType=VARCHAR},
+      updateaddress = #{updateaddress,jdbcType=BIT},
+      membercardid = #{membercardid,jdbcType=VARCHAR},
+      membercardcode = #{membercardcode,jdbcType=VARCHAR},
+      membershipnumber = #{membershipnumber,jdbcType=VARCHAR},
+      membercardactive = #{membercardactive,jdbcType=BIT},
+      levelendtime = #{levelendtime,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

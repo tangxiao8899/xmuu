@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.carryit.base.besttmwuu.dao.imsMcCreditsRecordMapper">
+  <resultMap id="BaseResultMap" type="com.carryit.base.besttmwuu.entity.imsMcCreditsRecord">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="uniacid" jdbcType="INTEGER" property="uniacid" />
+    <result column="credittype" jdbcType="VARCHAR" property="credittype" />
+    <result column="num" jdbcType="DECIMAL" property="num" />
+    <result column="operator" jdbcType="INTEGER" property="operator" />
+    <result column="createtime" jdbcType="INTEGER" property="createtime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="module" jdbcType="VARCHAR" property="module" />
+    <result column="clerk_id" jdbcType="INTEGER" property="clerkId" />
+    <result column="store_id" jdbcType="INTEGER" property="storeId" />
+    <result column="clerk_type" jdbcType="TINYINT" property="clerkType" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, uid, uniacid, credittype, num, operator, createtime, remark, module, clerk_id, 
+    store_id, clerk_type
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ims_mc_credits_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ims_mc_credits_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.carryit.base.besttmwuu.entity.imsMcCreditsRecord">
+    insert into ims_mc_credits_record (id, uid, uniacid, 
+      credittype, num, operator, 
+      createtime, remark, module, 
+      clerk_id, store_id, clerk_type
+      )
+    values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{uniacid,jdbcType=INTEGER}, 
+      #{credittype,jdbcType=VARCHAR}, #{num,jdbcType=DECIMAL}, #{operator,jdbcType=INTEGER}, 
+      #{createtime,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{module,jdbcType=VARCHAR}, 
+      #{clerkId,jdbcType=INTEGER}, #{storeId,jdbcType=INTEGER}, #{clerkType,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.carryit.base.besttmwuu.entity.imsMcCreditsRecord">
+    insert into ims_mc_credits_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="uniacid != null">
+        uniacid,
+      </if>
+      <if test="credittype != null">
+        credittype,
+      </if>
+      <if test="num != null">
+        num,
+      </if>
+      <if test="operator != null">
+        operator,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="module != null">
+        module,
+      </if>
+      <if test="clerkId != null">
+        clerk_id,
+      </if>
+      <if test="storeId != null">
+        store_id,
+      </if>
+      <if test="clerkType != null">
+        clerk_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="uniacid != null">
+        #{uniacid,jdbcType=INTEGER},
+      </if>
+      <if test="credittype != null">
+        #{credittype,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null">
+        #{num,jdbcType=DECIMAL},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="module != null">
+        #{module,jdbcType=VARCHAR},
+      </if>
+      <if test="clerkId != null">
+        #{clerkId,jdbcType=INTEGER},
+      </if>
+      <if test="storeId != null">
+        #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="clerkType != null">
+        #{clerkType,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.carryit.base.besttmwuu.entity.imsMcCreditsRecord">
+    update ims_mc_credits_record
+    <set>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="uniacid != null">
+        uniacid = #{uniacid,jdbcType=INTEGER},
+      </if>
+      <if test="credittype != null">
+        credittype = #{credittype,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null">
+        num = #{num,jdbcType=DECIMAL},
+      </if>
+      <if test="operator != null">
+        operator = #{operator,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="module != null">
+        module = #{module,jdbcType=VARCHAR},
+      </if>
+      <if test="clerkId != null">
+        clerk_id = #{clerkId,jdbcType=INTEGER},
+      </if>
+      <if test="storeId != null">
+        store_id = #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="clerkType != null">
+        clerk_type = #{clerkType,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.carryit.base.besttmwuu.entity.imsMcCreditsRecord">
+    update ims_mc_credits_record
+    set uid = #{uid,jdbcType=INTEGER},
+      uniacid = #{uniacid,jdbcType=INTEGER},
+      credittype = #{credittype,jdbcType=VARCHAR},
+      num = #{num,jdbcType=DECIMAL},
+      operator = #{operator,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      module = #{module,jdbcType=VARCHAR},
+      clerk_id = #{clerkId,jdbcType=INTEGER},
+      store_id = #{storeId,jdbcType=INTEGER},
+      clerk_type = #{clerkType,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

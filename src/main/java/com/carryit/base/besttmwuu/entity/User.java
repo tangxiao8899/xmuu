@@ -1,8 +1,8 @@
 package com.carryit.base.besttmwuu.entity;
 
-import java.io.Serializable;
+import com.bean.Domain;
 
-public class User implements Serializable {
+public class User extends Domain {
     private Integer id;
 
     private String userName;
