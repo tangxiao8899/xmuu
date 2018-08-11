@@ -47,9 +47,9 @@ public class RegisterController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/reg", method = { RequestMethod.GET, RequestMethod.POST },produces = "application/json;charset=UTF-8")
-	public JSONObject beginRegisterII(@RequestBody String data) {
+	public JSONObject beginRegisterII(@RequestBody(required = false) String data) {
 		Log.e("注册信息=" + data);
-		return callHttpReqTask(data.toString(), 0);
+		return callHttpReqTask(data, 0);
 	}
 
 	@Override
