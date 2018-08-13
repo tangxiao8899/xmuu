@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.carryit.base.besttmwuu.dao.MemberDao">
+
+
+	<select id="getMemberById" resultType="com.carryit.base.besttmwuu.entity.Member"
+		parameterType="Integer">
+		<!-- select b.levelname levelName from ims_ewei_shop_member a left join 
+			ims_ewei_shop_member_level b on a.level = b.level where a.uid = #{uid}
+			select id,avatar,realName,city,nickName from ims_ewei_shop_member m where 
+			id = #{uid} -->
+		SELECT avatar,realName,city,nickName,b.levelname levelName FROM
+		ims_ewei_shop_member a LEFT JOIN ims_ewei_shop_member_level b ON
+		a.level = b.level WHERE a.uid = #{uid}
+	</select>
+
+
+	<select id="getWealthById" resultType="com.carryit.base.besttmwuu.entity.Member"
+		parameterType="Integer">
+		select credit2,credit1 from ims_ewei_shop_member where id = #{uid}
+
+	</select>
+
+
+
+
+
+</mapper>

@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.carryit.base.besttmwuu.dao.imsEweiShopMemberLevelMapper">
+  <resultMap id="BaseResultMap" type="com.carryit.base.besttmwuu.entity.imsEweiShopMemberLevel">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="uniacid" jdbcType="INTEGER" property="uniacid" />
+    <result column="level" jdbcType="INTEGER" property="level" />
+    <result column="levelname" jdbcType="VARCHAR" property="levelname" />
+    <result column="ordermoney" jdbcType="DECIMAL" property="ordermoney" />
+    <result column="ordercount" jdbcType="INTEGER" property="ordercount" />
+    <result column="discount" jdbcType="DECIMAL" property="discount" />
+    <result column="enabled" jdbcType="TINYINT" property="enabled" />
+    <result column="enabledadd" jdbcType="BIT" property="enabledadd" />
+    <result column="buygoods" jdbcType="BIT" property="buygoods" />
+    <result column="childrennum" jdbcType="INTEGER" property="childrennum" />
+    <result column="upgoods" jdbcType="VARCHAR" property="upgoods" />
+    <result column="percent" jdbcType="DECIMAL" property="percent" />
+    <result column="totalpeople" jdbcType="INTEGER" property="totalpeople" />
+    <result column="teampercent" jdbcType="DECIMAL" property="teampercent" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.carryit.base.besttmwuu.entity.imsEweiShopMemberLevel">
+    <result column="goodsids" jdbcType="LONGVARCHAR" property="goodsids" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, uniacid, level, levelname, ordermoney, ordercount, discount, enabled, enabledadd, 
+    buygoods, childrennum, upgoods, percent, totalpeople, teampercent
+  </sql>
+  <sql id="Blob_Column_List">
+    goodsids
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ims_ewei_shop_member_level
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ims_ewei_shop_member_level
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopMemberLevel">
+    insert into ims_ewei_shop_member_level (id, uniacid, level, 
+      levelname, ordermoney, ordercount, 
+      discount, enabled, enabledadd, 
+      buygoods, childrennum, upgoods, 
+      percent, totalpeople, teampercent, 
+      goodsids)
+    values (#{id,jdbcType=INTEGER}, #{uniacid,jdbcType=INTEGER}, #{level,jdbcType=INTEGER}, 
+      #{levelname,jdbcType=VARCHAR}, #{ordermoney,jdbcType=DECIMAL}, #{ordercount,jdbcType=INTEGER}, 
+      #{discount,jdbcType=DECIMAL}, #{enabled,jdbcType=TINYINT}, #{enabledadd,jdbcType=BIT}, 
+      #{buygoods,jdbcType=BIT}, #{childrennum,jdbcType=INTEGER}, #{upgoods,jdbcType=VARCHAR}, 
+      #{percent,jdbcType=DECIMAL}, #{totalpeople,jdbcType=INTEGER}, #{teampercent,jdbcType=DECIMAL}, 
+      #{goodsids,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopMemberLevel">
+    insert into ims_ewei_shop_member_level
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="uniacid != null">
+        uniacid,
+      </if>
+      <if test="level != null">
+        level,
+      </if>
+      <if test="levelname != null">
+        levelname,
+      </if>
+      <if test="ordermoney != null">
+        ordermoney,
+      </if>
+      <if test="ordercount != null">
+        ordercount,
+      </if>
+      <if test="discount != null">
+        discount,
+      </if>
+      <if test="enabled != null">
+        enabled,
+      </if>
+      <if test="enabledadd != null">
+        enabledadd,
+      </if>
+      <if test="buygoods != null">
+        buygoods,
+      </if>
+      <if test="childrennum != null">
+        childrennum,
+      </if>
+      <if test="upgoods != null">
+        upgoods,
+      </if>
+      <if test="percent != null">
+        percent,
+      </if>
+      <if test="totalpeople != null">
+        totalpeople,
+      </if>
+      <if test="teampercent != null">
+        teampercent,
+      </if>
+      <if test="goodsids != null">
+        goodsids,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="uniacid != null">
+        #{uniacid,jdbcType=INTEGER},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="levelname != null">
+        #{levelname,jdbcType=VARCHAR},
+      </if>
+      <if test="ordermoney != null">
+        #{ordermoney,jdbcType=DECIMAL},
+      </if>
+      <if test="ordercount != null">
+        #{ordercount,jdbcType=INTEGER},
+      </if>
+      <if test="discount != null">
+        #{discount,jdbcType=DECIMAL},
+      </if>
+      <if test="enabled != null">
+        #{enabled,jdbcType=TINYINT},
+      </if>
+      <if test="enabledadd != null">
+        #{enabledadd,jdbcType=BIT},
+      </if>
+      <if test="buygoods != null">
+        #{buygoods,jdbcType=BIT},
+      </if>
+      <if test="childrennum != null">
+        #{childrennum,jdbcType=INTEGER},
+      </if>
+      <if test="upgoods != null">
+        #{upgoods,jdbcType=VARCHAR},
+      </if>
+      <if test="percent != null">
+        #{percent,jdbcType=DECIMAL},
+      </if>
+      <if test="totalpeople != null">
+        #{totalpeople,jdbcType=INTEGER},
+      </if>
+      <if test="teampercent != null">
+        #{teampercent,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsids != null">
+        #{goodsids,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopMemberLevel">
+    update ims_ewei_shop_member_level
+    <set>
+      <if test="uniacid != null">
+        uniacid = #{uniacid,jdbcType=INTEGER},
+      </if>
+      <if test="level != null">
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="levelname != null">
+        levelname = #{levelname,jdbcType=VARCHAR},
+      </if>
+      <if test="ordermoney != null">
+        ordermoney = #{ordermoney,jdbcType=DECIMAL},
+      </if>
+      <if test="ordercount != null">
+        ordercount = #{ordercount,jdbcType=INTEGER},
+      </if>
+      <if test="discount != null">
+        discount = #{discount,jdbcType=DECIMAL},
+      </if>
+      <if test="enabled != null">
+        enabled = #{enabled,jdbcType=TINYINT},
+      </if>
+      <if test="enabledadd != null">
+        enabledadd = #{enabledadd,jdbcType=BIT},
+      </if>
+      <if test="buygoods != null">
+        buygoods = #{buygoods,jdbcType=BIT},
+      </if>
+      <if test="childrennum != null">
+        childrennum = #{childrennum,jdbcType=INTEGER},
+      </if>
+      <if test="upgoods != null">
+        upgoods = #{upgoods,jdbcType=VARCHAR},
+      </if>
+      <if test="percent != null">
+        percent = #{percent,jdbcType=DECIMAL},
+      </if>
+      <if test="totalpeople != null">
+        totalpeople = #{totalpeople,jdbcType=INTEGER},
+      </if>
+      <if test="teampercent != null">
+        teampercent = #{teampercent,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsids != null">
+        goodsids = #{goodsids,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopMemberLevel">
+    update ims_ewei_shop_member_level
+    set uniacid = #{uniacid,jdbcType=INTEGER},
+      level = #{level,jdbcType=INTEGER},
+      levelname = #{levelname,jdbcType=VARCHAR},
+      ordermoney = #{ordermoney,jdbcType=DECIMAL},
+      ordercount = #{ordercount,jdbcType=INTEGER},
+      discount = #{discount,jdbcType=DECIMAL},
+      enabled = #{enabled,jdbcType=TINYINT},
+      enabledadd = #{enabledadd,jdbcType=BIT},
+      buygoods = #{buygoods,jdbcType=BIT},
+      childrennum = #{childrennum,jdbcType=INTEGER},
+      upgoods = #{upgoods,jdbcType=VARCHAR},
+      percent = #{percent,jdbcType=DECIMAL},
+      totalpeople = #{totalpeople,jdbcType=INTEGER},
+      teampercent = #{teampercent,jdbcType=DECIMAL},
+      goodsids = #{goodsids,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopMemberLevel">
+    update ims_ewei_shop_member_level
+    set uniacid = #{uniacid,jdbcType=INTEGER},
+      level = #{level,jdbcType=INTEGER},
+      levelname = #{levelname,jdbcType=VARCHAR},
+      ordermoney = #{ordermoney,jdbcType=DECIMAL},
+      ordercount = #{ordercount,jdbcType=INTEGER},
+      discount = #{discount,jdbcType=DECIMAL},
+      enabled = #{enabled,jdbcType=TINYINT},
+      enabledadd = #{enabledadd,jdbcType=BIT},
+      buygoods = #{buygoods,jdbcType=BIT},
+      childrennum = #{childrennum,jdbcType=INTEGER},
+      upgoods = #{upgoods,jdbcType=VARCHAR},
+      percent = #{percent,jdbcType=DECIMAL},
+      totalpeople = #{totalpeople,jdbcType=INTEGER},
+      teampercent = #{teampercent,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

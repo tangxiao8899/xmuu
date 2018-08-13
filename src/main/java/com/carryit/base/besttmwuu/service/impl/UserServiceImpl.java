@@ -30,4 +30,9 @@ public class UserServiceImpl implements UserService {
         return result;
     }
 
+	@Override
+	public User selectByPhone(String phone) {
+		 return userDao.selectByPhone(phone);
+	}
+
 }

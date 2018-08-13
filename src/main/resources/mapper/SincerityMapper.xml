@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.carryit.base.besttmwuu.dao.SincerityDao">
+
+    <select id="getNumberById" resultType="com.carryit.base.besttmwuu.entity.Sincerity" parameterType="Integer">
+        select * from t_sincerity where id = #{uid}
+    </select>
+
+
+</mapper>
