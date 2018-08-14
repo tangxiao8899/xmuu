@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface WealthDao {
 
-    List<UserDTO> onTheList(@Param("startTime") String startTime, @Param("endTime") String endTime);
+    List<UserDTO> onTheList(@Param("startTime") long startTime, @Param("endTime") long endTime);
 }

@@ -100,18 +100,23 @@ public class CirclesController extends BaseController {
     * */
     @RequestMapping("/onAndOff")
     public Map<String, String> onAndOff(int uid, int bid, String follow) {
+
         Map<String, String> map = new HashMap<>();
+        map.put("code", "201");
+        map.put("msg", "操作失败");
         try {
             if (uid != 0 & bid != 0 & follow != null) {
                 if ("0".equals(follow)) {
                     //取消关注
                     boardFollowService.delete(uid, bid);
-                    map.put("code", "0");
+                    map.put("code", "200");
+                    map.put("msg", "操作成功");
                 } else if ("1".equals(follow)) {
                     //关注
 
                     boardFollowService.add(uid, bid, new Date().getTime());
-                    map.put("code", "1");
+                    map.put("code", "200");
+                    map.put("msg", "操作成功");
                 }
             }
 

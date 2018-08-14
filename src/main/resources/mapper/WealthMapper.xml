@@ -4,7 +4,6 @@
 
 
     <select id="onTheList" resultType="com.carryit.base.besttmwuu.entity.UserDTO">
-        select  m.realname realName from t_wealth w LEFT JOIN ims_ewei_shop_member m ON w.udi=m.uid  where updateTime &gt;= str_to_date(#{startTime},'%Y-%m-%d %H:%i:%s') and updateTime &lt;= str_to_date(#{endTime},'%Y-%m-%d %H:%i:%s') order by number DESC limit 3
-
+        SELECT m.realname realName,m.avatar profilePhoto FROM `ims_ewei_shop_order` o join ims_ewei_shop_member m on o.openid  = m.openid where o.`status` = 3 and o.createtime &gt;=startTime and o.createtime &gt;=endTime GROUP BY o.openid ORDER BY sum(o.price) desc limit 3;
     </select>
 </mapper>

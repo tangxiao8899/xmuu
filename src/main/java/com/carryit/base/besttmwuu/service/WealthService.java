@@ -5,5 +5,5 @@ import com.carryit.base.besttmwuu.entity.UserDTO;
 import java.util.List;
 
 public interface WealthService {
-    List<UserDTO> onTheList(String startTime, String endTime);
+    List<UserDTO> onTheList(long startTime, long endTime);
 }

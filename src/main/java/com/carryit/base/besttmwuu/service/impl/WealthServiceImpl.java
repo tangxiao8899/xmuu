@@ -14,7 +14,7 @@ public class WealthServiceImpl implements WealthService {
     @Autowired
     private WealthDao wealthDao;
     @Override
-    public List<UserDTO> onTheList(String startTime, String endTime) {
+    public List<UserDTO> onTheList(long startTime, long endTime) {
         return wealthDao.onTheList(startTime,endTime);
     }
 }
