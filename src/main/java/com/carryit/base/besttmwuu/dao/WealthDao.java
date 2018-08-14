@@ -2,6 +2,7 @@ package com.carryit.base.besttmwuu.dao;
 
 import com.carryit.base.besttmwuu.entity.UserDTO;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -10,4 +11,8 @@ import java.util.List;
 public interface WealthDao {
 
     List<UserDTO> onTheList(@Param("startTime") long startTime, @Param("endTime") long endTime);
+
+    List<UserDTO> queryPage(RowBounds rowBounds);
+
+    long queryPageCount();
 }

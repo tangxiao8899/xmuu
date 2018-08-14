@@ -2,6 +2,9 @@ package com.carryit.base.besttmwuu.web;
 
 import com.alibaba.fastjson.JSONObject;
 import com.base.BaseController;
+import com.bean.Page;
+import com.bean.req.BoardReq;
+import com.bean.req.PageParam;
 import com.carryit.base.besttmwuu.entity.UserDTO;
 import com.carryit.base.besttmwuu.service.WealthService;
 import org.slf4j.Logger;
@@ -57,8 +60,27 @@ public class IndexController extends BaseController {
                     e.printStackTrace();
                 }
                 return doArraysResp(data);
+            case 1:
+                Page<UserDTO> page  = new Page<>();
+                List<UserDTO> list = new ArrayList<>();
+                long count = 0;
+                PageParam req = p(json, PageParam.class);
+                if(req!=null){
+                    list = wealthService.queryPage((req.getPageStart()-1)*req.getPageSize(),req.getPageSize());
+                    count = wealthService.queryPageCount();
+                    page.setList(list);
+                    page.setPageSize(req.getPageSize());
+                    page.setTotalSize(count);
+                }
+               // return doArraysResp(page);
 
         }
         return null;
+    }
+
+    @RequestMapping(value = "/queryPage", method = {RequestMethod.GET,
+            RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public JSONObject queryPage(@RequestBody(required = false) String json) {
+        return callHttpReqTask(json, 1);
     }
 }

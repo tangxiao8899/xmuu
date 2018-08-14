@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.carryit.base.besttmwuu.dao.BoardFollowDao">
+<mapper namespace="com.carryit.base.besttmwuu.dao.WealthDao">
 
 
     <select id="onTheList" resultType="com.carryit.base.besttmwuu.entity.UserDTO">
-        SELECT m.realname realName,m.avatar profilePhoto FROM `ims_ewei_shop_order` o join ims_ewei_shop_member m on o.openid  = m.openid where o.`status` = 3 and o.createtime &gt;=startTime and o.createtime &gt;=endTime GROUP BY o.openid ORDER BY sum(o.price) desc limit 3;
+        SELECT m.realname realName,m.avatar profilePhoto FROM ims_ewei_shop_order o join ims_ewei_shop_member m on o.openid  = m.openid where o.status = 3 and o.createtime &gt;=#{startTime} and o.createtime &lt;=#{endTime} GROUP BY o.openid ORDER BY sum(o.price) desc limit 3;
+    </select>
+
+    <select id="queryPage" resultType="com.carryit.base.besttmwuu.entity.UserDTO">
+        SELECT m.realname realName,m.avatar profilePhoto FROM ims_ewei_shop_order o join ims_ewei_shop_member m on o.openid  = m.openid where o.status = 3 and o.createtime &gt;=#{startTime} and o.createtime &lt;=#{endTime} GROUP BY o.openid ORDER BY sum(o.price) desc;
+    </select>
+
+    <select id="queryPageCount" resultType="long">
+     SELECT count(*) from (SELECT m.realname realName,m.avatar profilePhoto FROM ims_ewei_shop_order o join ims_ewei_shop_member m on o.openid  = m.openid where o.status = 3 and o.createtime &gt;=#{startTime} and o.createtime &lt;=#{endTime} GROUP BY o.openid ORDER BY sum(o.price) desc) a;
     </select>
 </mapper>
