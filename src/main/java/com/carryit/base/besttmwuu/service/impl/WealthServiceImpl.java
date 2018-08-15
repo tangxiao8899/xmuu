@@ -19,13 +19,14 @@ public class WealthServiceImpl implements WealthService {
         return wealthDao.onTheList(startTime,endTime);
     }
 
+
     @Override
-    public List<UserDTO> queryPage(int pageStart, int pageSize) {
-        return wealthDao.queryPage(new RowBounds(pageStart,pageSize));
+    public long queryPageCount(long startTime, long endTime) {
+        return wealthDao.queryPageCount(startTime,endTime);
     }
 
     @Override
-    public long queryPageCount() {
-        return wealthDao.queryPageCount();
+    public List<UserDTO> queryPage(long startTime, long endTime, int pageStart, int pageSize) {
+        return wealthDao.queryPage(startTime,endTime,new RowBounds(pageStart,pageSize));
     }
 }

@@ -12,7 +12,7 @@ public class Page<T> implements Serializable {
     private long totalSize;
     private int currentSize;
     private List<T> list;
-    private String result;
+
 
     public long getTotalPage() {
        totalPage=  (totalSize + pageSize - 1) / pageSize;
@@ -44,14 +44,6 @@ public class Page<T> implements Serializable {
 
     public void setTotalSize(long totalSize) {
         this.totalSize = totalSize;
-    }
-
-    public String getResult() {
-        return result;
-    }
-
-    public void setResult(String result) {
-        this.result = result;
     }
 
     public List<T> getList() {

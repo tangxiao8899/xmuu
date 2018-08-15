@@ -7,7 +7,9 @@ import java.util.List;
 public interface WealthService {
     List<UserDTO> onTheList(long startTime, long endTime);
 
-    List<UserDTO> queryPage(int pageStart, int pageSize);
+   
 
-    long queryPageCount();
+    long queryPageCount(long startTime, long endTime);
+
+    List<UserDTO> queryPage(long startTime, long endTime, int i, int pageSize);
 }
