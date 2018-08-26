@@ -50,6 +50,12 @@ public class CirclesController extends BaseController {
         return callHttpReqTask(json, 1);
     }
 
+    @RequestMapping(value = "/getZhuQuanZiByUid", method = {RequestMethod.GET,
+            RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public JSONObject getZhuQuanZiByUid(@RequestBody(required = false) String json) {
+        return callHttpReqTask(json, 2);
+    }
+
     @Override
     public JSONObject runTask(String json, int cmd) {
         switch (cmd) {
@@ -91,6 +97,8 @@ public class CirclesController extends BaseController {
                     e.printStackTrace();
                 }
                 return doObjResp(board);
+            case 2:
+
         }
         return null;
     }
