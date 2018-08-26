@@ -10,7 +10,7 @@ public class Message {
     private static final Logger logger = LoggerFactory.getLogger(Message.class);
 
 
-    @Value("#{config['Dysmsapi']}")
+    @Value(value="${Dysmsapi}")
     private String Dysmsapi;
 
     @Value("#{config['dysmsapi.aliyuncs.com']}")
