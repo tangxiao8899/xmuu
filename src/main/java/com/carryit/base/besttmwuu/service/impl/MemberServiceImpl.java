@@ -2,11 +2,14 @@ package com.carryit.base.besttmwuu.service.impl;
 
 import com.carryit.base.besttmwuu.dao.MemberDao;
 import com.carryit.base.besttmwuu.dao.imsEweiShopMemberMapper;
+import com.carryit.base.besttmwuu.entity.Level;
 import com.carryit.base.besttmwuu.entity.Member;
 import com.carryit.base.besttmwuu.entity.imsEweiShopMember;
 import com.carryit.base.besttmwuu.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service("memberService")
 public class MemberServiceImpl implements MemberService {
@@ -23,4 +26,5 @@ public class MemberServiceImpl implements MemberService {
     public Member getWealthById(int uid) {
         return memberDao.getWealthById(uid);
     }
+
 }

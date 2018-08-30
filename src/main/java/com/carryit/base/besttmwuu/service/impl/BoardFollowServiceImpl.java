@@ -2,9 +2,12 @@ package com.carryit.base.besttmwuu.service.impl;
 
 import com.carryit.base.besttmwuu.dao.BoardFollowDao;
 import com.carryit.base.besttmwuu.entity.BoardFollow;
+import com.carryit.base.besttmwuu.entity.Member;
 import com.carryit.base.besttmwuu.service.BoardFollowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service("boardFollowService")
 public class BoardFollowServiceImpl implements BoardFollowService {
@@ -24,5 +27,10 @@ public class BoardFollowServiceImpl implements BoardFollowService {
     @Override
     public void add(int uid, int bid, long time) {
         boardFollowDao.add(uid,bid,time);
+    }
+
+    @Override
+    public List<Member> getMemberByZhuQuanZiId(Integer zhuquanzi) {
+        return boardFollowDao.getMemberByZhuQuanZiId(zhuquanzi);
     }
 }

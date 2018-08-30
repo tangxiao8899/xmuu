@@ -4,12 +4,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.base.BaseController;
 import com.base.ServiceConfig;
 import com.bean.req.BoardReq;
-import com.carryit.base.besttmwuu.entity.Board;
-import com.carryit.base.besttmwuu.entity.BoardFollow;
-import com.carryit.base.besttmwuu.entity.Circles;
-import com.carryit.base.besttmwuu.service.BoardService;
-import com.carryit.base.besttmwuu.service.BoardFollowService;
-import com.carryit.base.besttmwuu.service.CirclesService;
+import com.carryit.base.besttmwuu.entity.*;
+import com.carryit.base.besttmwuu.service.*;
 import com.util.Log;
 
 import org.slf4j.Logger;
@@ -34,6 +30,8 @@ public class CirclesController extends BaseController {
     BoardService boardService;
     @Autowired
     BoardFollowService boardFollowService;
+    @Autowired
+    MemberService memberService;
 
     @RequestMapping(value = "/getCircles", method = {RequestMethod.GET,
             RequestMethod.POST}, produces = "application/json;charset=UTF-8")
@@ -91,6 +89,21 @@ public class CirclesController extends BaseController {
                     e.printStackTrace();
                 }
                 return doObjResp(board);
+            case 2:
+                List<Member> memberList = new ArrayList<>();
+
+                BoardReq req = p(json, BoardReq.class);
+                try {
+                    if(req!=null){
+                        Member member = memberService.getMemberById(req.uid);
+                        if(member!=null&&member.getZhuquanzi()!=null){
+                            memberList = boardFollowService.getMemberByZhuQuanZiId(member.getZhuquanzi());
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return doObjResp(memberList);
         }
         return null;
     }
@@ -125,5 +138,15 @@ public class CirclesController extends BaseController {
         }
         return map;
 
+    }
+
+    /*
+    圈子管理
+    * 根据用户id获取主圈子和主圈子下面的所有会员
+    * */
+    @RequestMapping(value = "/getZhuQuanZiByUid", method = {RequestMethod.GET,
+            RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public JSONObject getZhuQuanZiByUid(@RequestBody(required = false) String json) {
+        return callHttpReqTask(json, 2);
     }
 }
