@@ -1,4 +1,6 @@
 package com.util;
 
-public class TrustManagerUtil {
+import javax.net.ssl.TrustManager;
+
+public class TrustManagerUtil implements TrustManager {
 }

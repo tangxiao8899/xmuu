@@ -1,4 +1,9 @@
 package com.bean.req;
 
-public class WxPayReq {
+import com.bean.CommonRequest;
+
+public class WxPayReq extends CommonRequest {
+
+    public double totalFee; //支付金额
+
 }

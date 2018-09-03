@@ -1,101 +1,57 @@
 package com.util;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.Properties;
 
 public class PropertyUtil {
-    private String properiesName = "resources/application.yml";
-
-    public PropertyUtil() {
-
+    private static final Logger logger = LoggerFactory.getLogger(PropertyUtil.class);
+    private static Properties props;
+    static{
+        loadProps();
     }
 
-    public PropertyUtil(String fileName) {
-        this.properiesName = fileName;
-    }
+    synchronized static private void loadProps(){
+        logger.info("开始加载properties文件内容.......");
+        props = new Properties();
+        InputStream in = null;
+        // String prefixOfProp =System.getenv("pre")==null?"":System.getenv("pre");
 
-    /**
-     * 按key获取值
-     * @param key
-     * @return
-     */
-    public String readProperty(String key) {
-        String value = "";
-        InputStream is = null;
         try {
-            is = PropertyUtil.class.getClassLoader().getResourceAsStream(properiesName);
-            Properties p = new Properties();
-            p.load(is);
-            value = p.getProperty(key);
+            in = PropertyUtil.class.getClassLoader().getResourceAsStream("payment.properties");
+            props.load(in);
+        } catch (FileNotFoundException e) {
+            logger.error("payment.properties文件未找到");
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("出现IOException");
         } finally {
             try {
-                is.close();
+                if(null != in) {
+                    in.close();
+                }
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.error("payment.properties文件流关闭出现异常");
             }
         }
-        return value;
+        logger.info("加载payment.properties文件内容完成...........");
+        logger.info("payment.properties文件内容：" + props);
     }
 
-    /**
-     * 获取整个配置信息
-     * @return
-     */
-    public Properties getProperties() {
-        Properties p = new Properties();
-        InputStream is = null;
-        try {
-            is = PropertyUtil.class.getClassLoader().getResourceAsStream(properiesName);
-            p.load(is);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                is.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+    //读取key对应的value
+    public static String getProperty(String key){
+        if(null == props) {
+            loadProps();
         }
-        return p;
+        return props.getProperty(key);
     }
 
-    /**
-     * key-value写入配置文件
-     * @param key
-     * @param value
-     */
-    public void writeProperty(String key, String value) {
-        InputStream is = null;
-        OutputStream os = null;
-        Properties p = new Properties();
-        try {
-            is = new FileInputStream(properiesName);
-//            is = PropertiesUtil.class.getClassLoader().getResourceAsStream(properiesName);
-            p.load(is);
-//            os = new FileOutputStream(PropertiesUtil.class.getClassLoader().getResource(properiesName).getFile());
-            os = new FileOutputStream(properiesName);
-
-            p.setProperty(key, value);
-            p.store(os, key);
-            os.flush();
-            os.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (null != is)
-                    is.close();
-                if (null != os)
-                    os.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+    public static String getProperty(String key, String defaultValue) {
+        if(null == props) {
+            loadProps();
         }
-
+        return props.getProperty(key, defaultValue);
     }
 }
