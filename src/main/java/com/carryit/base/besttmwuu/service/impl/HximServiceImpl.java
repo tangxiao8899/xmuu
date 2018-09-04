@@ -12,8 +12,6 @@ public class HximServiceImpl implements HximService {
 
     @Override
     public ResultPojo getToken() throws Exception{
-        String URL = "https://" + PropertyUtil.getProperty("hxim.orgName") + "/"
-                + PropertyUtil.getProperty("hxim.appName") + "/token";
 
 
         JSONObject param = new JSONObject();

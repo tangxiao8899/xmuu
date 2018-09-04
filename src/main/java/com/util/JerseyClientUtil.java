@@ -22,7 +22,7 @@ import java.util.Map;
  */
 public class JerseyClientUtil {
 
-    private static final String BIGDATA_API_URL = "https://" + PropertyUtil.getProperty("hxim.orgName") + "/"
+    private static final String BIGDATA_API_URL = PropertyUtil.getProperty("hxim.url") + PropertyUtil.getProperty("hxim.orgName") + "/"
             + PropertyUtil.getProperty("hxim.appName") + "/token";
 
     /**
