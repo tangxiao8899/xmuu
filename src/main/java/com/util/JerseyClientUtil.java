@@ -23,7 +23,7 @@ import java.util.Map;
 public class JerseyClientUtil {
 
     private static final String BIGDATA_API_URL = PropertyUtil.getProperty("hxim.url") + PropertyUtil.getProperty("hxim.orgName") + "/"
-            + PropertyUtil.getProperty("hxim.appName") + "/token";
+            + PropertyUtil.getProperty("hxim.appName");
 
     /**
      * post方法
@@ -32,22 +32,57 @@ public class JerseyClientUtil {
      * @param param  参数
      * @return 返回值
      */
-    public static ResultPojo postMethod(String param) {
+    public static ResultPojo postMethod(String param,String method) {
         ResultPojo resultPojo = new ResultPojo();
         ClientResponse response = null;
         try {
             Client client = Client.create();
-            WebResource resource = client.resource(BIGDATA_API_URL );
+            WebResource resource = client.resource(BIGDATA_API_URL  + method);
             response = resource.type(MediaType.APPLICATION_JSON_TYPE).post(ClientResponse.class, param);
             int status = response.getStatus();
             String data = response.getEntity(String.class);
+            JSONObject jsonObject = JSON.parseObject(data);
+            resultPojo.setStatus(status);
+            resultPojo.setData(jsonObject);
             if (status == 200) {
-                JSONObject jsonObject = JSON.parseObject(data);
-                resultPojo.setStatus(jsonObject.getInteger("status"));
-                resultPojo.setData(data);
+                resultPojo.setErrorMsg("请求成功");
             } else {
-                resultPojo.setStatus(response.getStatus());
-                resultPojo.setData(data);
+                resultPojo.setErrorMsg("请求失败");
+            }
+        } catch (Exception e) {
+            resultPojo.setStatus(500);//服务器异常
+            resultPojo.setErrorMsg(e.getMessage());
+        } finally {
+            if (response != null) {
+                response.close();
+            }
+        }
+        return resultPojo;
+    }
+
+    /**
+     * 需要授权的post方法
+     * @param method 方法名
+     * @param param  参数
+     * @param token 授权信息
+     * @return 返回值
+     */
+    public static ResultPojo postMethod(String param,String token,String method) {
+        ResultPojo resultPojo = new ResultPojo();
+        ClientResponse response = null;
+        try {
+            Client client = Client.create();
+            WebResource resource = client.resource(BIGDATA_API_URL  + method);
+            response = resource.header("Authorization",token).type(MediaType.APPLICATION_JSON_TYPE).post(ClientResponse.class, param);
+            int status = response.getStatus();
+            String data = response.getEntity(String.class);
+            JSONObject jsonObject = JSON.parseObject(data);
+            resultPojo.setStatus(status);
+            resultPojo.setData(jsonObject);
+            if (status == 200) {
+                resultPojo.setErrorMsg("请求成功");
+            } else {
+                resultPojo.setErrorMsg("请求失败");
             }
         } catch (Exception e) {
             resultPojo.setStatus(500);//服务器异常
@@ -64,7 +99,6 @@ public class JerseyClientUtil {
     /**
      * get方法
      * 例如：consultation/recommend?startDate=201412030253&endDate=201412020253
-     * @param method 方法名
      * @param param  参数
      * @return 返回值
      */
@@ -100,7 +134,6 @@ public class JerseyClientUtil {
     /**
      * get方法
      * 例如：consultation/recommend/A1000037B04B8C
-     * @param method 方法名
      * @param param  参数
      * @return 返回值
      */
