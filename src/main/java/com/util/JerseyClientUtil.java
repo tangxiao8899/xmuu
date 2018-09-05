@@ -73,7 +73,7 @@ public class JerseyClientUtil {
         try {
             Client client = Client.create();
             WebResource resource = client.resource(BIGDATA_API_URL  + method);
-            response = resource.header("Authorization",token).type(MediaType.APPLICATION_JSON_TYPE).post(ClientResponse.class, param);
+            response = resource.header("Authorization"," Bearer "+token).type(MediaType.APPLICATION_JSON_TYPE).post(ClientResponse.class, param);
             int status = response.getStatus();
             String data = response.getEntity(String.class);
             JSONObject jsonObject = JSON.parseObject(data);

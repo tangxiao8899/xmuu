@@ -37,7 +37,7 @@ public class HxIMController {
     }
 
     /**
-     * 授权注册--单个用户
+     * 授权注册--单个用户|批量用户
      * @param json
      * @return
      */
