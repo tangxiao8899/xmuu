@@ -135,6 +135,56 @@ public class HximServiceImpl implements HximService {
         return rp;
     }
 
+    @Override
+    public ResultPojo getUserStatus(String json) throws Exception {
+        ResultPojo rp = new ResultPojo();
+        if (!StringUtils.isEmpty(json)) {
+            JSONObject jo = JSON.parseObject(json);
+            //校验授权信息
+            if (!jo.containsKey("token")) {
+                rp.setStatus(401);
+                rp.setErrorMsg("请先获取授权信息");
+                return rp;
+            }
+            if (!jo.containsKey("username")) {
+                rp.setStatus(400);
+                rp.setErrorMsg("请求参数异常");
+            } else {
+                rp = JerseyClientUtil.getTokenMethod(jo.getString("token"), "/users/" + jo.getString("username") +"/status" );
+            }
+        } else {
+            rp.setStatus(400);
+            rp.setErrorMsg("请求参数异常");
+
+        }
+        return rp;
+    }
+
+    @Override
+    public ResultPojo offlineMsgCount(String json) throws Exception {
+        ResultPojo rp = new ResultPojo();
+        if (!StringUtils.isEmpty(json)) {
+            JSONObject jo = JSON.parseObject(json);
+            //校验授权信息
+            if (!jo.containsKey("token")) {
+                rp.setStatus(401);
+                rp.setErrorMsg("请先获取授权信息");
+                return rp;
+            }
+            if (!jo.containsKey("owner_username")) {
+                rp.setStatus(400);
+                rp.setErrorMsg("请求参数异常");
+            } else {
+                rp = JerseyClientUtil.postTokenMethod(jo.getString("token"), "/users/" + jo.getString("owner_username") +"/offline_msg_count" ,2);
+            }
+        } else {
+            rp.setStatus(400);
+            rp.setErrorMsg("请求参数异常");
+
+        }
+        return rp;
+    }
+
     /**
      * 校验参数
      *

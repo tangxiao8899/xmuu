@@ -67,7 +67,7 @@ public class HxIMController {
     }
 
     /**
-     * 获取 IM 用户的好友列表
+     * 获取 IM 用户的好友列表 | 黑名单
      * @param json
      * @return
      */
@@ -75,6 +75,37 @@ public class HxIMController {
     public ResultPojo getFriends(@RequestBody(required = false) String json) {
         try {
             return  hximService.getFriends(json);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    /**
+     * 查看用户在线状态
+     * @param json
+     * @return
+     */
+    @RequestMapping(value = "/getUserStatus", method = {RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public ResultPojo getUserStatus(@RequestBody(required = false) String json) {
+        try {
+            return  hximService.getUserStatus(json);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 查询离线消息数
+     * @param json
+     * @return
+     */
+    @RequestMapping(value = "/offlineMsgCount", method = {RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public ResultPojo offlineMsgCount(@RequestBody(required = false) String json) {
+        try {
+            return  hximService.offlineMsgCount(json);
         } catch (Exception e) {
             e.printStackTrace();
         }

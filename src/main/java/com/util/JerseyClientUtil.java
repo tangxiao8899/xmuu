@@ -96,6 +96,40 @@ public class JerseyClientUtil {
     }
 
     /**
+     * 授权的GET请求
+     * @param method 请求方法
+     * @return
+     */
+    public static ResultPojo getTokenMethod(String token,String method) {
+        ResultPojo resultPojo = new ResultPojo();
+        ClientResponse response = null;
+        try {
+            Client client = Client.create();
+            WebResource resource = client.resource(BIGDATA_API_URL  + method);
+            response = resource.header("Authorization"," Bearer "+token).type(MediaType.APPLICATION_JSON_TYPE).get(ClientResponse.class);
+            int status = response.getStatus();
+            String data = response.getEntity(String.class);
+            JSONObject jsonObject = JSON.parseObject(data);
+            resultPojo.setStatus(status);
+            resultPojo.setData(jsonObject);
+            if (status == 200) {
+                resultPojo.setErrorMsg("请求成功");
+            } else {
+                resultPojo.setErrorMsg("请求失败");
+            }
+        } catch (Exception e) {
+            resultPojo.setStatus(500);//服务器异常
+            resultPojo.setErrorMsg(e.getMessage());
+        } finally {
+            if (response != null) {
+                response.close();
+            }
+        }
+        return resultPojo;
+    }
+
+
+    /**
      * 需要授权的post方法
      * @param method 方法名
      * @param type  请求类型

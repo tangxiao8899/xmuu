@@ -37,4 +37,20 @@ public interface HximService {
      * @throws Exception
      */
     ResultPojo getFriends(String json) throws Exception;
+
+    /**
+     * 查看用户在线状态
+     * @param json
+     * @return
+     * @throws Exception
+     */
+    ResultPojo getUserStatus(String json) throws Exception;
+
+    /**
+     * 查询离线消息数
+     * @param json
+     * @return
+     * @throws Exception
+     */
+    ResultPojo offlineMsgCount(String json) throws Exception;
 }
