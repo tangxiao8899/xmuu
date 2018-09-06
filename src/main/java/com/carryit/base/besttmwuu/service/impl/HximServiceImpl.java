@@ -15,48 +15,49 @@ import org.springframework.util.StringUtils;
 public class HximServiceImpl implements HximService {
 
     @Override
-    public ResultPojo getToken() throws Exception{
+    public ResultPojo getToken() throws Exception {
 
 
         JSONObject param = new JSONObject();
-        param.put("grant_type","client_credentials");
-        param.put("client_id",PropertyUtil.getProperty("hxim.clientId"));
-        param.put("client_secret",PropertyUtil.getProperty("hxim.clientSecret"));
+        param.put("grant_type", "client_credentials");
+        param.put("client_id", PropertyUtil.getProperty("hxim.clientId"));
+        param.put("client_secret", PropertyUtil.getProperty("hxim.clientSecret"));
 
-        return JerseyClientUtil.postMethod(param.toString(),"/token");
+        return JerseyClientUtil.postMethod(param.toString(), "/token");
 
     }
 
     @Override
     public ResultPojo registerUser(String json) throws Exception {
         ResultPojo rp = new ResultPojo();
-        if(!StringUtils.isEmpty(json)){
+        if (!StringUtils.isEmpty(json)) {
             JSONObject jo = JSON.parseObject(json);
             //校验授权信息
-            if(!jo.containsKey("token")){
+            if (!jo.containsKey("token")) {
                 rp.setStatus(401);
                 rp.setErrorMsg("请先获取授权信息");
+                return rp;
             }
             //判断是单个注册还是多个注册
-            if(jo.containsKey("users")){ // 多个注册
+            if (jo.containsKey("users")) { // 多个注册
                 JSONArray ja = JSONArray.parseArray(jo.getString("users"));
                 //校验参数
-                for(int i =0;i<ja.size();i++){
+                for (int i = 0; i < ja.size(); i++) {
                     JSONObject jao = ja.getJSONObject(i);
                     if (checkParam(rp, jao)) return rp;
                 }
-                rp =  JerseyClientUtil.postMethod(ja.toString(),jo.getString("token"),"/users");
-            }else{ // 单个注册
+                rp = JerseyClientUtil.postTokenMethod(ja.toString(), jo.getString("token"), "/users");
+            } else { // 单个注册
                 //校验参数
                 if (checkParam(rp, jo)) return rp;
 
                 JSONObject subJo = new JSONObject();
-                subJo.put("username",jo.getString("username"));
-                subJo.put("password",jo.getString("password"));
-                rp = JerseyClientUtil.postMethod(subJo.toString(),jo.getString("token"),"/users");
+                subJo.put("username", jo.getString("username"));
+                subJo.put("password", jo.getString("password"));
+                rp = JerseyClientUtil.postTokenMethod(subJo.toString(), jo.getString("token"), "/users");
 
             }
-        }else{
+        } else {
             rp.setStatus(400);
             rp.setErrorMsg("请求参数异常");
 
@@ -65,14 +66,84 @@ public class HximServiceImpl implements HximService {
 
     }
 
+    @Override
+    public ResultPojo addFriends(String json) throws Exception {
+        ResultPojo rp = new ResultPojo();
+        if (!StringUtils.isEmpty(json)) {
+            JSONObject jo = JSON.parseObject(json);
+            //校验授权信息
+            if (!jo.containsKey("token")) {
+                rp.setStatus(401);
+                rp.setErrorMsg("请先获取授权信息");
+                return rp;
+            }
+            if (!jo.containsKey("owner_username") || !jo.containsKey("friend_username")) {
+                rp.setStatus(400);
+                rp.setErrorMsg("请求参数异常");
+            } else {
+                Integer type = 1; //1 post 2 get  3 delete 4 put
+                if(!StringUtils.isEmpty(jo.getString("type"))){
+                    String t = jo.getString("type").toLowerCase();
+                    switch (t){
+                        case "post":
+                            type = 1;
+                            break;
+                        case "get":
+                            type = 2;
+                            break;
+                        case "delete":
+                            type = 3;
+                            break;
+                        case "put":
+                            type = 4;
+                            break;
+                    }
+                }
+
+                rp = JerseyClientUtil.postTokenMethod(jo.getString("token"), "/users/" + jo.getString("owner_username") + "/contacts/users/" + jo.getString("friend_username"),type);
+            }
+        } else {
+            rp.setStatus(400);
+            rp.setErrorMsg("请求参数异常");
+
+        }
+        return rp;
+    }
+
+    @Override
+    public ResultPojo getFriends(String json) throws Exception {
+        ResultPojo rp = new ResultPojo();
+        if (!StringUtils.isEmpty(json)) {
+            JSONObject jo = JSON.parseObject(json);
+            //校验授权信息
+            if (!jo.containsKey("token")) {
+                rp.setStatus(401);
+                rp.setErrorMsg("请先获取授权信息");
+                return rp;
+            }
+            if (!jo.containsKey("owner_username") || !jo.containsKey("type")) {
+                rp.setStatus(400);
+                rp.setErrorMsg("请求参数异常");
+            } else {
+                rp = JerseyClientUtil.postTokenMethod(jo.getString("token"), "/users/" + jo.getString("owner_username") + "/"+jo.getString("type")+"/users" ,2);
+            }
+        } else {
+            rp.setStatus(400);
+            rp.setErrorMsg("请求参数异常");
+
+        }
+        return rp;
+    }
+
     /**
      * 校验参数
+     *
      * @param rp
      * @param jao
      * @return
      */
     private boolean checkParam(ResultPojo rp, JSONObject jao) {
-        if(!jao.containsKey("username") || !jao.containsKey("password")){
+        if (!jao.containsKey("username") || !jao.containsKey("password")) {
             rp.setStatus(400);
             rp.setErrorMsg("请求参数异常");
             return true;

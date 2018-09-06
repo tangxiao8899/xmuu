@@ -20,4 +20,21 @@ public interface HximService {
      * @throws Exception
      */
     ResultPojo registerUser(String json) throws Exception;
+
+    /**
+     * IM添加好友|删除好友
+     * @param json
+     * @return
+     * @throws Exception
+     */
+    ResultPojo addFriends(String json) throws Exception;
+
+
+    /**
+     * 获取 IM 用户的好友列表 | 黑名单
+     * @param json
+     * @return
+     * @throws Exception
+     */
+    ResultPojo getFriends(String json) throws Exception;
 }

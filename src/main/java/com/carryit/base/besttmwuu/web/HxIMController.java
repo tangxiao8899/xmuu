@@ -51,4 +51,33 @@ public class HxIMController {
         return null;
     }
 
+    /**
+     * 给 IM 用户添加好友|删除好友
+     * @param json
+     * @return
+     */
+    @RequestMapping(value = "/addFriends", method = {RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public ResultPojo addFriends(@RequestBody(required = false) String json) {
+        try {
+            return  hximService.addFriends(json);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 获取 IM 用户的好友列表
+     * @param json
+     * @return
+     */
+    @RequestMapping(value = "/getFriends", method = {RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public ResultPojo getFriends(@RequestBody(required = false) String json) {
+        try {
+            return  hximService.getFriends(json);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

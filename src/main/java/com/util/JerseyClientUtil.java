@@ -67,13 +67,61 @@ public class JerseyClientUtil {
      * @param token 授权信息
      * @return 返回值
      */
-    public static ResultPojo postMethod(String param,String token,String method) {
+    public static ResultPojo postTokenMethod(String param,String token,String method) {
         ResultPojo resultPojo = new ResultPojo();
         ClientResponse response = null;
         try {
             Client client = Client.create();
             WebResource resource = client.resource(BIGDATA_API_URL  + method);
             response = resource.header("Authorization"," Bearer "+token).type(MediaType.APPLICATION_JSON_TYPE).post(ClientResponse.class, param);
+            int status = response.getStatus();
+            String data = response.getEntity(String.class);
+            JSONObject jsonObject = JSON.parseObject(data);
+            resultPojo.setStatus(status);
+            resultPojo.setData(jsonObject);
+            if (status == 200) {
+                resultPojo.setErrorMsg("请求成功");
+            } else {
+                resultPojo.setErrorMsg("请求失败");
+            }
+        } catch (Exception e) {
+            resultPojo.setStatus(500);//服务器异常
+            resultPojo.setErrorMsg(e.getMessage());
+        } finally {
+            if (response != null) {
+                response.close();
+            }
+        }
+        return resultPojo;
+    }
+
+    /**
+     * 需要授权的post方法
+     * @param method 方法名
+     * @param type  请求类型
+     * @param token 授权信息
+     * @return 返回值
+     */
+    public static ResultPojo postTokenMethod(String token,String method,Integer type) {
+        ResultPojo resultPojo = new ResultPojo();
+        ClientResponse response = null;
+        try {
+            Client client = Client.create();
+            WebResource resource = client.resource(BIGDATA_API_URL  + method);
+            switch (type){
+                case 1:
+                    response = resource.header("Authorization"," Bearer "+token).type(MediaType.APPLICATION_JSON_TYPE).post(ClientResponse.class);
+                    break;
+                case 2:
+                    response = resource.header("Authorization"," Bearer "+token).get(ClientResponse.class);
+                    break;
+                case 3:
+                    response = resource.header("Authorization"," Bearer "+token).delete(ClientResponse.class);
+                    break;
+                case 4:
+                    response = resource.header("Authorization"," Bearer "+token).type(MediaType.APPLICATION_JSON_TYPE).put(ClientResponse.class);
+                    break;
+            }
             int status = response.getStatus();
             String data = response.getEntity(String.class);
             JSONObject jsonObject = JSON.parseObject(data);
