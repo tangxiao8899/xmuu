@@ -14,13 +14,31 @@ public class Member implements Serializable{
 
     private String nickName;//个性签名
 
-
+    private String level;
 
     private String levelName;//圈子等级表
 
     private String credit2;//账户余额
 
     private String credit1;//账户积分
+
+    private Integer zhuquanzi;
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public Integer getZhuquanzi() {
+        return zhuquanzi;
+    }
+
+    public void setZhuquanzi(Integer zhuquanzi) {
+        this.zhuquanzi = zhuquanzi;
+    }
 
     public String getCredit2() {
         return credit2;

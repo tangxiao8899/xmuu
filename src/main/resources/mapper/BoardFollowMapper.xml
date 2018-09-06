@@ -4,7 +4,7 @@
 
 
     <select id="getBoardByUid" resultType="com.carryit.base.besttmwuu.entity.BoardFollow">
-        select id,bid,openid uid,createtime from ims_ewei_shop_sns_board_follow  where bid = #{bid} and openid =#{uid}
+        select id,bid,uid,createtime from ims_ewei_shop_sns_board_follow  where bid = #{bid} and uid =#{uid}
 
     </select>
 
@@ -14,7 +14,15 @@
     </delete>
 
     <insert id="add">
-        insert into ims_ewei_shop_sns_board_follow (bid,openid,createtime)
+        insert into ims_ewei_shop_sns_board_follow (bid,uid,createtime)
         values (#{bid},#{uid},#{time})
     </insert>
+
+    <select id="getMemberByZhuQuanZiId" resultType="com.carryit.base.besttmwuu.entity.Member">
+        select bf.id,m.avatar,m.nickname,m.level,b.levelname from ims_ewei_shop_sns_board_follow bf
+        LEFT JOIN ims_ewei_shop_member m ON bf.uid = m.uid
+        LEFT JOIN ims_ewei_shop_member_level b ON m.level = b.level
+         where bf.bid = #{zhuquanzi}
+
+    </select>
 </mapper>
