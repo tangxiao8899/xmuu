@@ -185,6 +185,36 @@ public class HximServiceImpl implements HximService {
         return rp;
     }
 
+    @Override
+    public ResultPojo sendMessages(String json) throws Exception {
+        ResultPojo rp = new ResultPojo();
+        if (!StringUtils.isEmpty(json)) {
+            JSONObject jo = JSON.parseObject(json);
+            //校验授权信息
+            if (!jo.containsKey("token")) {
+                rp.setStatus(401);
+                rp.setErrorMsg("请先获取授权信息");
+                return rp;
+            }
+            if (!jo.containsKey("target_type") || !jo.containsKey("target") || !jo.containsKey("msg") || !jo.containsKey("from")) {
+                rp.setStatus(400);
+                rp.setErrorMsg("请求参数异常");
+            } else {
+                JSONObject subJo = new JSONObject();
+                subJo.put("target_type",jo.getString("target_type"));
+                subJo.put("target",JSONArray.parseArray(jo.getString("target")));
+                subJo.put("msg",JSON.parseObject(jo.getString("msg")));
+                subJo.put("from",jo.getString("from"));
+                rp = JerseyClientUtil.postTokenMethod(subJo.toString(),jo.getString("token"), "/messages");
+            }
+        } else {
+            rp.setStatus(400);
+            rp.setErrorMsg("请求参数异常");
+
+        }
+        return rp;
+    }
+
     /**
      * 校验参数
      *

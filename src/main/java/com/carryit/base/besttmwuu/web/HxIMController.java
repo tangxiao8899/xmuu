@@ -111,4 +111,19 @@ public class HxIMController {
         }
         return null;
     }
+
+    /**
+     * 发送文本消息
+     * @param json
+     * @return
+     */
+    @RequestMapping(value = "/sendMessages", method = {RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public ResultPojo sendMessages(@RequestBody(required = false) String json) {
+        try {
+            return  hximService.sendMessages(json);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

@@ -53,4 +53,12 @@ public interface HximService {
      * @throws Exception
      */
     ResultPojo offlineMsgCount(String json) throws Exception;
+
+    /**
+     * 发送文本消息
+     * @param json
+     * @return
+     * @throws Exception
+     */
+    ResultPojo sendMessages(String json) throws Exception;
 }
