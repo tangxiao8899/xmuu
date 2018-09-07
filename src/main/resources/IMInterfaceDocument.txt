@@ -178,7 +178,7 @@ IM环信接口文档
                }
            }
 
-6、查询离线消息数
+7、查询离线消息数
 请求地址：http://ip:port/hx/offlineMsgCount
 请求类型：POST
 请求参数：{
@@ -201,7 +201,7 @@ IM环信接口文档
          }
      }
 
-6、发送文本消息
+8、发送文本消息
 请求地址：http://ip:port/hx/sendMessages
 请求类型：POST
 请求参数：{
