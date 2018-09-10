@@ -10,4 +10,7 @@ public interface MessageCodeService {
     void update(MessageCode messageCode);
 
     MessageCode getIdByPhone(String phoneNumber);
+
+    //保存短信验证码信息
+    void saveMessageCode(String phoneNumber,int code);
 }

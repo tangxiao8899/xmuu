@@ -96,29 +96,12 @@ public class RegisterController extends BaseController {
 		return result ? doObjResp(data) : faild("注册失败~");
 	}
 
-	//将手机号，验证码，当前时间，存到短信表
-	@RequestMapping(value="/message",method = { RequestMethod.GET, RequestMethod.POST },produces = "application/json;charset=UTF-8")
-	public void register(@RequestBody(required = false) String phoneNumber,int code){
-		MessageCode phone=messageCodeService.getIdByPhone(phoneNumber);
-		if(phone==null){
-			MessageCode messageCode=new MessageCode();
-			messageCode.setPhone(phoneNumber);
-			messageCode.setCode(code);
-			messageCode.setCreateTime(new Date());
-			messageCode.setStatus(1);
 
-			messageCodeService.insert(messageCode);
-		}else{
-			MessageCode messageCode=new MessageCode();
-			messageCode.setId(phone.getId());
-			messageCode.setPhone(phone.getPhone());
-			messageCode.setCreateTime(new Date());
-			messageCode.setStatus(1);
-			messageCodeService.update(messageCode);
-		}
-	}
+	//TODO
+	//发送短信验证码，调用saveMessageCode(String phoneNum,int code)方法，保存验证码信息
 
-	//校验验证码是否正确
+	//TODO
+	//校验验证码是否正确，正确->跳转完善个人注册信息页面；错误->给出提示
 	@RequestMapping()
 	public String check(int code,String phoneNumber) throws ParseException {
 		MessageCode messageCode=messageCodeService.getIdByPhone(phoneNumber);
@@ -134,4 +117,8 @@ public class RegisterController extends BaseController {
 		//判断校验时间<=创建时间+短信有效期
 		return null;
 	}
+
+	//TODO
+	//完善给人信息，调用注册方法 mRegisterService.addUser(User user);  成功->注册完成  失败 ->给出提示
+
 }
