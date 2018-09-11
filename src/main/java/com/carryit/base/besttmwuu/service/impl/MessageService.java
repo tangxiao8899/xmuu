@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
+import java.util.Random;
 
 /*
 * 短信发送验证码&批量发送短信（不能超过100条）
@@ -91,6 +92,20 @@ public class MessageService {
 //        } catch (ClientException e) {
 //            e.printStackTrace();
 //        }
+    }
+
+    /*
+    * 生成六位随机验证码
+    *
+    * */
+
+    public String securityCode() {
+        //生成验证码
+        String code = new Random().nextInt(1000000)+"";
+        if(code.length()!=6){
+            return securityCode();
+        }
+        return code;
     }
 
     /*
