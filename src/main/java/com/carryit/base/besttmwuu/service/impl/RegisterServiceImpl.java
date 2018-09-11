@@ -1,11 +1,17 @@
 package com.carryit.base.besttmwuu.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.base.ResultPojo;
 import com.bean.RegisterReq;
 import com.carryit.base.besttmwuu.dao.UserDao;
 import com.carryit.base.besttmwuu.entity.User;
+import com.carryit.base.besttmwuu.service.HximService;
 import com.carryit.base.besttmwuu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 
@@ -14,6 +20,9 @@ public class RegisterServiceImpl implements UserService {
 
     @Resource
     private UserDao userDao;
+
+    @Autowired
+    private HximService hximService;
 
 
     public User beiginRegister(RegisterReq req) {
@@ -30,19 +39,39 @@ public class RegisterServiceImpl implements UserService {
         return userDao.selectByPrimaryKey(userId);
     }
 
+    @Transactional
     public boolean addUser(User record) {
         boolean result = false;
         try {
+            //注册到平台
             userDao.insertSelective(record);
-            result = true;
 
-            //同步注册信息到环信
-
-
+            //同步注册到环信
+            //1、获取环信token
+            String token = null;
+            ResultPojo rp = hximService.getToken();
+            JSONObject jo = JSON.parseObject(rp.getData().toString());
+            if(jo.containsKey("access_token")){
+                token = jo.getString("access_token");
+            }
+            //2、注册到环信
+            if(!StringUtils.isEmpty(token)){
+                JSONObject sunJo = new JSONObject();
+                sunJo.put("token",token);
+                sunJo.put("username",record.getUserName());
+                sunJo.put("password",record.getPassword());
+                hximService.registerUser(sunJo.toJSONString());
+                result = true;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        if(!result){
+            //回滚事务
+            throw new RuntimeException("注册失败");
+        }
 
+        //能执行到此处，则resul必然是true，此处的提示可忽略
         return result;
     }
 
