@@ -4,6 +4,7 @@ import com.bean.RegisterReq;
 import com.carryit.base.besttmwuu.dao.UserDao;
 import com.carryit.base.besttmwuu.entity.User;
 import com.carryit.base.besttmwuu.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -13,6 +14,7 @@ public class RegisterServiceImpl implements UserService {
 
     @Resource
     private UserDao userDao;
+
 
     public User beiginRegister(RegisterReq req) {
     		User result = userDao.selectByPhone(req.phone);
@@ -33,6 +35,10 @@ public class RegisterServiceImpl implements UserService {
         try {
             userDao.insertSelective(record);
             result = true;
+
+            //同步注册信息到环信
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }

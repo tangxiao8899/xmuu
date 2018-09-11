@@ -1,0 +1,237 @@
+IM环信接口文档
+
+1、获取 APP 管理员 Token
+请求地址：http://ip:port/hx/getToken
+请求类型：POST
+请求参数：无
+响应结果：{
+         "status": 200,  //状态码
+         "errorMsg": "请求成功", //描述信息
+         "data": {
+             "access_token": "YWMtyaXSZrJlEeiKKhlnZGJWpQAAAAAAAAAAAAAAAAAAAAEkfycAnqcR6LF7AUVfW6SDAgMAAAFlsq48vABPGgB36BTYHDgIdOLDhDbNG3vnO73rjVKMeYsNTNdRAimkaQ",  //token 值
+             "application": "247f2700-9ea7-11e8-b17b-01455f5ba483", //当前 APP 的 UUID 值
+             "expires_in": 5184000 //token 有效时间，以秒为单位，在有效期内不需要重复获取
+         }
+     }
+
+
+2、环信注[单个]
+请求地址：http://ip:port/hx/registerUser
+请求类型：POST
+请求参数：{
+     	"username": "jliu", //用户名
+     	"password": "123456", //密码
+     	"token": "YWMtyaXSZrJlEeiKKhlnZGJWpQAAAAAAAAAAAAAAAAAAAAEkfycAnqcR6LF7AUVfW6SDAgMAAAFlsq48vABPGgB36BTYHDgIdOLDhDbNG3vnO73rjVKMeYsNTNdRAimkaQ" //授权token
+     }
+响应结果：{
+         "status": 200,
+         "errorMsg": "请求成功",
+         "data": {
+             "duration": 1,
+             "path": "/users",
+             "application": "247f2700-9ea7-11e8-b17b-01455f5ba483",
+             "entities": [
+                 {
+                     "created": 1536302646466,
+                     "modified": 1536302646466,
+                     "type": "user",
+                     "uuid": "6a9b1a20-b269-11e8-818c-7753bd2d31bf",
+                     "username": "jliu3",
+                     "activated": true
+                 }
+             ],
+             "organization": "1176180808228091",
+             "action": "post",
+             "uri": "https://a1.easemob.com/1176180808228091/xiaomauu/users",
+             "applicationName": "xiaomauu",
+             "timestamp": 1536302646469
+         }
+     }
+
+3、环信注[批量]
+请求地址：http://ip:port/hx/registerUser
+请求类型：POST
+请求参数：{
+     	"users": [{
+     		"username": "u3",
+     		"password": "p1"
+     	}, {
+     		"username": "u4",
+     		"password": "p2"
+     	}],
+     	"token": "YWMtTA62ZrJpEei9xu9oxuHsLQAAAAAAAAAAAAAAAAAAAAEkfycAnqcR6LF7AUVfW6SDAgMAAAFlssU8jgBPGgD13Bzal9mDcYvB1gg-FZN-0GT919bFe3jPTgKc_n0t6g"
+     }
+响应结果：{
+         "status": 200,
+         "errorMsg": "请求成功",
+         "data": {
+             "duration": 0,
+             "path": "/users",
+             "application": "247f2700-9ea7-11e8-b17b-01455f5ba483",
+             "entities": [
+                 {
+                     "created": 1536302883837,
+                     "modified": 1536302883837,
+                     "type": "user",
+                     "uuid": "f8170ad0-b269-11e8-9a98-bd5e81e1cebf",
+                     "username": "u3",
+                     "activated": true
+                 },
+                 {
+                     "created": 1536302883840,
+                     "modified": 1536302883840,
+                     "type": "user",
+                     "uuid": "f8178000-b269-11e8-b993-5766ee2b982b",
+                     "username": "u4",
+                     "activated": true
+                 }
+             ],
+             "organization": "1176180808228091",
+             "action": "post",
+             "uri": "https://a1.easemob.com/1176180808228091/xiaomauu/users",
+             "applicationName": "xiaomauu",
+             "timestamp": 1536302883847
+         }
+     }
+
+4、添加好友|删除好友
+请求地址：http://ip:port/hx/addFriends
+请求类型：POST
+请求参数：{
+     	"owner_username": "u1", //当前用户名
+     	"friend_username": "u3", //好友用户名
+     	"type": "post",   //post  添加好友  delete  删除好友
+     	"token": "YWMtTA62ZrJpEei9xu9oxuHsLQAAAAAAAAAAAAAAAAAAAAEkfycAnqcR6LF7AUVfW6SDAgMAAAFlssU8jgBPGgD13Bzal9mDcYvB1gg-FZN-0GT919bFe3jPTgKc_n0t6g"
+     }
+响应结果：{
+         "status": 200,
+         "errorMsg": "请求成功",
+         "data": {
+             "duration": 52,
+             "path": "/users/6189d230-b112-11e8-a8d1-cf2f516df90f/contacts",
+             "application": "247f2700-9ea7-11e8-b17b-01455f5ba483",
+             "entities": [
+                 {
+                     "created": 1536302883837,
+                     "modified": 1536302883837,
+                     "type": "user",
+                     "uuid": "f8170ad0-b269-11e8-9a98-bd5e81e1cebf",
+                     "username": "u3",
+                     "activated": true
+                 }
+             ],
+             "organization": "1176180808228091",
+             "action": "post",
+             "uri": "https://a1.easemob.com/1176180808228091/xiaomauu/users/6189d230-b112-11e8-a8d1-cf2f516df90f/contacts",
+             "applicationName": "xiaomauu",
+             "timestamp": 1536303450872
+         }
+     }
+
+5、获取 IM 用户的好友列表|黑名单
+请求地址：http://ip:port/hx/getFriends
+请求类型：POST
+请求参数：{
+          	"owner_username": "u1", //当前用户名
+          	"type":"contacts" , //contacts：获取好友  blocks:获取黑名单
+          	"token": "YWMtTA62ZrJpEei9xu9oxuHsLQAAAAAAAAAAAAAAAAAAAAEkfycAnqcR6LF7AUVfW6SDAgMAAAFlssU8jgBPGgD13Bzal9mDcYvB1gg-FZN-0GT919bFe3jPTgKc_n0t6g"
+          }
+响应结果：{
+         "status": 200,
+         "errorMsg": "请求成功",
+         "data": {
+             "duration": 6,
+             "data": [
+                 "u3",
+                 "u2",
+                 "jliu"
+             ],
+             "entities": [],
+             "count": 3,
+             "action": "get",
+             "uri": "http://a1.easemob.com/1176180808228091/xiaomauu/users/u1/contacts/users",
+             "timestamp": 1536304064166
+         }
+     }
+
+
+6、查看用户在线状态
+      请求地址：http://ip:port/hx/getUserStatus
+      请求类型：POST
+      请求参数：{
+           	"username": "u1",
+           	"token": "YWMtTA62ZrJpEei9xu9oxuHsLQAAAAAAAAAAAAAAAAAAAAEkfycAnqcR6LF7AUVfW6SDAgMAAAFlssU8jgBPGgD13Bzal9mDcYvB1gg-FZN-0GT919bFe3jPTgKc_n0t6g"
+           }
+      响应结果：{
+               "status": 200,
+               "errorMsg": "请求成功",
+               "data": {
+                   "duration": 4,
+                   "data": {
+                       "u1": "offline" //离线
+                   },
+                   "entities": [],
+                   "count": 0,
+                   "action": "get",
+                   "uri": "http://a1.easemob.com/1176180808228091/xiaomauu/users/u1/status",
+                   "timestamp": 1536304204380
+               }
+           }
+
+7、查询离线消息数
+请求地址：http://ip:port/hx/offlineMsgCount
+请求类型：POST
+请求参数：{
+     	"owner_username": "u1",
+     	"token": "YWMtTA62ZrJpEei9xu9oxuHsLQAAAAAAAAAAAAAAAAAAAAEkfycAnqcR6LF7AUVfW6SDAgMAAAFlssU8jgBPGgD13Bzal9mDcYvB1gg-FZN-0GT919bFe3jPTgKc_n0t6g"
+     }
+响应结果：{
+         "status": 200,
+         "errorMsg": "请求成功",
+         "data": {
+             "duration": 4,
+             "data": {
+                 "u1": 0 //离线记录条数
+             },
+             "entities": [],
+             "count": 0,
+             "action": "get",
+             "uri": "http://tomcatcluster_users/1176180808228091/xiaomauu/users/u1/offline_msg_count",
+             "timestamp": 1536304340011
+         }
+     }
+
+8、发送文本消息
+请求地址：http://ip:port/hx/sendMessages
+请求类型：POST
+请求参数：{
+     	"target_type": "users", // users 给用户发消息。chatgroups: 给群发消息，chatrooms: 给聊天室发消息
+     	"target": ["u2", "u3", "stliu"], // 注意这里需要用数组，数组长度建议不大于20，即使只有一个用户，
+                                         // 也要用数组 ['u1']，给用户发送时数组元素是用户名，给群组发送时
+                                         // 数组元素是groupid
+     	"msg": {
+     		"type": "txt",
+     		"msg": "HelloWorld" //消息内容，参考[[start:100serverintegration:30chatlog|聊天记录]]里的bodies内容
+     	},
+     	"from": "u1", //表示消息发送者。无此字段Server会默认设置为"from":"admin"，有from字段但值为空串("")时请求失败
+     	"token": "YWMtTA62ZrJpEei9xu9oxuHsLQAAAAAAAAAAAAAAAAAAAAEkfycAnqcR6LF7AUVfW6SDAgMAAAFlssU8jgBPGgD13Bzal9mDcYvB1gg-FZN-0GT919bFe3jPTgKc_n0t6g"
+     }
+响应结果：{
+         "status": 200,
+         "errorMsg": "请求成功",
+         "data": {
+             "duration": 0,
+             "path": "/messages",
+             "application": "247f2700-9ea7-11e8-b17b-01455f5ba483",
+             "data": {
+                 "u2": "success",
+                 "stliu": "success",
+                 "u3": "success"
+             },
+             "organization": "1176180808228091",
+             "action": "post",
+             "uri": "https://a1.easemob.com/1176180808228091/xiaomauu/messages",
+             "applicationName": "xiaomauu",
+             "timestamp": 1536304578888
+         }
+     }
