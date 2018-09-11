@@ -18,7 +18,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 /*
@@ -112,9 +114,9 @@ public class MessageService {
     * 短信发送验证码
     *
     * */
-public void sendSms(String phoneNumber, int code) {
-        //生成验证码
-        //int code = new Random().nextInt(1000000);
+public Map<String,String> sendSms(String phoneNumber, String code) {
+        Map<String,String> map = new HashMap<>();
+        map.put("code","0");
         SendSmsRequest request = new SendSmsRequest();
         request.setMethod(MethodType.POST);
         request.setPhoneNumbers(phoneNumber);
@@ -125,10 +127,12 @@ public void sendSms(String phoneNumber, int code) {
             SendSmsResponse sendSmsResponse = acsClient.getAcsResponse(request);
             if (sendSmsResponse.getCode() != null && sendSmsResponse.getCode().equals("OK")) {
                 logger.info("请求成功");
+                map.put("code","1");
             }
         } catch (ClientException e) {
             e.printStackTrace();
         }
+        return map;
     }
 
     //批量发送
