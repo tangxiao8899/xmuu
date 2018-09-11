@@ -111,7 +111,6 @@ public class RegisterController extends BaseController {
 			return faild("该用户已经存在~");
 		}
 		return result ? doObjResp(data) : faild("注册失败~");
-		mRegisterService.addUser(User user);
 	}
 
 
