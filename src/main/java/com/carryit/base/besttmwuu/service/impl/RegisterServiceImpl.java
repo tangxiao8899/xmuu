@@ -44,7 +44,7 @@ public class RegisterServiceImpl implements UserService {
         boolean result = false;
         try {
             //注册到平台
-            userDao.insertSelective(record);
+            userDao.updateByPhone(record);
 
             //同步注册到环信
             //1、获取环信token
@@ -65,13 +65,9 @@ public class RegisterServiceImpl implements UserService {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        if(!result){
-            //回滚事务
-            throw new RuntimeException("注册失败");
+            throw new RuntimeException();
         }
 
-        //能执行到此处，则resul必然是true，此处的提示可忽略
         return result;
     }
 

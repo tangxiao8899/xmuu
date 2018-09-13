@@ -13,4 +13,7 @@ public interface MessageCodeService {
 
     //保存短信验证码信息
     void saveMessageCode(String phoneNumber,int code);
+
+    //校验短信验证码
+    boolean checkCode(String json);
 }

@@ -7,11 +7,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import com.alibaba.fastjson.JSON;
 import com.carryit.base.besttmwuu.entity.MessageCode;
 import com.carryit.base.besttmwuu.service.MessageCodeService;
 import com.carryit.base.besttmwuu.service.UserService;
 import com.carryit.base.besttmwuu.service.impl.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -86,19 +88,23 @@ public class RegisterController extends BaseController {
                         return faild("失败~", false);
                     }
                 }
-                return null;
             case 3:
                 User _user = p(json, User.class);
                 if(_user!=null){
-                    boolean flag = userService.updateByPhone(_user);
+                    boolean flag = userService.addUser(_user);
                     if(flag){
 						return doObjRespSuccess("成功");
                     }else{
 						return faild("失败~", false);
 					}
                 }
-				return null;
-
+			case 4:
+				boolean flag = messageCodeService.checkCode(json);
+				if(flag){
+					return doObjRespSuccess("成功");
+				}else{
+					return faild("失败~", false);
+				}
 			default:
 			return register(json);
 		}
@@ -141,20 +147,9 @@ public class RegisterController extends BaseController {
 	}
 	//TODO
 	//校验验证码是否正确，正确->跳转完善个人注册信息页面；错误->给出提示
-	@RequestMapping()
-	public String check(int code,String phoneNumber) throws ParseException {
-		MessageCode messageCode=messageCodeService.getIdByPhone(phoneNumber);
-		//时间在有效期内不知道咋写
-		if(messageCode.getCode()!=code&&messageCode.getStatus()!=1)
-		{
-			return "验证码错误";
-		}
-		Date createDate=messageCode.getCreateTime();
-		long date=new Date().getTime();
-		SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMddhhmmss");
-		long crated=sdf.parse(String.valueOf(createDate)).getTime();
-		//判断校验时间<=创建时间+短信有效期
-		return null;
+	@RequestMapping(value = "/checkCode", method = { RequestMethod.GET, RequestMethod.POST })
+	public JSONObject checkCode(@RequestParam(value = "json", required = true) String json) {
+		return callHttpReqTask(json, 4);
 	}
 
 	//TODO
