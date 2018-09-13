@@ -19,4 +19,6 @@ public interface UserDao {
     int updateByPrimaryKey(User record);
     
     User selectByPhone(String phone);
+
+    void updateByPhone(User user);
 }

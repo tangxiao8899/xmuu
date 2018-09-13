@@ -30,7 +30,20 @@ public class UserServiceImpl implements UserService {
         return result;
     }
 
-	@Override
+    @Override
+    public boolean updateByPhone(User user) {
+        boolean result = false;
+        try {
+            userDao.updateByPhone(user);
+            result = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    @Override
 	public User selectByPhone(String phone) {
 		 return userDao.selectByPhone(phone);
 	}

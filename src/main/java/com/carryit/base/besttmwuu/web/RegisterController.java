@@ -9,6 +9,7 @@ import java.util.Random;
 
 import com.carryit.base.besttmwuu.entity.MessageCode;
 import com.carryit.base.besttmwuu.service.MessageCodeService;
+import com.carryit.base.besttmwuu.service.UserService;
 import com.carryit.base.besttmwuu.service.impl.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,6 +40,8 @@ public class RegisterController extends BaseController {
 	public RegisterServiceImpl mRegisterService;
 	@Autowired
 	public MessageService messageService;
+    @Autowired
+    public UserService userService;
 	//isHttpArraysJson
 	/**
 	 * consumes = MediaType.APPLICATION_JSON_VALUE
@@ -68,19 +71,34 @@ public class RegisterController extends BaseController {
 	@Override
 	public JSONObject runTask(String json, int cmd) {
 		switch (cmd) {
-
 			case 2:
-				//获取验证码
-				String code = messageService.securityCode();
-				//保存手机号和验证码
-				messageCodeService.saveMessageCode(json,Integer.parseInt(code));
-				//发送短信
-				Map<String, String> map = messageService.sendSms(json, code);
-				if("1".equals(map.get("code"))){
-					return doObjRespSuccess("成功");
-				}else{
-					return faild("失败~", false);
-				}
+                User user = p(json, User.class);
+                if(user!=null){
+                    //获取验证码
+                    String code = messageService.securityCode();
+                    //保存手机号和验证码
+                    messageCodeService.saveMessageCode(user.getPhone(),Integer.parseInt(code));
+                    //发送短信
+                    Map<String, String> map = messageService.sendSms(user.getPhone(), code);
+                    if("1".equals(map.get("code"))){
+                        return doObjRespSuccess("成功");
+                    }else{
+                        return faild("失败~", false);
+                    }
+                }
+                return null;
+            case 3:
+                User _user = p(json, User.class);
+                if(_user!=null){
+                    boolean flag = userService.updateByPhone(_user);
+                    if(flag){
+						return doObjRespSuccess("成功");
+                    }else{
+						return faild("失败~", false);
+					}
+                }
+				return null;
+
 			default:
 			return register(json);
 		}
@@ -117,9 +135,9 @@ public class RegisterController extends BaseController {
 	//TODO
 	//发送短信验证码，调用saveMessageCode(String phoneNum,int code)方法，保存验证码信息
 	@RequestMapping(value = "/getSecurityCode", method = { RequestMethod.GET, RequestMethod.POST })
-	public JSONObject getSecurityCode(@RequestParam(value = "phone", required = true) String phone) {
-		Log.e("号码=" + phone);
-		return callHttpReqTask(phone, 2);
+	public JSONObject getSecurityCode(@RequestParam(value = "json", required = true) String json) {
+		Log.e("号码=" + json);
+		return callHttpReqTask(json, 2);
 	}
 	//TODO
 	//校验验证码是否正确，正确->跳转完善个人注册信息页面；错误->给出提示
@@ -140,7 +158,11 @@ public class RegisterController extends BaseController {
 	}
 
 	//TODO
-	//完善给人信息，调用注册方法 mRegisterService.addUser(User user);  成功->注册完成  失败 ->给出提示
-
+	//完善个人信息
+	@RequestMapping(value = "/addUser", method = { RequestMethod.GET, RequestMethod.POST })
+	public JSONObject addUser(@RequestParam(value = "json", required = true) String json) {
+		Log.e("号码=" + json);
+		return callHttpReqTask(json, 3);
+	}
 
 }

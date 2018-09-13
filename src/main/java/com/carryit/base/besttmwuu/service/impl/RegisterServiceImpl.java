@@ -75,4 +75,18 @@ public class RegisterServiceImpl implements UserService {
         return result;
     }
 
+    @Override
+    public boolean updateByPhone(User user) {
+        boolean result = false;
+        try {
+            userDao.updateByPhone(user);
+            result = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+
 }

@@ -6,4 +6,6 @@ public interface UserService {
     public User getUserById(int userId);
     public User selectByPhone(String phone);
     boolean addUser(User record);
+
+    boolean updateByPhone(User user);
 }
