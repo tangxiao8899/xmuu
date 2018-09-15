@@ -1,6 +1,7 @@
 package com.carryit.base.besttmwuu.service.impl;
 
 import com.carryit.base.besttmwuu.dao.BoardFollowDao;
+import com.carryit.base.besttmwuu.entity.Board;
 import com.carryit.base.besttmwuu.entity.BoardFollow;
 import com.carryit.base.besttmwuu.entity.Member;
 import com.carryit.base.besttmwuu.service.BoardFollowService;
@@ -32,5 +33,10 @@ public class BoardFollowServiceImpl implements BoardFollowService {
     @Override
     public List<Member> getMemberByZhuQuanZiId(Integer zhuquanzi) {
         return boardFollowDao.getMemberByZhuQuanZiId(zhuquanzi);
+    }
+
+    @Override
+    public List<Board> getBoardFollowByUId(int uid) {
+        return boardFollowDao.getBoardFollowByUId(uid);
     }
 }

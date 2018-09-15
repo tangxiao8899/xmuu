@@ -8,6 +8,11 @@
 
     </select>
 
+    <select id="getBoardFollowByUId" resultType="com.carryit.base.besttmwuu.entity.Board">
+        select b.id,b.cid,b.title,b.logo,b.banner from ims_ewei_shop_sns_board_follow bf LEFT JOIN ims_ewei_shop_sns_board b on bf.bid =b.id where  bf.uid =#{uid}
+
+    </select>
+
     <delete id="delete">
         delete from ims_ewei_shop_sns_board_follow
         where bid = #{bid} and openid = #{uid}
