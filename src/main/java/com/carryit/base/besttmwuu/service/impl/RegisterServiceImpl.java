@@ -44,7 +44,7 @@ public class RegisterServiceImpl implements UserService {
         boolean result = false;
         try {
             //注册到平台
-            userDao.updateByPhone(record);
+            userDao.insertSelective(record);
 
             //同步注册到环信
             //1、获取环信token
@@ -71,18 +71,18 @@ public class RegisterServiceImpl implements UserService {
         return result;
     }
 
-    @Override
-    public boolean updateByPhone(User user) {
-        boolean result = false;
-        try {
-            userDao.updateByPhone(user);
-            result = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return result;
-    }
+//    @Override
+//    public boolean updateByPhone(User user) {
+//        boolean result = false;
+//        try {
+//            userDao.updateByPhone(user);
+//            result = true;
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        return result;
+//    }
 
 
 }

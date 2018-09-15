@@ -29,9 +29,7 @@
     <insert id="insertSelective" parameterType="com.carryit.base.besttmwuu.entity.User">
         insert into ims_users
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="uid != null">
-                uid,
-            </if>
+
             <if test="userName != null">
                 username,
             </if>
@@ -44,11 +42,30 @@
             <if test="phone != null">
                 phone,
             </if>
+            <if test="age != null">
+                age,
+            </if>
+            <if test="idCard != null">
+                idCard,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="speciality != null">
+                speciality,
+            </if>
+            <if test="need != null">
+                need,
+            </if>
+            <if test="education != null">
+                education,
+            </if>
+            <if test="isSingle != null">
+                isSingle,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=INTEGER},
-            </if>
+
             <if test="userName != null">
                 #{userName,jdbcType=VARCHAR},
             </if>
@@ -60,6 +77,27 @@
             </if>
             <if test="phone != null">
                 #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null">
+                #{age,jdbcType=VARCHAR},
+            </if>
+            <if test="idCard != null">
+                #{idCard,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="speciality != null">
+                #{speciality,jdbcType=VARCHAR},
+            </if>
+            <if test="need != null">
+                #{need,jdbcType=VARCHAR},
+            </if>
+            <if test="education != null">
+                #{education,jdbcType=VARCHAR},
+            </if>
+            <if test="isSingle != null">
+                #{isSingle,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
