@@ -104,6 +104,19 @@ public class CirclesController extends BaseController {
                     e.printStackTrace();
                 }
                 return doObjResp(memberList);
+            case 3:
+                List<Board> boardList = new ArrayList<>();
+
+                BoardReq _req = p(json, BoardReq.class);
+                try {
+                    if(_req!=null){
+                        boardList = boardFollowService.getBoardFollowByUId(_req.uid);
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return doObjResp(boardList);
         }
         return null;
     }
@@ -147,8 +160,17 @@ public class CirclesController extends BaseController {
     @RequestMapping(value = "/getZhuQuanZiByUid", method = {RequestMethod.GET,
             RequestMethod.POST}, produces = "application/json;charset=UTF-8")
     public JSONObject getZhuQuanZiByUid(@RequestBody(required = false) String json) {
-        return callHttpReqTask(json, 2);
+        return callHttpReqTask(json, 3);
     }
 
+    /*
+    *
+    * 根据用户id获取关注过的圈子（收藏）
+    * */
+    @RequestMapping(value = "/getQuanZiByUid", method = {RequestMethod.GET,
+            RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public JSONObject getQuanZiByUid(@RequestBody(required = false) String json) {
+        return callHttpReqTask(json, 2);
+    }
 
 }

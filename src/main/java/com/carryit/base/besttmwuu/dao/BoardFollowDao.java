@@ -1,5 +1,6 @@
 package com.carryit.base.besttmwuu.dao;
 
+import com.carryit.base.besttmwuu.entity.Board;
 import com.carryit.base.besttmwuu.entity.BoardFollow;
 import com.carryit.base.besttmwuu.entity.Member;
 import org.apache.ibatis.annotations.Param;
@@ -17,4 +18,6 @@ public interface BoardFollowDao {
     void add(@Param("uid")int uid, @Param("bid") int bid, @Param("time") long time);
 
     List<Member> getMemberByZhuQuanZiId(@Param("zhuquanzi") Integer zhuquanzi);
+
+    List<Board> getBoardFollowByUId(@Param("uid") int uid);
 }

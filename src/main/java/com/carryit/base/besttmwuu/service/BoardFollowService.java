@@ -1,5 +1,6 @@
 package com.carryit.base.besttmwuu.service;
 
+import com.carryit.base.besttmwuu.entity.Board;
 import com.carryit.base.besttmwuu.entity.BoardFollow;
 import com.carryit.base.besttmwuu.entity.Level;
 import com.carryit.base.besttmwuu.entity.Member;
@@ -16,4 +17,5 @@ public interface BoardFollowService {
 
     List<Member> getMemberByZhuQuanZiId(Integer zhuquanzi);
 
+    List<Board> getBoardFollowByUId(int uid);
 }
