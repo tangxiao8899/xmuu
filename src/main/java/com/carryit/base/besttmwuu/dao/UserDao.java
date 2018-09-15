@@ -20,5 +20,5 @@ public interface UserDao {
     
     User selectByPhone(String phone);
 
-    void updateByPhone(User user);
+    //void updateByPhone(User user);
 }

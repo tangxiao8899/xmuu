@@ -88,16 +88,6 @@ public class RegisterController extends BaseController {
                         return faild("失败~", false);
                     }
                 }
-            case 3:
-                User _user = p(json, User.class);
-                if(_user!=null){
-                    boolean flag = userService.addUser(_user);
-                    if(flag){
-						return doObjRespSuccess("成功");
-                    }else{
-						return faild("失败~", false);
-					}
-                }
 			case 4:
 				boolean flag = messageCodeService.checkCode(json);
 				if(flag){
@@ -127,8 +117,20 @@ public class RegisterController extends BaseController {
 		boolean result = false;
 		if (data == null) {
 			data = new User();
-			data.setUserName(reqJson.phone);
+			data.setUserName(reqJson.code);
 			data.setPassword(reqJson.password);
+
+			data.setAddress(reqJson.address);
+			data.setAge(reqJson.age);
+			data.setEducation(reqJson.education);
+			data.setIdCard(reqJson.idCard);
+			data.setIsSingle(reqJson.isSingle);
+			data.setNeed(reqJson.need);
+			data.setPhone(reqJson.phone);
+			data.setSpeciality(reqJson.speciality);
+			data.setUserName(reqJson.userName);
+
+
 			result = mRegisterService.addUser(data);
 			Log.e("注册结果=" + result);
 		} else {
@@ -150,14 +152,6 @@ public class RegisterController extends BaseController {
 	@RequestMapping(value = "/checkCode", method = { RequestMethod.GET, RequestMethod.POST })
 	public JSONObject checkCode(@RequestParam(value = "json", required = true) String json) {
 		return callHttpReqTask(json, 4);
-	}
-
-	//TODO
-	//完善个人信息
-	@RequestMapping(value = "/addUser", method = { RequestMethod.GET, RequestMethod.POST })
-	public JSONObject addUser(@RequestParam(value = "json", required = true) String json) {
-		Log.e("号码=" + json);
-		return callHttpReqTask(json, 3);
 	}
 
 }
