@@ -13,7 +13,7 @@
 
     </select>
 
-    <select id="getBoardById" resultType="com.carryit.base.besttmwuu.entity.Board">
+    <select id="getAllBoard" resultType="com.carryit.base.besttmwuu.entity.Board">
         select id,cid,title,logo,banner from ims_ewei_shop_sns_board
 
     </select>

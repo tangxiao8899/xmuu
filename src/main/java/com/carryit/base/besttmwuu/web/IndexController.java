@@ -35,7 +35,7 @@ public class IndexController extends BaseController {
     @Autowired
     BoardService boardService;
 
-    //每日上榜
+    //每周上榜
     @RequestMapping(value = "/onTheList", method = {RequestMethod.GET,
             RequestMethod.POST}, produces = "application/json;charset=UTF-8")
     public JSONObject onTheList(@RequestBody(required = false) String json) {
