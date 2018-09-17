@@ -23,4 +23,9 @@ public class BoardServiceImpl implements BoardService {
     public Board getBoardById(int bid) {
         return boardDao.getBoardById(bid);
     }
+
+    @Override
+    public List<Board> getAllBoard() {
+        return boardDao.getAllBoard();
+    }
 }

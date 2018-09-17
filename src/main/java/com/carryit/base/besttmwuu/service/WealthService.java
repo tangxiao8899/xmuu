@@ -11,5 +11,5 @@ public interface WealthService {
 
     long queryPageCount(long startTime, long endTime);
 
-    List<UserDTO> queryPage(long startTime, long endTime, int i, int pageSize);
+    List<UserDTO> queryPage(long startTime, long endTime);
 }
