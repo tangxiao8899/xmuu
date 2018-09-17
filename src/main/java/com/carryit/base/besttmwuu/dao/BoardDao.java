@@ -12,4 +12,6 @@ public interface BoardDao {
     public List<Board> getBoardByCid(@Param("id") Integer id);
 
     Board getBoardById(@Param("bid") int bid);
+
+    List<Board> getAllBoard();
 }

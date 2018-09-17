@@ -8,34 +8,23 @@
 		<result column="age" property="age" jdbcType="INTEGER" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		id, user_name, password, age
+		id, username, password, age
 	</sql>
-	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
-		parameterType="java.lang.Integer">
-		select
-		<include refid="Base_Column_List" />
-		from t_user
-		where id = #{id,jdbcType=INTEGER}
-	</select>
-	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-		delete from t_user
-		where id = #{id,jdbcType=INTEGER}
-	</delete>
-	<insert id="insert" parameterType="com.carryit.base.besttmwuu.entity.User">
-		insert into t_user (id, user_name, password,
-		age)
-		values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR},
-		#{password,jdbcType=VARCHAR},
-		#{age,jdbcType=INTEGER})
-	</insert>
+	<!--<select id="selectByPrimaryKey" resultMap="BaseResultMap"-->
+		<!--parameterType="java.lang.Integer">-->
+		<!--select-->
+		<!--<include refid="Base_Column_List" />-->
+		<!--from t_user-->
+		<!--where id = #{id,jdbcType=INTEGER}-->
+	<!--</select>-->
+
+
 	<insert id="insertSelective" parameterType="com.carryit.base.besttmwuu.entity.User">
-		insert into t_user
+		insert into ims_users
 		<trim prefix="(" suffix=")" suffixOverrides=",">
-			<if test="id != null">
-				id,
-			</if>
+
 			<if test="userName != null">
-				user_name,
+				username,
 			</if>
 			<if test="password != null">
 				password,
@@ -43,11 +32,33 @@
 			<if test="age != null">
 				age,
 			</if>
+			<if test="phone != null">
+				phone,
+			</if>
+			<if test="age != null">
+				age,
+			</if>
+			<if test="idCard != null">
+				idCard,
+			</if>
+			<if test="address != null">
+				address,
+			</if>
+			<if test="speciality != null">
+				speciality,
+			</if>
+			<if test="need != null">
+				need,
+			</if>
+			<if test="education != null">
+				education,
+			</if>
+			<if test="isSingle != null">
+				isSingle,
+			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
-			<if test="id != null">
-				#{id,jdbcType=INTEGER},
-			</if>
+
 			<if test="userName != null">
 				#{userName,jdbcType=VARCHAR},
 			</if>
@@ -57,9 +68,33 @@
 			<if test="age != null">
 				#{age,jdbcType=INTEGER},
 			</if>
+			<if test="phone != null">
+				#{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="age != null">
+				#{age,jdbcType=VARCHAR},
+			</if>
+			<if test="idCard != null">
+				#{idCard,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				#{address,jdbcType=VARCHAR},
+			</if>
+			<if test="speciality != null">
+				#{speciality,jdbcType=VARCHAR},
+			</if>
+			<if test="need != null">
+				#{need,jdbcType=VARCHAR},
+			</if>
+			<if test="education != null">
+				#{education,jdbcType=VARCHAR},
+			</if>
+			<if test="isSingle != null">
+				#{isSingle,jdbcType=VARCHAR},
+			</if>
 		</trim>
 	</insert>
-	<update id="updateByPrimaryKeySelective" parameterType="com.carryit.base.besttmwuu.entity.User">
+<!--	<update id="updateByPrimaryKeySelective" parameterType="com.carryit.base.besttmwuu.entity.User">
 		update t_user
 		<set>
 			<if test="userName != null">
@@ -73,21 +108,21 @@
 			</if>
 		</set>
 		where id = #{id,jdbcType=INTEGER}
-	</update>
-	<update id="updateByPrimaryKey" parameterType="com.carryit.base.besttmwuu.entity.User">
+	</update>-->
+<!--	<update id="updateByPrimaryKey" parameterType="com.carryit.base.besttmwuu.entity.User">
 		update t_user
 		set user_name = #{userName,jdbcType=VARCHAR},
 		password = #{password,jdbcType=VARCHAR},
 		age = #{age,jdbcType=INTEGER}
 		where id = #{id,jdbcType=INTEGER}
-	</update>
+	</update>-->
 
 	<!-- 根据手机号查表  -->
 	<select id="selectByPhone" resultMap="BaseResultMap"
 		parameterType="java.lang.String">
 		select
 		<include refid="Base_Column_List" />
-		from t_user
+		from ims_users
 		where user_name = #{phone,jdbcType=VARCHAR}
 	</select>
 </mapper>

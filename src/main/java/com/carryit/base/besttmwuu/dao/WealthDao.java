@@ -12,7 +12,7 @@ public interface WealthDao {
 
     List<UserDTO> onTheList(@Param("startTime") long startTime, @Param("endTime") long endTime);
 
-    List<UserDTO> queryPage(@Param("startTime") long startTime, @Param("endTime") long endTime,RowBounds rowBounds);
+    List<UserDTO> queryPage(@Param("startTime") long startTime, @Param("endTime") long endTime);
 
     long queryPageCount(@Param("startTime") long startTime, @Param("endTime") long endTime);
 }

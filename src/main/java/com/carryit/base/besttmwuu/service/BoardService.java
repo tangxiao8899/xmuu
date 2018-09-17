@@ -9,4 +9,6 @@ public interface BoardService {
     List<Board> getBoardByCid(Integer id);
 
     Board getBoardById(int bid);
+
+    List<Board> getAllBoard();
 }
