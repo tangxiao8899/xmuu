@@ -2,24 +2,24 @@ package com.base;
 
 public class ResultPojo {
 
-    private Integer status;
-    private String errorMsg;
+    private Integer code;
+    private String message;
     private Object data;
 
-    public Integer getStatus() {
-        return status;
+    public Integer getCode() {
+        return code;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setCode(Integer code) {
+        this.code = code;
     }
 
-    public String getErrorMsg() {
-        return errorMsg;
+    public String getMessage() {
+        return message;
     }
 
-    public void setErrorMsg(String errorMsg) {
-        this.errorMsg = errorMsg;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public Object getData() {
