@@ -15,9 +15,9 @@
     <update id="update">
         update Author set
         id = #{id},
-        phone = #{phoneNumber},
+        phone = #{phone},
         code = #{code},
         status = #{status}
-        where phone = #{phoneNumber}
+        where phone = #{phone}
     </update>
 </mapper>
