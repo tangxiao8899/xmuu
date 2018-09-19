@@ -18,4 +18,6 @@ public interface BoardFollowService {
     List<Member> getMemberByZhuQuanZiId(Integer zhuquanzi);
 
     List<Board> getBoardFollowByUId(int uid);
+
+    List<Board> getUnconcerned(int uid);
 }

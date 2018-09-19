@@ -39,4 +39,9 @@ public class BoardFollowServiceImpl implements BoardFollowService {
     public List<Board> getBoardFollowByUId(int uid) {
         return boardFollowDao.getBoardFollowByUId(uid);
     }
+
+    @Override
+    public List<Board> getUnconcerned(int uid) {
+        return boardFollowDao.getUnconcerned(uid);
+    }
 }
