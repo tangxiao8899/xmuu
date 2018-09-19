@@ -20,4 +20,6 @@ public interface BoardFollowDao {
     List<Member> getMemberByZhuQuanZiId(@Param("zhuquanzi") Integer zhuquanzi);
 
     List<Board> getBoardFollowByUId(@Param("uid") int uid);
+
+    List<Board> getUnconcerned(@Param("uid")int uid);
 }

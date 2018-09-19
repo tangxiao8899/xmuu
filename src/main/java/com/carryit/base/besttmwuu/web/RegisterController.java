@@ -53,7 +53,7 @@ public class RegisterController extends BaseController {
 	 * @return
 	 * 伪json
 	 */
-	@RequestMapping(value = "/register", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/register", method = { RequestMethod.GET, RequestMethod.POST }, produces = "application/json;charset=UTF-8")
 	public JSONObject beginRegister(@RequestParam(value = "data", required = true) String data) {
 		Log.e("注册=" + data);
 		return callHttpReqTask(data.toString(), 0);
@@ -142,14 +142,14 @@ public class RegisterController extends BaseController {
 
 	//TODO
 	//发送短信验证码，调用saveMessageCode(String phoneNum,int code)方法，保存验证码信息
-	@RequestMapping(value = "/getSecurityCode", method = { RequestMethod.GET, RequestMethod.POST })
-	public JSONObject getSecurityCode(@RequestParam(value = "json", required = true) String json) {
+	@RequestMapping(value = "/getSecurityCode", method = { RequestMethod.GET, RequestMethod.POST }, produces = "application/json;charset=UTF-8")
+	public JSONObject getSecurityCode(@RequestParam(value = "json", required = false) String json) {
 		Log.e("号码=" + json);
 		return callHttpReqTask(json, 2);
 	}
 	//TODO
 	//校验验证码是否正确，正确->跳转完善个人注册信息页面；错误->给出提示
-	@RequestMapping(value = "/checkCode", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/checkCode", method = { RequestMethod.GET, RequestMethod.POST }, produces = "application/json;charset=UTF-8")
 	public JSONObject checkCode(@RequestParam(value = "json", required = true) String json) {
 		return callHttpReqTask(json, 4);
 	}

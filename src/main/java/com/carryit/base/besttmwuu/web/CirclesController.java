@@ -117,6 +117,25 @@ public class CirclesController extends BaseController {
                     e.printStackTrace();
                 }
                 return doObjResp(boardList);
+            case 4:
+                List<Board> newboardList = new ArrayList<>();
+
+                BoardReq unconcerned = p(json, BoardReq.class);
+                try {
+                    if(unconcerned!=null){
+                        newboardList = boardFollowService.getUnconcerned(unconcerned.uid);
+                        if (newboardList!=null&&newboardList.size()>0) {
+                            Collections.shuffle(newboardList);
+                            if(newboardList.size()>10){
+                                newboardList = newboardList.subList(0, 9);
+                            }
+                          }
+                        }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return doObjResp(newboardList);
         }
         return null;
     }
@@ -171,6 +190,11 @@ public class CirclesController extends BaseController {
             RequestMethod.POST}, produces = "application/json;charset=UTF-8")
     public JSONObject getQuanZiByUid(@RequestBody(required = false) String json) {
         return callHttpReqTask(json, 2);
+    }
+    @RequestMapping(value = "/getUnconcerned", method = {RequestMethod.GET,
+            RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public JSONObject getUnconcerned(@RequestBody(required = false) String json) {
+        return callHttpReqTask(json, 4);
     }
 
 }
