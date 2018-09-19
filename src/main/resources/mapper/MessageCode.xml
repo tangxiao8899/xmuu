@@ -3,21 +3,21 @@
 <mapper namespace="com.carryit.base.besttmwuu.dao.MessageCodeDao">
 
 
-    <select id="getIdByPhone" resultType="com.carryit.base.besttmwuu.entity.MessageCode" parameterType="Integer">
+    <select id="getIdByPhone" resultType="com.carryit.base.besttmwuu.entity.MessageCode" parameterType="string">
         select * FROM ims_message WHERE phone=#{phoneNumber}
     </select>
 
     <insert id="insert">
         insert ims_message (id,phone,code,createTime,status)
-        values (#{id},#{phoneNumber},#{code},#{createTime},#{status})
+        values (#{id},#{phone},#{code},#{createTime},#{status})
     </insert>
 
     <update id="update">
         update Author set
         id = #{id},
-        phone = #{phoneNumber},
+        phone = #{phone},
         code = #{code},
         status = #{status}
-        where phone = #{phoneNumber}
+        where phone = #{phone}
     </update>
 </mapper>
