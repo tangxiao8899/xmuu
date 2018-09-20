@@ -3,7 +3,7 @@ package com.base;
 public class ResultPojo {
 
     private Integer code;
-    private String message;
+    private String msg;
     private Object data;
 
     public Integer getCode() {
@@ -14,12 +14,12 @@ public class ResultPojo {
         this.code = code;
     }
 
-    public String getMessage() {
-        return message;
+    public String getMsg() {
+        return msg;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
     public Object getData() {

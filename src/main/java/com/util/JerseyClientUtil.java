@@ -45,13 +45,13 @@ public class JerseyClientUtil {
             resultPojo.setCode(status);
             resultPojo.setData(jsonObject);
             if (status == 200) {
-                resultPojo.setMessage("请求成功");
+                resultPojo.setMsg("请求成功");
             } else {
-                resultPojo.setMessage("请求失败");
+                resultPojo.setMsg("请求失败");
             }
         } catch (Exception e) {
             resultPojo.setCode(500);//服务器异常
-            resultPojo.setMessage(e.getMessage());
+            resultPojo.setMsg(e.getMessage());
         } finally {
             if (response != null) {
                 response.close();
@@ -80,13 +80,13 @@ public class JerseyClientUtil {
             resultPojo.setCode(status);
             resultPojo.setData(jsonObject);
             if (status == 200) {
-                resultPojo.setMessage("请求成功");
+                resultPojo.setMsg("请求成功");
             } else {
-                resultPojo.setMessage("请求失败");
+                resultPojo.setMsg("请求失败");
             }
         } catch (Exception e) {
             resultPojo.setCode(500);//服务器异常
-            resultPojo.setMessage(e.getMessage());
+            resultPojo.setMsg(e.getMessage());
         } finally {
             if (response != null) {
                 response.close();
@@ -113,13 +113,13 @@ public class JerseyClientUtil {
             resultPojo.setCode(status);
             resultPojo.setData(jsonObject);
             if (status == 200) {
-                resultPojo.setMessage("请求成功");
+                resultPojo.setMsg("请求成功");
             } else {
-                resultPojo.setMessage("请求失败");
+                resultPojo.setMsg("请求失败");
             }
         } catch (Exception e) {
             resultPojo.setCode(500);//服务器异常
-            resultPojo.setMessage(e.getMessage());
+            resultPojo.setMsg(e.getMessage());
         } finally {
             if (response != null) {
                 response.close();
@@ -162,13 +162,13 @@ public class JerseyClientUtil {
             resultPojo.setCode(status);
             resultPojo.setData(jsonObject);
             if (status == 200) {
-                resultPojo.setMessage("请求成功");
+                resultPojo.setMsg("请求成功");
             } else {
-                resultPojo.setMessage("请求失败");
+                resultPojo.setMsg("请求失败");
             }
         } catch (Exception e) {
             resultPojo.setCode(500);//服务器异常
-            resultPojo.setMessage(e.getMessage());
+            resultPojo.setMsg(e.getMessage());
         } finally {
             if (response != null) {
                 response.close();
@@ -204,7 +204,7 @@ public class JerseyClientUtil {
         } catch (Exception e) {
             e.printStackTrace();
             resultPojo.setCode(500);//服务器异常
-            resultPojo.setMessage(e.getMessage());
+            resultPojo.setMsg(e.getMessage());
         } finally {
             if (response != null) {
                 response.close();
@@ -239,7 +239,7 @@ public class JerseyClientUtil {
         } catch (Exception e) {
             e.printStackTrace();
             resultPojo.setCode(500);//服务器异常
-            resultPojo.setMessage(e.getMessage());
+            resultPojo.setMsg(e.getMessage());
         } finally {
             if (response != null) {
                 response.close();

@@ -8,7 +8,7 @@
     </select>
 
     <insert id="insert">
-        insert ims_message (id,phone,code,createTime,status)
+        insert INTO ims_message (id,phone,code,createTime,status)
         values (#{id},#{phone},#{code},#{createTime},#{status})
     </insert>
 
