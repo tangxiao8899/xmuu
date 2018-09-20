@@ -88,6 +88,16 @@ public class RegisterController extends BaseController {
                         return faild("失败~", false);
                     }
                 }
+			case 3:
+				User _user = p(json, User.class);
+				if(_user!=null){
+					boolean flag = mRegisterService.addUser(_user);
+					if(flag){
+						return doObjRespSuccess("成功");
+					}else{
+						return faild("失败~", false);
+					}
+				}
 			case 4:
 				boolean flag = messageCodeService.checkCode(json);
 				if(flag){
@@ -142,16 +152,23 @@ public class RegisterController extends BaseController {
 
 	//TODO
 	//发送短信验证码，调用saveMessageCode(String phoneNum,int code)方法，保存验证码信息
-	@RequestMapping(value = "/getSecurityCode", method = { RequestMethod.GET, RequestMethod.POST }, produces = "application/json;charset=UTF-8")
-	public JSONObject getSecurityCode(@RequestParam(value = "json", required = false) String json) {
+	@RequestMapping(value = "/getSecurityCode")
+	public JSONObject getSecurityCode(@RequestBody(required = false) String json) {
 		Log.e("号码=" + json);
 		return callHttpReqTask(json, 2);
 	}
 	//TODO
 	//校验验证码是否正确，正确->跳转完善个人注册信息页面；错误->给出提示
-	@RequestMapping(value = "/checkCode", method = { RequestMethod.GET, RequestMethod.POST }, produces = "application/json;charset=UTF-8")
-	public JSONObject checkCode(@RequestParam(value = "json", required = true) String json) {
+	@RequestMapping(value = "/checkCode")
+	public JSONObject checkCode(@RequestBody(required = false) String json) {
 		return callHttpReqTask(json, 4);
 	}
 
+	//TODO
+	//完善个人信息
+	@RequestMapping(value = "/addUser", method = { RequestMethod.GET, RequestMethod.POST })
+	public JSONObject addUser(@RequestBody(required = false) String json) {
+		Log.e("号码=" + json);
+		return callHttpReqTask(json, 3);
+	}
 }

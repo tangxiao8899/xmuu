@@ -5,8 +5,8 @@ IM环信接口文档
 请求类型：POST
 请求参数：无
 响应结果：{
-         "status": 200,  //状态码
-         "errorMsg": "请求成功", //描述信息
+         "code": 200,  //状态码
+         "message": "请求成功", //描述信息
          "data": {
              "access_token": "YWMtyaXSZrJlEeiKKhlnZGJWpQAAAAAAAAAAAAAAAAAAAAEkfycAnqcR6LF7AUVfW6SDAgMAAAFlsq48vABPGgB36BTYHDgIdOLDhDbNG3vnO73rjVKMeYsNTNdRAimkaQ",  //token 值
              "application": "247f2700-9ea7-11e8-b17b-01455f5ba483", //当前 APP 的 UUID 值
@@ -24,8 +24,8 @@ IM环信接口文档
      	"token": "YWMtyaXSZrJlEeiKKhlnZGJWpQAAAAAAAAAAAAAAAAAAAAEkfycAnqcR6LF7AUVfW6SDAgMAAAFlsq48vABPGgB36BTYHDgIdOLDhDbNG3vnO73rjVKMeYsNTNdRAimkaQ" //授权token
      }
 响应结果：{
-         "status": 200,
-         "errorMsg": "请求成功",
+         "code": 200,
+         "message": "请求成功",
          "data": {
              "duration": 1,
              "path": "/users",
@@ -62,8 +62,8 @@ IM环信接口文档
      	"token": "YWMtTA62ZrJpEei9xu9oxuHsLQAAAAAAAAAAAAAAAAAAAAEkfycAnqcR6LF7AUVfW6SDAgMAAAFlssU8jgBPGgD13Bzal9mDcYvB1gg-FZN-0GT919bFe3jPTgKc_n0t6g"
      }
 响应结果：{
-         "status": 200,
-         "errorMsg": "请求成功",
+         "code": 200,
+         "message": "请求成功",
          "data": {
              "duration": 0,
              "path": "/users",
@@ -104,8 +104,8 @@ IM环信接口文档
      	"token": "YWMtTA62ZrJpEei9xu9oxuHsLQAAAAAAAAAAAAAAAAAAAAEkfycAnqcR6LF7AUVfW6SDAgMAAAFlssU8jgBPGgD13Bzal9mDcYvB1gg-FZN-0GT919bFe3jPTgKc_n0t6g"
      }
 响应结果：{
-         "status": 200,
-         "errorMsg": "请求成功",
+         "code": 200,
+         "message": "请求成功",
          "data": {
              "duration": 52,
              "path": "/users/6189d230-b112-11e8-a8d1-cf2f516df90f/contacts",
@@ -137,8 +137,8 @@ IM环信接口文档
           	"token": "YWMtTA62ZrJpEei9xu9oxuHsLQAAAAAAAAAAAAAAAAAAAAEkfycAnqcR6LF7AUVfW6SDAgMAAAFlssU8jgBPGgD13Bzal9mDcYvB1gg-FZN-0GT919bFe3jPTgKc_n0t6g"
           }
 响应结果：{
-         "status": 200,
-         "errorMsg": "请求成功",
+         "code": 200,
+         "message": "请求成功",
          "data": {
              "duration": 6,
              "data": [
@@ -163,8 +163,8 @@ IM环信接口文档
            	"token": "YWMtTA62ZrJpEei9xu9oxuHsLQAAAAAAAAAAAAAAAAAAAAEkfycAnqcR6LF7AUVfW6SDAgMAAAFlssU8jgBPGgD13Bzal9mDcYvB1gg-FZN-0GT919bFe3jPTgKc_n0t6g"
            }
       响应结果：{
-               "status": 200,
-               "errorMsg": "请求成功",
+               "code": 200,
+               "message": "请求成功",
                "data": {
                    "duration": 4,
                    "data": {
@@ -186,8 +186,8 @@ IM环信接口文档
      	"token": "YWMtTA62ZrJpEei9xu9oxuHsLQAAAAAAAAAAAAAAAAAAAAEkfycAnqcR6LF7AUVfW6SDAgMAAAFlssU8jgBPGgD13Bzal9mDcYvB1gg-FZN-0GT919bFe3jPTgKc_n0t6g"
      }
 响应结果：{
-         "status": 200,
-         "errorMsg": "请求成功",
+         "code": 200,
+         "message": "请求成功",
          "data": {
              "duration": 4,
              "data": {
@@ -217,8 +217,8 @@ IM环信接口文档
      	"token": "YWMtTA62ZrJpEei9xu9oxuHsLQAAAAAAAAAAAAAAAAAAAAEkfycAnqcR6LF7AUVfW6SDAgMAAAFlssU8jgBPGgD13Bzal9mDcYvB1gg-FZN-0GT919bFe3jPTgKc_n0t6g"
      }
 响应结果：{
-         "status": 200,
-         "errorMsg": "请求成功",
+         "code": 200,
+         "message": "请求成功",
          "data": {
              "duration": 0,
              "path": "/messages",

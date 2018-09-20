@@ -59,7 +59,7 @@ public class MessageCodeServiceImpl implements MessageCodeService{
     @Override
     public boolean checkCode(String json) {
         JSONObject jo = JSON.parseObject(json);
-        String phoneNumber = jo.getString("phoneNumber");
+        String phoneNumber = jo.getString("phone");
         int code = jo.getInteger("code");
         MessageCode messageCode=this.getIdByPhone(phoneNumber);
         if(StringUtils.isEmpty(messageCode)){ //验证码表没数据

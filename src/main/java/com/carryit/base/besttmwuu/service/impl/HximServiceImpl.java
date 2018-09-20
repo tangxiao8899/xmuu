@@ -34,8 +34,8 @@ public class HximServiceImpl implements HximService {
             JSONObject jo = JSON.parseObject(json);
             //校验授权信息
             if (!jo.containsKey("token")) {
-                rp.setStatus(401);
-                rp.setErrorMsg("请先获取授权信息");
+                rp.setCode(401);
+                rp.setMsg("请先获取授权信息");
                 return rp;
             }
             //判断是单个注册还是多个注册
@@ -58,8 +58,8 @@ public class HximServiceImpl implements HximService {
 
             }
         } else {
-            rp.setStatus(400);
-            rp.setErrorMsg("请求参数异常");
+            rp.setCode(400);
+            rp.setMsg("请求参数异常");
 
         }
         return rp;
@@ -73,13 +73,13 @@ public class HximServiceImpl implements HximService {
             JSONObject jo = JSON.parseObject(json);
             //校验授权信息
             if (!jo.containsKey("token")) {
-                rp.setStatus(401);
-                rp.setErrorMsg("请先获取授权信息");
+                rp.setCode(401);
+                rp.setMsg("请先获取授权信息");
                 return rp;
             }
             if (!jo.containsKey("owner_username") || !jo.containsKey("friend_username")) {
-                rp.setStatus(400);
-                rp.setErrorMsg("请求参数异常");
+                rp.setCode(400);
+                rp.setMsg("请求参数异常");
             } else {
                 Integer type = 1; //1 post 2 get  3 delete 4 put
                 if(!StringUtils.isEmpty(jo.getString("type"))){
@@ -103,8 +103,8 @@ public class HximServiceImpl implements HximService {
                 rp = JerseyClientUtil.postTokenMethod(jo.getString("token"), "/users/" + jo.getString("owner_username") + "/contacts/users/" + jo.getString("friend_username"),type);
             }
         } else {
-            rp.setStatus(400);
-            rp.setErrorMsg("请求参数异常");
+            rp.setCode(400);
+            rp.setMsg("请求参数异常");
 
         }
         return rp;
@@ -117,19 +117,19 @@ public class HximServiceImpl implements HximService {
             JSONObject jo = JSON.parseObject(json);
             //校验授权信息
             if (!jo.containsKey("token")) {
-                rp.setStatus(401);
-                rp.setErrorMsg("请先获取授权信息");
+                rp.setCode(401);
+                rp.setMsg("请先获取授权信息");
                 return rp;
             }
             if (!jo.containsKey("owner_username") || !jo.containsKey("type")) {
-                rp.setStatus(400);
-                rp.setErrorMsg("请求参数异常");
+                rp.setCode(400);
+                rp.setMsg("请求参数异常");
             } else {
                 rp = JerseyClientUtil.postTokenMethod(jo.getString("token"), "/users/" + jo.getString("owner_username") + "/"+jo.getString("type")+"/users" ,2);
             }
         } else {
-            rp.setStatus(400);
-            rp.setErrorMsg("请求参数异常");
+            rp.setCode(400);
+            rp.setMsg("请求参数异常");
 
         }
         return rp;
@@ -142,19 +142,19 @@ public class HximServiceImpl implements HximService {
             JSONObject jo = JSON.parseObject(json);
             //校验授权信息
             if (!jo.containsKey("token")) {
-                rp.setStatus(401);
-                rp.setErrorMsg("请先获取授权信息");
+                rp.setCode(401);
+                rp.setMsg("请先获取授权信息");
                 return rp;
             }
             if (!jo.containsKey("username")) {
-                rp.setStatus(400);
-                rp.setErrorMsg("请求参数异常");
+                rp.setCode(400);
+                rp.setMsg("请求参数异常");
             } else {
                 rp = JerseyClientUtil.getTokenMethod(jo.getString("token"), "/users/" + jo.getString("username") +"/status" );
             }
         } else {
-            rp.setStatus(400);
-            rp.setErrorMsg("请求参数异常");
+            rp.setCode(400);
+            rp.setMsg("请求参数异常");
 
         }
         return rp;
@@ -167,19 +167,19 @@ public class HximServiceImpl implements HximService {
             JSONObject jo = JSON.parseObject(json);
             //校验授权信息
             if (!jo.containsKey("token")) {
-                rp.setStatus(401);
-                rp.setErrorMsg("请先获取授权信息");
+                rp.setCode(401);
+                rp.setMsg("请先获取授权信息");
                 return rp;
             }
             if (!jo.containsKey("owner_username")) {
-                rp.setStatus(400);
-                rp.setErrorMsg("请求参数异常");
+                rp.setCode(400);
+                rp.setMsg("请求参数异常");
             } else {
                 rp = JerseyClientUtil.postTokenMethod(jo.getString("token"), "/users/" + jo.getString("owner_username") +"/offline_msg_count" ,2);
             }
         } else {
-            rp.setStatus(400);
-            rp.setErrorMsg("请求参数异常");
+            rp.setCode(400);
+            rp.setMsg("请求参数异常");
 
         }
         return rp;
@@ -192,13 +192,13 @@ public class HximServiceImpl implements HximService {
             JSONObject jo = JSON.parseObject(json);
             //校验授权信息
             if (!jo.containsKey("token")) {
-                rp.setStatus(401);
-                rp.setErrorMsg("请先获取授权信息");
+                rp.setCode(401);
+                rp.setMsg("请先获取授权信息");
                 return rp;
             }
             if (!jo.containsKey("target_type") || !jo.containsKey("target") || !jo.containsKey("msg") || !jo.containsKey("from")) {
-                rp.setStatus(400);
-                rp.setErrorMsg("请求参数异常");
+                rp.setCode(400);
+                rp.setMsg("请求参数异常");
             } else {
                 JSONObject subJo = new JSONObject();
                 subJo.put("target_type",jo.getString("target_type"));
@@ -208,8 +208,8 @@ public class HximServiceImpl implements HximService {
                 rp = JerseyClientUtil.postTokenMethod(subJo.toString(),jo.getString("token"), "/messages");
             }
         } else {
-            rp.setStatus(400);
-            rp.setErrorMsg("请求参数异常");
+            rp.setCode(400);
+            rp.setMsg("请求参数异常");
 
         }
         return rp;
@@ -224,8 +224,8 @@ public class HximServiceImpl implements HximService {
      */
     private boolean checkParam(ResultPojo rp, JSONObject jao) {
         if (!jao.containsKey("username") || !jao.containsKey("password")) {
-            rp.setStatus(400);
-            rp.setErrorMsg("请求参数异常");
+            rp.setCode(400);
+            rp.setMsg("请求参数异常");
             return true;
         }
         return false;
