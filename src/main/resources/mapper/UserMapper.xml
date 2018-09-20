@@ -125,4 +125,10 @@
 		from ims_users
 		where user_name = #{phone,jdbcType=VARCHAR}
 	</select>
+
+	<update id="updatePassWord">
+		update ims_users set
+		password = #{password}
+		where phone = #{phone}
+	</update>
 </mapper>

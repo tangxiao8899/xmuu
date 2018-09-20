@@ -1,9 +1,12 @@
 package com.carryit.base.besttmwuu.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.carryit.base.besttmwuu.dao.UserDao;
 import com.carryit.base.besttmwuu.entity.User;
 import com.carryit.base.besttmwuu.service.UserService;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 
@@ -28,6 +31,20 @@ public class UserServiceImpl implements UserService {
         }
 
         return result;
+    }
+
+    @Override
+    public int updatePassWord(String json) {
+        int i =0;
+        JSONObject jo = JSON.parseObject(json);
+        String phone = jo.getString("phone");
+        String password = jo.getString("password");
+        if(StringUtils.isEmpty(phone)&&StringUtils.isEmpty(password)){
+           return i;
+        }
+        i = userDao.updatePassWord(phone, password);
+        return i;
+
     }
 
 //    @Override

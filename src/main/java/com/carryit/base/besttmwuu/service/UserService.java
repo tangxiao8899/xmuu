@@ -7,5 +7,7 @@ public interface UserService {
     public User selectByPhone(String phone);
     boolean addUser(User record);
 
+    int updatePassWord(String json);
+
     //boolean updateByPhone(User user);
 }

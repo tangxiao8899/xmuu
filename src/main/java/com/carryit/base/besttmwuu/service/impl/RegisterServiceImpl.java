@@ -71,6 +71,20 @@ public class RegisterServiceImpl implements UserService {
         return result;
     }
 
+    @Override
+    public int updatePassWord(String json) {
+        int i =0;
+        JSONObject jo = JSON.parseObject(json);
+        String phone = jo.getString("phone");
+        String password = jo.getString("password");
+        if(StringUtils.isEmpty(phone)&&StringUtils.isEmpty(password)){
+            return i;
+        }
+        i = userDao.updatePassWord(phone, password);
+        return i;
+
+    }
+
 //    @Override
 //    public boolean updateByPhone(User user) {
 //        boolean result = false;

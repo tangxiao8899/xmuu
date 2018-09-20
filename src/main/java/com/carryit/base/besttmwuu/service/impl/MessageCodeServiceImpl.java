@@ -69,7 +69,7 @@ public class MessageCodeServiceImpl implements MessageCodeService{
             Long SMS_TIME = Long.valueOf(PropertyUtil.getProperty("sms_time"));
             Long userfulTime = messageCode.getCreateTime().getTime() + SMS_TIME;
             //验证码失效
-            if(messageCode.getStatus()!=1 || messageCode.getCode()!=code || userfulTime > new Date().getTime() )
+            if(messageCode.getStatus()!=1 || messageCode.getCode()!=code || userfulTime < new Date().getTime() )
             {
                 return false;
             }else{
