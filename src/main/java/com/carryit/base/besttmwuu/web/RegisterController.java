@@ -105,6 +105,18 @@ public class RegisterController extends BaseController {
 				}else{
 					return faild("失败~", false);
 				}
+			case 5:
+				boolean _flag = messageCodeService.checkCode(json);
+				if(_flag){
+					int i = userService.updatePassWord(json);
+					if(i==1){
+						return doObjRespSuccess("成功");
+					}else {
+						return faild("失败~", false);
+					}
+				}else{
+					return faild("失败~", false);
+				}
 			default:
 			return register(json);
 		}
@@ -170,5 +182,13 @@ public class RegisterController extends BaseController {
 	public JSONObject addUser(@RequestBody(required = false) String json) {
 		Log.e("号码=" + json);
 		return callHttpReqTask(json, 3);
+	}
+
+	//TODO
+	//修改密码
+	@RequestMapping(value = "/updatePassWord", method = { RequestMethod.GET, RequestMethod.POST })
+	public JSONObject updatePassWord(@RequestBody(required = false) String json) {
+		Log.e("号码=" + json);
+		return callHttpReqTask(json, 5);
 	}
 }
