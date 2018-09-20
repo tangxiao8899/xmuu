@@ -13,11 +13,10 @@
     </insert>
 
     <update id="update">
-        update Author set
-        id = #{id},
-        phone = #{phone},
+        update ims_message set
         code = #{code},
-        status = #{status}
+        status = #{status},
+        createTime=#{createTime}
         where phone = #{phone}
     </update>
 </mapper>

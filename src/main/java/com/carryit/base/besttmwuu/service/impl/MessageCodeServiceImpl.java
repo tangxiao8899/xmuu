@@ -51,7 +51,7 @@ public class MessageCodeServiceImpl implements MessageCodeService{
             messageCode.setPhone(phoneNumber);
             this.insert(messageCode);
         }else{
-            messageCode.setId(phone.getId());
+            messageCode.setPhone(phone.getPhone());
             this.update(messageCode);
         }
     }
