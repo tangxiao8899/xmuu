@@ -1,0 +1,26 @@
+微信支付接口文档
+
+1、统一下单接口
+请求地址：http://ip:port/wx/wxPay
+请求类型：POST
+请求参数：{
+     	"remoteAddrIP": "127.0.0.1", //用户端实际ip
+     	"totalFee": 30 //支付金额
+     }
+响应结果：{
+         "msg": "SUCCESS",
+         "code": 200,
+         "data": {
+             "appid": "wx18c2cdc67528ee31",
+             "body": "小马商城支付订单",
+             "fee_type": "CNY",
+             "mch_id": "1499854482",
+             "nonce_str": "bKEWUF63OwZ7TqRq",
+             "notify_url": "",
+             "out_trade_no": "20180925202915",
+             "sign": "30F09B3DDC6E34762AF4921C7C0B9CC6",
+             "spbill_create_ip": "127.0.0.1",
+             "total_fee": "30",
+             "trade_type": "APP"
+         }
+     }

@@ -48,7 +48,7 @@ public class WxPayControllrt extends BaseController {
                         return doObjResp(false,-999,"付款金额错误!");
                     else{
                         try{
-                            return wxPayService.wxPay(this.request.getRemoteAddr(),String.valueOf(req.totalFee));
+                            return wxPayService.wxPay(json);
                         } catch (Exception e){
                             e.printStackTrace();
                             logger.error(e.getMessage());
