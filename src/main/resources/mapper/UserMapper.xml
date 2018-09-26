@@ -27,7 +27,7 @@
 				username,
 			</if>
 			<if test="password != null">
-				password,selectByPhone
+				password,
 			</if>
 			<if test="age != null">
 				age,
