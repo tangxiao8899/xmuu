@@ -8,7 +8,7 @@
 		<result column="age" property="age" jdbcType="INTEGER" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		id, username, password, age
+		id, phone, password
 	</sql>
 	<!--<select id="selectByPrimaryKey" resultMap="BaseResultMap"-->
 		<!--parameterType="java.lang.Integer">-->
@@ -27,7 +27,7 @@
 				username,
 			</if>
 			<if test="password != null">
-				password,
+				password,selectByPhone
 			</if>
 			<if test="age != null">
 				age,
@@ -123,7 +123,7 @@
 		select
 		<include refid="Base_Column_List" />
 		from ims_users
-		where user_name = #{phone,jdbcType=VARCHAR}
+		where phone = #{phone,jdbcType=VARCHAR}
 	</select>
 
 	<update id="updatePassWord">
