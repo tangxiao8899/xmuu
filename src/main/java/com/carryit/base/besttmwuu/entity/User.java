@@ -2,7 +2,9 @@ package com.carryit.base.besttmwuu.entity;
 
 import com.bean.Domain;
 
-public class User extends Domain {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private Integer uid;
 
     private String userName;    //姓名

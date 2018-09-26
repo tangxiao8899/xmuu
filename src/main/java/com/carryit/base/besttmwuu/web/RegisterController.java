@@ -91,12 +91,23 @@ public class RegisterController extends BaseController {
 			case 3:
 				User _user = p(json, User.class);
 				if(_user!=null){
-					boolean flag = mRegisterService.addUser(_user);
-					if(flag){
-						return doObjRespSuccess("成功");
+					if(_user.getPhone()!=null){
+						User data = mRegisterService.selectByPhone(_user.getPhone());
+						if(data==null){
+							boolean flag = mRegisterService.addUser(_user);
+							if(flag){
+								return doObjRespSuccess("成功");
+							}else{
+								return faild("失败~", false);
+							}
+						}else {
+							return faild("用户已存在~", false);
+						}
+
 					}else{
-						return faild("失败~", false);
+						return faild("号码为空~", false);
 					}
+
 				}
 			case 4:
 				boolean flag = messageCodeService.checkCode(json);
@@ -117,9 +128,11 @@ public class RegisterController extends BaseController {
 				}else{
 					return faild("失败~", false);
 				}
-			default:
-			return register(json);
+//			default:
+//			return register(json);
+
 		}
+		return null;
 	}
 
 	public JSONObject register(String json) {

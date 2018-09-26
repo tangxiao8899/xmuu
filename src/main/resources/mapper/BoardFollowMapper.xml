@@ -32,7 +32,7 @@
     </select>
 
     <select id="getUnconcerned" resultType="com.carryit.base.besttmwuu.entity.Board">
-       select b.id,b.cid,b.title,b.logo,b.banner,(select count(*) from ims_ewei_shop_sns_post p where p.bid =b.id ) topic from ims_ewei_shop_sns_board b where b.id not in(select bf.bid from ims_ewei_shop_sns_board_follow bf where bf.uid=#{uid})
+       select b.id,b.cid,b.title,b.logo,b.banner,(select count(*) from ims_ewei_shop_sns_post p where p.bid =b.id ) topic from ims_ewei_shop_sns_board b where b.id not in(select bf.bid from ims_ewei_shop_sns_board_follow bf where bf.uid=#{uid}) order by topic desc
 
     </select>
 </mapper>
