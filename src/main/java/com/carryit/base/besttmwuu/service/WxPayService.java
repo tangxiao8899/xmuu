@@ -1,6 +1,7 @@
 package com.carryit.base.besttmwuu.service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.base.ResultPojo;
 
 /**
  * 微信支付服务
@@ -8,10 +9,9 @@ import com.alibaba.fastjson.JSONObject;
 public interface WxPayService {
     /**
      * 获取微信预订单
-     * @param remoteAddrIP 终端ip
-     * @param totalPrice 订单总金额
+     * @param json
      * @return
      */
-    JSONObject wxPay(String remoteAddrIP,String totalPrice) throws Exception;
+    JSONObject wxPay(String json ) throws Exception;
     ;
 }

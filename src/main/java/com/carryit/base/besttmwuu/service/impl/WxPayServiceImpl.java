@@ -1,6 +1,8 @@
 package com.carryit.base.besttmwuu.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.base.ResultPojo;
 import com.carryit.base.besttmwuu.service.WxPayService;
 import com.util.PayCommonUtil;
 import com.util.PropertyUtil;
@@ -8,6 +10,7 @@ import com.util.XMLUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.*;
@@ -19,9 +22,12 @@ public class WxPayServiceImpl implements WxPayService{
 
 
     @Override
-    public JSONObject wxPay(String remoteAddrIP,String totalPrice) throws Exception{
+    public JSONObject wxPay(String json) throws Exception{
 
         JSONObject jo = new JSONObject();
+
+
+
         /*
         应用ID	appid
         商户号	mch_id
@@ -44,9 +50,32 @@ public class WxPayServiceImpl implements WxPayService{
 //        orders.setTravelFly(travelFly);
 //        parameters.put("body", "xxx产品-" + travelFly.getProductName());
 
-        parameters.put("spbill_create_ip", remoteAddrIP);
+        if (!StringUtils.isEmpty(json)) {
+            JSONObject parmJo = JSON.parseObject(json);
+            //校验授权信息
+            if (!parmJo.containsKey("remoteAddrIP")) {
+                jo.put("code",400);
+                jo.put("msg","参数异常");
+                jo.put("data","");
+                return jo;
+            }
+            if(!parmJo.containsKey("totalFee")){
+                jo.put("code",400);
+                jo.put("msg","参数异常");
+                jo.put("data","");
+                return jo;
+            }
+            parameters.put("spbill_create_ip", parmJo.getString("remoteAddrIP"));
+            parameters.put("total_fee", parmJo.getString("totalFee")); // 测试时，每次支付一分钱，微信支付所传的金额是以分为单位的，因此实际开发中需要x100
+        }else{
+            jo.put("code",400);
+            jo.put("msg","参数异常");
+            jo.put("data","");
+            return jo;
+        }
+
         parameters.put("out_trade_no",  PayCommonUtil.getDateStr()); // 订单id这里我的订单id生成规则是订单id+时间
-        parameters.put("total_fee", totalPrice); // 测试时，每次支付一分钱，微信支付所传的金额是以分为单位的，因此实际开发中需要x100
+
         // parameters.put("total_fee", orders.getOrderAmount()*100+""); // 上线后，将此代码放开
 
         parameters.put("body","小马商城支付订单");
@@ -65,13 +94,16 @@ public class WxPayServiceImpl implements WxPayService{
         if (parMap != null)
         {
             jo.put("code",200);
-            jo.put("data",parameters);
             jo.put("msg","SUCCESS");
+            jo.put("data",parameters);
+            return jo;
+
         } else
         {
             jo.put("code",-999);
             jo.put("msg","支付出现异常，请稍后重试!");
+            jo.put("data","");
+            return jo;
         }
-        return jo;
     }
 }
