@@ -125,9 +125,8 @@ public class CirclesController extends BaseController {
                     if(unconcerned!=null){
                         newboardList = boardFollowService.getUnconcerned(unconcerned.uid);
                         if (newboardList!=null&&newboardList.size()>0) {
-                            Collections.shuffle(newboardList);
                             if(newboardList.size()>10){
-                                newboardList = newboardList.subList(0, 9);
+                                newboardList = newboardList.subList(0,10);
                             }
                           }
                         }
@@ -179,7 +178,7 @@ public class CirclesController extends BaseController {
     @RequestMapping(value = "/getZhuQuanZiByUid", method = {RequestMethod.GET,
             RequestMethod.POST}, produces = "application/json;charset=UTF-8")
     public JSONObject getZhuQuanZiByUid(@RequestBody(required = false) String json) {
-        return callHttpReqTask(json, 3);
+        return callHttpReqTask(json, 2);
     }
 
     /*
@@ -189,8 +188,13 @@ public class CirclesController extends BaseController {
     @RequestMapping(value = "/getQuanZiByUid", method = {RequestMethod.GET,
             RequestMethod.POST}, produces = "application/json;charset=UTF-8")
     public JSONObject getQuanZiByUid(@RequestBody(required = false) String json) {
-        return callHttpReqTask(json, 2);
+        return callHttpReqTask(json, 3);
     }
+
+    /*
+  *
+  * 推荐10条动态最高的未关注的圈子
+  * */
     @RequestMapping(value = "/getUnconcerned", method = {RequestMethod.GET,
             RequestMethod.POST}, produces = "application/json;charset=UTF-8")
     public JSONObject getUnconcerned(@RequestBody(required = false) String json) {
