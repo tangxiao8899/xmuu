@@ -27,4 +27,15 @@ public class MemberServiceImpl implements MemberService {
         return memberDao.getWealthById(uid);
     }
 
+    @Override
+    public int getMemberByUIdAndLevel(int zhuquanzi, int level) {
+        return memberDao.getMemberByUIdAndLevel(zhuquanzi,level);
+    }
+
+    @Override
+    public void updateMemberByUIdAndLevel(int uid, int level) {
+        memberDao.updateMemberByUIdAndLevel(uid,level);
+    }
+
+
 }
