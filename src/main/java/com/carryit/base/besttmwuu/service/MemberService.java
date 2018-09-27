@@ -11,4 +11,7 @@ public interface MemberService {
 
     Member getWealthById(int uid);
 
+    int getMemberByUIdAndLevel(int zhuquanzi,int level);
+
+    void updateMemberByUIdAndLevel(int uid, int level);
 }

@@ -33,6 +33,11 @@ public class CirclesController extends BaseController {
     @Autowired
     MemberService memberService;
 
+    private static String UU圈主 = "0";
+    private static String 副圈主 = "6";
+    private static String UC管理员 = "7";
+
+
     @RequestMapping(value = "/getCircles", method = {RequestMethod.GET,
             RequestMethod.POST}, produces = "application/json;charset=UTF-8")
     public JSONObject getCircles(@RequestBody(required = false) String json) {
@@ -90,26 +95,50 @@ public class CirclesController extends BaseController {
                 }
                 return doObjResp(board);
             case 2:
+                MemberManage manage = new MemberManage();
+                //所有会员集合
                 List<Member> memberList = new ArrayList<>();
 
+                List<String> adminList = new ArrayList<>();
+                adminList.add(UU圈主);//UU圈主
+                adminList.add(副圈主);//副圈主
+                adminList.add(UC管理员);//UC管理员
+                //管理员集合
+                List<Member> adminMember = new ArrayList<>();
+                //普通用户集合
+                List<Member> normalMember = new ArrayList<>();
                 BoardReq req = p(json, BoardReq.class);
                 try {
-                    if(req!=null){
+                    if (req != null) {
                         Member member = memberService.getMemberById(req.uid);
-                        if(member!=null&&member.getZhuquanzi()!=null){
+                        if (member != null && member.getZhuquanzi() != null) {
+                            //主圈子信息
+                            Board zhuQuanZiboard = boardService.getBoardById(member.getZhuquanzi());
+                            //升序，查找所有该主圈子的用户
                             memberList = boardFollowService.getMemberByZhuQuanZiId(member.getZhuquanzi());
+                            //符合uu圈主，副圈主，UC管理员的要分离出来
+                            for (int i = 0; i < memberList.size(); i++) {
+                                if (adminList.contains(memberList.get(i).getLevel())) {
+                                    adminMember.add(memberList.get(i));
+                                } else {
+                                    normalMember.add(memberList.get(i));
+                                }
+                            }
+                            manage.setBoard(zhuQuanZiboard);
+                            manage.setAdminMember(adminMember);
+                            manage.setNormalMember(normalMember);
                         }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                return doObjResp(memberList);
+                return doObjResp(manage);
             case 3:
                 List<Board> boardList = new ArrayList<>();
 
                 BoardReq _req = p(json, BoardReq.class);
                 try {
-                    if(_req!=null){
+                    if (_req != null) {
                         boardList = boardFollowService.getBoardFollowByUId(_req.uid);
                     }
 
@@ -122,19 +151,64 @@ public class CirclesController extends BaseController {
 
                 BoardReq unconcerned = p(json, BoardReq.class);
                 try {
-                    if(unconcerned!=null){
+                    if (unconcerned != null) {
                         newboardList = boardFollowService.getUnconcerned(unconcerned.uid);
-                        if (newboardList!=null&&newboardList.size()>0) {
-                            if(newboardList.size()>10){
-                                newboardList = newboardList.subList(0,10);
+                        if (newboardList != null && newboardList.size() > 0) {
+                            if (newboardList.size() > 10) {
+                                newboardList = newboardList.subList(0, 10);
                             }
-                          }
                         }
+                    }
 
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 return doObjResp(newboardList);
+            case 5:
+
+                MemberLevel ml = p(json, MemberLevel.class);
+                try {
+                    if (ml != null && ml.getUid() != 0 && ml.getLevel() != 0) {
+                        //根据uid查询该用户的主圈子
+                        Member mb = memberService.getMemberById(ml.getUid());
+                        if (mb != null && mb.getZhuquanzi() != null) {
+                            //如果等级level为副圈主 ="6"，查找该圈子副圈主的个数
+                            if(Integer.parseInt(副圈主)==ml.getLevel()){
+
+                                int fuCount = memberService.getMemberByUIdAndLevel(mb.getZhuquanzi(), Integer.parseInt(副圈主));
+                                if (fuCount >= 10) {
+                                    return faild("副圈主名额已满", false);
+                                }else{
+                                    //更新用户为副圈主
+                                    memberService.updateMemberByUIdAndLevel(ml.getUid(),ml.getLevel());
+                                    return doObjRespSuccess("成功");
+                                }
+
+                            }else if(Integer.parseInt(UC管理员)==ml.getLevel()){
+                                //如果等级level为UC管理员 ="7"
+                                int fuCount = memberService.getMemberByUIdAndLevel(mb.getZhuquanzi(), Integer.parseInt(UC管理员));
+                                if (fuCount >= 50) {
+                                    return faild("UC管理员名额已满", false);
+                                }else{
+                                    //更新用户为UC管理员
+                                    memberService.updateMemberByUIdAndLevel(ml.getUid(),ml.getLevel());
+                                    return doObjRespSuccess("成功");
+                                }
+                            }
+
+
+
+                        } else {
+                            return faild("数据异常（用户没有绑定主圈子）~", false);
+                        }
+                    } else {
+                        return faild("参数异常~", false);
+                    }
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
         }
         return null;
     }
@@ -199,6 +273,16 @@ public class CirclesController extends BaseController {
             RequestMethod.POST}, produces = "application/json;charset=UTF-8")
     public JSONObject getUnconcerned(@RequestBody(required = false) String json) {
         return callHttpReqTask(json, 4);
+    }
+
+    /*
+*
+* 根据uid修改会员等级 参数 {uid=xx,level=xx}
+* */
+    @RequestMapping(value = "/updateMemberLevel", method = {RequestMethod.GET,
+            RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public JSONObject updateMemberLevel(@RequestBody(required = false) String json) {
+        return callHttpReqTask(json, 5);
     }
 
 }

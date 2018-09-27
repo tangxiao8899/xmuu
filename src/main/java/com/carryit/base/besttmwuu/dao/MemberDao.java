@@ -2,6 +2,7 @@ package com.carryit.base.besttmwuu.dao;
 
 import com.carryit.base.besttmwuu.entity.Level;
 import com.carryit.base.besttmwuu.entity.Member;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,4 +14,7 @@ public interface MemberDao {
 
     Member getWealthById(int uid);
 
+    int getMemberByUIdAndLevel(@Param("zhuquanzi") int zhuquanzi, @Param("level") int level);
+
+    void updateMemberByUIdAndLevel(@Param("uid") int uid, @Param("level") int level);
 }

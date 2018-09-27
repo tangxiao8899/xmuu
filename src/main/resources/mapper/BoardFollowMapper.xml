@@ -24,10 +24,8 @@
     </insert>
 
     <select id="getMemberByZhuQuanZiId" resultType="com.carryit.base.besttmwuu.entity.Member">
-        select bf.id,m.avatar,m.nickname,m.level,b.levelname from ims_ewei_shop_sns_board_follow bf
-        LEFT JOIN ims_ewei_shop_member m ON bf.uid = m.uid
-        LEFT JOIN ims_ewei_shop_member_level b ON m.level = b.level
-         where bf.bid = #{zhuquanzi}
+    select m.id,m.realname,m.avatar,m.nickname,m.level,b.levelname
+    from ims_ewei_shop_member m LEFT JOIN ims_ewei_shop_member_level b ON m.level = b.level  where m.zhuquanzi =#{zhuquanzi} order by m.level asc
 
     </select>
 
