@@ -16,4 +16,9 @@ public class SincerityServiceImpl implements SincerityService {
     public Sincerity getNumberById(int uid) {
         return sincerityDao.getNumberById(uid);
     }
+
+    @Override
+    public boolean addLikes(int uid) {
+        return sincerityDao.insterLikes(uid);
+    }
 }

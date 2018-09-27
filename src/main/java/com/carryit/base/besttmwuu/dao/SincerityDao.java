@@ -8,4 +8,6 @@ public interface SincerityDao {
 
 
     Sincerity getNumberById(int uid);
+
+    boolean insterLikes(int uid);
 }

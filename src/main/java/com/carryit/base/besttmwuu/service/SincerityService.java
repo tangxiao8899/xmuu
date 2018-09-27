@@ -7,4 +7,6 @@ import org.springframework.stereotype.Service;
 public interface SincerityService {
 
     Sincerity getNumberById(int uid);
+
+    boolean addLikes(int uid);
 }
