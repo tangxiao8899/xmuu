@@ -27,12 +27,12 @@ public class ContextData {
         return nameList.size();
     }
 
-    public static synchronized Prize removeFirst() {
-        if (nameList.size() > 0) {
-            return (Prize) nameList.remove(0);
-        } else {
-            return null;
-        }
+    public static synchronized void removeAll() {
+        nameList.clear();
+    }
+
+    public static synchronized List<Prize> getAll(){
+        return nameList;
     }
 
     public static synchronized Prize getIdx(int idx) {

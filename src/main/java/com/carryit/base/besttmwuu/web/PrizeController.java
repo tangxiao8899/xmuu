@@ -41,34 +41,29 @@ public class PrizeController {
         List<Prize> prizes;
         Random rand = new Random();
         if (ContextData.getAllSize() == 0) {
-            int size = 0;
-            prizes = prizeService.getAllPrize();
-            for (Prize p : prizes) {
-                ContextData.add(p);
-                size += p.getNumber();
-            }
-            ContextData.setAllSize(size);
-            if (ContextData.getAllSize() > 0) {
-                int ri = rand.nextInt((ContextData.getSize()));
-                Prize rp = ContextData.getIdx(ri);
-                if (rp.getNumber() > 0) {
-                    rp.setNumber(rp.getNumber() - 1);
-                    return rp;
-                } else {
-                    return new Prize();
+            if (ContextData.getSize() == 0) {
+                int size = 0;
+                prizes = prizeService.getAllPrize();
+                for (Prize p : prizes) {
+                    ContextData.add(p);
+                    size += p.getNumber();
                 }
-            } else {
+                ContextData.setAllSize(size);
+            }else {
+                for (Prize p: ContextData.getAll()){
+                    prizeService.updatePrizeById(p);
+                }
+                ContextData.removeAll();
                 return null;
             }
+        }
+        int ri = rand.nextInt((ContextData.getSize()));
+        Prize rp = ContextData.getIdx(ri);
+        if (rp.getNumber() > 0) {
+            rp.setNumber(rp.getNumber() - 1);
+            return rp;
         } else {
-            int ri = rand.nextInt((ContextData.getSize()));
-            Prize rp = ContextData.getIdx(ri);
-            if (rp.getNumber() > 0) {
-                rp.setNumber(rp.getNumber() - 1);
-                return rp;
-            } else {
-                return new Prize();
-            }
+            return new Prize();
         }
     }
 
