@@ -120,8 +120,8 @@ public Map<String,String> sendSms(String phoneNumber, String code) {
         SendSmsRequest request = new SendSmsRequest();
         request.setMethod(MethodType.POST);
         request.setPhoneNumbers(phoneNumber);
-        request.setSignName("陈志胜");
-        request.setTemplateCode("SMS_78370060");
+        request.setSignName("小马uu");
+        request.setTemplateCode("SMS_146615924");
         request.setTemplateParam("{\"code\":\"" + code + "\"}");
         try {
             SendSmsResponse sendSmsResponse = acsClient.getAcsResponse(request);
@@ -145,7 +145,7 @@ public Map<String,String> sendSms(String phoneNumber, String code) {
         request.setMethod(MethodType.POST);
         request.setPhoneNumberJson(phoneNumberList);
         request.setSignNameJson(signNameList);
-        request.setTemplateCode("SMS_78370060");
+        request.setTemplateCode("SMS_146615924");
         request.setTemplateParamJson(mes);
         try {
             SendBatchSmsResponse sendSmsResponse = acsClient.getAcsResponse(request);
