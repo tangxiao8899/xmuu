@@ -1,5 +1,6 @@
 package com.carryit.base.besttmwuu.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.carryit.base.besttmwuu.entity.MessageCode;
 
 public interface MessageCodeService {
@@ -15,5 +16,5 @@ public interface MessageCodeService {
     void saveMessageCode(String phoneNumber,int code);
 
     //校验短信验证码
-    boolean checkCode(String json);
+    JSONObject checkCode(String json);
 }
