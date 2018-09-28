@@ -44,4 +44,14 @@ public class BoardFollowServiceImpl implements BoardFollowService {
     public List<Board> getUnconcerned(int uid) {
         return boardFollowDao.getUnconcerned(uid);
     }
+
+    @Override
+    public long getTopicCount(int bid) {
+        return boardFollowDao.getTopicCount(bid);
+    }
+
+    @Override
+    public long getFollowCount(int bid) {
+        return boardFollowDao.getFollowCount(bid);
+    }
 }

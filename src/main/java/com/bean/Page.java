@@ -10,25 +10,7 @@ public class Page<T> implements Serializable {
 
     private int pageSize;
     private long totalSize;
-    private int currentSize;
     private List<T> list;
-
-
-    public long getTotalPage() {
-       totalPage=  (totalSize + pageSize - 1) / pageSize;
-        return totalPage;
-    }
-
-    public long totalPage;
-
-
-    public int getCurrentSize() {
-        return currentSize;
-    }
-
-    public void setCurrentSize(int currentSize) {
-        this.currentSize = currentSize;
-    }
 
     public int getPageSize() {
         return pageSize;

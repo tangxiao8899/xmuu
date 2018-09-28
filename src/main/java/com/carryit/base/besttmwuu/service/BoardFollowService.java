@@ -20,4 +20,8 @@ public interface BoardFollowService {
     List<Board> getBoardFollowByUId(int uid);
 
     List<Board> getUnconcerned(int uid);
+
+    long getTopicCount(int bid);
+
+    long getFollowCount(int bid);
 }

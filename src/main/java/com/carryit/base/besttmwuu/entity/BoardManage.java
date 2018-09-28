@@ -5,8 +5,17 @@ import java.io.Serializable;
 public class BoardManage implements Serializable {
 
     private int uid;
+    private int bid;
     private int pageStart;
     private int pageSize;
+
+    public int getBid() {
+        return bid;
+    }
+
+    public void setBid(int bid) {
+        this.bid = bid;
+    }
 
     public int getUid() {
         return uid;
