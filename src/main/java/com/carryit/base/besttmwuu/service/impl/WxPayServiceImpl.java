@@ -3,12 +3,17 @@ package com.carryit.base.besttmwuu.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.base.ResultPojo;
+import com.carryit.base.besttmwuu.entity.Order;
+import com.carryit.base.besttmwuu.entity.Product;
+import com.carryit.base.besttmwuu.service.OrderService;
+import com.carryit.base.besttmwuu.service.ProductService;
 import com.carryit.base.besttmwuu.service.WxPayService;
 import com.util.PayCommonUtil;
 import com.util.PropertyUtil;
 import com.util.XMLUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -20,11 +25,18 @@ public class WxPayServiceImpl implements WxPayService{
 
     Logger logger = LoggerFactory.getLogger(WxPayServiceImpl.class);
 
+    @Autowired
+    OrderService orderService;
+
+    @Autowired
+    ProductService productService;
+
 
     @Override
     public JSONObject wxPay(String json) throws Exception{
 
         JSONObject jo = new JSONObject();
+
 
 
 
@@ -59,14 +71,37 @@ public class WxPayServiceImpl implements WxPayService{
                 jo.put("data","");
                 return jo;
             }
-            if(!parmJo.containsKey("totalFee")){
+            if(!parmJo.containsKey("productId")){ //商品ID
                 jo.put("code",400);
                 jo.put("msg","参数异常");
                 jo.put("data","");
                 return jo;
             }
+            if(!parmJo.containsKey("productNum")){ //商品数量
+                jo.put("code",400);
+                jo.put("msg","参数异常");
+                jo.put("data","");
+                return jo;
+            }
+
+            //生成商品订单
+            Product product = productService.findById(Integer.valueOf(parmJo.getString("productId")));
+
+            Order order = new Order();
+            order.setOrdersn(System.currentTimeMillis() + PropertyUtil.random() + ""); //订单号
+            order.setPrice(product.getPrice() * Long.valueOf(parmJo.getString("productNum"))); //订单价格
+            order.setStatus(2); //待付款
+            order.setUid(Integer.valueOf(parmJo.getString("uid"))); //下单用户
+            order.setPaytype(2); //在线支付
+            order.setCreatetime(new Date().getTime());//创建时间
+
+
+            orderService.save(order);
+            parameters.put("notify_url",PropertyUtil.getProperty("wxpay.notifyurl"));//通知地址
+            parameters.put("body","小马UU-"+product.getLevelName()); //商品描述
+            parameters.put("out_trade_no",  order.getOrdersn()); // 订单id这里我的订单id生成规则是订单id+时间
             parameters.put("spbill_create_ip", parmJo.getString("remoteAddrIP"));
-            parameters.put("total_fee", parmJo.getString("totalFee")); // 测试时，每次支付一分钱，微信支付所传的金额是以分为单位的，因此实际开发中需要x100
+            parameters.put("total_fee", order.getPrice()*100); // 测试时，每次支付一分钱，微信支付所传的金额是以分为单位的，因此实际开发中需要x100
         }else{
             jo.put("code",400);
             jo.put("msg","参数异常");
@@ -74,11 +109,6 @@ public class WxPayServiceImpl implements WxPayService{
             return jo;
         }
 
-        parameters.put("out_trade_no",  PayCommonUtil.getDateStr()); // 订单id这里我的订单id生成规则是订单id+时间
-
-        // parameters.put("total_fee", orders.getOrderAmount()*100+""); // 上线后，将此代码放开
-
-        parameters.put("body","小马商城支付订单");
 
         // 设置签名
         String sign = PayCommonUtil.createSign("UTF-8", parameters);
