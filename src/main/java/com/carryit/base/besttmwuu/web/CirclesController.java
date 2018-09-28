@@ -245,13 +245,41 @@ public class CirclesController extends BaseController {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            case 7:
+                BoardManage boardManage = p(json, BoardManage.class);
+                try {
+                    if (boardManage != null) {
+//                        Member member = memberService.getMemberById(boardManage.getUid());
+//                        if (member != null && member.getZhuquanzi() != null) {
+//                            //主圈子信息
+//                            Board zhuQuanZiboard = boardService.getBoardById(member.getZhuquanzi());
+//                            //升序，查找所有该主圈子的用户
+//                            memberList = boardFollowService.getMemberByZhuQuanZiId(member.getZhuquanzi());
+//                            //符合uu圈主，副圈主，UC管理员的要分离出来
+//                            for (int i = 0; i < memberList.size(); i++) {
+//                                if (adminList.contains(memberList.get(i).getLevel())) {
+//                                    adminMember.add(memberList.get(i));
+//                                } else {
+//                                    normalMember.add(memberList.get(i));
+//                                }
+//                            }
+//                            manage.setBoard(zhuQuanZiboard);
+//                            manage.setAdminMember(adminMember);
+//                            manage.setNormalMember(normalMember);
+//                        }
+                    }
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
         }
         return null;
     }
 
     /*
- 圈子管理
- * 根据用户id获取主圈子和主圈子下面的所有会员
+      关注与取消关注
+ *
  * */
     @RequestMapping(value = "/onAndOff", method = {RequestMethod.GET,
             RequestMethod.POST}, produces = "application/json;charset=UTF-8")
@@ -298,6 +326,26 @@ public class CirclesController extends BaseController {
             RequestMethod.POST}, produces = "application/json;charset=UTF-8")
     public JSONObject updateMemberLevel(@RequestBody(required = false) String json) {
         return callHttpReqTask(json, 5);
+    }
+
+    /*
+  圈子管理
+* 根据用户id获取主圈子和主圈子下面的所有普通会员（分页，每页10条）
+* */
+    @RequestMapping(value = "/getNormalPage", method = {RequestMethod.GET,
+            RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public JSONObject getNormalPage(@RequestBody(required = false) String json) {
+        return callHttpReqTask(json, 7);
+    }
+
+    /*
+圈子管理
+* 根据用户id获取主圈子和主圈子下面的所有管理员（分页，每页10条）
+* */
+    @RequestMapping(value = "/getAdminPage", method = {RequestMethod.GET,
+            RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public JSONObject getAdminPage(@RequestBody(required = false) String json) {
+        return callHttpReqTask(json, 8);
     }
 
 }
