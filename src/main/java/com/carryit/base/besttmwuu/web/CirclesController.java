@@ -247,26 +247,32 @@ public class CirclesController extends BaseController {
                 }
             case 7:
                 BoardManage boardManage = p(json, BoardManage.class);
+                //普通用户集合
+                List<Member> normalMember = new ArrayList<>();
+                long count =0;
+                MemberManage man = new MemberManage();
                 try {
                     if (boardManage != null) {
-//                        Member member = memberService.getMemberById(boardManage.getUid());
-//                        if (member != null && member.getZhuquanzi() != null) {
-//                            //主圈子信息
-//                            Board zhuQuanZiboard = boardService.getBoardById(member.getZhuquanzi());
-//                            //升序，查找所有该主圈子的用户
-//                            memberList = boardFollowService.getMemberByZhuQuanZiId(member.getZhuquanzi());
-//                            //符合uu圈主，副圈主，UC管理员的要分离出来
-//                            for (int i = 0; i < memberList.size(); i++) {
-//                                if (adminList.contains(memberList.get(i).getLevel())) {
-//                                    adminMember.add(memberList.get(i));
-//                                } else {
-//                                    normalMember.add(memberList.get(i));
-//                                }
-//                            }
-//                            manage.setBoard(zhuQuanZiboard);
-//                            manage.setAdminMember(adminMember);
-//                            manage.setNormalMember(normalMember);
-//                        }
+                        Member member = memberService.getMemberById(boardManage.getUid());
+                        if (member != null && member.getZhuquanzi() != null) {
+                            if(member.getZhuquanzi()==0||boardManage.getPageSize()==0){
+                                return faild("参数异常~", false);
+                            }
+                            //主圈子信息
+                            Board zhuQuanZiboard = boardService.getBoardById(member.getZhuquanzi());
+                            //升序，查找该主圈子的普通用户（分页）
+                            // normalMember = boardFollowService.getMemberByZhuQuanZiId(member.getZhuquanzi());
+                            normalMember = memberService.getnormalMember(member.getZhuquanzi(),(boardManage.getPageStart()-1)*boardManage.getPageSize(),boardManage.getPageSize());
+
+
+                                page.setList(list);
+                                page.setPageSize(req.getPageSize());
+                                page.setTotalSize(count);
+
+
+                                man.setBoard(zhuQuanZiboard);
+                                man.setNormalMember(normalMember);
+                        }
                     }
 
 

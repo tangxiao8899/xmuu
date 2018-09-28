@@ -32,6 +32,12 @@
 		where uid = #{uid}
 	</update>
 
+	<select id="getnormalMember" resultType="com.carryit.base.besttmwuu.entity.Member">
+		select m.id,m.realname,m.avatar,m.nickname,m.level,b.levelname
+		from ims_ewei_shop_member m LEFT JOIN ims_ewei_shop_member_level b ON m.level = b.level  where m.zhuquanzi =#{zhuquanzi} order by m.level asc
+
+	</select>
+
 
 
 </mapper>

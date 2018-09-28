@@ -14,4 +14,6 @@ public interface MemberService {
     int getMemberByUIdAndLevel(int zhuquanzi,int level);
 
     void updateMemberByUIdAndLevel(int uid, int level);
+
+    List<Member> getnormalMember(Integer zhuquanzi, int pageStart, int pageSize);
 }
