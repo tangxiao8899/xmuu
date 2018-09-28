@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.carryit.base.besttmwuu.dao.UserPrizeDao">
+    <resultMap id="UserPrize" type="com.carryit.base.besttmwuu.entity.UserPrize">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="uid" property="uid" jdbcType="VARCHAR"/>
+        <result column="pid" property="pid" jdbcType="INTEGER"/>
+        <result column="createTime" property="createTime" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="addUserPrize" parameterType="com.carryit.base.besttmwuu.entity.UserPrize">
+        insert into t_user_prize(uid,pid) values(#{uid},#{pid})
+    </insert>
+
+    <select id="getAllUserPrize" resultMap="UserPrize"
+            parameterType="com.carryit.base.besttmwuu.entity.UserPrize">
+		select id,uid,pid,createTime
+		from t_user_prize
+	</select>
+
+    <select id="getUserPrizeById" resultMap="UserPrize"
+            parameterType="com.carryit.base.besttmwuu.entity.UserPrize">
+        select id,uid,pid,createTime
+        from t_user_prize
+        where id=#{id}
+    </select>
+    <delete id="deleteUserPrizeById" parameterType="com.carryit.base.besttmwuu.entity.UserPrize">
+        delete from t_user_prize where id=#{id}
+    </delete>
+
+</mapper>
