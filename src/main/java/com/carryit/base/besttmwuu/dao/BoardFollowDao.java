@@ -22,4 +22,8 @@ public interface BoardFollowDao {
     List<Board> getBoardFollowByUId(@Param("uid") int uid);
 
     List<Board> getUnconcerned(@Param("uid")int uid);
+
+    long getTopicCount(@Param("bid") int bid);
+
+    long getFollowCount(@Param("bid")int bid);
 }
