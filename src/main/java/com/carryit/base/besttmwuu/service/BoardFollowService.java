@@ -13,7 +13,7 @@ public interface BoardFollowService {
 
     void delete(int uid, int bid);
 
-    void add(int uid, int bid, long time);
+    void add(int uid, int bid, String time);
 
     List<Member> getMemberByZhuQuanZiId(Integer zhuquanzi);
 

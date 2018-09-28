@@ -15,7 +15,7 @@ public interface BoardFollowDao {
 
     void delete(@Param("uid") int uid, @Param("bid") int bid);
 
-    void add(@Param("uid")int uid, @Param("bid") int bid, @Param("time") long time);
+    void add(@Param("uid")int uid, @Param("bid") int bid, @Param("time") String time);
 
     List<Member> getMemberByZhuQuanZiId(@Param("zhuquanzi") Integer zhuquanzi);
 
