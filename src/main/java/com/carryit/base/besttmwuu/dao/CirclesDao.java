@@ -1,6 +1,9 @@
 package com.carryit.base.besttmwuu.dao;
 
+import com.bean.Page;
+import com.bean.req.PageParam;
 import com.carryit.base.besttmwuu.entity.Circles;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -10,4 +13,5 @@ public interface CirclesDao {
 
     List<Circles> getCircles();
 
+    List<Circles> getCirclesInfo(@Param("title") String title,@Param("pageIndex") int pageIndex, @Param("pageSize")int pageSize);
 }

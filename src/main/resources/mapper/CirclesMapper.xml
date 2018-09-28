@@ -7,4 +7,12 @@
         select id,name from ims_ewei_shop_sns_category
 
     </select>
+
+    <!--通过圈子标题模糊查询圈子信息-->
+    <select id="getCirclesInfo" resultType="com.bean.resp.CirclesResp">
+        select id,title from ims_ewei_shop_sns_board
+        where title like CONCAT("%",#{title},"%")
+        ORDER BY id ASC
+        limit #{pageIndex}, #{pageSize}
+    </select>
 </mapper>

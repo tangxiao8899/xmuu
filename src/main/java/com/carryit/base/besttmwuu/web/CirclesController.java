@@ -270,9 +270,13 @@ public class CirclesController extends BaseController {
                     }
 
 
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            case 9:
+                return circlesService.getCirclesInfo(json);
+
         }
         return null;
     }
@@ -347,5 +351,18 @@ public class CirclesController extends BaseController {
     public JSONObject getAdminPage(@RequestBody(required = false) String json) {
         return callHttpReqTask(json, 8);
     }
+
+
+    /**
+     * 圈子查询
+     * @param json
+     * @return
+     */
+    @RequestMapping(value = "/getCirclesInfo", method = {RequestMethod.GET,
+            RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public JSONObject getCirclesInfo(@RequestBody(required = false) String json) {
+        return callHttpReqTask(json, 9);
+    }
+
 
 }
