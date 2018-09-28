@@ -42,4 +42,14 @@
        select count(*) from ims_ewei_shop_sns_board_follow  where bid = #{bid}
 
     </select>
+
+    <select id="getAllBoardTopic" resultType="com.carryit.base.besttmwuu.entity.Post">
+        select id,bid,avatar,content,image,nickname,title,createtime,replytime,credit,views,fabulous from ims_ewei_shop_sns_post where bid =#{bid} ORDER by createtime desc
+
+    </select>
+    <select id="getAllBoardTopicCount" resultType="long">
+        select count(*) from ims_ewei_shop_sns_post where bid =#{bid}
+
+    </select>
+
 </mapper>
