@@ -8,7 +8,7 @@
 		<!--<result column="age" property="age" jdbcType="INTEGER" />-->
 	<!--</resultMap>-->
 	<sql id="Base_Column_List">
-		uid, username, password, age
+		uid, phone, password, age
 	</sql>
 	<!--<select id="selectByPrimaryKey" resultMap="BaseResultMap"-->
 		<!--parameterType="java.lang.Integer">-->

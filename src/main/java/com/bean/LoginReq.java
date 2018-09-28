@@ -5,16 +5,16 @@ package com.bean;
  */
 public class LoginReq {
 
-    private String username;
+    private String phone;
 
     private String password;
 
-    public String getUsername() {
-        return username;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getPassword() {

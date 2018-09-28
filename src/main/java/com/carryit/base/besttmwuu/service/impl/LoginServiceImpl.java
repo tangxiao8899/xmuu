@@ -20,17 +20,17 @@ public class LoginServiceImpl implements LoginService {
 
         JSONObject jo = new JSONObject();
 
-        String username = req.getUsername();
+        String phone = req.getPhone();
         String password = req.getPassword();
 
-        if(StringUtils.isEmpty(username) || StringUtils.isEmpty(password)){
+        if(StringUtils.isEmpty(phone) || StringUtils.isEmpty(password)){
             jo.put("code",400);
             jo.put("message","请求参数异常");
             jo.put("data","");
             return jo;
         }
 
-        User user = userService.selectByPhone(username);
+        User user = userService.selectByPhone(phone);
         if(user == null){ //用户不存在
             jo.put("code",401);
             jo.put("message","用户不存在");
@@ -42,10 +42,12 @@ public class LoginServiceImpl implements LoginService {
             jo.put("data","");
             return jo;
         }else{ //登录成功
+            JSONObject data = new JSONObject();
+            data.put("token",user.getId());
+            data.put("id",user.getId());
             jo.put("code",200);
             jo.put("message","登录成功");
-            jo.put("data",new JSONObject().put("token",user.getId()));
-            jo.put("id",user.getId());
+            jo.put("data",data);
             return jo;
         }
     }
