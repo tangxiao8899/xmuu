@@ -26,7 +26,7 @@ public class BoardFollowServiceImpl implements BoardFollowService {
     }
 
     @Override
-    public void add(int uid, int bid, long time) {
+    public void add(int uid, int bid, String time) {
         boardFollowDao.add(uid,bid,time);
     }
 

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @RestController
@@ -210,41 +211,54 @@ public class CirclesController extends BaseController {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
+            case 6:
+                Follow follow = p(json, Follow.class);
+                try {
+                    if (follow != null && follow.getUid() != 0 & follow.getBid() != 0 ) {
+
+                        if ("0".equals(follow.getFollow())) {
+                            BoardFollow boardByUid = boardFollowService.getBoardByUid(follow.getUid(), follow.getBid());
+                            if(boardByUid!=null){
+                                //取消关注
+                                boardFollowService.delete(follow.getUid(), follow.getBid());
+                                return doObjResp(true);
+                            }else {
+                                return faild("取消关注失败~", false);
+                            }
+
+                        } else if ("1".equals(follow.getFollow())) {
+                            //关注
+                            BoardFollow newbf = boardFollowService.getBoardByUid(follow.getUid(), follow.getBid());
+                            if(newbf==null){
+                                boardFollowService.add(follow.getUid(), follow.getBid(), new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+                                return doObjResp(true);
+                            }else {
+                                return faild("关注失败~", false);
+                            }
+                        }
+                    }else {
+                        return faild("参数异常~", false);
+                    }
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
         }
         return null;
     }
 
     /*
-    * 关注与取消关注
-    * */
-    @RequestMapping("/onAndOff")
-    public Map<String, String> onAndOff(int uid, int bid, String follow) {
-
-        Map<String, String> map = new HashMap<>();
-        map.put("code", "201");
-        map.put("msg", "操作失败");
-        try {
-            if (uid != 0 & bid != 0 & follow != null) {
-                if ("0".equals(follow)) {
-                    //取消关注
-                    boardFollowService.delete(uid, bid);
-                    map.put("code", "200");
-                    map.put("msg", "操作成功");
-                } else if ("1".equals(follow)) {
-                    //关注
-
-                    boardFollowService.add(uid, bid, new Date().getTime());
-                    map.put("code", "200");
-                    map.put("msg", "操作成功");
-                }
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return map;
-
+ 圈子管理
+ * 根据用户id获取主圈子和主圈子下面的所有会员
+ * */
+    @RequestMapping(value = "/onAndOff", method = {RequestMethod.GET,
+            RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public JSONObject onAndOff(@RequestBody(required = false) String json) {
+        return callHttpReqTask(json, 6);
     }
+
 
     /*
     圈子管理

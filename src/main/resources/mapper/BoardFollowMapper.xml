@@ -15,7 +15,7 @@
 
     <delete id="delete">
         delete from ims_ewei_shop_sns_board_follow
-        where bid = #{bid} and openid = #{uid}
+        where bid = #{bid} and uid = #{uid}
     </delete>
 
     <insert id="add">
