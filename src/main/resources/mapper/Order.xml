@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.carryit.base.besttmwuu.dao.OrderDao">
 
-	<insert id="insertSelective" parameterType="com.carryit.base.besttmwuu.entity.User">
+	<!--<insert id="insertSelective" parameterType="com.carryit.base.besttmwuu.entity.User">
 		insert into ims_ewei_shop_order
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null">
@@ -68,6 +68,6 @@
 		transid=#{transid,jdbcType=VARCHAR},
 		createtime=#{createtime,jdbcType=INTEGER}
 		where uid = #{id,jdbcType=INTEGER}
-	</update>
+	</update>-->
 
 </mapper>
