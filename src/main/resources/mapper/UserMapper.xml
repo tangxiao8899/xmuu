@@ -53,6 +53,12 @@
 			<if test="isSingle != null">
 				isSingle,
 			</if>
+			<if test="mailbox != null">
+				mailbox,
+			</if>
+			<if test="corporateName != null">
+				corporateName,
+			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 
@@ -85,6 +91,12 @@
 			</if>
 			<if test="isSingle != null">
 				#{isSingle,jdbcType=VARCHAR},
+			</if>
+			<if test="mailbox != null">
+				#{mailbox,jdbcType=VARCHAR},
+			</if>
+			<if test="corporateName != null">
+				#{corporateName,jdbcType=VARCHAR},
 			</if>
 		</trim>
 	</insert>
