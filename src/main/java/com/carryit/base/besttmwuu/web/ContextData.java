@@ -10,6 +10,19 @@ public class ContextData {
 
     private static List<Prize> nameList = Collections.synchronizedList(new LinkedList());
     private static Integer allSize = 0;
+    private static List<String> shakedUid = Collections.synchronizedList(new LinkedList());
+
+    public static void addShakedUid(String uid){
+        shakedUid.add(uid);
+    }
+
+    public static boolean isShaked(String uid){
+        return shakedUid.contains(uid);
+    }
+
+    public static void removeShakedUid(){
+        shakedUid.clear();
+    }
 
     public static Integer getAllSize() {
         return allSize;
