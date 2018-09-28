@@ -45,6 +45,7 @@ public class LoginServiceImpl implements LoginService {
             jo.put("code",200);
             jo.put("message","登录成功");
             jo.put("data",new JSONObject().put("token",user.getId()));
+            jo.put("id",user.getId());
             return jo;
         }
     }

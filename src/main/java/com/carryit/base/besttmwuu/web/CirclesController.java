@@ -77,23 +77,24 @@ public class CirclesController extends BaseController {
 
                 try {
                     BoardReq req = p(json, BoardReq.class);
-                    if (req == null) {
-                        if (ServiceConfig.DEBUG) {
-                            req = new BoardReq();
-                            req.bid = 17;
-                            req.uid = 17;
+                    if (req != null) {
+//                        if (ServiceConfig.DEBUG) {
+//                            req = new BoardReq();
+//                            req.bid = 17;
+//                            req.uid = 17;
+//                        }
+                        bf = boardFollowService.getBoardByUid(req.uid, req.bid);// 查询该用户是否关注该圈子
+                        if (bf != null) {
+                            return doObjResp(true);
+                        }else{
+                            return doObjResp(false);
                         }
                     }
-                    Log.e("请求字符串=" + json + "|命令|" + cmd);
-                    board = boardService.getBoardById(req.bid);// 查询圈子详细信息
-                    bf = boardFollowService.getBoardByUid(req.uid, req.bid);// 查询该用户是否关注该圈子
-                    if (bf != null) {
-                        board.setFollow(true);
-                    }
+                    //Log.e("请求字符串=" + json + "|命令|" + cmd);
+                    //board = boardService.getBoardById(req.bid);// 查询圈子详细信息
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                return doObjResp(board);
             case 2:
                 MemberManage manage = new MemberManage();
                 //所有会员集合
