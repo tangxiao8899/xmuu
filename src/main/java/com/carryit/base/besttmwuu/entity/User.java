@@ -17,15 +17,43 @@ public class User implements Serializable {
 
     private String phone;   //电话
 
-    private String address;   //地址
+    private String address;   //公司地址
 
-    private String speciality; //特长
+    private String speciality; //公司简介
 
-    private String need;   //需求
+    private String corporateName;//公司名称
+
+    private String need;   //近期需求
 
     private String education; //学历
 
+    private String mailbox;//公司邮箱
+
     private String  isSingle; //是否单身
+
+    public Integer getUid() {
+        return uid;
+    }
+
+    public void setUid(Integer uid) {
+        this.uid = uid;
+    }
+
+    public String getCorporateName() {
+        return corporateName;
+    }
+
+    public void setCorporateName(String corporateName) {
+        this.corporateName = corporateName;
+    }
+
+    public String getMailbox() {
+        return mailbox;
+    }
+
+    public void setMailbox(String mailbox) {
+        this.mailbox = mailbox;
+    }
 
     public String getIdCard() {
         return idCard;
