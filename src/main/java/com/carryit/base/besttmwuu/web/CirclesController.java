@@ -34,6 +34,9 @@ public class CirclesController extends BaseController {
     @Autowired
     MemberService memberService;
 
+    @Autowired
+    UserPostService userPostService;
+
     private static String UU圈主 = "0";
     private static String 副圈主 = "6";
     private static String UC管理员 = "7";
@@ -273,6 +276,21 @@ public class CirclesController extends BaseController {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
+            case 9:
+                UserPost userPost=new UserPost();
+                try {
+                    if (userPost!=null){
+                        userPostService.saveUserPost(userPost);
+                    }else{
+                        return faild("失败~", false);
+                    }
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+
         }
         return null;
     }
@@ -339,13 +357,23 @@ public class CirclesController extends BaseController {
     }
 
     /*
-圈子管理
+*   圈子管理
 * 根据用户id获取主圈子和主圈子下面的所有管理员（分页，每页10条）
 * */
     @RequestMapping(value = "/getAdminPage", method = {RequestMethod.GET,
             RequestMethod.POST}, produces = "application/json;charset=UTF-8")
     public JSONObject getAdminPage(@RequestBody(required = false) String json) {
         return callHttpReqTask(json, 8);
+    }
+
+
+    /*
+    * 圈子发布消息保存消息
+    * */
+    @RequestMapping(value = "insertPost",method = {RequestMethod.GET,
+            RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public JSONObject insertPost(@RequestBody(required = false) String json){
+        return callHttpReqTask(json, 9);
     }
 
 }

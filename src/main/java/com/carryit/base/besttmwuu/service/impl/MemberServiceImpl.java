@@ -37,5 +37,10 @@ public class MemberServiceImpl implements MemberService {
         memberDao.updateMemberByUIdAndLevel(uid,level);
     }
 
+    @Override
+    public void updateNumber(int uid) {
+        memberDao.updateNumber(uid);
+    }
+
 
 }

@@ -17,4 +17,6 @@ public interface MemberDao {
     int getMemberByUIdAndLevel(@Param("zhuquanzi") int zhuquanzi, @Param("level") int level);
 
     void updateMemberByUIdAndLevel(@Param("uid") int uid, @Param("level") int level);
+
+    void updateNumber(int uid);
 }
