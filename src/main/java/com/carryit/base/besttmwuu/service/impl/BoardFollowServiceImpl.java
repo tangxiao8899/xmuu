@@ -4,7 +4,9 @@ import com.carryit.base.besttmwuu.dao.BoardFollowDao;
 import com.carryit.base.besttmwuu.entity.Board;
 import com.carryit.base.besttmwuu.entity.BoardFollow;
 import com.carryit.base.besttmwuu.entity.Member;
+import com.carryit.base.besttmwuu.entity.Post;
 import com.carryit.base.besttmwuu.service.BoardFollowService;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -53,5 +55,15 @@ public class BoardFollowServiceImpl implements BoardFollowService {
     @Override
     public long getFollowCount(int bid) {
         return boardFollowDao.getFollowCount(bid);
+    }
+
+    @Override
+    public List<Post> getAllBoardTopic(int bid, int pageStart, int pageSize) {
+        return boardFollowDao.getAllBoardTopic(bid,new RowBounds(pageStart,pageSize));
+    }
+
+    @Override
+    public long getAllBoardTopicCount(int bid) {
+        return boardFollowDao.getAllBoardTopicCount(bid);
     }
 }

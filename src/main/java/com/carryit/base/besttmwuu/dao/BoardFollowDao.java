@@ -3,7 +3,9 @@ package com.carryit.base.besttmwuu.dao;
 import com.carryit.base.besttmwuu.entity.Board;
 import com.carryit.base.besttmwuu.entity.BoardFollow;
 import com.carryit.base.besttmwuu.entity.Member;
+import com.carryit.base.besttmwuu.entity.Post;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -26,4 +28,8 @@ public interface BoardFollowDao {
     long getTopicCount(@Param("bid") int bid);
 
     long getFollowCount(@Param("bid")int bid);
+
+    List<Post> getAllBoardTopic(@Param("bid")int bid, RowBounds rowBounds);
+
+    long getAllBoardTopicCount(@Param("bid")int bid);
 }

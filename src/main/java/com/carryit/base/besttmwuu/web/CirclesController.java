@@ -368,29 +368,29 @@ public class CirclesController extends BaseController {
                 JSONObject topicJo = new JSONObject();
 
                 long topicCount = 0;
-              /*  try {
-                    if (boardTopic != null) {
-                        boardFollowService.getAllBoardTopic();
-                        if (member != null && member.getZhuquanzi() != null) {
-                            if (bm.getPageStart() != 0 && bm.getPageSize() != 0) {
-                                //主圈子信息
-                                zb = boardService.getBoardById(member.getZhuquanzi());
-                                //查找该主圈子的普通用户（分页）
-                                admin = memberService.getadminMember(member.getZhuquanzi(), startTime, endTime, (bm.getPageStart() - 1) * bm.getPageSize(), bm.getPageSize());
-                                newcount = memberService.getadminMemberCount(member.getZhuquanzi());
-                                newpage.setList(admin);
-                                newpage.setPageSize(bm.getPageSize());
-                                newpage.setTotalSize(newcount);
+                try {
+                if (boardTopic != null) {
+                  List<Post> postList =  boardFollowService.getAllBoardTopic(boardTopic.getBid(),(boardTopic.getPageStart() - 1) * boardTopic.getPageSize(), boardTopic.getPageSize());
+                 if(postList!=null&&postList.size()>0){
+                     for (Post post:postList) {
+                         if(post.getCreatetime()!=0){
+                             SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                             String date = fm.format(new Date(post.getCreatetime()));
+                             post.setCreateDate(date);
+                         }
+                     }
+                 }
+                  topicCount =  boardFollowService.getAllBoardTopicCount(boardTopic.getBid());
 
-                            }
-                        }
-                    }
-                    newjo.put("page", newpage);
-                    newjo.put("board", zb);
-                    return doObjResp(newjo);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }*/
+                    topicPage.setList(postList);
+                    topicPage.setPageSize(boardTopic.getPageSize());
+                    topicPage.setTotalSize(topicCount);
+
+                }
+                return doObjResp(topicPage);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         return null;
     }
