@@ -21,4 +21,9 @@ public class SincerityServiceImpl implements SincerityService {
     public boolean addLikes(int uid) {
         return sincerityDao.insterLikes(uid);
     }
+
+    @Override
+    public void updateCredit(int uid) {
+        sincerityDao.updateCredit(uid);
+    }
 }

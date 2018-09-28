@@ -9,4 +9,6 @@ public interface SincerityService {
     Sincerity getNumberById(int uid);
 
     boolean addLikes(int uid);
+
+    void updateCredit(int uid);
 }

@@ -6,6 +6,7 @@ import com.carryit.base.besttmwuu.entity.Level;
 import com.carryit.base.besttmwuu.entity.Member;
 import com.carryit.base.besttmwuu.entity.imsEweiShopMember;
 import com.carryit.base.besttmwuu.service.MemberService;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +36,26 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void updateMemberByUIdAndLevel(int uid, int level) {
         memberDao.updateMemberByUIdAndLevel(uid,level);
+    }
+
+    @Override
+    public List<Member> getnormalMember(Integer zhuquanzi,long startTime,long endTime, int pageStart, int pageSize) {
+        return memberDao.getnormalMember(zhuquanzi, startTime, endTime,new RowBounds(pageStart,pageSize));
+    }
+
+    @Override
+    public long getnormalMemberCount(Integer zhuquanzi) {
+        return memberDao.getnormalMemberCount(zhuquanzi);
+    }
+
+    @Override
+    public List<Member> getadminMember(Integer zhuquanzi, long startTime, long endTime, int pageStart, int pageSize) {
+        return memberDao.getadminMember(zhuquanzi, startTime, endTime,new RowBounds(pageStart,pageSize));
+    }
+
+    @Override
+    public long getadminMemberCount(Integer zhuquanzi) {
+        return memberDao.getadminMemberCount(zhuquanzi);
     }
 
 

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.carryit.base.besttmwuu.dao.UserPostDao">
+    <insert id="insert" parameterType="com.carryit.base.besttmwuu.entity.UserPost">
+        insert into ims_ewei_shop_sns_post (id, uniacid, bid,
+        pid, rpid, avatar, nickname, title, createtime, replytime,
+        credit, views,
+        deleted, deletedtime, checked,
+        checktime, content, images,fabulous)
+        values (#{id,jdbcType=INTEGER}, #{uniacid,jdbcType=INTEGER}, #{bid,jdbcType=INTEGER},
+        #{pid,jdbcType=INTEGER}, #{rpid,jdbcType=INTEGER},
+        #{avatar,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR},
+        #{createtime,jdbcType=INTEGER}, #{replytime,jdbcType=INTEGER},
+        #{credit,jdbcType=INTEGER}, #{views,jdbcType=INTEGER},
+        #{deleted,jdbcType=TINYINT}, #{deletedtime,jdbcType=INTEGER}, #{checked,jdbcType=TINYINT},
+        #{checktime,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR},
+        #{images,jdbcType=LONGVARCHAR},#{fabulous,jdbcType=INTEGER})
+    </insert>
+
+    <!--删除动态-->
+    <delete id="deleteByUid" parameterType="com.carryit.base.besttmwuu.entity.UserPost">
+        delete from ims_ewei_shop_sns_post
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <!--点赞累加-->
+    <update id="updateFabulousByUid">
+
+
+    </update>
+</mapper>

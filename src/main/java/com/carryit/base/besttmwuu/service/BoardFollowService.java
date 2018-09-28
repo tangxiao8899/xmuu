@@ -2,7 +2,7 @@ package com.carryit.base.besttmwuu.service;
 
 import com.carryit.base.besttmwuu.entity.Board;
 import com.carryit.base.besttmwuu.entity.BoardFollow;
-import com.carryit.base.besttmwuu.entity.Level;
+import com.carryit.base.besttmwuu.entity.Post;
 import com.carryit.base.besttmwuu.entity.Member;
 
 import java.util.List;
@@ -20,4 +20,12 @@ public interface BoardFollowService {
     List<Board> getBoardFollowByUId(int uid);
 
     List<Board> getUnconcerned(int uid);
+
+    long getTopicCount(int bid);
+
+    long getFollowCount(int bid);
+
+    List<Post> getAllBoardTopic(int bid, int pageStart, int pageSize);
+
+    long getAllBoardTopicCount(int bid);
 }

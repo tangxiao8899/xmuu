@@ -33,4 +33,23 @@
        select b.id,b.cid,b.title,b.logo,b.banner,(select count(*) from ims_ewei_shop_sns_post p where p.bid =b.id ) topic from ims_ewei_shop_sns_board b where b.id not in(select bf.bid from ims_ewei_shop_sns_board_follow bf where bf.uid=#{uid}) order by topic desc
 
     </select>
+
+    <select id="getTopicCount" resultType="long">
+       select count(*) from ims_ewei_shop_sns_post where bid =#{bid}
+
+    </select>
+    <select id="getFollowCount" resultType="long">
+       select count(*) from ims_ewei_shop_sns_board_follow  where bid = #{bid}
+
+    </select>
+
+    <select id="getAllBoardTopic" resultType="com.carryit.base.besttmwuu.entity.Post">
+        select id,bid,avatar,content,image,nickname,title,createtime,replytime,credit,views,fabulous from ims_ewei_shop_sns_post where bid =#{bid} ORDER by createtime desc
+
+    </select>
+    <select id="getAllBoardTopicCount" resultType="long">
+        select count(*) from ims_ewei_shop_sns_post where bid =#{bid}
+
+    </select>
+
 </mapper>
