@@ -15,5 +15,11 @@ public interface MemberService {
 
     void updateMemberByUIdAndLevel(int uid, int level);
 
-    List<Member> getnormalMember(Integer zhuquanzi, int pageStart, int pageSize);
+    List<Member> getnormalMember(Integer zhuquanzi,long startTime,long endTime, int pageStart, int pageSize);
+
+    long getnormalMemberCount(Integer zhuquanzi);
+
+    List<Member> getadminMember(Integer zhuquanzi, long startTime, long endTime, int pageStart, int pageSize);
+
+    long getadminMemberCount(Integer zhuquanzi);
 }

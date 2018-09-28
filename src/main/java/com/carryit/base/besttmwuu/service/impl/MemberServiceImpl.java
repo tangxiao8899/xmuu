@@ -39,8 +39,23 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public List<Member> getnormalMember(Integer zhuquanzi, int pageStart, int pageSize) {
-        return memberDao.getnormalMember(zhuquanzi,new RowBounds(pageStart,pageSize));
+    public List<Member> getnormalMember(Integer zhuquanzi,long startTime,long endTime, int pageStart, int pageSize) {
+        return memberDao.getnormalMember(zhuquanzi, startTime, endTime,new RowBounds(pageStart,pageSize));
+    }
+
+    @Override
+    public long getnormalMemberCount(Integer zhuquanzi) {
+        return memberDao.getnormalMemberCount(zhuquanzi);
+    }
+
+    @Override
+    public List<Member> getadminMember(Integer zhuquanzi, long startTime, long endTime, int pageStart, int pageSize) {
+        return memberDao.getadminMember(zhuquanzi, startTime, endTime,new RowBounds(pageStart,pageSize));
+    }
+
+    @Override
+    public long getadminMemberCount(Integer zhuquanzi) {
+        return memberDao.getadminMemberCount(zhuquanzi);
     }
 
 
