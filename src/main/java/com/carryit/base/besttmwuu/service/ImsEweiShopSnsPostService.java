@@ -7,4 +7,6 @@ import com.carryit.base.besttmwuu.entity.ImsEweiShopSnsPostWithBLOBs;
  * */
 public interface ImsEweiShopSnsPostService {
 	public boolean addOne(ImsEweiShopSnsPostWithBLOBs imsEweiShopSnsPostWithBLOBs);
+
+	void addTreds(ImsEweiShopSnsPostWithBLOBs imsEweiShopSnsPostWithBLOBs);
 }

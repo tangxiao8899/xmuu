@@ -1,5 +1,7 @@
 package com.carryit.base.besttmwuu.service.impl;
 
+import com.carryit.base.besttmwuu.dao.MemberDao;
+import com.carryit.base.besttmwuu.entity.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +16,12 @@ import com.carryit.base.besttmwuu.service.ImsEweiShopSnsPostService;
 public class ImsEweiShopSnsPostServiceImpl implements ImsEweiShopSnsPostService {
 	@Autowired
 	ImsEweiShopSnsPostMapper postMapper;
-	
+
 	@Autowired
 	imsEweiShopMemberMapper memberMapper;
+
+	@Autowired
+	MemberDao memberDao;
 
 	@Override
 	public boolean addOne(ImsEweiShopSnsPostWithBLOBs imsEweiShopSnsPostWithBLOBs) {
@@ -33,5 +38,10 @@ public class ImsEweiShopSnsPostServiceImpl implements ImsEweiShopSnsPostService 
 		postMapper.insert(imsEweiShopSnsPostWithBLOBs);
 		return true;
 	}
-	
+
+	@Override
+	public void addTreds(ImsEweiShopSnsPostWithBLOBs imsEweiShopSnsPostWithBLOBs) {
+		Member member = memberDao.getMemberById(imsEweiShopSnsPostWithBLOBs.getUid());
+	}
+
 }

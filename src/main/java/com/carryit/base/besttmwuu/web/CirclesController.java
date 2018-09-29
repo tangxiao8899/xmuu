@@ -374,6 +374,7 @@ public class CirclesController extends BaseController {
                  if(postList!=null&&postList.size()>0){
                      for (Post post:postList) {
                          if(post.getCreatetime()!=0){
+                             //查到每个圈子所有的评论
                              SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
                              String date = fm.format(new Date(post.getCreatetime()));
                              post.setCreateDate(date);
@@ -478,7 +479,7 @@ public class CirclesController extends BaseController {
 
 
     /*
-    分页查询圈子的所有动态
+    分页查询某个圈子的所有动态和评论和点赞数
 *
 * */
     @RequestMapping(value = "/getBoardtopic", method = {RequestMethod.GET,
@@ -486,4 +487,17 @@ public class CirclesController extends BaseController {
     public JSONObject getBoardtopic(@RequestBody(required = false) String json) {
         return callHttpReqTask(json, 10);
     }
+
+
+    /*
+    分页查询某个用户所关注的圈子的所有动态和评论和点赞数
+*
+* */
+    @RequestMapping(value = "/getAlltopic", method = {RequestMethod.GET,
+            RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public JSONObject getAlltopic(@RequestBody(required = false) String json) {
+        return callHttpReqTask(json, 11);
+    }
+
+
 }

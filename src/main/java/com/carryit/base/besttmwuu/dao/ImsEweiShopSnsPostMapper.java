@@ -2,9 +2,10 @@ package com.carryit.base.besttmwuu.dao;
 
 import com.carryit.base.besttmwuu.entity.imsEweiShopSnsPost;
 import com.carryit.base.besttmwuu.entity.ImsEweiShopSnsPostWithBLOBs;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Repository
 public interface ImsEweiShopSnsPostMapper {
     int deleteByPrimaryKey(Integer id);
 
