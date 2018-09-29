@@ -164,8 +164,8 @@ public class PayCommonUtil {
         while (it.hasNext())
         {
             Map.Entry entry = (Map.Entry) it.next();
-            String k = (String) entry.getKey();
-            String v = (String) entry.getValue();
+            String k = String.valueOf(entry.getKey());
+            String v = String.valueOf(entry.getValue());
             if ("attach".equalsIgnoreCase(k) || "body".equalsIgnoreCase(k))
             {
                 sb.append("<" + k + ">" + "<![CDATA[" + v + "]]></" + k + ">");
@@ -264,7 +264,6 @@ public class PayCommonUtil {
      *            请求地址
      * @param requestMethod
      *            请求方式（GET、POST）
-     * @param outputStr
      *            提交的数据
      * @return JSONObject(通过JSONObject.get(key)的方式获取json对象的属性值)
      */

@@ -2,5 +2,74 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.carryit.base.besttmwuu.dao.OrderDao">
 
+    <insert id="save" >
+        insert into ims_ewei_shop_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="ordersn != null">
+                ordersn,
+            </if>
+            <if test="price != null">
+                price,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="paytype != null">
+                paytype,
+            </if>
+            <if test="transid != null">
+                transid,
+            </if>
+            <if test="createtime != null">
+                createtime,
+            </if>
+            <if test="uid != null">
+                uid,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="ordersn != null">
+                #{ordersn},
+            </if>
+            <if test="price != null">
+                #{price},
+            </if>
+            <if test="status != null">
+                #{status},
+            </if>
+            <if test="paytype != null">
+                #{paytype},
+            </if>
+            <if test="transid != null">
+                #{transid},
+            </if>
+            <if test="createtime != null">
+                #{createtime},
+            </if>
+            <if test="uid != null">
+                #{uid},
+            </if>
 
+        </trim>
+    </insert>
+
+    <!--更新订单状态-->
+    <update id="update" >
+        update ims_ewei_shop_order
+        set  status=#{status}
+        where ordesn=#{ordesn}
+    </update>
+
+    <!--根据订单号查询订单-->
+    <select id="queryOrder" resultType="com.carryit.base.besttmwuu.entity.Order">
+        select id,ordersn,price
+        from
+        ims_ewei_shop_order
+    </select>
 </mapper>

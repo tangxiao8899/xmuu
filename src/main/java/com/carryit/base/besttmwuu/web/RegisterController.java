@@ -108,15 +108,10 @@ public class RegisterController extends BaseController {
 
 				}
 			case 4:
-				boolean flag = messageCodeService.checkCode(json);
-				if(flag){
-					return doObjRespSuccess("成功");
-				}else{
-					return faild("失败~", false);
-				}
+				return   messageCodeService.checkCode(json);
 			case 5:
-				boolean _flag = messageCodeService.checkCode(json);
-				if(_flag){
+				JSONObject jo = messageCodeService.checkCode(json);
+				if(Integer.valueOf(jo.getString("code")) == 200){
 					int i = userService.updatePassWord(json);
 					if(i==1){
 						return doObjRespSuccess("成功");

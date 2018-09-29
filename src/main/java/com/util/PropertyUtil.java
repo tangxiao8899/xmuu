@@ -54,4 +54,19 @@ public class PropertyUtil {
         }
         return props.getProperty(key, defaultValue);
     }
+
+    /**
+     * 随机数
+     * @return
+     */
+    public static int random() {
+        String str = "";
+        str += (int) (Math.random() * 9 + 1);
+        for (int i = 0; i < 5; i++) {
+            str += (int) (Math.random() * 10);
+        }
+        int num = Integer.parseInt(str);
+        return num;
+    }
+
 }

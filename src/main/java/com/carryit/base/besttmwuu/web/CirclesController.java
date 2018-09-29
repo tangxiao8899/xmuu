@@ -340,7 +340,6 @@ public class CirclesController extends BaseController {
                 BoardDetail boardDetail = new BoardDetail();
                 Board boa = new Board();
                 BoardFollow nbf = null;
-
                 try {
                     BoardReq req = p(json, BoardReq.class);
                     if (req != null) {
@@ -374,7 +373,6 @@ public class CirclesController extends BaseController {
                  if(postList!=null&&postList.size()>0){
                      for (Post post:postList) {
                          if(post.getCreatetime()!=0){
-                             //查到每个圈子所有的评论
                              SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
                              String date = fm.format(new Date(post.getCreatetime()));
                              post.setCreateDate(date);
@@ -392,6 +390,8 @@ public class CirclesController extends BaseController {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        case 11:
+            return circlesService.getCirclesInfo(json);
         }
         return null;
     }
@@ -467,6 +467,18 @@ public class CirclesController extends BaseController {
         return callHttpReqTask(json, 8);
     }
 
+
+
+    /**
+     * 圈子查询
+     * @param json
+     * @return
+     */
+    @RequestMapping(value = "/getCirclesInfo", method = {RequestMethod.GET,
+            RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public JSONObject getCirclesInfo(@RequestBody(required = false) String json){
+        return callHttpReqTask(json,11);
+        }
     /*
     点击圈子查看圈子详情
 *
@@ -476,6 +488,7 @@ public class CirclesController extends BaseController {
     public JSONObject getBoardDetail(@RequestBody(required = false) String json) {
         return callHttpReqTask(json, 9);
     }
+
 
 
     /*
@@ -498,6 +511,7 @@ public class CirclesController extends BaseController {
     public JSONObject getAlltopic(@RequestBody(required = false) String json) {
         return callHttpReqTask(json, 11);
     }
+
 
 
 }

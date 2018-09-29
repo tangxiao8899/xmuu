@@ -5,7 +5,9 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.carryit.base.besttmwuu.dao.MessageCodeDao;
 import com.carryit.base.besttmwuu.entity.MessageCode;
+import com.carryit.base.besttmwuu.entity.User;
 import com.carryit.base.besttmwuu.service.MessageCodeService;
+import com.carryit.base.besttmwuu.service.UserService;
 import com.util.PropertyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,9 @@ import java.util.Date;
 public class MessageCodeServiceImpl implements MessageCodeService{
     @Autowired
     public MessageCodeDao messageCodeDao;
+
+    @Autowired
+    UserService userService;
 
 
 
@@ -57,28 +62,46 @@ public class MessageCodeServiceImpl implements MessageCodeService{
     }
 
     @Override
-    public boolean checkCode(String json) {
+    public JSONObject checkCode(String json) {
+
+        JSONObject rj = new JSONObject();
+
         JSONObject jo = JSON.parseObject(json);
         String phoneNumber = jo.getString("phone");
         int code = jo.getInteger("code");
         MessageCode messageCode=this.getIdByPhone(phoneNumber);
         if(StringUtils.isEmpty(messageCode)){ //验证码表没数据
-            return false;
-        }else{
+            rj.put("msg","未收到验证码");
+            rj.put("code","400");
+            rj.put("data","");
+        }else {
             //有效期：创建时间 + 有效时长（60秒） > 当前时间
             Long SMS_TIME = Long.valueOf(PropertyUtil.getProperty("sms_time"));
             Long userfulTime = messageCode.getCreateTime().getTime() + SMS_TIME;
             //验证码失效
-            if(messageCode.getStatus()!=1 || messageCode.getCode()!=code || userfulTime < new Date().getTime() )
-            {
-                return false;
-            }else{
-                return true;
+            if (messageCode.getStatus() != 1 || messageCode.getCode() != code || userfulTime < new Date().getTime()) {
+                rj.put("msg", "验证码失效");
+                rj.put("code", "400");
+                rj.put("data", "");
+            } else {
+                //验证码校验通过
+                //校验手机号是否注册
+                User u = userService.selectByPhone(phoneNumber);
+                if (u != null) { //注册过
+                    rj.put("msg", "手机号已注册过");
+                    rj.put("code", "400");
+                    rj.put("data", "");
+                } else {
+                    rj.put("msg", "验证通过");
+                    rj.put("code", "200");
+                    rj.put("data", "");
+                }
+
             }
 
-
         }
-    }
+        return rj;
+        }
 
 
 }

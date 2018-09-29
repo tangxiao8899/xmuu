@@ -8,17 +8,17 @@ public class Order implements Serializable {
 
     private Integer uid;//用户ID
 
-    private String ordesn;//订单号
+    private String ordersn;//订单号
 
-    private Float price;//价格
+    private long price;//价格
 
-    private Integer status;//状态-1取消状态0付款待发货1已付款3付款成功
+    private Integer status;//状态-1取消状态0付款待发货1已付款3付款成功 2:待付款
 
     private Integer paytype;//1余额支付，2在线支付，3货到付款
 
     private String transid;//微信支付单号
 
-    private BigInteger createtime;//创建时间java.math.BigInteger
+    private Long createtime;//创建时间java.math.BigInteger
 
     public Integer getId() {
         return id;
@@ -36,19 +36,19 @@ public class Order implements Serializable {
         this.uid = uid;
     }
 
-    public String getOrdesn() {
-        return ordesn;
+    public String getOrdersn() {
+        return ordersn;
     }
 
-    public void setOrdesn(String ordesn) {
-        this.ordesn = ordesn;
+    public void setOrdersn(String ordersn) {
+        this.ordersn = ordersn;
     }
 
-    public Float getPrice() {
+    public long getPrice() {
         return price;
     }
 
-    public void setPrice(Float price) {
+    public void setPrice(long price) {
         this.price = price;
     }
 
@@ -76,11 +76,13 @@ public class Order implements Serializable {
         this.transid = transid;
     }
 
-    public BigInteger getCreatetime() {
+    public Long getCreatetime() {
         return createtime;
     }
 
-    public void setCreatetime(BigInteger createtime) {
+    public void setCreatetime(Long createtime) {
         this.createtime = createtime;
     }
+
+
 }
