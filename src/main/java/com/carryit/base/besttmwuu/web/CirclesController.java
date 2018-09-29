@@ -340,7 +340,6 @@ public class CirclesController extends BaseController {
                 BoardDetail boardDetail = new BoardDetail();
                 Board boa = new Board();
                 BoardFollow nbf = null;
-
                 try {
                     BoardReq req = p(json, BoardReq.class);
                     if (req != null) {
@@ -391,6 +390,8 @@ public class CirclesController extends BaseController {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        case 11:
+            return circlesService.getCirclesInfo(json);
         }
         return null;
     }
@@ -466,6 +467,18 @@ public class CirclesController extends BaseController {
         return callHttpReqTask(json, 8);
     }
 
+
+
+    /**
+     * 圈子查询
+     * @param json
+     * @return
+     */
+    @RequestMapping(value = "/getCirclesInfo", method = {RequestMethod.GET,
+            RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public JSONObject getCirclesInfo(@RequestBody(required = false) String json){
+        return callHttpReqTask(json,11);
+        }
     /*
     点击圈子查看圈子详情
 *
@@ -477,6 +490,7 @@ public class CirclesController extends BaseController {
     }
 
 
+
     /*
     分页查询圈子的所有动态
 *
@@ -486,4 +500,5 @@ public class CirclesController extends BaseController {
     public JSONObject getBoardtopic(@RequestBody(required = false) String json) {
         return callHttpReqTask(json, 10);
     }
+
 }

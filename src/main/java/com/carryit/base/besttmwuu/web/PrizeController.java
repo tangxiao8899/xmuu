@@ -1,5 +1,7 @@
 package com.carryit.base.besttmwuu.web;
 
+import com.alibaba.fastjson.JSONObject;
+import com.base.BaseController;
 import com.carryit.base.besttmwuu.entity.Prize;
 import com.carryit.base.besttmwuu.entity.UserPrize;
 import com.carryit.base.besttmwuu.service.PrizeService;
@@ -21,7 +23,7 @@ import java.util.Random;
 
 @RestController
 @RequestMapping("/prize")
-public class PrizeController {
+public class PrizeController extends BaseController {
 
     @Autowired
     private PrizeService prizeService;
@@ -29,37 +31,10 @@ public class PrizeController {
     @Autowired
     private UserPrizeService userPrizeService;
 
-    @RequestMapping(value = "/shakePrize", method = {RequestMethod.POST, RequestMethod.GET})
-    @ResponseBody
-    public Object shakePrize(@RequestBody(required = false) String userId) {
-        Map<String, Object> res = new HashMap<>();
-        if (ContextData.isShaked(userId)) {
-            res.put("isSuccess", true);
-            res.put("prizeName", "你已经摇过奖");
-            res.put("prizePhone", null);
-            res.put("uid", userId);
-            return res;
-        }
-        Prize prize = processShake();
-        if (prize != null) {
-            res.put("isSuccess", true);
-            res.put("prizeName", prize.getName());
-            res.put("prizePhone", prize.getPhone());
-            res.put("uid", userId);
-            if (prize.getName() != null) {
-                ContextData.addShakedUid(userId);
-                UserPrize userPrize = new UserPrize();
-                userPrize.setPid(prize.getId());
-                userPrize.setUid(userId);
-                userPrizeService.addUserPrize(userPrize);
-            }
-        } else {
-            res.put("isSuccess", false);
-            res.put("prizeName", "摇奖完毕");
-            res.put("prizePhone", 1);
-            res.put("uid", userId);
-        }
-        return res;
+    @RequestMapping(value = "/shakePrize", method = {RequestMethod.POST, RequestMethod.GET},
+            produces = "application/json;charset=UTF-8")
+    public JSONObject shakePrize(@RequestBody(required = false) String userId) {
+        return callHttpReqTask(userId, 0);
     }
 
     private Prize processShake() {
@@ -93,5 +68,36 @@ public class PrizeController {
         }
     }
 
+    @Override
+    public JSONObject runTask(String userId, int cmd) {
+        Map<String, Object> res = new HashMap<>();
+        if (ContextData.isShaked(userId)) {
+            res.put("isSuccess", true);
+            res.put("prizeName", "你已经摇过奖");
+            res.put("prizePhone", null);
+            res.put("uid", userId);
+            return doObjResp(res);
+        }
+        Prize prize = processShake();
+        if (prize != null) {
+            res.put("isSuccess", true);
+            res.put("prizeName", prize.getName());
+            res.put("prizePhone", prize.getPhone());
+            res.put("uid", userId);
+            if (prize.getName() != null) {
+                ContextData.addShakedUid(userId);
+                UserPrize userPrize = new UserPrize();
+                userPrize.setPid(prize.getId());
+                userPrize.setUid(userId);
+                userPrizeService.addUserPrize(userPrize);
+            }
+        } else {
+            res.put("isSuccess", false);
+            res.put("prizeName", "摇奖完毕");
+            res.put("prizePhone", 1);
+            res.put("uid", userId);
+        }
+        return doObjResp(res);
+    }
 }
 
