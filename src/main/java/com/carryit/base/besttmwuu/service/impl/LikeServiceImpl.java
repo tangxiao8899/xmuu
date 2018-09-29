@@ -20,6 +20,6 @@ public class LikeServiceImpl implements LikeService{
     @Transactional//事物执行两个方法
     public void saveCreditNumber(int uid) {
         sincerityService.updateCredit(uid);
-        memberService.updateNumber(uid);
+//        memberService.updateNumber(uid);
     }
 }
