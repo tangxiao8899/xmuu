@@ -74,14 +74,12 @@ public class RegisterController extends BaseController {
                 User user = p(json, User.class);
                 if(user!=null){
                     //获取验证码
-                    //String code = messageService.securityCode();
-					String code = "123456";
+                    String code = messageService.securityCode();
+
                     //保存手机号和验证码
                     messageCodeService.saveMessageCode(user.getPhone(),Integer.parseInt(code));
                     //发送短信
-                    //Map<String, String> map = messageService.sendSms(user.getPhone(), code);
-					Map<String, String> map = new HashMap<>();
-					map.put("code","1");
+                    Map<String, String> map = messageService.sendSms(user.getPhone(), code);
                     if("1".equals(map.get("code"))){
                         return doObjRespSuccess("成功");
                     }else{
