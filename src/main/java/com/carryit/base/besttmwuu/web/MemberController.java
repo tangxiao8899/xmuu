@@ -77,7 +77,7 @@ public class MemberController extends BaseController {
                 return doObjResp(member);
             case 1:
                 Member mem =new Member();
-                String Wealth= null;
+                float Wealth =0;
 
                 try {
                     BoardReq req = p(json, BoardReq.class);

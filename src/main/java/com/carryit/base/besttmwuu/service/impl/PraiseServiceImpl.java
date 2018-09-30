@@ -35,4 +35,14 @@ public class PraiseServiceImpl implements PraiseService {
 		}
 	}
 
+	@Override
+	public long getPraiseCount(Integer id) {
+		return praiseMapper.getPraiseCount(id);
+	}
+
+	@Override
+	public List<String> getPraiseImage(Integer id) {
+		return praiseMapper.getPraiseImage(id);
+	}
+
 }

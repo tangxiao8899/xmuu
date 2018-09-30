@@ -1,16 +1,15 @@
 package com.carryit.base.besttmwuu.service.impl;
 
 import com.carryit.base.besttmwuu.dao.MemberDao;
-import com.carryit.base.besttmwuu.entity.Member;
+import com.carryit.base.besttmwuu.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.carryit.base.besttmwuu.dao.ImsEweiShopSnsPostMapper;
 import com.carryit.base.besttmwuu.dao.imsEweiShopMemberMapper;
-import com.carryit.base.besttmwuu.entity.ImsEweiShopSnsPostWithBLOBs;
-import com.carryit.base.besttmwuu.entity.ImsUsers;
-import com.carryit.base.besttmwuu.entity.imsEweiShopMember;
 import com.carryit.base.besttmwuu.service.ImsEweiShopSnsPostService;
+
+import java.util.List;
 
 @Service
 public class ImsEweiShopSnsPostServiceImpl implements ImsEweiShopSnsPostService {
@@ -26,14 +25,11 @@ public class ImsEweiShopSnsPostServiceImpl implements ImsEweiShopSnsPostService 
 	@Override
 	public boolean addOne(ImsEweiShopSnsPostWithBLOBs imsEweiShopSnsPostWithBLOBs) {
 //		查询评论人的昵称,并设置
-		ImsUsers user = new ImsUsers();
-		user.setUid(imsEweiShopSnsPostWithBLOBs.getUid());
-		imsEweiShopMember member = memberMapper.getByUid(user);
-		imsEweiShopSnsPostWithBLOBs.setNickname(member.getNickname());
-		
-//		设置创建时间,获取时间戳，秒
-		long seconds = System.currentTimeMillis()/1000;
-		imsEweiShopSnsPostWithBLOBs.setCreatetime(Integer.valueOf(String.valueOf(seconds)));
+		Member member = memberDao.getMemberById(imsEweiShopSnsPostWithBLOBs.getUid());
+		imsEweiShopSnsPostWithBLOBs.setNickname(member.getNickName());
+//		设置创建时间
+		long seconds = System.currentTimeMillis();
+		imsEweiShopSnsPostWithBLOBs.setCreatetime(Long.valueOf(String.valueOf(seconds)));
 		
 		postMapper.insert(imsEweiShopSnsPostWithBLOBs);
 		return true;
@@ -42,6 +38,17 @@ public class ImsEweiShopSnsPostServiceImpl implements ImsEweiShopSnsPostService 
 	@Override
 	public void addTreds(ImsEweiShopSnsPostWithBLOBs imsEweiShopSnsPostWithBLOBs) {
 		Member member = memberDao.getMemberById(imsEweiShopSnsPostWithBLOBs.getUid());
+		//查询发布动态人的昵称，头像。
+		imsEweiShopSnsPostWithBLOBs.setNickname(member.getNickName());
+		imsEweiShopSnsPostWithBLOBs.setAvatar(member.getAvatar());
+		long seconds = System.currentTimeMillis();
+		imsEweiShopSnsPostWithBLOBs.setCreatetime(Long.valueOf(String.valueOf(seconds)));
+		postMapper.insert(imsEweiShopSnsPostWithBLOBs);
+	}
+
+	@Override
+	public List<Post> getcommentBypid(Integer id) {
+		return postMapper.getcommentBypid(id);
 	}
 
 }

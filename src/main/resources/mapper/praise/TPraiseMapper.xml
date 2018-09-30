@@ -193,4 +193,12 @@
       createtime = #{createtime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="getPraiseCount" resultType="long" >
+    select count(*) from t_praise where ims_ewei_shop_sns_post_id =#{id}
+  </select>
+
+  <select id="getPraiseImage" resultType="String" >
+    select m.avatar from t_praise p LEFT JOIN ims_ewei_shop_member m on p.uid = m.uid where p.ims_ewei_shop_sns_post_id =#{id}
+  </select>
 </mapper>

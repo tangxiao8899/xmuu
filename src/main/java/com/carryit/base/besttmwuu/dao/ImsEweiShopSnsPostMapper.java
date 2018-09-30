@@ -1,5 +1,6 @@
 package com.carryit.base.besttmwuu.dao;
 
+import com.carryit.base.besttmwuu.entity.Post;
 import com.carryit.base.besttmwuu.entity.imsEweiShopSnsPost;
 import com.carryit.base.besttmwuu.entity.ImsEweiShopSnsPostWithBLOBs;
 import org.springframework.stereotype.Repository;
@@ -22,4 +23,6 @@ public interface ImsEweiShopSnsPostMapper {
     int updateByPrimaryKey(imsEweiShopSnsPost record);
 
     List<ImsEweiShopSnsPostWithBLOBs> getimsEweiShopSnsPostWithBLOBs();
+
+    List<Post> getcommentBypid(Integer id);
 }
