@@ -48,6 +48,8 @@ public class imsEweiShopSnsPost {
     private Integer checktime;
 
     private Byte isadmin;
+    
+    private Integer uid;
 
     public Integer getId() {
         return id;
@@ -240,4 +242,14 @@ public class imsEweiShopSnsPost {
     public void setIsadmin(Byte isadmin) {
         this.isadmin = isadmin;
     }
+
+	public Integer getUid() {
+		return uid;
+	}
+
+	public void setUid(Integer uid) {
+		this.uid = uid;
+	}
+    
+    
 }

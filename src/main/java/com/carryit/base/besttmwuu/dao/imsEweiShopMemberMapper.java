@@ -1,5 +1,6 @@
 package com.carryit.base.besttmwuu.dao;
 
+import com.carryit.base.besttmwuu.entity.ImsUsers;
 import com.carryit.base.besttmwuu.entity.imsEweiShopMember;
 import com.carryit.base.besttmwuu.entity.imsEweiShopMemberWithBLOBs;
 
@@ -17,4 +18,6 @@ public interface imsEweiShopMemberMapper {
     int updateByPrimaryKeyWithBLOBs(imsEweiShopMemberWithBLOBs record);
 
     int updateByPrimaryKey(imsEweiShopMember record);
+    
+    imsEweiShopMember getByUid(ImsUsers user);
 }
