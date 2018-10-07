@@ -2,6 +2,7 @@ package com.carryit.base.besttmwuu.dao;
 
 import com.carryit.base.besttmwuu.entity.Level;
 import com.carryit.base.besttmwuu.entity.Member;
+import com.carryit.base.besttmwuu.entity.MemberDTO;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Repository;
@@ -26,4 +27,6 @@ public interface MemberDao {
     List<Member> getadminMember(@Param("zhuquanzi") Integer zhuquanzi,@Param("startTime") long startTime,@Param("endTime")long endTime, RowBounds rowBounds);
 
     long getadminMemberCount(@Param("zhuquanzi") Integer zhuquanzi);
+
+    MemberDTO showMember(@Param("uid") int uid);
 }
