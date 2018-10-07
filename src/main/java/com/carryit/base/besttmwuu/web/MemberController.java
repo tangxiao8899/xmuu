@@ -61,6 +61,14 @@ public class MemberController extends BaseController {
         return callHttpReqTask(json, 3);
     }
 
+    //用户中心
+    @RequestMapping(value = "/getMember", method = {RequestMethod.GET,
+            RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public JSONObject getMember(@RequestBody(required = false) String json) {
+        return callHttpReqTask(json, 4);
+    }
+
+
     @Override
     public JSONObject runTask(String json, int cmd) {
         switch (cmd) {
@@ -111,6 +119,18 @@ public class MemberController extends BaseController {
                     e.printStackTrace();
                 }
                 return doObjResp(globouns);
+            case 4:
+                MemberDTO mb=new MemberDTO();
+                try {
+                    BoardReq req = p(json, BoardReq.class);
+                    if(req!=null){
+                        mb= memberService.showMember(req.uid);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return doObjResp(mb);
+
         }
         return null;
     }

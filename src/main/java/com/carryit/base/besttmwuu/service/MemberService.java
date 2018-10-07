@@ -2,6 +2,7 @@ package com.carryit.base.besttmwuu.service;
 
 import com.carryit.base.besttmwuu.entity.Level;
 import com.carryit.base.besttmwuu.entity.Member;
+import com.carryit.base.besttmwuu.entity.MemberDTO;
 
 import java.util.List;
 
@@ -22,4 +23,6 @@ public interface MemberService {
     List<Member> getadminMember(Integer zhuquanzi, long startTime, long endTime, int pageStart, int pageSize);
 
     long getadminMemberCount(Integer zhuquanzi);
+
+    MemberDTO showMember(int uid);
 }

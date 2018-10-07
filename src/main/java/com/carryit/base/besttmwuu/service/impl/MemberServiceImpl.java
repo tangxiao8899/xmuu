@@ -4,6 +4,7 @@ import com.carryit.base.besttmwuu.dao.MemberDao;
 import com.carryit.base.besttmwuu.dao.imsEweiShopMemberMapper;
 import com.carryit.base.besttmwuu.entity.Level;
 import com.carryit.base.besttmwuu.entity.Member;
+import com.carryit.base.besttmwuu.entity.MemberDTO;
 import com.carryit.base.besttmwuu.entity.imsEweiShopMember;
 import com.carryit.base.besttmwuu.service.MemberService;
 import org.apache.ibatis.session.RowBounds;
@@ -56,6 +57,11 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public long getadminMemberCount(Integer zhuquanzi) {
         return memberDao.getadminMemberCount(zhuquanzi);
+    }
+
+    @Override
+    public MemberDTO showMember(int uid) {
+        return memberDao.showMember(uid);
     }
 
 
