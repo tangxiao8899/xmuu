@@ -4,7 +4,9 @@ import com.carryit.base.besttmwuu.entity.TPraise;
 import com.carryit.base.besttmwuu.entity.TPraiseExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface TPraiseMapper {
     int countByExample(TPraiseExample example);
 
@@ -27,4 +29,8 @@ public interface TPraiseMapper {
     int updateByPrimaryKeySelective(TPraise record);
 
     int updateByPrimaryKey(TPraise record);
+
+    long getPraiseCount(Integer id);
+
+    List<String> getPraiseImage(Integer id);
 }

@@ -3,6 +3,7 @@ package com.carryit.base.besttmwuu.web;
 import java.time.LocalDateTime;
 import java.util.Date;
 
+import com.bean.req.TredsReq;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,8 +62,15 @@ public class LikesController extends BaseController {
     //评论接口
     @RequestMapping(value = "/comment", method = {RequestMethod.POST}, produces = "application/json;charset=UTF-8")
     public JSONObject comment(@RequestBody(required = false) String json) {
+        return callHttpReqTask(json, 2);
+    }
+
+    //动态接口
+    @RequestMapping(value = "/treds", method = {RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public JSONObject Treds(@RequestBody(required = false) String json) {
         return callHttpReqTask(json, 3);
     }
+
 
     @Override
     public JSONObject runTask(String json, int cmd) {
@@ -98,11 +106,27 @@ public class LikesController extends BaseController {
                 	ImsEweiShopSnsPostWithBLOBs imsEweiShopSnsPostWithBLOBs = new ImsEweiShopSnsPostWithBLOBs();
                 	imsEweiShopSnsPostWithBLOBs.setPid(commentReq.getPid());
                 	imsEweiShopSnsPostWithBLOBs.setUid(commentReq.getUid());
-                	imsEweiShopSnsPostWithBLOBs.setBid(commentReq.getBid());
+                	//imsEweiShopSnsPostWithBLOBs.setBid(commentReq.getBid());
                 	imsEweiShopSnsPostWithBLOBs.setContent(commentReq.getContent());
 //                	保存
                 	postService.addOne(imsEweiShopSnsPostWithBLOBs);
-                	return doObjRespSuccess("点赞成功");
+                	return doObjRespSuccess("评论成功");
+                }else {
+                    return faild("失败~", false);
+                }
+            case 3:
+//            	添加动态
+                TredsReq tredsReq = p(json, TredsReq.class);
+                if(tredsReq!=null){
+                    ImsEweiShopSnsPostWithBLOBs imsEweiShopSnsPostWithBLOBs = new ImsEweiShopSnsPostWithBLOBs();
+
+                    imsEweiShopSnsPostWithBLOBs.setUid(tredsReq.getUid());
+                    imsEweiShopSnsPostWithBLOBs.setBid(tredsReq.getBid());
+                    imsEweiShopSnsPostWithBLOBs.setContent(tredsReq.getContent());
+                    imsEweiShopSnsPostWithBLOBs.setImages(tredsReq.getImage());
+//                	保存
+                    postService.addTreds(imsEweiShopSnsPostWithBLOBs);
+                    return doObjRespSuccess("发布成功");
                 }else {
                     return faild("失败~", false);
                 }

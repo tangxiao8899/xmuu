@@ -18,7 +18,7 @@ public class Member implements Serializable{
 
     private String levelName;//圈子等级表
 
-    private String credit2;//账户余额
+    private float credit2;//账户余额
 
     private String credit1;//账户积分
 
@@ -40,11 +40,11 @@ public class Member implements Serializable{
         this.zhuquanzi = zhuquanzi;
     }
 
-    public String getCredit2() {
+    public float getCredit2() {
         return credit2;
     }
 
-    public void setCredit2(String credit2) {
+    public void setCredit2(float credit2) {
         this.credit2 = credit2;
     }
 

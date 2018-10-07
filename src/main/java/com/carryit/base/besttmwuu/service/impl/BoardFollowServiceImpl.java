@@ -66,4 +66,19 @@ public class BoardFollowServiceImpl implements BoardFollowService {
     public long getAllBoardTopicCount(int bid) {
         return boardFollowDao.getAllBoardTopicCount(bid);
     }
+
+    @Override
+    public List<Integer> getboardIDListUId(int uid) {
+        return boardFollowDao.getboardIDListUId(uid);
+    }
+
+    @Override
+    public List<Post> getNewAllBoardTopic(List<Integer> boardIDList, int pageStart, int pageSize) {
+        return boardFollowDao.getNewAllBoardTopic(boardIDList,new RowBounds(pageStart,pageSize));
+    }
+
+    @Override
+    public long getNewAllBoardTopicCount(List<Integer> boardIDList) {
+        return boardFollowDao.getNewAllBoardTopicCount(boardIDList);
+    }
 }

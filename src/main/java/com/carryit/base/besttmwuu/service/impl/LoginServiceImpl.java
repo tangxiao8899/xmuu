@@ -25,7 +25,7 @@ public class LoginServiceImpl implements LoginService {
 
         if(StringUtils.isEmpty(phone) || StringUtils.isEmpty(password)){
             jo.put("code",400);
-            jo.put("message","请求参数异常");
+            jo.put("msg","请求参数异常");
             jo.put("data","");
             return jo;
         }
@@ -33,12 +33,12 @@ public class LoginServiceImpl implements LoginService {
         User user = userService.selectByPhone(phone);
         if(user == null){ //用户不存在
             jo.put("code",401);
-            jo.put("message","用户不存在");
+            jo.put("msg","用户不存在");
             jo.put("data","");
             return jo;
         }else if(!password.equals(user.getPassword())){ //密码错误
             jo.put("code",401);
-            jo.put("message","密码错误");
+            jo.put("msg","密码错误");
             jo.put("data","");
             return jo;
         }else{ //登录成功
@@ -46,7 +46,7 @@ public class LoginServiceImpl implements LoginService {
             data.put("token",user.getId());
             data.put("id",user.getId());
             jo.put("code",200);
-            jo.put("message","登录成功");
+            jo.put("msg","登录成功");
             jo.put("data",data);
             return jo;
         }

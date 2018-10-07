@@ -28,4 +28,10 @@ public interface BoardFollowService {
     List<Post> getAllBoardTopic(int bid, int pageStart, int pageSize);
 
     long getAllBoardTopicCount(int bid);
+
+    List<Integer> getboardIDListUId(int uid);
+
+    List<Post> getNewAllBoardTopic(List<Integer> boardIDList, int i, int pageSize);
+
+    long getNewAllBoardTopicCount(List<Integer> boardIDList);
 }

@@ -35,6 +35,10 @@ public class CirclesController extends BaseController {
     BoardFollowService boardFollowService;
     @Autowired
     MemberService memberService;
+    @Autowired
+    ImsEweiShopSnsPostService postService;
+    @Autowired
+    PraiseService praiseService;
 
     private static String UU圈主 = "0";
     private static String 副圈主 = "6";
@@ -295,7 +299,6 @@ public class CirclesController extends BaseController {
                                 page.setList(nm);
                                 page.setPageSize(boardManage.getPageSize());
                                 page.setTotalSize(count);
-
                             }
                         }
                     }
@@ -364,14 +367,28 @@ public class CirclesController extends BaseController {
                 BoardManage boardTopic = p(json, BoardManage.class);
                 Page topicPage = new Page();
 
-                JSONObject topicJo = new JSONObject();
-
                 long topicCount = 0;
                 try {
                 if (boardTopic != null) {
+                    //分页查询10条动态
                   List<Post> postList =  boardFollowService.getAllBoardTopic(boardTopic.getBid(),(boardTopic.getPageStart() - 1) * boardTopic.getPageSize(), boardTopic.getPageSize());
-                 if(postList!=null&&postList.size()>0){
+                    List<TrendsData> TrendsDataList = new ArrayList<>();
+                  if(postList!=null&&postList.size()>0){
                      for (Post post:postList) {
+                         TrendsData trendsData = new TrendsData();
+
+                         //根据动态查评论
+                         List<Post> commentList = postService.getcommentBypid(post.getId());
+                         //查找点赞数
+                         long praiseCount  = praiseService.getPraiseCount(post.getId());
+                         //点赞头像
+                         List<String> avatarList = praiseService.getPraiseImage(post.getId());
+
+                         trendsData.setPost(post);
+                         trendsData.setCommentList(commentList);
+                         trendsData.setPraiseCount(praiseCount);
+                         trendsData.setAvatarList(avatarList);
+                         TrendsDataList.add(trendsData);
                          if(post.getCreatetime()!=0){
                              SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
                              String date = fm.format(new Date(post.getCreatetime()));
@@ -381,7 +398,7 @@ public class CirclesController extends BaseController {
                  }
                   topicCount =  boardFollowService.getAllBoardTopicCount(boardTopic.getBid());
 
-                    topicPage.setList(postList);
+                    topicPage.setList(TrendsDataList);
                     topicPage.setPageSize(boardTopic.getPageSize());
                     topicPage.setTotalSize(topicCount);
 
@@ -390,7 +407,57 @@ public class CirclesController extends BaseController {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        case 11:
+
+            case 11:
+                BoardManage newBoardTopic = p(json, BoardManage.class);
+                Page newTopicPage = new Page();
+
+                long newtopicCount = 0;
+                try {
+                    if (newBoardTopic != null) {
+                        List<TrendsData> newTrendsDataList = new ArrayList<>();
+
+                        //查找用户关注的所有的圈子id
+                       List<Integer> boardIDList = boardFollowService.getboardIDListUId(newBoardTopic.getUid());
+                        if(boardIDList!=null&&boardIDList.size()>0){
+                            //分页查询10条动态
+                            List<Post> postList =  boardFollowService.getNewAllBoardTopic(boardIDList,(newBoardTopic.getPageStart() - 1) * newBoardTopic.getPageSize(), newBoardTopic.getPageSize());
+
+                            if(postList!=null&&postList.size()>0){
+                                for (Post post:postList) {
+                                    TrendsData newTrendsData = new TrendsData();
+
+                                    //根据动态查评论
+                                    List<Post> newCommentList = postService.getcommentBypid(post.getId());
+                                    //查找点赞数
+                                    long newPraiseCount  = praiseService.getPraiseCount(post.getId());
+                                    //点赞头像
+                                    List<String> newAvatarList = praiseService.getPraiseImage(post.getId());
+
+                                    newTrendsData.setPost(post);
+                                    newTrendsData.setCommentList(newCommentList);
+                                    newTrendsData.setPraiseCount(newPraiseCount);
+                                    newTrendsData.setAvatarList(newAvatarList);
+                                    newTrendsDataList.add(newTrendsData);
+                                    if(post.getCreatetime()!=0){
+                                        SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                                        String date = fm.format(new Date(post.getCreatetime()));
+                                        post.setCreateDate(date);
+                                    }
+                                }
+                            }
+                            newtopicCount =  boardFollowService.getNewAllBoardTopicCount(boardIDList);
+                        }
+
+                        newTopicPage.setList(newTrendsDataList);
+                        newTopicPage.setPageSize(newBoardTopic.getPageSize());
+                        newTopicPage.setTotalSize(newtopicCount);
+                    }
+                    return doObjResp(newTopicPage);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+        case 12:
             return circlesService.getCirclesInfo(json);
         }
         return null;
@@ -477,7 +544,7 @@ public class CirclesController extends BaseController {
     @RequestMapping(value = "/getCirclesInfo", method = {RequestMethod.GET,
             RequestMethod.POST}, produces = "application/json;charset=UTF-8")
     public JSONObject getCirclesInfo(@RequestBody(required = false) String json){
-        return callHttpReqTask(json,11);
+        return callHttpReqTask(json,12);
         }
     /*
     点击圈子查看圈子详情
@@ -492,7 +559,7 @@ public class CirclesController extends BaseController {
 
 
     /*
-    分页查询圈子的所有动态
+    分页查询某个圈子的所有动态和评论和点赞数
 *
 * */
     @RequestMapping(value = "/getBoardtopic", method = {RequestMethod.GET,
@@ -500,5 +567,17 @@ public class CirclesController extends BaseController {
     public JSONObject getBoardtopic(@RequestBody(required = false) String json) {
         return callHttpReqTask(json, 10);
     }
+
+
+    /*
+    分页查询某个用户所关注的圈子的所有动态和评论和点赞数
+*
+* */
+    @RequestMapping(value = "/getAlltopic", method = {RequestMethod.GET,
+            RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public JSONObject getAlltopic(@RequestBody(required = false) String json) {
+        return callHttpReqTask(json, 11);
+    }
+
 
 }

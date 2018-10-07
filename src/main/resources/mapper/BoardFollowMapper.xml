@@ -44,11 +44,34 @@
     </select>
 
     <select id="getAllBoardTopic" resultType="com.carryit.base.besttmwuu.entity.Post">
-        select id,bid,avatar,content,image,nickname,title,createtime,replytime,credit,views,fabulous from ims_ewei_shop_sns_post where bid =#{bid} ORDER by createtime desc
+        select sp.id,sp.bid,m.avatar,sp.content,sp.image,m.nickname,sp.createtime from ims_ewei_shop_sns_post sp JOIN ims_ewei_shop_member m on sp.uid=m.uid where sp.bid =#{bid} ORDER by sp.createtime desc
 
     </select>
     <select id="getAllBoardTopicCount" resultType="long">
         select count(*) from ims_ewei_shop_sns_post where bid =#{bid}
+
+    </select>
+
+    <select id="getboardIDListUId" resultType="int">
+        select bid from ims_ewei_shop_sns_board_follow  where uid =#{uid}
+
+    </select>
+
+    <select id="getNewAllBoardTopic" resultType="com.carryit.base.besttmwuu.entity.Post">
+        select sp.id,sp.bid,m.avatar,sp.content,sp.image,m.nickname,sp.createtime from ims_ewei_shop_sns_post sp JOIN ims_ewei_shop_member m on sp.uid=m.uid
+        where sp.bid IN
+        <foreach collection="boardIDList" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        ORDER by sp.createtime desc
+
+    </select>
+
+    <select id="getNewAllBoardTopicCount" resultType="long">
+        select count(*) from ims_ewei_shop_sns_post where bid IN
+        <foreach collection="boardIDList" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
 
     </select>
 

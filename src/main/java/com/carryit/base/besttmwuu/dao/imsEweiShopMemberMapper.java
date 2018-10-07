@@ -3,7 +3,9 @@ package com.carryit.base.besttmwuu.dao;
 import com.carryit.base.besttmwuu.entity.ImsUsers;
 import com.carryit.base.besttmwuu.entity.imsEweiShopMember;
 import com.carryit.base.besttmwuu.entity.imsEweiShopMemberWithBLOBs;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface imsEweiShopMemberMapper {
     int deleteByPrimaryKey(Integer id);
 

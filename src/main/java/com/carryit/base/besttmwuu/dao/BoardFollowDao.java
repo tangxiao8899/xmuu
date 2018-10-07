@@ -32,4 +32,10 @@ public interface BoardFollowDao {
     List<Post> getAllBoardTopic(@Param("bid")int bid, RowBounds rowBounds);
 
     long getAllBoardTopicCount(@Param("bid")int bid);
+
+    List<Integer> getboardIDListUId(int uid);
+
+    List<Post> getNewAllBoardTopic(@Param("boardIDList") List<Integer> boardIDList, RowBounds rowBounds);
+
+    long getNewAllBoardTopicCount(@Param("boardIDList") List<Integer> boardIDList);
 }
