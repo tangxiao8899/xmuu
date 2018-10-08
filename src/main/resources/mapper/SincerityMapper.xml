@@ -65,4 +65,16 @@
             </if>
         </set>
     </update>
+    
+    <select id="querySincerityByUserId" parameterType="com.carryit.base.besttmwuu.entity.Sincerity" resultType="com.carryit.base.besttmwuu.entity.Sincerity">
+    	select sid, uid, number, updateTime from t_sincerity where uid=#{uid}
+    </select>
+    
+    <insert id="addOne" parameterType="com.carryit.base.besttmwuu.entity.Sincerity" useGeneratedKeys="true">
+    	insert into t_sincerity(uid, number, updateTime) values(#{uid}, #{number}, #{updateTime})
+    </insert>
+    
+    <update id="updateOne" parameterType="com.carryit.base.besttmwuu.entity.Sincerity">
+    	update t_sincerity set updateTime=#{updateTime}, number=#{number} where sid=#{sid}
+    </update>
 </mapper>
