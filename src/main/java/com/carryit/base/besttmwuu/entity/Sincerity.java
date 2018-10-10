@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class Sincerity implements Serializable{
 
-    private Integer sid;
+    private Integer id;
 
     private Integer uid;//用户ID
 
@@ -17,12 +17,12 @@ public class Sincerity implements Serializable{
 
     private String channel;//途径
 
-    public Integer getSid() {
-        return sid;
+    public Integer getId() {
+        return id;
     }
 
-    public void setSid(Integer sid) {
-        this.sid = sid;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Integer getUid() {

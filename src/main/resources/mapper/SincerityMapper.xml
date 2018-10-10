@@ -3,7 +3,7 @@
 <mapper namespace="com.carryit.base.besttmwuu.dao.SincerityDao">
 
     <select id="getNumberById" resultType="com.carryit.base.besttmwuu.entity.Sincerity" parameterType="Integer">
-        select * from t_sincerity where id = #{uid}
+        select * from t_sincerity where uid = #{uid}
     </select>
 
     <insert id="insterLikes" parameterType="com.carryit.base.besttmwuu.entity.User">
@@ -67,7 +67,7 @@
     </update>
     
     <select id="querySincerityByUserId" parameterType="com.carryit.base.besttmwuu.entity.Sincerity" resultType="com.carryit.base.besttmwuu.entity.Sincerity">
-    	select sid, uid, number, updateTime from t_sincerity where uid=#{uid}
+    	select id, uid, number, DATE_FORMAT(updateTime,'%Y-%m-%d %H:%i:%s') updateTime from t_sincerity where uid=#{uid}
     </select>
     
     <insert id="addOne" parameterType="com.carryit.base.besttmwuu.entity.Sincerity" useGeneratedKeys="true">
@@ -75,6 +75,6 @@
     </insert>
     
     <update id="updateOne" parameterType="com.carryit.base.besttmwuu.entity.Sincerity">
-    	update t_sincerity set updateTime=#{updateTime}, number=#{number} where sid=#{sid}
+    	update t_sincerity set updateTime=#{updateTime}, number=#{number} where uid=#{uid}
     </update>
 </mapper>
