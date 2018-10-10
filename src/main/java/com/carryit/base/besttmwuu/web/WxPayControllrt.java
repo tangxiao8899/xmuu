@@ -208,13 +208,15 @@ public class WxPayControllrt extends BaseController {
 
 
 
+
+
     /**
      * 微信异步通知
      */
     @SuppressWarnings("unchecked")
     @RequestMapping(value="/notify",produces="text/html;charset=utf-8")
     @ResponseBody
-    public String wxNotify(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public void wxNotify(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String result = PayCommonUtil.reciverWx(request); // 接收到异步的参数
         Map<String, String> m = new HashMap<String, String>();// 解析xml成map
         if (m != null && !"".equals(m)) {
@@ -271,13 +273,12 @@ public class WxPayControllrt extends BaseController {
 
             // 处理业务完毕，将业务结果通知给微信
             // ------------------------------
-//            BufferedOutputStream out = new BufferedOutputStream(response.getOutputStream());
-//            out.write(resXml.getBytes());
-//            out.flush();
-//            out.close();
+            BufferedOutputStream out = new BufferedOutputStream(response.getOutputStream());
+            out.write(resXml.getBytes());
+            out.flush();
+            out.close();
 
         }
-        return resXml;
     }
 
     /**
