@@ -214,7 +214,7 @@ public class WxPayControllrt extends BaseController {
      * 微信异步通知
      */
     @SuppressWarnings("unchecked")
-    @RequestMapping(value="/notify",produces="text/html;charset=utf-8")
+    @RequestMapping("/notify")
     @ResponseBody
     public void wxNotify(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String result = PayCommonUtil.reciverWx(request); // 接收到异步的参数
