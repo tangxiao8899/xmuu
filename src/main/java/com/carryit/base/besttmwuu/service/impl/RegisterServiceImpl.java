@@ -85,6 +85,11 @@ public class RegisterServiceImpl implements UserService {
 
     }
 
+    public int updateUser(User newUser) {
+        int i = userDao.updateUser(newUser);
+        return i;
+    }
+
 //    @Override
 //    public boolean updateByPhone(User user) {
 //        boolean result = false;
