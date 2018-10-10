@@ -123,27 +123,27 @@ public class RegisterController extends BaseController {
                 }
 //			default:
 //			return register(json);
-//            case 6:
-//                User newUser = p(json, User.class);
-//                if (newUser != null) {
-//                    if (newUser.getUid() != null && newUser.getUid() != 0) {
-//                        User data = mRegisterService.getUserById(newUser.getUid());
-//                        if (data == null) {
-//                            boolean flag = mRegisterService.addUser(_user);
-//                            if (flag) {
-//                                return doObjRespSuccess("成功");
-//                            } else {
-//                                return faild("失败~", false);
-//                            }
-//                        } else {
-//                            return faild("用户已存在~", false);
-//                        }
-//
-//                    } else {
-//                        return faild("用户不存在~", false);
-//                    }
-//
-//                }
+            case 6:
+                User newUser = p(json, User.class);
+                if (newUser != null) {
+                    if (newUser.getUid() != null && newUser.getUid() != 0) {
+                        User data = mRegisterService.getUserById(newUser.getUid());
+                        if (data != null) {
+                            int flag = mRegisterService.updateUser(newUser);
+                            if (flag==1) {
+                                return doObjRespSuccess("成功");
+                            } else {
+                                return faild("失败~", false);
+                            }
+                        } else {
+                            return faild("用户不存在~", false);
+                        }
+
+                    } else {
+                        return faild("用户不存在~", false);
+                    }
+
+                }
 
         }
         return null;
