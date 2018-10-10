@@ -8,12 +8,22 @@ import com.carryit.base.besttmwuu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import javax.servlet.http.*;
 
 @Service
 public class LoginServiceImpl implements LoginService {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    HttpServletRequest request;
+
+    @Autowired
+    HttpServletResponse response;
 
     @Override
     public JSONObject login(LoginReq req) {
@@ -22,33 +32,72 @@ public class LoginServiceImpl implements LoginService {
 
         String phone = req.getPhone();
         String password = req.getPassword();
+        String token = req.getToken();
 
-        if(StringUtils.isEmpty(phone) || StringUtils.isEmpty(password)){
-            jo.put("code",400);
-            jo.put("msg","请求参数异常");
-            jo.put("data","");
-            return jo;
-        }
+        if(!StringUtils.isEmpty(token)){
+            //自动登录
+//            HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+//            String cookie=request.getHeader("cookie");
+            Cookie[] cookies = request.getCookies();
+            for(Cookie c : cookies){
+                if(c.getName().equals("token")){ //存在token，校验token正确性
+                    String key = c.getValue();
+                    if(token.equals(key)){
+                        JSONObject data = new JSONObject();
+                        data.put("token",key);
+                        jo.put("code",200);
+                        jo.put("msg","登录成功");
+                        jo.put("data",data);
+                        return jo;
+                    }else{
+                        //token错误，重新登录
+                        jo.put("code",401);
+                        jo.put("msg","token错误，请重新登录");
+                        jo.put("data","");
+                        return jo;
+                    }
+                }else{ //不存在token 说明token过期
+                    //重新登录
+                    jo.put("code",401);
+                    jo.put("msg","token过期，请重新登录");
+                    jo.put("data","");
+                    return jo;
+                }
+            }
+        }else{
+            if(StringUtils.isEmpty(phone) || StringUtils.isEmpty(password)){
+                jo.put("code",400);
+                jo.put("msg","请求参数异常");
+                jo.put("data","");
+                return jo;
+            }
+            User user = userService.selectByPhone(phone);
+            if(user == null){ //用户不存在
+                jo.put("code",401);
+                jo.put("msg","用户不存在");
+                jo.put("data","");
+                return jo;
+            }else if(!password.equals(user.getPassword())){ //密码错误
+                jo.put("code",401);
+                jo.put("msg","密码错误");
+                jo.put("data","");
+                return jo;
+            }else{ //登录成功
+                JSONObject data = new JSONObject();
 
-        User user = userService.selectByPhone(phone);
-        if(user == null){ //用户不存在
-            jo.put("code",401);
-            jo.put("msg","用户不存在");
-            jo.put("data","");
-            return jo;
-        }else if(!password.equals(user.getPassword())){ //密码错误
-            jo.put("code",401);
-            jo.put("msg","密码错误");
-            jo.put("data","");
-            return jo;
-        }else{ //登录成功
-            JSONObject data = new JSONObject();
-            data.put("token",user.getId());
-            data.put("id",user.getId());
-            jo.put("code",200);
-            jo.put("msg","登录成功");
-            jo.put("data",data);
-            return jo;
+                String k = user.getId() + user.getPhone() + System.currentTimeMillis();
+                Cookie cookie = new Cookie("token",k);
+                cookie.setMaxAge(10*24*60*60); //设置token有效期为10天
+                cookie.setPath("/");
+                response.addCookie(cookie);
+                data.put("token",k);
+//            data.put("id",user.getId());
+                jo.put("code",200);
+                jo.put("msg","登录成功");
+                jo.put("data",data);
+                return jo;
+            }
         }
+        return jo;
     }
 }
