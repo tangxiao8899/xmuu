@@ -171,17 +171,27 @@ public class CirclesController extends BaseController {
 //                return doObjResp(manage);
             case 3:
                 List<Board> boardList = new ArrayList<>();
-
+                List<Board> boardListDTO = new ArrayList<>();
+                Board bo = new Board();
+                bo.setId(0);
+                bo.setTitle("全部");
+                boardListDTO.add(bo);
                 BoardReq _req = p(json, BoardReq.class);
                 try {
                     if (_req != null) {
                         boardList = boardFollowService.getBoardFollowByUId(_req.uid);
+                    if(boardList!=null&&boardList.size()>0){
+                        for (Board _bo:boardList) {
+                            boardListDTO.add(_bo);
+                        }
+                    }
+
                     }
 
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                return doObjResp(boardList);
+                return doObjResp(boardListDTO);
             case 4:
                 List<Board> newboardList = new ArrayList<>();
 

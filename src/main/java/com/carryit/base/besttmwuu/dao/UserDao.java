@@ -13,7 +13,7 @@ public interface UserDao {
 
     int insertSelective(User record);
 
-    User selectByPrimaryKey(Integer id);
+    User selectByPrimaryKey(@Param("uid") Integer uid);
 
     int updateByPrimaryKeySelective(User record);
 
@@ -22,6 +22,8 @@ public interface UserDao {
     User selectByPhone(String phone);
 
     int updatePassWord(@Param("phone") String phone, @Param("password")String password);
+
+    int updateUser(User user);
 
     //void updateByPhone(User user);
 }
