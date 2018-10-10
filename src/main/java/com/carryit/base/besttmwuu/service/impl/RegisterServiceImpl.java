@@ -58,7 +58,7 @@ public class RegisterServiceImpl implements UserService {
             if(!StringUtils.isEmpty(token)){
                 JSONObject sunJo = new JSONObject();
                 sunJo.put("token",token);
-                sunJo.put("username",record.getUserName());
+                sunJo.put("username",record.getPhone());
                 sunJo.put("password",record.getPassword());
                 hximService.registerUser(sunJo.toJSONString());
                 result = true;
