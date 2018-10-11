@@ -249,7 +249,7 @@ public class WxPayControllrt extends BaseController {
                 //判断订单号是否重复
                 List<Order> userList = orderService.queryOrder(out_trade_no);
                 if (userList.size() > 0) {
-                    result = this.setXml("fail", "订单号重复");
+                    result = this.setXml("FAIL", "订单号重复");
                     resXml = "<xml>" + "<return_code><![CDATA[FAIL]]></return_code>"
                             + "<return_msg><![CDATA[交易失败]]></return_msg>" + "</xml> ";
                 } else {

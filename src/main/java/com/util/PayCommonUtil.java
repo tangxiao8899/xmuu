@@ -27,11 +27,15 @@ import java.util.TreeMap;
 import javax.net.ssl.*;
 import javax.servlet.http.HttpServletRequest;
 import com.alibaba.fastjson.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 支付工具类
  */
 public class PayCommonUtil {
+
+    Logger logger = LoggerFactory.getLogger(PayCommonUtil.class);
 
     public static final String TIME = "yyyyMMddHHmmss";
 
@@ -350,6 +354,9 @@ public class PayCommonUtil {
         }
         in.close();
         inputStream.close();
+        System.out.println("======================================================================");
+        System.out.println("微信回请求："+sb.toString());
+        System.out.println("======================================================================");
         return sb.toString();
     }
 
