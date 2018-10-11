@@ -15,14 +15,9 @@ import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.ConnectException;
 import java.net.URL;
+import java.security.MessageDigest;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
-import java.util.SortedMap;
-import java.util.TreeMap;
+import java.util.*;
 
 import javax.net.ssl.*;
 import javax.servlet.http.HttpServletRequest;
@@ -125,6 +120,11 @@ public class PayCommonUtil {
         return tenpaySign.equals(mysign);
     }
 
+    // 微信支付签名用
+
+
+
+
     /**
      * @Description：创建sign签名
      * @param characterEncoding
@@ -148,7 +148,7 @@ public class PayCommonUtil {
                 sb.append(k + "=" + v + "&");
             }
         }
-        sb.append("key=" + PropertyUtil.getProperty("key"));
+        sb.append("key=" + PropertyUtil.getProperty("wxpay.key"));
         String sign = MD5Util.MD5Encode(sb.toString(), characterEncoding).toUpperCase();
         return sign;
     }
