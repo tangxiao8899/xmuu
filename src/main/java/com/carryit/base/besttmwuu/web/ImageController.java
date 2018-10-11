@@ -10,6 +10,7 @@ import com.carryit.base.besttmwuu.service.MemberService;
 import com.carryit.base.besttmwuu.service.SincerityService;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,6 +31,8 @@ import java.util.Random;
 @RequestMapping("/image")
 public class ImageController extends BaseController {
 
+    @Value(value = "${domain_name}")
+    private String domain_name;
 
     //上传图片,先临时保存在/static/index_img下,做测试.后面保存到图片服务器
     @RequestMapping(value = "/upload", method = {RequestMethod.GET,
@@ -65,9 +68,11 @@ public class ImageController extends BaseController {
                     out.write(base64Bytes);
                     out.flush();
                     out.close();
-                    return doObjRespSuccess("成功");
+                    String url = domain_name + "/index_img/" + files;
+                    return doObjResp(url);
                 } catch (Exception e) {
                     e.printStackTrace();
+                    return faild("异常~", false);
                 }
 
                 }
