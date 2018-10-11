@@ -72,6 +72,7 @@ public class ImageController extends BaseController {
                     return doObjResp(url);
                 } catch (Exception e) {
                     e.printStackTrace();
+                    return faild("异常~", false);
                 }
 
                 }
