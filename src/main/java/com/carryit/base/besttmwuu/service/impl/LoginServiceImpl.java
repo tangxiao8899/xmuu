@@ -53,14 +53,14 @@ public class LoginServiceImpl implements LoginService {
                         //token错误，重新登录
                         jo.put("code",401);
                         jo.put("msg","token错误，请重新登录");
-                        jo.put("data","");
+                        jo.put("data",null);
                         return jo;
                     }
                 }else{ //不存在token 说明token过期
                     //重新登录
                     jo.put("code",401);
                     jo.put("msg","token过期，请重新登录");
-                    jo.put("data","");
+                    jo.put("data",null);
                     return jo;
                 }
             }
@@ -68,19 +68,19 @@ public class LoginServiceImpl implements LoginService {
             if(StringUtils.isEmpty(phone) || StringUtils.isEmpty(password)){
                 jo.put("code",400);
                 jo.put("msg","请求参数异常");
-                jo.put("data","");
+                jo.put("data",null);
                 return jo;
             }
             User user = userService.selectByPhone(phone);
             if(user == null){ //用户不存在
                 jo.put("code",401);
                 jo.put("msg","用户不存在");
-                jo.put("data","");
+                jo.put("data",null);
                 return jo;
             }else if(!password.equals(user.getPassword())){ //密码错误
                 jo.put("code",401);
                 jo.put("msg","密码错误");
-                jo.put("data","");
+                jo.put("data",null);
                 return jo;
             }else{ //登录成功
                 JSONObject data = new JSONObject();
