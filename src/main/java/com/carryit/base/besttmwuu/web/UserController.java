@@ -64,32 +64,48 @@ public class UserController extends BaseController {
 		Log.e("请求字符串=" + json + "|命令|" + cmd);
 		switch (cmd) {
 		case TO_INDEX:
-			UserGroupReq req = p(json, UserGroupReq.class);
-			User data;
-			if (req != null) {
-				int userId = Integer.parseInt(req.id);
-				data = this.userService.getUserById(userId);
-			} else {
-				return faild("请求参数异常~", false);
+			try {
+				UserGroupReq req = p(json, UserGroupReq.class);
+				User data;
+				if (req != null) {
+                    int userId = Integer.parseInt(req.id);
+                    data = this.userService.getUserById(userId);
+                } else {
+                    return faild("请求参数异常~", false);
+                }
+				return doObjResp(data);
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+				return faild("失败~", false);
 			}
-			return doObjResp(data);
-		case ADD_USER:
-			User reqII = p(json, User.class);
-			boolean flg = userService.addUser(reqII);
-			return flg ? doObjRespSuccess("成功") : faild("失败~", false);
-		case PUBLISH_CENTER:
-			List<PersonInfo> datas = new ArrayList<PersonInfo>();
-			List<ImsEweiShopSnsPostWithBLOBs> list = publishService.getimsEweiShopSnsPostWithBLOBs();
-			for (ImsEweiShopSnsPostWithBLOBs imsEweiShopSnsPost : list) {
-				PersonInfo person = new PersonInfo();
-				person.id = imsEweiShopSnsPost.getId();
-				person.Nickname = imsEweiShopSnsPost.getNickname();
-				person.title = imsEweiShopSnsPost.getTitle();
-				person.content = imsEweiShopSnsPost.getContent();
-				datas.add(person);
-			}
-			return doArraysResp(datas); // 返回 list 用它
-		default:
+			case ADD_USER:
+				try {
+					User reqII = p(json, User.class);
+					boolean flg = userService.addUser(reqII);
+					return flg ? doObjRespSuccess("成功") : faild("失败~", false);
+				} catch (Exception e) {
+					e.printStackTrace();
+					return faild("失败~", false);
+				}
+			case PUBLISH_CENTER:
+
+				try {
+					List<PersonInfo> datas = new ArrayList<PersonInfo>();
+					List<ImsEweiShopSnsPostWithBLOBs> list = publishService.getimsEweiShopSnsPostWithBLOBs();
+					for (ImsEweiShopSnsPostWithBLOBs imsEweiShopSnsPost : list) {
+                        PersonInfo person = new PersonInfo();
+                        person.id = imsEweiShopSnsPost.getId();
+                        person.Nickname = imsEweiShopSnsPost.getNickname();
+                        person.title = imsEweiShopSnsPost.getTitle();
+                        person.content = imsEweiShopSnsPost.getContent();
+                        datas.add(person);
+                    }
+					return doArraysResp(datas); // 返回 list 用它
+				} catch (Exception e) {
+					e.printStackTrace();
+					return faild("失败~", false);
+				}
+			default:
 			return null;
 		}
 	}

@@ -32,8 +32,13 @@ public class HxIMController {
             return  hximService.getToken();
         } catch (Exception e) {
             e.printStackTrace();
+            ResultPojo jo = new ResultPojo();
+            jo.setCode(2);
+            jo.setMsg("失败");
+            jo.setData(null);
+            return jo;
+
         }
-        return null;
     }
 
     /**
@@ -47,8 +52,12 @@ public class HxIMController {
             return  hximService.registerUser(json);
         } catch (Exception e) {
             e.printStackTrace();
+            ResultPojo jo = new ResultPojo();
+            jo.setCode(2);
+            jo.setMsg("失败");
+            jo.setData(null);
+            return jo;
         }
-        return null;
     }
 
     /**
@@ -62,8 +71,13 @@ public class HxIMController {
             return  hximService.addFriends(json);
         } catch (Exception e) {
             e.printStackTrace();
+            ResultPojo jo = new ResultPojo();
+            jo.setCode(2);
+            jo.setMsg("失败");
+            jo.setData(null);
+            return jo;
         }
-        return null;
+
     }
 
     /**
@@ -77,8 +91,12 @@ public class HxIMController {
             return  hximService.getFriends(json);
         } catch (Exception e) {
             e.printStackTrace();
+            ResultPojo jo = new ResultPojo();
+            jo.setCode(2);
+            jo.setMsg("失败");
+            jo.setData(null);
+            return jo;
         }
-        return null;
     }
 
 
@@ -93,8 +111,12 @@ public class HxIMController {
             return  hximService.getUserStatus(json);
         } catch (Exception e) {
             e.printStackTrace();
+            ResultPojo jo = new ResultPojo();
+            jo.setCode(2);
+            jo.setMsg("失败");
+            jo.setData(null);
+            return jo;
         }
-        return null;
     }
 
     /**
@@ -108,8 +130,12 @@ public class HxIMController {
             return  hximService.offlineMsgCount(json);
         } catch (Exception e) {
             e.printStackTrace();
+            ResultPojo jo = new ResultPojo();
+            jo.setCode(2);
+            jo.setMsg("失败");
+            jo.setData(null);
+            return jo;
         }
-        return null;
     }
 
     /**
@@ -123,7 +149,12 @@ public class HxIMController {
             return  hximService.sendMessages(json);
         } catch (Exception e) {
             e.printStackTrace();
+            ResultPojo jo = new ResultPojo();
+            jo.setCode(2);
+            jo.setMsg("失败");
+            jo.setData(null);
+            return jo;
         }
-        return null;
     }
+
 }

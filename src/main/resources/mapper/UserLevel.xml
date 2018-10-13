@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.carryit.base.besttmwuu.dao.UserLevelDao">
+
+	<select id="getLevel" resultType="com.carryit.base.besttmwuu.entity.UserLevel">
+		select
+		id,level,levelname,price
+		from ims_ewei_shop_member_level
+	</select>
+
+</mapper>

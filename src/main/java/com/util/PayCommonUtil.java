@@ -15,23 +15,22 @@ import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.ConnectException;
 import java.net.URL;
+import java.security.MessageDigest;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
-import java.util.SortedMap;
-import java.util.TreeMap;
+import java.util.*;
 
 import javax.net.ssl.*;
 import javax.servlet.http.HttpServletRequest;
 import com.alibaba.fastjson.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 支付工具类
  */
 public class PayCommonUtil {
+
+    Logger logger = LoggerFactory.getLogger(PayCommonUtil.class);
 
     public static final String TIME = "yyyyMMddHHmmss";
 
@@ -121,6 +120,11 @@ public class PayCommonUtil {
         return tenpaySign.equals(mysign);
     }
 
+    // 微信支付签名用
+
+
+
+
     /**
      * @Description：创建sign签名
      * @param characterEncoding
@@ -144,7 +148,7 @@ public class PayCommonUtil {
                 sb.append(k + "=" + v + "&");
             }
         }
-        sb.append("key=" + PropertyUtil.getProperty("key"));
+        sb.append("key=" + PropertyUtil.getProperty("wxpay.key"));
         String sign = MD5Util.MD5Encode(sb.toString(), characterEncoding).toUpperCase();
         return sign;
     }
@@ -350,6 +354,9 @@ public class PayCommonUtil {
         }
         in.close();
         inputStream.close();
+        System.out.println("======================================================================");
+        System.out.println("微信回请求："+sb.toString());
+        System.out.println("======================================================================");
         return sb.toString();
     }
 
