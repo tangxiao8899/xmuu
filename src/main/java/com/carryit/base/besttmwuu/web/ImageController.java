@@ -3,24 +3,10 @@ package com.carryit.base.besttmwuu.web;
 
 import com.alibaba.fastjson.JSONObject;
 import com.base.BaseController;
-import com.base.ResultPojo;
-import com.bean.req.BoardReq;
-import com.carryit.base.besttmwuu.entity.*;
-import com.carryit.base.besttmwuu.service.GlobounService;
-import com.carryit.base.besttmwuu.service.MemberService;
-import com.carryit.base.besttmwuu.service.SincerityService;
-import com.mysql.jdbc.StringUtils;
-import com.util.UploadHelper;
-import org.apache.commons.codec.binary.Base64;
-import org.apache.tomcat.util.http.fileupload.FileUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import sun.misc.BASE64Decoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
