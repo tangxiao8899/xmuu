@@ -28,6 +28,8 @@ public class ImageController extends BaseController {
     public JSONObject uploadFile(HttpServletRequest request,
                              HttpServletResponse response) {
         try {
+            String path ="/var/apache-tomcat-8.5.31/webapps/besttmwuu-0.0.1/WEB-INF/classes/static/index_img/";
+            ArrayList<String> urls = new ArrayList<>();
             MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
             Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
             if(fileMap == null || fileMap.size() == 0){
@@ -35,24 +37,19 @@ public class ImageController extends BaseController {
             }
             Collection<MultipartFile> files = fileMap.values();
             for(MultipartFile file:files){
-                File tempFile = getTmpFile();
-                        tempFile.createNewFile();
-                        file.transferTo(tempFile); //到这里tempFile即是上传上来的文件。
-                    }
+                String filesName = new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date())
+                        + (new Random().nextInt(9000) % (9000 - 1000 + 1) + 1000) + ".jpg";
+                File tempFile=new File(path, filesName);
+                tempFile.createNewFile();
+                file.transferTo(tempFile); //到这里tempFile即是上传上来的文件。
+                urls.add(domain_name+"/"+filesName);
+            }
+                return doObjResp(urls);
         } catch (Exception e) {
             e.printStackTrace();
             return faild("上传失败",false);
 
         }
-        return null;
-    }
-
-    public File getTmpFile() {
-       String path ="/var/apache-tomcat-8.5.31/webapps/besttmwuu-0.0.1/WEB-INF/classes/static/index_img/";
-
-        String filesName = new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date())
-                        + (new Random().nextInt(9000) % (9000 - 1000 + 1) + 1000) + ".jpg";
-        return new File(path, filesName);
     }
 
     @Override
