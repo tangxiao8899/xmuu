@@ -70,34 +70,39 @@ public class PrizeController extends BaseController {
 
     @Override
     public JSONObject runTask(String userId, int cmd) {
-        Map<String, Object> res = new HashMap<>();
-        if (ContextData.isShaked(userId)) {
-            res.put("isSuccess", true);
-            res.put("prizeName", "你已经摇过奖");
-            res.put("prizePhone", null);
-            res.put("uid", userId);
-            return doObjResp(res);
-        }
-        Prize prize = processShake();
-        if (prize != null) {
-            res.put("isSuccess", true);
-            res.put("prizeName", prize.getName());
-            res.put("prizePhone", prize.getPhone());
-            res.put("uid", userId);
-            if (prize.getName() != null) {
-                ContextData.addShakedUid(userId);
-                UserPrize userPrize = new UserPrize();
-                userPrize.setPid(prize.getId());
-                userPrize.setUid(userId);
-                userPrizeService.addUserPrize(userPrize);
+        try {
+            Map<String, Object> res = new HashMap<>();
+            if (ContextData.isShaked(userId)) {
+                res.put("isSuccess", true);
+                res.put("prizeName", "你已经摇过奖");
+                res.put("prizePhone", null);
+                res.put("uid", userId);
+                return doObjResp(res);
             }
-        } else {
-            res.put("isSuccess", false);
-            res.put("prizeName", "摇奖完毕");
-            res.put("prizePhone", 1);
-            res.put("uid", userId);
+            Prize prize = processShake();
+            if (prize != null) {
+                res.put("isSuccess", true);
+                res.put("prizeName", prize.getName());
+                res.put("prizePhone", prize.getPhone());
+                res.put("uid", userId);
+                if (prize.getName() != null) {
+                    ContextData.addShakedUid(userId);
+                    UserPrize userPrize = new UserPrize();
+                    userPrize.setPid(prize.getId());
+                    userPrize.setUid(userId);
+                    userPrizeService.addUserPrize(userPrize);
+                }
+            } else {
+                res.put("isSuccess", false);
+                res.put("prizeName", "摇奖完毕");
+                res.put("prizePhone", 1);
+                res.put("uid", userId);
+            }
+            return doObjResp(res);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return faild("失败~", false);
         }
-        return doObjResp(res);
     }
 }
 

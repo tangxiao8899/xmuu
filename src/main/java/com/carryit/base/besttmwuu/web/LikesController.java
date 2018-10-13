@@ -76,58 +76,78 @@ public class LikesController extends BaseController {
     public JSONObject runTask(String json, int cmd) {
         switch (cmd) {
             case 0:
+                try{
                 BoardReq req = p(json, BoardReq.class);
-                if (req!=null) {
-//                    likeService.saveCreditNumber(req.uid);
-//                	签到
-                	signInService.sign(req.uid, LocalDateTime.now());
-                	return doObjRespSuccess("签到成功");
-                } else {
+                    if (req!=null) {
+    //                    likeService.saveCreditNumber(req.uid);
+    //                	签到
+                        signInService.sign(req.uid, LocalDateTime.now());
+                        return doObjRespSuccess("签到成功");
+                    } else {
+                        return faild("失败~", false);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                     return faild("失败~", false);
                 }
             case 1:
-            	PraiseReq pReq = p(json, PraiseReq.class);
-                if(pReq!=null){
-//                    userPostService.updateFabulousByUid(breq.uid);
-                	TPraise praise = new TPraise();
-                	praise.setUid(pReq.getUid());
-                	praise.setImsEweiShopSnsPostId(pReq.getId());
-                	praise.setCreatetime(new Date());
-//                	点赞
-                	praiseService.praise(praise);
-                	return doObjRespSuccess("点赞成功");
-                }else {
+                try {
+                    PraiseReq pReq = p(json, PraiseReq.class);
+                    if(pReq!=null){
+    //                    userPostService.updateFabulousByUid(breq.uid);
+                        TPraise praise = new TPraise();
+                        praise.setUid(pReq.getUid());
+                        praise.setImsEweiShopSnsPostId(pReq.getId());
+                        praise.setCreatetime(new Date());
+    //                	点赞
+                        praiseService.praise(praise);
+                        return doObjRespSuccess("点赞成功");
+                    }else {
+                        return faild("失败~", false);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                     return faild("失败~", false);
                 }
             case 2:
 //            	添加评论
-            	CommentReq commentReq = p(json, CommentReq.class);
-                if(commentReq!=null){
-                	ImsEweiShopSnsPostWithBLOBs imsEweiShopSnsPostWithBLOBs = new ImsEweiShopSnsPostWithBLOBs();
-                	imsEweiShopSnsPostWithBLOBs.setPid(commentReq.getPid());
-                	imsEweiShopSnsPostWithBLOBs.setUid(commentReq.getUid());
-                	//imsEweiShopSnsPostWithBLOBs.setBid(commentReq.getBid());
-                	imsEweiShopSnsPostWithBLOBs.setContent(commentReq.getContent());
-//                	保存
-                	postService.addOne(imsEweiShopSnsPostWithBLOBs);
-                	return doObjRespSuccess("评论成功");
-                }else {
+                try {
+                    CommentReq commentReq = p(json, CommentReq.class);
+                    if(commentReq!=null){
+                        ImsEweiShopSnsPostWithBLOBs imsEweiShopSnsPostWithBLOBs = new ImsEweiShopSnsPostWithBLOBs();
+                        imsEweiShopSnsPostWithBLOBs.setPid(commentReq.getPid());
+                        imsEweiShopSnsPostWithBLOBs.setUid(commentReq.getUid());
+                        //imsEweiShopSnsPostWithBLOBs.setBid(commentReq.getBid());
+                        imsEweiShopSnsPostWithBLOBs.setContent(commentReq.getContent());
+    //                	保存
+                        postService.addOne(imsEweiShopSnsPostWithBLOBs);
+                        return doObjRespSuccess("评论成功");
+                    }else {
+                        return faild("失败~", false);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                     return faild("失败~", false);
                 }
             case 3:
 //            	添加动态
-                TredsReq tredsReq = p(json, TredsReq.class);
-                if(tredsReq!=null){
-                    ImsEweiShopSnsPostWithBLOBs imsEweiShopSnsPostWithBLOBs = new ImsEweiShopSnsPostWithBLOBs();
+                try {
+                    TredsReq tredsReq = p(json, TredsReq.class);
+                    if(tredsReq!=null){
+                        ImsEweiShopSnsPostWithBLOBs imsEweiShopSnsPostWithBLOBs = new ImsEweiShopSnsPostWithBLOBs();
 
-                    imsEweiShopSnsPostWithBLOBs.setUid(tredsReq.getUid());
-                    imsEweiShopSnsPostWithBLOBs.setBid(tredsReq.getBid());
-                    imsEweiShopSnsPostWithBLOBs.setContent(tredsReq.getContent());
-                    imsEweiShopSnsPostWithBLOBs.setImages(tredsReq.getImage());
-//                	保存
-                    postService.addTreds(imsEweiShopSnsPostWithBLOBs);
-                    return doObjRespSuccess("发布成功");
-                }else {
+                        imsEweiShopSnsPostWithBLOBs.setUid(tredsReq.getUid());
+                        imsEweiShopSnsPostWithBLOBs.setBid(tredsReq.getBid());
+                        imsEweiShopSnsPostWithBLOBs.setContent(tredsReq.getContent());
+                        imsEweiShopSnsPostWithBLOBs.setImages(tredsReq.getImage());
+    //                	保存
+                        postService.addTreds(imsEweiShopSnsPostWithBLOBs);
+                        return doObjRespSuccess("发布成功");
+                    }else {
+                        return faild("失败~", false);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                     return faild("失败~", false);
                 }
 

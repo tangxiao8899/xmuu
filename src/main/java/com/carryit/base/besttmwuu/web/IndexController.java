@@ -67,6 +67,7 @@ public class IndexController extends BaseController {
             endTime = sdf.parse(imptimeEnd + " 23:59:59").getTime();
         } catch (ParseException e) {
             e.printStackTrace();
+            return faild("失败~", false);
         }
         switch (cmd) {
             case 0:
@@ -82,6 +83,7 @@ public class IndexController extends BaseController {
                     br.setUserList(userList);
                 } catch (Exception e) {
                     e.printStackTrace();
+                    return faild("失败~", false);
                 }
                 return doObjResp(br);
             case 1:
@@ -91,6 +93,7 @@ public class IndexController extends BaseController {
                     list = wealthService.queryPage(startTime, endTime);
                 } catch (Exception e) {
                     e.printStackTrace();
+                    return faild("失败~", false);
                 }
                 return doArraysResp(list);
         }

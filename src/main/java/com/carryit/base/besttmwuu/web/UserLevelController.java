@@ -39,18 +39,15 @@ public class UserLevelController extends BaseController {
             case 0:
                 List<UserLevel> lvList= new ArrayList<>();
                 try {
-
                     lvList=userLevelService.getLevel();
                      return doObjResp(lvList);
                 }catch (Exception e){
                     e.printStackTrace();
-                     return faild("查询失败~", false);
+                     return faild("查询失败~",false);
                 }
 
 
         }
-
-
         return null;
     }
 }

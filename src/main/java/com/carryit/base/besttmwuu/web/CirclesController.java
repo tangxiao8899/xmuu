@@ -87,6 +87,7 @@ public class CirclesController extends BaseController {
             lastc.setTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(last));
         } catch (ParseException e) {
             e.printStackTrace();
+            return faild("失败~",false);
         }
         long endTime = lastc.getTimeInMillis();
 
@@ -103,7 +104,7 @@ public class CirclesController extends BaseController {
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    return doObjResp(false,-999,"程序异常!");
+                    return faild("失败~",false);
                 }
                 return doArraysResp(data);
             case 1:
@@ -130,7 +131,7 @@ public class CirclesController extends BaseController {
                     //board = boardService.getBoardById(req.bid);// 查询圈子详细信息
                 } catch (Exception e) {
                     e.printStackTrace();
-                    return doObjResp(false,-999,"程序异常!");
+                    return faild("失败~",false);
                 }
 //            case 2:
 //                MemberManage manage = new MemberManage();
@@ -192,7 +193,7 @@ public class CirclesController extends BaseController {
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    return doObjResp(false,-999,"程序异常!");
+                    return faild("失败~",false);
                 }
                 return doObjResp(boardListDTO);
             case 4:
@@ -211,7 +212,7 @@ public class CirclesController extends BaseController {
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    return doObjResp(false,-999,"程序异常!");
+                    return faild("失败~",false);
                 }
                 return doObjResp(newboardList);
             case 5:
@@ -257,7 +258,7 @@ public class CirclesController extends BaseController {
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    return doObjResp(false,-999,"程序异常!");
+                    return faild("失败~",false);
                 }
 
             case 6:
@@ -292,7 +293,7 @@ public class CirclesController extends BaseController {
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    return doObjResp(false,-999,"程序异常!");
+                    return faild("失败~",false);
                 }
             case 7:
                 BoardManage boardManage = p(json, BoardManage.class);
@@ -323,7 +324,7 @@ public class CirclesController extends BaseController {
                     return doObjResp(jo);
                 } catch (Exception e) {
                     e.printStackTrace();
-                    return doObjResp(false,-999,"程序异常!");
+                    return faild("失败~",false);
                 }
             case 8:
                 BoardManage bm = p(json, BoardManage.class);
@@ -355,7 +356,7 @@ public class CirclesController extends BaseController {
                     return doObjResp(newjo);
                 } catch (Exception e) {
                     e.printStackTrace();
-                    return doObjResp(false,-999,"程序异常!");
+                    return faild("失败~",false);
                 }
             case 9:
                 BoardDetail boardDetail = new BoardDetail();
@@ -380,7 +381,7 @@ public class CirclesController extends BaseController {
                     return doObjResp(boardDetail);
                 } catch (Exception e) {
                     e.printStackTrace();
-                    return doObjResp(false,-999,"程序异常!");
+                    return faild("失败~",false);
                 }
             case 10:
                 BoardManage boardTopic = p(json, BoardManage.class);
@@ -425,7 +426,7 @@ public class CirclesController extends BaseController {
                 return doObjResp(topicPage);
             } catch (Exception e) {
                 e.printStackTrace();
-                return doObjResp(false,-999,"程序异常!");
+                    return faild("失败~",false);
             }
 
             case 11:
@@ -476,9 +477,17 @@ public class CirclesController extends BaseController {
                     return doObjResp(newTopicPage);
                 } catch (Exception e) {
                     e.printStackTrace();
+                    return faild("失败~",false);
                 }
         case 12:
-            return circlesService.getCirclesInfo(json);
+
+            try {
+                return circlesService.getCirclesInfo(json);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return faild("失败~",false);
+            }
+
         }
         return null;
     }
