@@ -87,11 +87,11 @@ public class ImageController {
     public String uploadFile(HttpServletRequest request,
                              HttpServletResponse response) {
         List<MultipartFile> multipartFiles = UploadHelper.getFileSet(request, 1024 * 20, null);
-        String path = "/var/apache-tomcat-8.5.31/webapps/besttmwuu-0.0.1/WEB-INF/classes/static/index_img/";
-        if (multipartFiles.size() == 0) {
-            // TODO 给出提示,不允许没选择文件点击上传
-
-        }
+        //String path = "/var/apache-tomcat-8.5.31/webapps/besttmwuu-0.0.1/WEB-INF/classes/static/index_img/";
+       String path ="D:\\";
+       if(multipartFiles.size()==0){
+           return null;
+       }
         for (MultipartFile multipartFile : multipartFiles) {
             try {
                 String filePath = UploadHelper.uploadFile(multipartFile, path);

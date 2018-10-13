@@ -29,10 +29,11 @@ public class UploadHelper {
             return new LinkedList<MultipartFile>();
         }
 
-        List<MultipartFile> files = new LinkedList<MultipartFile>();
+        List<MultipartFile> files = new ArrayList<>();
         Iterator<String> fileNames = multipartRequest.getFileNames();
         while(fileNames.hasNext()) {
-            files = multipartRequest.getFiles(fileNames.next());
+             files = multipartRequest.getFiles(fileNames.next());
+
             for (int i = 0; i < files.size(); i++) {
                 if (!validateFile(files.get(i), maxLength, allowExtName)) {
                     files.remove(files.get(i));
