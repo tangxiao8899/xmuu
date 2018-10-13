@@ -42,7 +42,7 @@ public class ImageController extends BaseController {
                 File tempFile=new File(path, filesName);
                 tempFile.createNewFile();
                 file.transferTo(tempFile); //到这里tempFile即是上传上来的文件。
-                urls.add(domain_name+"/"+filesName);
+                urls.add(domain_name+"/index_img/"+filesName);
             }
                 return doObjResp(urls);
         } catch (Exception e) {
