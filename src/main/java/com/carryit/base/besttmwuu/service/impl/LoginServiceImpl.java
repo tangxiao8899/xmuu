@@ -91,7 +91,7 @@ public class LoginServiceImpl implements LoginService {
                 cookie.setPath("/");
                 response.addCookie(cookie);
                 data.put("token",k);
-//            data.put("id",user.getId());
+                data.put("uid",user.getId());
                 jo.put("code",200);
                 jo.put("msg","登录成功");
                 jo.put("data",data);

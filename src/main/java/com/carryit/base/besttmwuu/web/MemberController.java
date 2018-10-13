@@ -81,6 +81,7 @@ public class MemberController extends BaseController {
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
+                    return faild("失败~", false);
                 }
                 return doObjResp(member);
             case 1:
@@ -95,6 +96,7 @@ public class MemberController extends BaseController {
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
+                    return faild("失败~", false);
                 }
                 return doObjResp(Wealth);
             case 2:
@@ -106,6 +108,7 @@ public class MemberController extends BaseController {
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
+                    return faild("失败~", false);
                 }
                 return doObjResp(sincerity);
             case 3:
@@ -117,6 +120,7 @@ public class MemberController extends BaseController {
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
+                    return faild("失败~", false);
                 }
                 return doObjResp(globouns);
             case 4:
@@ -128,6 +132,7 @@ public class MemberController extends BaseController {
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
+                    return faild("失败~", false);
                 }
                 return doObjResp(mb);
 

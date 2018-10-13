@@ -29,7 +29,7 @@ public class CirclesServiceImpl implements CirclesService {
         if(StringUtils.isEmpty(json)){
             jo.put("msg","请求参数不能为空");
             jo.put("code",400);
-            jo.put("data","");
+            jo.put("data",null);
         }else{
             JSONObject subJo = JSON.parseObject(json);
             String title = subJo.getString("title");

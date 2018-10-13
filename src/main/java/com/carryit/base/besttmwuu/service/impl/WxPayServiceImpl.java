@@ -97,7 +97,7 @@ public class WxPayServiceImpl implements WxPayService{
 
 
             orderService.save(order);
-            parameters.put("notify_url",PropertyUtil.getProperty("wxpay.notifyurl"));//通知地址
+//            parameters.put("notify_url",PropertyUtil.getProperty("wxpay.notifyurl"));//通知地址
             parameters.put("body","小马UU-"+product.getLevelName()); //商品描述
             parameters.put("out_trade_no",  order.getOrdersn()); // 订单id这里我的订单id生成规则是订单id+时间
             parameters.put("spbill_create_ip", parmJo.getString("remoteAddrIP"));
@@ -111,6 +111,10 @@ public class WxPayServiceImpl implements WxPayService{
 
 
         // 设置签名
+
+
+//        String sign = PayCommonUtil.wxSignature(parameters,PropertyUtil.getProperty("wxpay.key"));
+
         String sign = PayCommonUtil.createSign("UTF-8", parameters);
         parameters.put("sign", sign);
         // 封装请求参数结束

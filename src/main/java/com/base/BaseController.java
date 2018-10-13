@@ -155,9 +155,9 @@ public abstract class BaseController<Req extends CommonRequest, Resp extends Dom
 	 * ===格式=== { "msg": "ok", " code": 1, "data":{} } ===格式===
 	 */
 	public static <T> JSONObject doObjResp(T resp, int code, String msg) {
-		if(resp == null){
-			resp = (T) "";
-		}
+//		if(resp == null){
+//			resp = (T) "";
+//		}
 		return (JSONObject) JSON.toJSON(new HttpObjResp<T>(resp, code, msg));
 	}
 }
