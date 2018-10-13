@@ -7,14 +7,16 @@ import com.carryit.base.besttmwuu.service.UserLevelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service("userService")
+import java.util.List;
+
+@Service("userLevelService")
 public class UserLevelServiceImpl implements UserLevelService {
     @Autowired
     private UserLevelDao userLevelDao;
 
 
     @Override
-    public UserLevel getLevel() {
+    public List<UserLevel> getLevel() {
         return userLevelDao.getLevel();
     }
 }

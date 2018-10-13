@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping("/level")
 public class UserLevelController extends BaseController {
@@ -34,15 +37,14 @@ public class UserLevelController extends BaseController {
     public JSONObject runTask(String json, int cmd) {
         switch (cmd){
             case 0:
-                UserLevel lv=new UserLevel();
+                List<UserLevel> lvList= new ArrayList<>();
                 try {
-                    BoardReq req= p(json, BoardReq.class);
-                    if (req!=null){
-                        lv=userLevelService.getLevel();
-                    }
 
+                    lvList=userLevelService.getLevel();
+                     return doObjResp(lvList);
                 }catch (Exception e){
                     e.printStackTrace();
+                     return faild("查询失败~", false);
                 }
 
 
