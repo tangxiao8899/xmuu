@@ -32,4 +32,12 @@ public interface WxPayService {
      */
     JSONObject wxReward(String json ) throws Exception;
 
+
+    /**
+     * 更新账户信息
+     * @param out_trade_no 商户订单号
+     * @param total_fee 订单总金额
+     */
+    void updateRechargeInfo(String out_trade_no,String total_fee);
+
 }

@@ -3,7 +3,9 @@ package com.carryit.base.besttmwuu.web;
 import com.alibaba.fastjson.JSONObject;
 import com.base.BaseController;
 import com.bean.req.WxPayReq;
+import com.carryit.base.besttmwuu.entity.Member;
 import com.carryit.base.besttmwuu.entity.Order;
+import com.carryit.base.besttmwuu.service.MemberService;
 import com.carryit.base.besttmwuu.service.OrderService;
 import com.carryit.base.besttmwuu.service.WxPayService;
 import com.util.PayCommonUtil;
@@ -36,6 +38,8 @@ public class WxPayControllrt extends BaseController {
 
     @Autowired
     OrderService orderService;
+
+
 
 
     /**
@@ -225,9 +229,8 @@ public class WxPayControllrt extends BaseController {
                     resXml = "<xml>" + "<return_code><![CDATA[FAIL]]></return_code>"
                             + "<return_msg><![CDATA[交易失败]]></return_msg>" + "</xml> ";
                 } else {
-                    //更新用户账户情况
-                    //TODO
-
+                    //更新订单状态
+                    wxPayService.updateRechargeInfo(out_trade_no,total_fee);
 
                     resXml = "<xml>" + "<return_code><![CDATA[SUCCESS]]></return_code>"
                             + "<return_msg><![CDATA[OK]]></return_msg>" + "</xml> ";

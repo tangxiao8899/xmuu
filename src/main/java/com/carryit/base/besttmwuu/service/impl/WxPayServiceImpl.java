@@ -3,8 +3,10 @@ package com.carryit.base.besttmwuu.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.base.ResultPojo;
+import com.carryit.base.besttmwuu.entity.Member;
 import com.carryit.base.besttmwuu.entity.Order;
 import com.carryit.base.besttmwuu.entity.Product;
+import com.carryit.base.besttmwuu.service.MemberService;
 import com.carryit.base.besttmwuu.service.OrderService;
 import com.carryit.base.besttmwuu.service.ProductService;
 import com.carryit.base.besttmwuu.service.WxPayService;
@@ -15,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
@@ -30,6 +33,9 @@ public class WxPayServiceImpl implements WxPayService{
 
     @Autowired
     ProductService productService;
+
+    @Autowired
+    MemberService memberService;
 
 
     @Override
@@ -167,9 +173,26 @@ public class WxPayServiceImpl implements WxPayService{
                 jo.put("data","");
                 return jo;
             }
+            if(!parmJo.containsKey("type")){ //充值类型
+                jo.put("code",400);
+                jo.put("msg","参数异常");
+                jo.put("data","");
+                return jo;
+            }
+
+            Order order = new Order();
+            order.setOrdersn(System.currentTimeMillis() + PropertyUtil.random() + ""); //订单号
+            order.setPrice(Long.valueOf(parmJo.getString("money"))); //订单价格
+            order.setStatus(2); //待付款
+            order.setUid(Integer.valueOf(parmJo.getString("uid"))); //下单用户
+            order.setPaytype(2); //在线支付
+            order.setCreatetime(new Date().getTime());//创建时间
+
+
+            orderService.save(order);
 
             parameters.put("body","小马UU-用户充值"); //商品描述
-            parameters.put("out_trade_no",  System.currentTimeMillis() + PayCommonUtil.CreateNoncestr()); // 订单id这里我的订单id生成规则是订单id+时间
+            parameters.put("out_trade_no", parmJo.getString("uid") + "_" +parmJo.getString("type")+"_" + System.currentTimeMillis()); // 订单id这里我的订单id生成规则是uid+充值类型+时间
             parameters.put("spbill_create_ip", parmJo.getString("remoteAddrIP"));
             parameters.put("total_fee", Long.valueOf(parmJo.getString("money")) *100); // 测试时，每次支付一分钱，微信支付所传的金额是以分为单位的，因此实际开发中需要x100
         }else{
@@ -276,6 +299,36 @@ public class WxPayServiceImpl implements WxPayService{
             jo.put("msg","支付出现异常，请稍后重试!");
             jo.put("data","");
             return jo;
+        }
+    }
+
+    @Override
+    @Transactional
+    public void updateRechargeInfo(String out_trade_no, String total_fee) {
+        Order order = new Order();
+        order.setOrdersn(out_trade_no);
+        order.setStatus(3); //付款成功
+
+        //用户ID
+        String  uid = out_trade_no.split("_")[0];
+        //充值类型
+        String type = out_trade_no.split("_")[1];
+
+        //支付成功，更新订单状态
+        orderService.update(order);
+        //查询Member表有无该用户
+        Member member = memberService.getMemberById(Integer.valueOf(uid));
+        if(!StringUtils.isEmpty(member)){
+            float Credit = 0f;
+            //更新后的余额
+            if("Y".equals(type)){
+                Credit  =   member.getCredit2() + Float.valueOf(total_fee);
+            }else{
+                Credit =   member.getCredit2() - Float.valueOf(total_fee);
+            }
+
+            //更新用户账户情况
+            memberService.updateMemberByUid(Integer.valueOf(uid),Credit);
         }
     }
 

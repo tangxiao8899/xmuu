@@ -26,3 +26,31 @@
              "trade_type": "APP"
          }
      }
+
+2、微信充值、提现接口
+请求地址：http://ip:port/wx/wxRecharge
+请求类型：POST
+请求参数：{
+     	"remoteAddrIP": "127.0.0.1", //用户端实际ip
+     	"uid":2, //充值/提现用户ID
+     	"money":3,//充值金额
+     	"type":"Y" //充值类型  Y 充值  N 提现
+
+     }
+响应结果：{
+         "msg": "SUCCESS",
+         "code": 200,
+         "data": {
+             "appid": "wx18c2cdc67528ee31",
+             "body": "小马UU-用户充值",
+             "fee_type": "CNY",
+             "mch_id": "1514027471",
+             "nonce_str": "qXn75GMrjj2pCJeE",
+             "notify_url": "http://xm.besttmw.com/besttmwuu-0.0.1/wx/rechargeNotify",
+             "out_trade_no": "2_1539613741938",
+             "sign": "0D59558BE4B27F27CDE6840476A94403",
+             "spbill_create_ip": "127.0.0.1",
+             "total_fee": 300,
+             "trade_type": "APP"
+         }
+     }

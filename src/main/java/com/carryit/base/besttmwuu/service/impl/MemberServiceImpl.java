@@ -64,5 +64,10 @@ public class MemberServiceImpl implements MemberService {
         return memberDao.showMember(uid);
     }
 
+    @Override
+    public void updateMemberByUid(int uid, float credit2) {
+        memberDao.updateMemberByUid(uid,credit2);
+    }
+
 
 }

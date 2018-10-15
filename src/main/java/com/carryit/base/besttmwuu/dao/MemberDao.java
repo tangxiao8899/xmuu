@@ -29,4 +29,11 @@ public interface MemberDao {
     long getadminMemberCount(@Param("zhuquanzi") Integer zhuquanzi);
 
     MemberDTO showMember(@Param("uid") int uid);
+
+    /**
+     * 修改账户余额
+     * @param uid 用户ID
+     * @param credit2 余额
+     */
+    void updateMemberByUid(@Param("uid") int uid, @Param("credit2") float credit2);
 }
