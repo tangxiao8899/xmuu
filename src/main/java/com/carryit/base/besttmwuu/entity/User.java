@@ -19,7 +19,7 @@ public class User implements Serializable {
 
     private String address;   //公司地址
 
-    private String speciality; //公司简介
+    private String companyProfile; //公司简介
 
     private String corporateName;//公司名称
 
@@ -30,6 +30,12 @@ public class User implements Serializable {
     private String mailbox;//公司邮箱
 
     private String  isSingle; //是否单身
+
+    private String marriage;//婚否
+
+    private String services;//提供服务
+
+    private String sex;//性别
 
     public Integer getUid() {
         return uid;
@@ -77,14 +83,6 @@ public class User implements Serializable {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public String getSpeciality() {
-        return speciality;
-    }
-
-    public void setSpeciality(String speciality) {
-        this.speciality = speciality;
     }
 
     public String getNeed() {
@@ -141,5 +139,37 @@ public class User implements Serializable {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public String getCompanyProfile() {
+        return companyProfile;
+    }
+
+    public void setCompanyProfile(String companyProfile) {
+        this.companyProfile = companyProfile;
+    }
+
+    public String getMarriage() {
+        return marriage;
+    }
+
+    public void setMarriage(String marriage) {
+        this.marriage = marriage;
+    }
+
+    public String getServices() {
+        return services;
+    }
+
+    public void setServices(String services) {
+        this.services = services;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 }
