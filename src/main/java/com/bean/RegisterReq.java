@@ -13,7 +13,7 @@ public class RegisterReq extends CommonRequest  {
 
 	public String address;   //地址
 
-	public String speciality; //特长
+	public String companyProfile; //公司简介
 
 	public String need;   //需求
 
