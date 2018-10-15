@@ -8,10 +8,28 @@ import com.base.ResultPojo;
  */
 public interface WxPayService {
     /**
-     * 获取微信预订单
+     * 微信支付
      * @param json
      * @return
      */
     JSONObject wxPay(String json ) throws Exception;
-    ;
+
+
+    /**
+     * 微信充值
+     * @param json
+     * @return
+     * @throws Exception
+     */
+    JSONObject wxRecharge(String json ) throws Exception;
+
+
+    /**
+     * 微信打赏
+     * @param json
+     * @return
+     * @throws Exception
+     */
+    JSONObject wxReward(String json ) throws Exception;
+
 }
