@@ -42,7 +42,7 @@
 				address,
 			</if>
 			<if test="speciality != null">
-				speciality,
+				companyProfile,
 			</if>
 			<if test="need != null">
 				need,
@@ -59,6 +59,15 @@
 			<if test="corporateName != null">
 				corporateName,
 			</if>
+			<if test="corporateName != null">
+				marriage,
+			</if>
+			<if test="corporateName != null">
+				services,
+			</if>
+			<if test="corporateName != null">
+				sex,
+		</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 
@@ -81,7 +90,7 @@
 				#{address,jdbcType=VARCHAR},
 			</if>
 			<if test="speciality != null">
-				#{speciality,jdbcType=VARCHAR},
+				#{companyProfile,jdbcType=VARCHAR},
 			</if>
 			<if test="need != null">
 				#{need,jdbcType=VARCHAR},
@@ -97,6 +106,15 @@
 			</if>
 			<if test="corporateName != null">
 				#{corporateName,jdbcType=VARCHAR},
+			</if>
+			<if test="corporateName != null">
+				#{marriage,jdbcType=VARCHAR},
+			</if>
+			<if test="corporateName != null">
+				#{services,jdbcType=VARCHAR},
+			</if>
+			<if test="corporateName != null">
+				#{sex,jdbcType=VARCHAR},
 			</if>
 		</trim>
 	</insert>
@@ -124,7 +142,7 @@
 				address=#{address},
 			</if>
 			<if test="speciality != null">
-				speciality=#{speciality},
+				companyProfile=#{companyProfile},
 			</if>
 			<if test="need != null">
 				need=#{need},
@@ -141,7 +159,15 @@
 			<if test="corporateName != null">
 				corporateName=#{corporateName},
 			</if>
-
+			<if test="marriage != null">
+				corporateName=#{corporateName},
+			</if>
+			<if test="services != null">
+				corporateName=#{corporateName},
+			</if>
+			<if test="sex != null">
+				corporateName=#{corporateName},
+			</if>
 		</set>
 		where uid = #{uid,jdbcType=INTEGER}
 	</update>

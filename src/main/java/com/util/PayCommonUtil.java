@@ -37,14 +37,14 @@ public class PayCommonUtil {
     /**
      * 创建微信交易对象
      */
-    public static SortedMap<Object, Object> getWXPrePayID()
+    public static SortedMap<Object, Object> getWXPrePayID(String notify)
     {
         SortedMap<Object, Object> parameters = new TreeMap<Object, Object>();
         parameters.put("appid", PropertyUtil.getProperty("wxpay.appid"));
         parameters.put("mch_id", PropertyUtil.getProperty("wxpay.mchid"));
         parameters.put("nonce_str", PayCommonUtil.CreateNoncestr());
         parameters.put("fee_type", "CNY");
-        parameters.put("notify_url", PropertyUtil.getProperty("wxpay.notifyurl"));
+        parameters.put("notify_url", PropertyUtil.getProperty(notify));
         parameters.put("trade_type", "APP");
         return parameters;
     }

@@ -3,6 +3,7 @@ package com.carryit.base.besttmwuu.service;
 import com.carryit.base.besttmwuu.entity.Level;
 import com.carryit.base.besttmwuu.entity.Member;
 import com.carryit.base.besttmwuu.entity.MemberDTO;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -25,4 +26,11 @@ public interface MemberService {
     long getadminMemberCount(Integer zhuquanzi);
 
     MemberDTO showMember(int uid);
+
+    /**
+     * 修改账户余额
+     * @param uid 用户ID
+     * @param credit2 余额
+     */
+    void updateMemberByUid(@Param("uid") int uid, @Param("credit2") float credit2);
 }

@@ -202,7 +202,7 @@ public class RegisterController extends BaseController {
                 data.setIsSingle(reqJson.isSingle);
                 data.setNeed(reqJson.need);
                 data.setPhone(reqJson.phone);
-                data.setSpeciality(reqJson.speciality);
+                data.setCompanyProfile(reqJson.companyProfile);
                 data.setUserName(reqJson.userName);
 
 
