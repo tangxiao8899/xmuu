@@ -67,5 +67,10 @@
 		ims_ewei_shop_member a ON u.uid=a.uid LEFT JOIN ims_ewei_shop_member_level b ON a.level = b.level WHERE a.uid = #{uid}
 	</select>
 
-
+	<!--更新账户余额-->
+	<update id="updateMemberByUid" >
+		update ims_ewei_shop_member set
+		credit2 = #{credit2}
+		where uid = #{uid}
+	</update>
 </mapper>

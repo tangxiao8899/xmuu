@@ -1,16 +1,46 @@
 package com.util;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.Charset;
+import java.security.KeyManagementException;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.UnrecoverableKeyException;
+import java.security.cert.CertificateException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManagerFactory;
-import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.security.*;
-import java.security.cert.CertificateException;
-import java.util.HashMap;
-import java.util.Map;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+
+import com.alibaba.fastjson.JSON;
 
 public class HttpClientUtil {
 
@@ -272,4 +302,36 @@ public class HttpClientUtil {
         return new String(InputStreamTOByte(in),encoding);
 
     }
+    
+    public static String post(String url, String jsonParam) throws ClientProtocolException, IOException {
+    	CloseableHttpClient httpClient = HttpClients.createDefault();
+    	HttpPost httpPost = new HttpPost(url);
+
+    	//设置请求超时时间
+        RequestConfig requestConfig = RequestConfig.custom()
+                .setSocketTimeout(60000)
+                .setConnectTimeout(60000)
+                .setConnectionRequestTimeout(60000)
+                .build();
+        httpPost.setConfig(requestConfig);
+    	
+//    	包装请求体
+        StringEntity request = new StringEntity(jsonParam, Charset.forName("utf-8"));
+        
+        
+//    	发送请求
+    	httpPost.setEntity(request);
+    	CloseableHttpResponse httpResponse = httpClient.execute(httpPost);
+    	
+        //读取响应
+        HttpEntity entity = httpResponse.getEntity();
+        String result = "";
+        if (entity != null) {
+            result = EntityUtils.toString(entity, "UTF-8");
+        }
+ 
+        return result;
+    }
+    
+    
 }

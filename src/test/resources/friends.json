@@ -1,0 +1,13 @@
+{
+  "code": 200,
+  "message": "«Î«Û≥…π¶",
+  "data": {
+    "duration": 6,
+    "data": ["u3", "u2", "jliu"],
+    "entities": [],
+    "count": 3,
+    "action": "get",
+    "uri": "http://a1.easemob.com/1176180808228091/xiaomauu/users/u1/contacts/users",
+    "timestamp": 1536304064166
+  }
+}
