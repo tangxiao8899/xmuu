@@ -48,5 +48,15 @@ public class ContactServiceImpl implements ContactService {
 		return imsUsers;
 	}
 
+	@Override
+	public List<ImsUsers> getFriends(int uid) {
+		ImsUsers user = userMapper.selectByPrimaryKey(uid);
+//		未查询到用户时：
+		if(user == null) {
+			return new ArrayList<>();
+		}
+		return imsService.getContacts(user);
+	}
+
 
 }

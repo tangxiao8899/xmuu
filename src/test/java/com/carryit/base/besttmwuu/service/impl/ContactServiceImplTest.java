@@ -25,5 +25,13 @@ public class ContactServiceImplTest {
 		List<ImsUsers> notFrineds = contactService.getContactsWithoutAdd(21, phones);
 		System.out.println(JSON.toJSON(notFrineds));
 	}
+	
+	
+	@Test
+	public void testGetFriends() {
+		List<ImsUsers> friends = contactService.getFriends(12);
+		System.out.println(JSON.toJSON(friends));
+	}
+	
 
 }

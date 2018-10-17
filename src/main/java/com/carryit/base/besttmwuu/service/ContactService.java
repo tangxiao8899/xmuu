@@ -15,4 +15,13 @@ public interface ContactService {
 	 * @return 未添加的好友
 	 * */
 	List<ImsUsers> getContactsWithoutAdd(int uid, List<String> phones);
+	
+	
+	/*
+	 * @param uid 用户id
+	 * @return 好友数量
+	 * 查询指定用户的好友数量
+	 * 
+	 * */
+	List<ImsUsers> getFriends(int uid);
 }
