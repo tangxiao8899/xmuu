@@ -31,12 +31,12 @@ public class ImageController extends BaseController {
             String path ="/var/apache-tomcat-8.5.31/webapps/besttmwuu-0.0.1/WEB-INF/classes/static/index_img/";
             ArrayList<String> urls = new ArrayList<>();
             MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-            Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
-            if(fileMap == null || fileMap.size() == 0){
+
+            List<MultipartFile> fileList = multipartRequest.getFiles("image");
+            if(fileList == null || fileList.size() == 0){
                 return faild("文件为空",false);
             }
-            Collection<MultipartFile> files = fileMap.values();
-            for(MultipartFile file:files){
+            for(MultipartFile file:fileList){
                 String filesName = new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date())
                         + (new Random().nextInt(9000) % (9000 - 1000 + 1) + 1000) + ".jpg";
                 File tempFile=new File(path, filesName);
