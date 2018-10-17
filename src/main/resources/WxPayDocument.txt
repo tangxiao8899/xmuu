@@ -4,8 +4,7 @@
 请求地址：http://ip:port/wx/wxPay
 请求类型：POST
 请求参数：{
-     	"remoteAddrIP": "127.0.0.1", //用户端实际ip
-     	"productId": 9, //商品ID
+     	"productId": 14, //商品ID
      	"productNum":3,//商品数量
      	"uid":2 //下单用户ID
      }
@@ -14,15 +13,15 @@
          "code": 200,
          "data": {
              "appid": "wx18c2cdc67528ee31",
-             "body": "小马UU-普通会员",
+             "body": "小马UU-UU圈主",
              "fee_type": "CNY",
-             "mch_id": "1499854482",
-             "nonce_str": "CRupNPG5kMBCOsu0",
-             "notify_url": "http://localhost:8096/wx/notify",
-             "out_trade_no": "1538156303903",
-             "sign": "C5F237EBFA51AA4D21F62941D59282E2",
-             "spbill_create_ip": "127.0.0.1",
-             "total_fee": 300,
+             "mch_id": "1514027471",
+             "nonce_str": "hbIizVMTXaT6FVVu",
+             "notify_url": "http://xm.besttmw.com/besttmwuu-0.0.1/wx/notify",
+             "out_trade_no": "1539787464259",
+             "sign": "4CFD374DC9E65174D9F0D0321A79CA95",
+             "spbill_create_ip": "192.168.1.7",
+             "total_fee": 9000000,
              "trade_type": "APP"
          }
      }
@@ -31,7 +30,6 @@
 请求地址：http://ip:port/wx/wxRecharge
 请求类型：POST
 请求参数：{
-     	"remoteAddrIP": "127.0.0.1", //用户端实际ip
      	"uid":2, //充值/提现用户ID
      	"money":3,//充值金额
      	"type":"Y" //充值类型  Y 充值  N 提现

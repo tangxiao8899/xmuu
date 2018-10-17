@@ -71,12 +71,7 @@ public class WxPayServiceImpl implements WxPayService{
         if (!StringUtils.isEmpty(json)) {
             JSONObject parmJo = JSON.parseObject(json);
             //校验授权信息
-            if (!parmJo.containsKey("remoteAddrIP")) {
-                jo.put("code",400);
-                jo.put("msg","参数异常");
-                jo.put("data","");
-                return jo;
-            }
+
             if(!parmJo.containsKey("productId")){ //商品ID
                 jo.put("code",400);
                 jo.put("msg","参数异常");
@@ -93,6 +88,13 @@ public class WxPayServiceImpl implements WxPayService{
             //生成商品订单
             Product product = productService.findById(Integer.valueOf(parmJo.getString("productId")));
 
+            if(StringUtils.isEmpty(product)){
+                jo.put("code",404);
+                jo.put("msg","未找到该产品");
+                jo.put("data","");
+                return jo;
+            }
+
             Order order = new Order();
             order.setOrdersn(System.currentTimeMillis() + PropertyUtil.random() + ""); //订单号
             order.setPrice(product.getPrice() * Long.valueOf(parmJo.getString("productNum"))); //订单价格
@@ -106,7 +108,7 @@ public class WxPayServiceImpl implements WxPayService{
 //            parameters.put("notify_url",PropertyUtil.getProperty("wxpay.notifyurl"));//通知地址
             parameters.put("body","小马UU-"+product.getLevelName()); //商品描述
             parameters.put("out_trade_no",  order.getOrdersn()); // 订单id这里我的订单id生成规则是订单id+时间
-            parameters.put("spbill_create_ip", parmJo.getString("remoteAddrIP"));
+            parameters.put("spbill_create_ip", PropertyUtil.getIp());
             parameters.put("total_fee", order.getPrice()*100); // 测试时，每次支付一分钱，微信支付所传的金额是以分为单位的，因此实际开发中需要x100
         }else{
             jo.put("code",400);
@@ -155,12 +157,7 @@ public class WxPayServiceImpl implements WxPayService{
         if (!StringUtils.isEmpty(json)) {
             JSONObject parmJo = JSON.parseObject(json);
             //校验授权信息
-            if (!parmJo.containsKey("remoteAddrIP")) {
-                jo.put("code",400);
-                jo.put("msg","参数异常");
-                jo.put("data","");
-                return jo;
-            }
+
             if(!parmJo.containsKey("uid")){ //用户ID
                 jo.put("code",400);
                 jo.put("msg","参数异常");
@@ -193,7 +190,7 @@ public class WxPayServiceImpl implements WxPayService{
 
             parameters.put("body","小马UU-用户充值"); //商品描述
             parameters.put("out_trade_no", parmJo.getString("uid") + "_" +parmJo.getString("type")+"_" + System.currentTimeMillis()); // 订单id这里我的订单id生成规则是uid+充值类型+时间
-            parameters.put("spbill_create_ip", parmJo.getString("remoteAddrIP"));
+            parameters.put("spbill_create_ip", PropertyUtil.getIp());
             parameters.put("total_fee", Long.valueOf(parmJo.getString("money")) *100); // 测试时，每次支付一分钱，微信支付所传的金额是以分为单位的，因此实际开发中需要x100
         }else{
             jo.put("code",400);
@@ -238,12 +235,7 @@ public class WxPayServiceImpl implements WxPayService{
         if (!StringUtils.isEmpty(json)) {
             JSONObject parmJo = JSON.parseObject(json);
             //校验授权信息
-            if (!parmJo.containsKey("remoteAddrIP")) {
-                jo.put("code",400);
-                jo.put("msg","参数异常");
-                jo.put("data","");
-                return jo;
-            }
+
             if(!parmJo.containsKey("fuid")){ //打赏用户ID
                 jo.put("code",400);
                 jo.put("msg","参数异常");
@@ -265,7 +257,7 @@ public class WxPayServiceImpl implements WxPayService{
 
             parameters.put("body","小马UU-用户打赏"); //商品描述
             parameters.put("out_trade_no",  System.currentTimeMillis() + PayCommonUtil.CreateNoncestr()); // 订单id这里我的订单id生成规则是订单id+时间
-            parameters.put("spbill_create_ip", parmJo.getString("remoteAddrIP"));
+            parameters.put("spbill_create_ip", PropertyUtil.getIp());
             parameters.put("total_fee", Long.valueOf(parmJo.getString("money")) *100); // 测试时，每次支付一分钱，微信支付所传的金额是以分为单位的，因此实际开发中需要x100
         }else{
             jo.put("code",400);
