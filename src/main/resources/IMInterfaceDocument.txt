@@ -235,3 +235,31 @@ IM环信接口文档
              "timestamp": 1536304578888
          }
      }
+
+ 9、重置IM用户密码
+ 请求地址：http://ip:port/hx/resetPassword
+ 请求类型：POST
+ 请求参数：{
+        "username":"u1"
+        "newpassword": "123456", //新密码
+        "token": "YWMtTA62ZrJpEei9xu9oxuHsLQAAAAAAAAAAAAAAAAAAAAEkfycAnqcR6LF7AUVfW6SDAgMAAAFlssU8jgBPGgD13Bzal9mDcYvB1gg-FZN-0GT919bFe3jPTgKc_n0t6g"
+      }
+ 响应结果：{
+          "code": 200,
+          "message": "请求成功",
+          "data": {
+              "duration": 0,
+              "path": "/messages",
+              "application": "247f2700-9ea7-11e8-b17b-01455f5ba483",
+              "data": {
+                  "u2": "success",
+                  "stliu": "success",
+                  "u3": "success"
+              },
+              "organization": "1176180808228091",
+              "action": "post",
+              "uri": "https://a1.easemob.com/1176180808228091/xiaomauu/messages",
+              "applicationName": "xiaomauu",
+              "timestamp": 1536304578888
+          }
+      }

@@ -271,5 +271,44 @@ public class JerseyClientUtil {
     }
 
 
-
+    public static ResultPojo postTokenMethod(String param, String token, String method, int type) {
+        ResultPojo resultPojo = new ResultPojo();
+        ClientResponse response = null;
+        try {
+            Client client = Client.create();
+            WebResource resource = client.resource(BIGDATA_API_URL  + method);
+            switch (type){
+                case 1:
+                    response = resource.header("Authorization"," Bearer "+token).type(MediaType.APPLICATION_JSON_TYPE).post(ClientResponse.class,param);
+                    break;
+                case 2:
+                    response = resource.header("Authorization"," Bearer "+token).get(ClientResponse.class);
+                    break;
+                case 3:
+                    response = resource.header("Authorization"," Bearer "+token).delete(ClientResponse.class);
+                    break;
+                case 4:
+                    response = resource.header("Authorization"," Bearer "+token).type(MediaType.APPLICATION_JSON_TYPE).put(ClientResponse.class,param);
+                    break;
+            }
+            int status = response.getStatus();
+            String data = response.getEntity(String.class);
+            JSONObject jsonObject = JSON.parseObject(data);
+            resultPojo.setCode(status);
+            resultPojo.setData(jsonObject);
+            if (status == 200) {
+                resultPojo.setMsg("请求成功");
+            } else {
+                resultPojo.setMsg("请求失败");
+            }
+        } catch (Exception e) {
+            resultPojo.setCode(500);//服务器异常
+            resultPojo.setMsg(e.getMessage());
+        } finally {
+            if (response != null) {
+                response.close();
+            }
+        }
+        return resultPojo;
+    }
 }

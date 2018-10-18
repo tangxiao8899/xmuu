@@ -61,4 +61,12 @@ public interface HximService {
      * @throws Exception
      */
     ResultPojo sendMessages(String json) throws Exception;
+
+    /**
+     * 重置IM用户密码
+     * @param json
+     * @return
+     * @throws Exception
+     */
+    ResultPojo resetPassword(String json)throws Exception;
 }
