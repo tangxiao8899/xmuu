@@ -17,7 +17,7 @@
 
 	<select id="getWealthById" resultType="com.carryit.base.besttmwuu.entity.Member"
 		parameterType="Integer">
-		select credit2,credit1 from ims_ewei_shop_member where id = #{uid}
+		select credit2,credit1 from ims_ewei_shop_member where uid = #{uid}
 
 	</select>
 

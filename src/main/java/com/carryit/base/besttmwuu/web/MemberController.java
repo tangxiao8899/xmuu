@@ -92,6 +92,9 @@ public class MemberController extends BaseController {
                     BoardReq req = p(json, BoardReq.class);
                     if (req != null) {
                         mem=memberService.getWealthById(req.uid);
+                        if(mem==null){
+                            return faild("用户不存在~", false);
+                        }
                         Wealth=mem.getCredit2();
                     }
                 } catch (Exception e) {
