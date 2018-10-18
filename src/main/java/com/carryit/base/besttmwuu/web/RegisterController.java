@@ -9,6 +9,7 @@ import com.carryit.base.besttmwuu.entity.MessageCode;
 import com.carryit.base.besttmwuu.service.MessageCodeService;
 import com.carryit.base.besttmwuu.service.UserService;
 import com.carryit.base.besttmwuu.service.impl.MessageService;
+import com.util.PropertyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -126,8 +127,23 @@ public class RegisterController extends BaseController {
                 }
             case 5:
                 try {
-                    JSONObject jo = messageCodeService.checkCode(json);
-                    if (Integer.valueOf(jo.getString("code")) == 200) {
+                    JSONObject jo = JSON.parseObject(json);
+                    String phoneNumber = jo.getString("phone");
+                    int code = jo.getInteger("code");
+                    MessageCode messageCode=messageCodeService.getIdByPhone(phoneNumber);
+                    if(StringUtils.isEmpty(messageCode)){ //验证码表没数据
+                        return faild("未收到验证码~", false);
+                    }else {
+                        //有效期：创建时间 + 有效时长（60秒） > 当前时间
+                        Long SMS_TIME = Long.valueOf(PropertyUtil.getProperty("sms_time"));
+                        Long userfulTime = messageCode.getCreateTime().getTime() + SMS_TIME;
+                        //验证码失效
+                        if (messageCode.getStatus() != 1 || messageCode.getCode() != code || userfulTime < new Date().getTime()) {
+                            return faild("验证码失效~", false);
+                         }
+                     }
+                    User u = userService.selectByPhone(phoneNumber);
+                    if (u!=null) {
                         int i = userService.updatePassWord(json);
                         if (i == 1) {
                             return doObjRespSuccess("成功");
@@ -135,7 +151,7 @@ public class RegisterController extends BaseController {
                             return faild("失败~", false);
                         }
                     } else {
-                        return faild("失败~", false);
+                        return faild("用户为空~", false);
                     }
                 } catch (NumberFormatException e) {
                     e.printStackTrace();
@@ -192,19 +208,22 @@ public class RegisterController extends BaseController {
             boolean result = false;
             if (data == null) {
                 data = new User();
+
                 data.setUserName(reqJson.code);
                 data.setPassword(reqJson.password);
-
                 data.setAddress(reqJson.address);
                 data.setAge(reqJson.age);
                 data.setEducation(reqJson.education);
                 data.setIdCard(reqJson.idCard);
-                data.setIsSingle(reqJson.isSingle);
                 data.setNeed(reqJson.need);
                 data.setPhone(reqJson.phone);
                 data.setCompanyProfile(reqJson.companyProfile);
                 data.setUserName(reqJson.userName);
-
+                data.setCorporateName(reqJson.corporateName);
+                data.setMailbox(reqJson.mailbox);
+                data.setMarriage(reqJson.marriage);
+                data.setServices(reqJson.services);
+                data.setSex(reqJson.sex);
 
                 result = mRegisterService.addUser(data);
                 Log.e("注册结果=" + result);

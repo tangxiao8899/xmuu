@@ -85,13 +85,13 @@ public class LoginServiceImpl implements LoginService {
             }else{ //登录成功
                 JSONObject data = new JSONObject();
 
-                String k = user.getId() + user.getPhone() + System.currentTimeMillis();
+                String k = user.getUid() + user.getPhone() + System.currentTimeMillis();
                 Cookie cookie = new Cookie("token",k);
                 cookie.setMaxAge(10*24*60*60); //设置token有效期为10天
                 cookie.setPath("/");
                 response.addCookie(cookie);
                 data.put("token",k);
-                data.put("uid",user.getId());
+                data.put("uid",user.getUid());
                 jo.put("code",200);
                 jo.put("msg","登录成功");
                 jo.put("data",data);
