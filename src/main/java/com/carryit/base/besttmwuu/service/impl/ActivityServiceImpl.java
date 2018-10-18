@@ -3,6 +3,7 @@ package com.carryit.base.besttmwuu.service.impl;
 import com.carryit.base.besttmwuu.dao.ActivityDao;
 import com.carryit.base.besttmwuu.dao.BoardDao;
 import com.carryit.base.besttmwuu.entity.Activity;
+import com.carryit.base.besttmwuu.entity.SignUp;
 import com.carryit.base.besttmwuu.service.ActivityService;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +29,15 @@ public class ActivityServiceImpl implements ActivityService {
     @Override
     public long getPageCount() {
         return activityDao.getPageCount();
+    }
+
+    @Override
+    public void signUpRelease(SignUp signUp) {
+        activityDao.signUpRelease(signUp);
+    }
+
+    @Override
+    public Activity getActivityById(Integer aid) {
+        return activityDao.getActivityById(aid);
     }
 }
