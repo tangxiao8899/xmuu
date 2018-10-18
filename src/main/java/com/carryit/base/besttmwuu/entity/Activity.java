@@ -8,6 +8,7 @@ public class Activity implements Serializable{
 
     private Integer uid; //用户id
     private Integer bid; //圈子id
+    private String title;//活动标题
     private long startTime;//活动开始时间，13位毫秒值
     private long endTime;//活动结束时间，13位毫秒值
     private long cerateTime;//创建时间，13位毫秒值
@@ -17,6 +18,41 @@ public class Activity implements Serializable{
     private int level;//参加人员等级限制
     private String detail;//活动介绍
     private String images;
+    private String board名称;//圈子
+    private String levelname;//等级名称
+    private String joinNumber; //参加人数
+
+    public String getJoinNumber() {
+        return joinNumber;
+    }
+
+    public void setJoinNumber(String joinNumber) {
+        this.joinNumber = joinNumber;
+    }
+
+    public String getLevelname() {
+        return levelname;
+    }
+
+    public void setLevelname(String levelname) {
+        this.levelname = levelname;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getBoard名称() {
+        return board名称;
+    }
+
+    public void setBoard名称(String board名称) {
+        this.board名称 = board名称;
+    }
 
     public Integer getUid() {
         return uid;

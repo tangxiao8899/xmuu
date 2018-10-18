@@ -5,10 +5,19 @@ import java.io.Serializable;
 public class SignUp implements Serializable {
 
     private Integer uid; //用户id
+    private Integer aid;//动态id
     private String name;//姓名
     private String phone;
     private String sex;//(0女，1男)
     private String age;
+
+    public Integer getAid() {
+        return aid;
+    }
+
+    public void setAid(Integer aid) {
+        this.aid = aid;
+    }
 
     public Integer getUid() {
         return uid;
