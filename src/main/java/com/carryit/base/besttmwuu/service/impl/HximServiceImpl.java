@@ -215,6 +215,33 @@ public class HximServiceImpl implements HximService {
         return rp;
     }
 
+    @Override
+    public ResultPojo resetPassword(String json) throws Exception {
+        ResultPojo rp = new ResultPojo();
+        if (!StringUtils.isEmpty(json)) {
+            JSONObject jo = JSON.parseObject(json);
+            //校验授权信息
+            if (!jo.containsKey("token")) {
+                rp.setCode(401);
+                rp.setMsg("请先获取授权信息");
+                return rp;
+            }
+            if (!jo.containsKey("username") || !jo.containsKey("newpassword")) {
+                rp.setCode(400);
+                rp.setMsg("请求参数异常");
+            } else {
+                JSONObject subJo = new JSONObject();
+                subJo.put("newpassword", jo.getString("newpassword"));
+                rp = JerseyClientUtil.postTokenMethod(subJo.toString(),jo.getString("token"), "/users/" + jo.getString("username") + "/password",4);
+            }
+        } else {
+            rp.setCode(400);
+            rp.setMsg("请求参数异常");
+
+        }
+        return rp;
+    }
+
     /**
      * 校验参数
      *
