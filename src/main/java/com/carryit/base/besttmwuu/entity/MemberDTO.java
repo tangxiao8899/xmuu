@@ -11,7 +11,7 @@ public class MemberDTO implements Serializable {
     private String phone; //电话
     private String mailbox; //邮箱
     private String address;//公司地址
-    private String speciality;//公司简介
+    private String companyProfile;//公司简介
     private String banner;
 
     public String getNickName() {
@@ -70,12 +70,12 @@ public class MemberDTO implements Serializable {
         this.address = address;
     }
 
-    public String getSpeciality() {
-        return speciality;
+    public String getCompanyProfile() {
+        return companyProfile;
     }
 
-    public void setSpeciality(String speciality) {
-        this.speciality = speciality;
+    public void setCompanyProfile(String companyProfile) {
+        this.companyProfile = companyProfile;
     }
 
     public String getBanner() {

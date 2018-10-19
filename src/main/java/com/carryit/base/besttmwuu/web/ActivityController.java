@@ -6,8 +6,11 @@ import com.base.BaseController;
 import com.bean.Page;
 import com.bean.req.BoardReq;
 import com.carryit.base.besttmwuu.entity.Activity;
+import com.carryit.base.besttmwuu.entity.Member;
+import com.carryit.base.besttmwuu.entity.SignUp;
 import com.carryit.base.besttmwuu.entity.UserLevel;
 import com.carryit.base.besttmwuu.service.ActivityService;
+import com.carryit.base.besttmwuu.service.MemberService;
 import com.carryit.base.besttmwuu.service.UserLevelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,6 +28,9 @@ public class ActivityController extends BaseController {
     @Autowired
     private ActivityService activityService;
 
+    @Autowired
+    private MemberService memberService;
+
 
     //发布活动
     @RequestMapping(value = "/release", method = {RequestMethod.GET,
@@ -33,18 +39,27 @@ public class ActivityController extends BaseController {
         return callHttpReqTask(json, 0);
     }
 
-    //分页查询全部活动
-    @RequestMapping(value = "/releasePage", method = {RequestMethod.GET,
-            RequestMethod.POST}, produces = "application/json;charset=UTF-8")
-    public JSONObject releasePage(@RequestBody(required = false) String json) {
-        return callHttpReqTask(json, 1);
-    }
-
     //根据活动id,查询活动具体信息
     @RequestMapping(value = "/getReleaseById", method = {RequestMethod.GET,
             RequestMethod.POST}, produces = "application/json;charset=UTF-8")
     public JSONObject getReleaseById(@RequestBody(required = false) String json) {
+        return callHttpReqTask(json, 1);
+    }
+
+
+    //分页查询全部活动
+    @RequestMapping(value = "/releasePage", method = {RequestMethod.GET,
+            RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public JSONObject releasePage(@RequestBody(required = false) String json) {
         return callHttpReqTask(json, 2);
+    }
+
+
+    //活动报名
+    @RequestMapping(value = "/signUpRelease", method = {RequestMethod.GET,
+            RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public JSONObject signUpRelease(@RequestBody(required = false) String json) {
+        return callHttpReqTask(json, 3);
     }
 
 
@@ -62,17 +77,19 @@ public class ActivityController extends BaseController {
                 }
             case 1:
                 try {
+                    Activity newAct = new Activity();
                     JSONObject jo = JSON.parseObject(json);
-                    int pageStart = jo.getInteger("pageStart");
-                    int pageSize = jo.getInteger("pageSize");
-
-                    List<Activity> activityList = activityService.getPage((pageStart - 1) * pageSize,pageSize);
-                    long count = activityService.getPageCount();
-                    Page newpage = new Page();
-                    newpage.setList(activityList);
-                    newpage.setPageSize(pageSize);
-                    newpage.setTotalSize(count);
-                    return doObjResp(newpage);
+                    if(jo!=null) {
+                        int id = jo.getInteger("id");
+                        if (id != 0) {
+                            newAct = activityService.getActivityById(id);
+                            return doObjResp(newAct);
+                        } else {
+                            return faild("活动不存在~", false);
+                        }
+                    }else {
+                        return faild("参数异常~", false);
+                    }
                 }catch (Exception e){
                     e.printStackTrace();
                     return faild("失败~",false);
@@ -80,6 +97,7 @@ public class ActivityController extends BaseController {
             case 2:
                 try {
                     JSONObject jo = JSON.parseObject(json);
+                    if(jo!=null){
                     int pageStart = jo.getInteger("pageStart");
                     int pageSize = jo.getInteger("pageSize");
 
@@ -90,6 +108,47 @@ public class ActivityController extends BaseController {
                     newpage.setPageSize(pageSize);
                     newpage.setTotalSize(count);
                     return doObjResp(newpage);
+                    }else {
+                        return faild("参数异常~",false);
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                    return faild("失败~",false);
+                }
+
+            case 3:
+                try {
+                    SignUp signUp = p(json, SignUp.class);
+                    if(signUp!=null){
+
+                        if(signUp.getAid()!=0&&signUp.getUid()!=0){
+                            
+                            Activity act =  activityService.getActivityById(signUp.getAid());
+                            Member member = memberService.getMemberById(signUp.getUid());
+                            //判断是否符合等级
+                            if(act!=null&&member!=null){
+                            if(member.getLevel().equals(act.getLevel())){
+                                ////判断人员是否满员,参加人数小于总人数
+                                if(act.getJoinNumber()<act.getPeopleNumber()){
+                                    activityService.signUpRelease(signUp);
+                                    return doObjRespSuccess("报名成功");
+                                }else{
+                                    return faild("名额已满",false);
+                                }
+                            }else{
+                                return faild("不符合参与等级要求",false);
+                            }
+
+
+                        }else {
+                            return faild("参数为空~",false);
+                        }
+                        }else {
+                            return faild("参数为空~",false);
+                        }
+                    }else {
+                        return faild("参数为空~",false);
+                    }
                 }catch (Exception e){
                     e.printStackTrace();
                     return faild("失败~",false);

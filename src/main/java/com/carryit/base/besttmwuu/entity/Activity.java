@@ -15,18 +15,18 @@ public class Activity implements Serializable{
     private String address;//活动详细地址
     private float cost; //费用(免费为0.00)
     private int peopleNumber;//人数
-    private int level;//参加人员等级限制
+    private String level;//参加人员等级限制
     private String detail;//活动介绍
     private String images;
-    private String board名称;//圈子
+    private String board;//圈子
     private String levelname;//等级名称
-    private String joinNumber; //参加人数
+    private int joinNumber; //参加人数
 
-    public String getJoinNumber() {
+    public int getJoinNumber() {
         return joinNumber;
     }
 
-    public void setJoinNumber(String joinNumber) {
+    public void setJoinNumber(int joinNumber) {
         this.joinNumber = joinNumber;
     }
 
@@ -46,12 +46,12 @@ public class Activity implements Serializable{
         this.title = title;
     }
 
-    public String getBoard名称() {
-        return board名称;
+    public String getBoard() {
+        return board;
     }
 
-    public void setBoard名称(String board名称) {
-        this.board名称 = board名称;
+    public void setBoard(String board) {
+        this.board = board;
     }
 
     public Integer getUid() {
@@ -118,11 +118,11 @@ public class Activity implements Serializable{
         this.peopleNumber = peopleNumber;
     }
 
-    public int getLevel() {
+    public String getLevel() {
         return level;
     }
 
-    public void setLevel(int level) {
+    public void setLevel(String level) {
         this.level = level;
     }
 
