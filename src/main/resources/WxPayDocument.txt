@@ -13,16 +13,12 @@
          "code": 200,
          "data": {
              "appid": "wx18c2cdc67528ee31",
-             "body": "小马UU-UU圈主",
-             "fee_type": "CNY",
-             "mch_id": "1514027471",
-             "nonce_str": "hbIizVMTXaT6FVVu",
-             "notify_url": "http://xm.besttmw.com/besttmwuu-0.0.1/wx/notify",
-             "out_trade_no": "1539787464259",
-             "sign": "4CFD374DC9E65174D9F0D0321A79CA95",
-             "spbill_create_ip": "192.168.1.7",
-             "total_fee": 9000000,
-             "trade_type": "APP"
+             "noncestr": "wVwcSWlIFAuGfTpO",
+             "package": "Sign=WXPay",
+             "partnerid": "1514027471",
+             "prepayid": "wx1916290681461480724d573d0135647023",
+             "sign": "6C253F4B502B6C6C3412B4663E09A1CA",
+             "timestamp": 1539937746
          }
      }
 
@@ -40,16 +36,12 @@
          "code": 200,
          "data": {
              "appid": "wx18c2cdc67528ee31",
-             "body": "小马UU-用户充值",
-             "fee_type": "CNY",
-             "mch_id": "1514027471",
-             "nonce_str": "qXn75GMrjj2pCJeE",
-             "notify_url": "http://xm.besttmw.com/besttmwuu-0.0.1/wx/rechargeNotify",
-             "out_trade_no": "2_1539613741938",
-             "sign": "0D59558BE4B27F27CDE6840476A94403",
-             "spbill_create_ip": "127.0.0.1",
-             "total_fee": 300,
-             "trade_type": "APP"
+             "noncestr": "S4sb0Qc3q0yT5Wpn",
+             "package": "Sign=WXPay",
+             "partnerid": "1514027471",
+             "prepayid": "wx19162615113383eb599e03f00273157563",
+             "sign": "90A1587A3DC0462F036013F972A46307",
+             "timestamp": 1539937581
          }
      }
 
@@ -67,15 +59,11 @@
          "code": 200,
          "data": {
              "appid": "wx18c2cdc67528ee31",
-             "body": "小马UU-用户打赏",
-             "fee_type": "CNY",
-             "mch_id": "1514027471",
-             "nonce_str": "ZppPJo5TT5m8E3eA",
-             "notify_url": "http://xm.besttmw.com/besttmwuu-0.0.1/wx/rewardNotify",
-             "out_trade_no": "23_4_1539931543290",
-             "sign": "3C0DF062E30226F7FB0AE27841460C93",
-             "spbill_create_ip": "192.168.1.3",
-             "total_fee": 2000,
-             "trade_type": "APP"
+             "noncestr": "R1c4yNRrJEsfqcFd",
+             "package": "Sign=WXPay",
+             "partnerid": "1514027471",
+             "prepayid": "wx1916295546801796e0cc8eed0445385439",
+             "sign": "B9713384E17EC4B61DCE7DDF1C7B1B11",
+             "timestamp": 1539937795
          }
      }

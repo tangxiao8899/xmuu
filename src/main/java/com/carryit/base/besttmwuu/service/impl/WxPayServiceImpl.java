@@ -138,7 +138,7 @@ public class WxPayServiceImpl implements WxPayService{
         {
             jo.put("code",200);
             jo.put("msg","SUCCESS");
-            jo.put("data",parameters);
+            jo.put("data",parMap);
             return jo;
 
         } else
@@ -216,7 +216,7 @@ public class WxPayServiceImpl implements WxPayService{
         {
             jo.put("code",200);
             jo.put("msg","SUCCESS");
-            jo.put("data",parameters);
+            jo.put("data",parMap);
             return jo;
 
         } else
@@ -311,7 +311,7 @@ public class WxPayServiceImpl implements WxPayService{
         {
             jo.put("code",200);
             jo.put("msg","SUCCESS");
-            jo.put("data",parameters);
+            jo.put("data",parMap);
             return jo;
 
         } else
