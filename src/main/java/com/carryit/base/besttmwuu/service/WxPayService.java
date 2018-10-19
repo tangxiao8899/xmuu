@@ -34,10 +34,16 @@ public interface WxPayService {
 
 
     /**
-     * 更新账户信息
+     * 更新充值、提现账户信息
      * @param out_trade_no 商户订单号
      * @param total_fee 订单总金额
      */
     void updateRechargeInfo(String out_trade_no,String total_fee);
 
+    /**
+     * 更新打赏账户信息
+     * @param out_trade_no 商户订单号
+     * @param total_fee 订单总金额
+     */
+    void updateRewardInfo(String out_trade_no, String total_fee);
 }

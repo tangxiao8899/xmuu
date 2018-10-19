@@ -52,3 +52,30 @@
              "trade_type": "APP"
          }
      }
+
+3、微信打赏
+请求地址：http://ip:port/wx/wxReward
+请求类型：POST
+请求参数：{
+     	"fuid":23, //打赏用户ID
+     	"money":3,//打赏金额
+     	"tuid":4 //被打赏用户ID
+
+     }
+响应结果：{
+         "msg": "SUCCESS",
+         "code": 200,
+         "data": {
+             "appid": "wx18c2cdc67528ee31",
+             "body": "小马UU-用户打赏",
+             "fee_type": "CNY",
+             "mch_id": "1514027471",
+             "nonce_str": "ZppPJo5TT5m8E3eA",
+             "notify_url": "http://xm.besttmw.com/besttmwuu-0.0.1/wx/rewardNotify",
+             "out_trade_no": "23_4_1539931543290",
+             "sign": "3C0DF062E30226F7FB0AE27841460C93",
+             "spbill_create_ip": "192.168.1.3",
+             "total_fee": 2000,
+             "trade_type": "APP"
+         }
+     }

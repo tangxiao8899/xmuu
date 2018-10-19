@@ -9,7 +9,7 @@
 			ims_ewei_shop_member_level b on a.level = b.level where a.uid = #{uid}
 			select id,avatar,realName,city,nickName from ims_ewei_shop_member m where 
 			id = #{uid} -->
-		SELECT a.id,avatar,realName,city,nickName,b.levelname levelName,zhuquanzi,a.level FROM
+		SELECT a.id,avatar,realName,city,nickName,b.levelname levelName,zhuquanzi,a.level,a.credit2 FROM
 		ims_ewei_shop_member a LEFT JOIN ims_ewei_shop_member_level b ON
 		a.level = b.level WHERE a.uid = #{uid}
 	</select>

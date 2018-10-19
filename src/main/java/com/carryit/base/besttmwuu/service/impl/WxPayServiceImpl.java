@@ -256,8 +256,36 @@ public class WxPayServiceImpl implements WxPayService{
                 return jo;
             }
 
+            //打赏
+            //1、检查账户余额是否足够打赏
+            Member m = memberService.getMemberById(Integer.valueOf(parmJo.getString("fuid")));
+            if(StringUtils.isEmpty(m)){
+                jo.put("code",404);
+                jo.put("msg","打赏账户不存在");
+                jo.put("data","");
+                return jo;
+            }else{
+                float f = m.getCredit2(); //账户余额
+                if(f < Float.valueOf(parmJo.getString("money"))){
+                    jo.put("code",400);
+                    jo.put("msg","打赏账户余额不足，请先充值");
+                    jo.put("data","");
+                    return jo;
+                }
+            }
+
+            //2、打赏下单
+            Order order = new Order();
+            order.setOrdersn(System.currentTimeMillis() + PropertyUtil.random() + ""); //订单号
+            order.setPrice(Long.valueOf(parmJo.getString("money"))); //订单价格
+            order.setStatus(2); //待付款
+            order.setUid(Integer.valueOf(parmJo.getString("fuid"))); //下单用户
+            order.setPaytype(2); //在线支付
+            order.setCreatetime(new Date().getTime());//创建时间
+
+
             parameters.put("body","小马UU-用户打赏"); //商品描述
-            parameters.put("out_trade_no",  System.currentTimeMillis() + PayCommonUtil.CreateNoncestr()); // 订单id这里我的订单id生成规则是订单id+时间
+            parameters.put("out_trade_no", parmJo.getString("fuid") + "_" +parmJo.getString("tuid")+"_" + System.currentTimeMillis()); // 订单id这里我的订单id生成规则是uid+充值类型+时间
             parameters.put("spbill_create_ip", PropertyUtil.getIp());
             parameters.put("total_fee", Long.valueOf(parmJo.getString("money")) *100); // 测试时，每次支付一分钱，微信支付所传的金额是以分为单位的，因此实际开发中需要x100
         }else{
@@ -332,6 +360,54 @@ public class WxPayServiceImpl implements WxPayService{
         entity.setType(0);
 
         imsUserCapitalFlowService.save(entity);
+    }
+
+    @Override
+    @Transactional
+    public void updateRewardInfo(String out_trade_no, String total_fee) {
+        //TODO 待后期优化
+
+       //更新订单状态
+        Order order = new Order();
+        order.setOrdersn(out_trade_no);
+        order.setStatus(3); //付款成功
+        //支付成功，更新订单状态
+        orderService.update(order);
+
+
+        //打赏用户ID
+        String  fuid = out_trade_no.split("_")[0];
+        //被打赏用户ID
+        String tuid = out_trade_no.split("_")[1];
+
+        //查询Member表账户信息
+        Member fmember = memberService.getMemberById(Integer.valueOf(fuid));
+        Member tmember = memberService.getMemberById(Integer.valueOf(tuid));
+
+        float Creditf = fmember.getCredit2()  - Float.valueOf(total_fee);
+        float Creditt = tmember.getCredit2()  + Float.valueOf(total_fee);
+
+        //更新用户账户情况
+        memberService.updateMemberByUid(Integer.valueOf(fuid),Creditf);
+        memberService.updateMemberByUid(Integer.valueOf(tuid),Creditt);
+
+        //记录资金流水
+        ImsUserCapitalFlowEntity entity = new ImsUserCapitalFlowEntity();
+        entity.setUid(Integer.valueOf(fuid));
+        entity.setPrice(Long.valueOf(total_fee)*100); //记录单位为分
+        entity.setSource(0); //充值
+        entity.setType(1); //支出
+
+        imsUserCapitalFlowService.save(entity);
+
+
+        ImsUserCapitalFlowEntity entity2 = new ImsUserCapitalFlowEntity();
+        entity2.setUid(Integer.valueOf(tuid));
+        entity2.setPrice(Long.valueOf(total_fee)*100); //记录单位为分
+        entity2.setSource(1); //打赏
+        entity2.setType(0); //收入
+
+        imsUserCapitalFlowService.save(entity2);
     }
 
 
