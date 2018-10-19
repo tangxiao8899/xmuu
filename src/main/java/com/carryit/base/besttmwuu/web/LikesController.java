@@ -95,15 +95,21 @@ public class LikesController extends BaseController {
                     PraiseReq pReq = p(json, PraiseReq.class);
                     if(pReq!=null){
     //                    userPostService.updateFabulousByUid(breq.uid);
-                        TPraise praise = new TPraise();
-                        praise.setUid(pReq.getUid());
-                        praise.setImsEweiShopSnsPostId(pReq.getId());
-                        praise.setCreatetime(new Date());
-    //                	点赞
-                        praiseService.praise(praise);
-                        return doObjRespSuccess("点赞成功");
+                        if("0".equals(pReq.getFabulous())){
+                            praiseService.deletepraise(pReq.id,pReq.uid);
+                            return doObjRespSuccess("取消点赞成功");
+                        }else if("1".equals(pReq.getFabulous())){
+                            TPraise praise = new TPraise();
+                            praise.setUid(pReq.getUid());
+                            praise.setImsEweiShopSnsPostId(pReq.getId());
+                            praise.setCreatetime(new Date());
+                            //                	点赞
+                            praiseService.praise(praise);
+                            return doObjRespSuccess("点赞成功");
+                        }
+
                     }else {
-                        return faild("失败~", false);
+                        return faild("参数异常~", false);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

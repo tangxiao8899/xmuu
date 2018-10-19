@@ -45,4 +45,14 @@ public class PraiseServiceImpl implements PraiseService {
 		return praiseMapper.getPraiseImage(id);
 	}
 
+	@Override
+	public TPraise getPraise(int uid, Integer id) {
+		return praiseMapper.getPraise(uid,id);
+	}
+
+	@Override
+	public void deletepraise(int id, int uid) {
+		praiseMapper.deletepraise(id,uid);
+	}
+
 }

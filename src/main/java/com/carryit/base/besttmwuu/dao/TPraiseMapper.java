@@ -33,4 +33,8 @@ public interface TPraiseMapper {
     long getPraiseCount(Integer id);
 
     List<String> getPraiseImage(Integer id);
+
+    TPraise getPraise(@Param("uid") int uid, @Param("id") Integer id);
+
+    void deletepraise(@Param("id") int id, @Param("uid") int uid);
 }
