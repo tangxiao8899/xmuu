@@ -454,7 +454,13 @@ public class CirclesController extends BaseController {
                                     long newPraiseCount  = praiseService.getPraiseCount(post.getId());
                                     //点赞头像
                                     List<String> newAvatarList = praiseService.getPraiseImage(post.getId());
-
+                                    //查询当前动态当前用户是否点赞
+                                    TPraise pr = praiseService.getPraise(newBoardTopic.getUid(),post.getId());
+                                    if(pr==null){
+                                        post.setFabulous(0);//没有点赞
+                                    }else {
+                                        post.setFabulous(1);//已经点赞
+                                    }
                                     newTrendsData.setPost(post);
                                     newTrendsData.setCommentList(newCommentList);
                                     newTrendsData.setPraiseCount(newPraiseCount);

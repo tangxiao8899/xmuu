@@ -201,4 +201,13 @@
   <select id="getPraiseImage" resultType="String" >
     select m.avatar from t_praise p LEFT JOIN ims_ewei_shop_member m on p.uid = m.uid where p.ims_ewei_shop_sns_post_id =#{id}
   </select>
+
+  <select id="getPraise" resultType="com.carryit.base.besttmwuu.entity.TPraise" >
+    select id,ims_ewei_shop_sns_post_id imsEweiShopSnsPostId,uid from t_praise where ims_ewei_shop_sns_post_id =#{id} and uid=#{uid}
+  </select>
+
+  <delete id="deletepraise" >
+    delete from t_praise
+    where ims_ewei_shop_sns_post_id = #{id} and uid=#{uid}
+  </delete>
 </mapper>

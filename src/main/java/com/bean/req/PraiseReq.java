@@ -8,8 +8,8 @@ public class PraiseReq extends CommonRequest {
 	public int id;
 //	点赞用户id
 	public int uid;
-//	圈子id
-	private int bid;
+//	点赞状态 ("0"为取消点赞,"1"为点赞)
+	private String fabulous;
 	
 	public int getId() {
 		return id;
@@ -23,12 +23,12 @@ public class PraiseReq extends CommonRequest {
 	public void setUid(int uid) {
 		this.uid = uid;
 	}
-	public int getBid() {
-		return bid;
+
+	public String getFabulous() {
+		return fabulous;
 	}
-	public void setBid(int bid) {
-		this.bid = bid;
+
+	public void setFabulous(String fabulous) {
+		this.fabulous = fabulous;
 	}
-	
-	
 }

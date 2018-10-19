@@ -18,4 +18,8 @@ public interface PraiseService {
 	long getPraiseCount(Integer id);
 
 	List<String> getPraiseImage(Integer id);
+
+	TPraise getPraise(int uid, Integer id);
+
+	void deletepraise(int id, int uid);
 }
