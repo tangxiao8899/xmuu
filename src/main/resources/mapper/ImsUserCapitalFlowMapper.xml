@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.carryit.base.besttmwuu.dao.ImsUserCapitalFlowDao">
+
+    <!--保存资金流水-->
+    <insert id="save">
+        insert into ims_user_capital_flow (uid,price,type,source,createTime)
+        values(#{uid},#{price},#{type},#{source},NOW())
+    </insert>
+
+</mapper>

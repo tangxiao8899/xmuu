@@ -229,8 +229,10 @@ public class WxPayControllrt extends BaseController {
                     resXml = "<xml>" + "<return_code><![CDATA[FAIL]]></return_code>"
                             + "<return_msg><![CDATA[交易失败]]></return_msg>" + "</xml> ";
                 } else {
-                    //更新订单状态
+                    //更新订单状态，记录资金流水
                     wxPayService.updateRechargeInfo(out_trade_no,total_fee);
+
+
 
                     resXml = "<xml>" + "<return_code><![CDATA[SUCCESS]]></return_code>"
                             + "<return_msg><![CDATA[OK]]></return_msg>" + "</xml> ";

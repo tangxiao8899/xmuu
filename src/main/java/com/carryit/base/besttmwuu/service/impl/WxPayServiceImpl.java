@@ -3,13 +3,11 @@ package com.carryit.base.besttmwuu.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.base.ResultPojo;
+import com.carryit.base.besttmwuu.entity.ImsUserCapitalFlowEntity;
 import com.carryit.base.besttmwuu.entity.Member;
 import com.carryit.base.besttmwuu.entity.Order;
 import com.carryit.base.besttmwuu.entity.Product;
-import com.carryit.base.besttmwuu.service.MemberService;
-import com.carryit.base.besttmwuu.service.OrderService;
-import com.carryit.base.besttmwuu.service.ProductService;
-import com.carryit.base.besttmwuu.service.WxPayService;
+import com.carryit.base.besttmwuu.service.*;
 import com.util.PayCommonUtil;
 import com.util.PropertyUtil;
 import com.util.XMLUtil;
@@ -36,6 +34,9 @@ public class WxPayServiceImpl implements WxPayService{
 
     @Autowired
     MemberService memberService;
+
+    @Autowired
+    ImsUserCapitalFlowService imsUserCapitalFlowService;
 
 
     @Override
@@ -322,6 +323,15 @@ public class WxPayServiceImpl implements WxPayService{
             //更新用户账户情况
             memberService.updateMemberByUid(Integer.valueOf(uid),Credit);
         }
+
+        //记录资金流水
+        ImsUserCapitalFlowEntity entity = new ImsUserCapitalFlowEntity();
+        entity.setUid(Integer.valueOf(uid));
+        entity.setPrice(Long.valueOf(total_fee)*100); //记录单位为分
+        entity.setSource(0); //充值
+        entity.setType(0);
+
+        imsUserCapitalFlowService.save(entity);
     }
 
 
