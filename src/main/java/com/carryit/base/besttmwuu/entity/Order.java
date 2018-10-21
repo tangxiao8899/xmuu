@@ -10,7 +10,7 @@ public class Order implements Serializable {
 
     private String ordersn;//订单号
 
-    private long price;//价格
+    private Double price;//价格
 
     private Integer status;//状态-1取消状态0付款待发货1已付款3付款成功 2:待付款
 
@@ -44,11 +44,11 @@ public class Order implements Serializable {
         this.ordersn = ordersn;
     }
 
-    public long getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(long price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

@@ -98,7 +98,7 @@ public class WxPayServiceImpl implements WxPayService{
 
             Order order = new Order();
             order.setOrdersn(System.currentTimeMillis() + PropertyUtil.random() + ""); //订单号
-            order.setPrice(product.getPrice() * Long.valueOf(parmJo.getString("productNum"))); //订单价格
+            order.setPrice(product.getPrice() * Double.valueOf(parmJo.getString("productNum"))); //订单价格
             order.setStatus(2); //待付款
             order.setUid(Integer.valueOf(parmJo.getString("uid"))); //下单用户
             order.setPaytype(2); //在线支付
@@ -110,7 +110,7 @@ public class WxPayServiceImpl implements WxPayService{
             parameters.put("body","小马UU-"+product.getLevelName()); //商品描述
             parameters.put("out_trade_no",  order.getOrdersn()); // 订单id这里我的订单id生成规则是订单id+时间
             parameters.put("spbill_create_ip", PropertyUtil.getIp());
-            parameters.put("total_fee", order.getPrice()*100); // 测试时，每次支付一分钱，微信支付所传的金额是以分为单位的，因此实际开发中需要x100
+            parameters.put("total_fee", Math.round(order.getPrice()*100)); // 测试时，每次支付一分钱，微信支付所传的金额是以分为单位的，因此实际开发中需要x100
         }else{
             jo.put("code",400);
             jo.put("msg","参数异常");
@@ -180,7 +180,7 @@ public class WxPayServiceImpl implements WxPayService{
 
             Order order = new Order();
             order.setOrdersn(System.currentTimeMillis() + PropertyUtil.random() + ""); //订单号
-            order.setPrice(Long.valueOf(parmJo.getString("money"))); //订单价格
+            order.setPrice(Double.valueOf(parmJo.getString("money"))); //订单价格
             order.setStatus(2); //待付款
             order.setUid(Integer.valueOf(parmJo.getString("uid"))); //下单用户
             order.setPaytype(2); //在线支付
@@ -192,7 +192,7 @@ public class WxPayServiceImpl implements WxPayService{
             parameters.put("body","小马UU-用户充值"); //商品描述
             parameters.put("out_trade_no", parmJo.getString("uid") + "_" +parmJo.getString("type")+"_" + System.currentTimeMillis()); // 订单id这里我的订单id生成规则是uid+充值类型+时间
             parameters.put("spbill_create_ip", PropertyUtil.getIp());
-            parameters.put("total_fee", Long.valueOf(parmJo.getString("money")) *100); // 测试时，每次支付一分钱，微信支付所传的金额是以分为单位的，因此实际开发中需要x100
+            parameters.put("total_fee", Math.round(Double.valueOf(parmJo.getString("money")) *100)); // 测试时，每次支付一分钱，微信支付所传的金额是以分为单位的，因此实际开发中需要x100
         }else{
             jo.put("code",400);
             jo.put("msg","参数异常");
@@ -277,7 +277,7 @@ public class WxPayServiceImpl implements WxPayService{
             //2、打赏下单
             Order order = new Order();
             order.setOrdersn(System.currentTimeMillis() + PropertyUtil.random() + ""); //订单号
-            order.setPrice(Long.valueOf(parmJo.getString("money"))); //订单价格
+            order.setPrice(Double.valueOf(parmJo.getString("money"))); //订单价格
             order.setStatus(2); //待付款
             order.setUid(Integer.valueOf(parmJo.getString("fuid"))); //下单用户
             order.setPaytype(2); //在线支付
@@ -287,7 +287,7 @@ public class WxPayServiceImpl implements WxPayService{
             parameters.put("body","小马UU-用户打赏"); //商品描述
             parameters.put("out_trade_no", parmJo.getString("fuid") + "_" +parmJo.getString("tuid")+"_" + System.currentTimeMillis()); // 订单id这里我的订单id生成规则是uid+充值类型+时间
             parameters.put("spbill_create_ip", PropertyUtil.getIp());
-            parameters.put("total_fee", Long.valueOf(parmJo.getString("money")) *100); // 测试时，每次支付一分钱，微信支付所传的金额是以分为单位的，因此实际开发中需要x100
+            parameters.put("total_fee", Math.round(Double.valueOf(parmJo.getString("money")) *100)); // 测试时，每次支付一分钱，微信支付所传的金额是以分为单位的，因此实际开发中需要x100
         }else{
             jo.put("code",400);
             jo.put("msg","参数异常");
