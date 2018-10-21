@@ -14,7 +14,7 @@
          "data": {
              "appid": "wx18c2cdc67528ee31",
              "noncestr": "wVwcSWlIFAuGfTpO",
-             "package": "Sign=WXPay",
+             "packageValue": "Sign=WXPay",
              "partnerid": "1514027471",
              "prepayid": "wx1916290681461480724d573d0135647023",
              "sign": "6C253F4B502B6C6C3412B4663E09A1CA",
@@ -37,7 +37,7 @@
          "data": {
              "appid": "wx18c2cdc67528ee31",
              "noncestr": "S4sb0Qc3q0yT5Wpn",
-             "package": "Sign=WXPay",
+             "packageValue": "Sign=WXPay",
              "partnerid": "1514027471",
              "prepayid": "wx19162615113383eb599e03f00273157563",
              "sign": "90A1587A3DC0462F036013F972A46307",
@@ -60,7 +60,7 @@
          "data": {
              "appid": "wx18c2cdc67528ee31",
              "noncestr": "R1c4yNRrJEsfqcFd",
-             "package": "Sign=WXPay",
+             "packageValue": "Sign=WXPay",
              "partnerid": "1514027471",
              "prepayid": "wx1916295546801796e0cc8eed0445385439",
              "sign": "B9713384E17EC4B61DCE7DDF1C7B1B11",
