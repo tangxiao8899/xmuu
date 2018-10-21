@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserService {
         }
         JSONObject subjo = JSON.parseObject(rp.getData().toString());
         if(subjo.containsKey("access_token")){
-            token = jo.getString("access_token");
+            token = subjo.getString("access_token");
         }
         //2、同步环信密码
         if(!StringUtils.isEmpty(token)){
