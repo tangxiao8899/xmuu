@@ -12,13 +12,16 @@ import com.carryit.base.besttmwuu.entity.UserLevel;
 import com.carryit.base.besttmwuu.service.ActivityService;
 import com.carryit.base.besttmwuu.service.MemberService;
 import com.carryit.base.besttmwuu.service.UserLevelService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -63,6 +66,12 @@ public class ActivityController extends BaseController {
     }
 
 
+    public static String longToDate(long lo){
+        Date date = new Date(lo);
+        SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return sd.format(date);
+    }
+
     @Override
     public JSONObject runTask(String json, int cmd) {
         switch (cmd){
@@ -83,6 +92,9 @@ public class ActivityController extends BaseController {
                         int id = jo.getInteger("id");
                         if (id != 0) {
                             newAct = activityService.getActivityById(id);
+                            newAct.setCerateTime(longToDate(Long.parseLong(newAct.getCerateTime())));
+                            newAct.setEndTime(longToDate(Long.parseLong(newAct.getEndTime())));
+                            newAct.setStartTime(longToDate(Long.parseLong(newAct.getStartTime())));
                             return doObjResp(newAct);
                         } else {
                             return faild("活动不存在~", false);
@@ -122,7 +134,6 @@ public class ActivityController extends BaseController {
                     if(signUp!=null){
 
                         if(signUp.getAid()!=0&&signUp.getUid()!=0){
-                            
                             Activity act =  activityService.getActivityById(signUp.getAid());
                             Member member = memberService.getMemberById(signUp.getUid());
                             //判断是否符合等级
@@ -135,9 +146,16 @@ public class ActivityController extends BaseController {
                                 }else{
                                     return faild("名额已满",false);
                                 }
-                            }else{
-                                return faild("不符合参与等级要求",false);
-                            }
+                            }else if(StringUtils.isBlank(act.getLevel())){
+                                if(act.getJoinNumber()<act.getPeopleNumber()){
+                                    activityService.signUpRelease(signUp);
+                                    return doObjRespSuccess("报名成功");
+                                }else{
+                                    return faild("名额已满",false);
+                                }
+                            }else {
+                                    return faild("不符合参与等级要求",false);
+                                }
 
 
                         }else {
