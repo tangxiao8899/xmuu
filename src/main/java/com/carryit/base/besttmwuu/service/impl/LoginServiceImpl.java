@@ -61,14 +61,14 @@ public class LoginServiceImpl implements LoginService {
                         return jo;
                     }else{
                         //token错误，重新登录
-                        jo.put("code",401);
+                        jo.put("code",403);
                         jo.put("msg","token错误，请重新登录");
                         jo.put("data",null);
                         return jo;
                     }
                 }else{ //不存在token 说明token过期
                     //重新登录
-                    jo.put("code",401);
+                    jo.put("code",403);
                     jo.put("msg","token过期，请重新登录");
                     jo.put("data",null);
                     return jo;
