@@ -53,6 +53,8 @@ public class LoginServiceImpl implements LoginService {
                         JSONObject data = new JSONObject();
                         data.put("token",key);
                         data.put("uid",key.split("_")[0]);
+                        data.put("hxu",key.split("_")[1]);
+                        data.put("hxp",key.split("_")[2]);
                         jo.put("code",200);
                         jo.put("msg","登录成功");
                         jo.put("data",data);
@@ -93,13 +95,15 @@ public class LoginServiceImpl implements LoginService {
             }else{ //登录成功
                 JSONObject data = new JSONObject();
 
-                String k = user.getUid()+"_"+ user.getPhone() + System.currentTimeMillis();
+                String k = user.getUid()+"_"+ user.getPhone()+"_"+user.getPassword() + System.currentTimeMillis();
                 Cookie cookie = new Cookie("token",k);
                 cookie.setMaxAge(10*24*60*60); //设置token有效期为10天
                 cookie.setPath("/");
                 response.addCookie(cookie);
                 data.put("token",k);
                 data.put("uid",user.getUid());
+                data.put("hxu",user.getPhone());
+                data.put("hxp",user.getPassword());
                 jo.put("code",200);
                 jo.put("msg","登录成功");
                 jo.put("data",data);
