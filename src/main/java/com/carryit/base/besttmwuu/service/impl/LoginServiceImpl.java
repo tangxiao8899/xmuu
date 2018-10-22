@@ -95,7 +95,7 @@ public class LoginServiceImpl implements LoginService {
             }else{ //登录成功
                 JSONObject data = new JSONObject();
 
-                String k = user.getUid()+"_"+ user.getPhone()+"_"+user.getPassword() + System.currentTimeMillis();
+                String k = user.getUid()+"_"+ user.getPhone()+"_"+user.getPassword()+"_" + System.currentTimeMillis();
                 Cookie cookie = new Cookie("token",k);
                 cookie.setMaxAge(10*24*60*60); //设置token有效期为10天
                 cookie.setPath("/");
