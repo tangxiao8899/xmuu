@@ -207,7 +207,14 @@ public class CirclesController extends BaseController {
                             if (newboardList.size() > 10) {
                                 newboardList = newboardList.subList(0, 10);
                             }
+                            for (int i = 0; i < newboardList.size(); i++) {
+                                if(newboardList.get(i).getBanner()!=null){
+                                    List<String> result = Arrays.asList(newboardList.get(i).getBanner().split(","));
+                                    newboardList.get(i).setBannerList(result);
+                                }
+                            }
                         }
+
                     }
 
                 } catch (Exception e) {

@@ -1,6 +1,7 @@
 package com.carryit.base.besttmwuu.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Board implements Serializable {
 
@@ -12,6 +13,15 @@ public class Board implements Serializable {
     private Integer topic; //话题数
     private Integer concerns;//关注数
     private Boolean follow; //是否关注
+    private List<String> bannerList;//图片集合
+
+    public List<String> getBannerList() {
+        return bannerList;
+    }
+
+    public void setBannerList(List<String> bannerList) {
+        this.bannerList = bannerList;
+    }
 
     public Boolean getFollow() {
         return follow;
