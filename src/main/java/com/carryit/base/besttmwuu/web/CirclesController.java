@@ -478,6 +478,10 @@ public class CirclesController extends BaseController {
                                         String date = fm.format(new Date(post.getCreatetime()));
                                         post.setCreateDate(date);
                                     }
+                                    if(post.getImage()!=null){
+                                        List<String> result = Arrays.asList(post.getImage().split(","));
+                                        post.setImageList(result);
+                                    }
                                 }
                             }
                             newtopicCount =  boardFollowService.getNewAllBoardTopicCount(boardIDList);
