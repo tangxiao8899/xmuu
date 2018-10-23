@@ -69,4 +69,12 @@ public interface HximService {
      * @throws Exception
      */
     ResultPojo resetPassword(String json)throws Exception;
+
+    /**
+     * 获取用户 -单个用户、批量用户
+     * @param json
+     * @return
+     * @throws Exception
+     */
+    ResultPojo getUser(String json)throws Exception;
 }

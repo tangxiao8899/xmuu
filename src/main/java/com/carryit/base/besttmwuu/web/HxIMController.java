@@ -81,6 +81,25 @@ public class HxIMController {
     }
 
     /**
+     * 获取--单个用户|批量用户
+     * @param json
+     * @return
+     */
+    @RequestMapping(value = "/getUser", method = {RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public ResultPojo getUser(@RequestBody(required = false) String json) {
+        try {
+            return  hximService.getUser(json);
+        } catch (Exception e) {
+            e.printStackTrace();
+            ResultPojo jo = new ResultPojo();
+            jo.setCode(2);
+            jo.setMsg("失败");
+            jo.setData("");
+            return jo;
+        }
+    }
+
+    /**
      * 给 IM 用户添加好友|删除好友
      * @param json
      * @return

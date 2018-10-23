@@ -242,6 +242,31 @@ public class HximServiceImpl implements HximService {
         return rp;
     }
 
+    @Override
+    public ResultPojo getUser(String json) throws Exception {
+        ResultPojo rp = new ResultPojo();
+        if (!StringUtils.isEmpty(json)) {
+            JSONObject jo = JSON.parseObject(json);
+            //校验授权信息
+            if (!jo.containsKey("token")) {
+                rp.setCode(401);
+                rp.setMsg("请先获取授权信息");
+                return rp;
+            }
+            //判断是单个还是
+            if (jo.containsKey("limit")) { // 多个用户
+                rp = JerseyClientUtil.getTokenMethod(jo.getString("token"), "/users?limit="+jo.getString("limit"));
+            } else { // 单个注册
+                rp = JerseyClientUtil.getTokenMethod(jo.getString("token"), "/users/"+jo.getString("username"));
+            }
+        } else {
+            rp.setCode(400);
+            rp.setMsg("请求参数异常");
+
+        }
+        return rp;
+    }
+
     /**
      * 校验参数
      *

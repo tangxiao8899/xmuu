@@ -263,3 +263,140 @@ IM环信接口文档
               "timestamp": 1536304578888
           }
       }
+10、获取单个IM用户
+请求地址：http://ip:port/hx/getUser
+请求类型：POST
+请求参数：{
+      "username":"u1"
+      "token": "YWMtTA62ZrJpEei9xu9oxuHsLQAAAAAAAAAAAAAAAAAAAAEkfycAnqcR6LF7AUVfW6SDAgMAAAFlssU8jgBPGgD13Bzal9mDcYvB1gg-FZN-0GT919bFe3jPTgKc_n0t6g"
+    }
+响应结果：{
+         "code": 200,
+         "msg": "请求成功",
+         "data": {
+             "duration": 10,
+             "path": "/users",
+             "entities": [
+                 {
+                     "created": 1536155313875,
+                     "modified": 1536155313875,
+                     "type": "user",
+                     "uuid": "6189d230-b112-11e8-a8d1-cf2f516df90f",
+                     "username": "u1",
+                     "activated": true
+                 }
+             ],
+             "count": 1,
+             "action": "get",
+             "uri": "http://a1.easemob.com/1176180808228091/xiaomauu/users/u1",
+             "timestamp": 1540300392488
+         }
+     }
+
+11、获取多个IM用户
+请求地址：http://ip:port/hx/getUser
+请求类型：POST
+请求参数：{
+      "limit":10 //最多支持20个
+      "token": "YWMtTA62ZrJpEei9xu9oxuHsLQAAAAAAAAAAAAAAAAAAAAEkfycAnqcR6LF7AUVfW6SDAgMAAAFlssU8jgBPGgD13Bzal9mDcYvB1gg-FZN-0GT919bFe3jPTgKc_n0t6g"
+    }
+响应结果：{
+         "code": 200,
+         "msg": "请求成功",
+         "data": {
+             "duration": 28,
+             "cursor": "LTgzNDAxMjM3OTpPN3VISUxXS0VlaWZVUGxtLXFUUHZR",
+             "path": "/users",
+             "entities": [
+                 {
+                     "created": 1534328728313,
+                     "modified": 1536846546644,
+                     "type": "user",
+                     "uuid": "87b3de90-a075-11e8-8867-2fc29c2e2915",
+                     "username": "xiaomauu001",
+                     "activated": true
+                 },
+                 {
+                     "created": 1534328748823,
+                     "modified": 1534328748823,
+                     "type": "user",
+                     "uuid": "93ed7270-a075-11e8-85f9-cd3810e08286",
+                     "username": "xiaomauu002",
+                     "activated": true
+                 },
+                 {
+                     "created": 1536153041051,
+                     "modified": 1536153041051,
+                     "type": "user",
+                     "uuid": "16d466b0-b10d-11e8-b54f-db56a57e4492",
+                     "username": "jliu",
+                     "activated": true
+                 },
+                 {
+                     "created": 1536155262991,
+                     "modified": 1536155262991,
+                     "type": "user",
+                     "uuid": "433589f0-b112-11e8-b09b-f5430cda9b81",
+                     "username": "jliu2",
+                     "activated": true
+                 },
+                 {
+                     "created": 1536155313875,
+                     "modified": 1536155313875,
+                     "type": "user",
+                     "uuid": "6189d230-b112-11e8-a8d1-cf2f516df90f",
+                     "username": "u1",
+                     "activated": true
+                 },
+                 {
+                     "created": 1536155313877,
+                     "modified": 1536155313877,
+                     "type": "user",
+                     "uuid": "618a2050-b112-11e8-8fc0-b7d3a0f2e694",
+                     "username": "u2",
+                     "activated": true
+                 },
+                 {
+                     "created": 1536302646466,
+                     "modified": 1536302646466,
+                     "type": "user",
+                     "uuid": "6a9b1a20-b269-11e8-818c-7753bd2d31bf",
+                     "username": "jliu3",
+                     "activated": true
+                 },
+                 {
+                     "created": 1536302883837,
+                     "modified": 1536302883837,
+                     "type": "user",
+                     "uuid": "f8170ad0-b269-11e8-9a98-bd5e81e1cebf",
+                     "username": "u3",
+                     "activated": true
+                 },
+                 {
+                     "created": 1536302883840,
+                     "modified": 1536302883840,
+                     "type": "user",
+                     "uuid": "f8178000-b269-11e8-b993-5766ee2b982b",
+                     "username": "u4",
+                     "activated": true
+                 },
+                 {
+                     "created": 1536646594706,
+                     "modified": 1536646594706,
+                     "type": "user",
+                     "uuid": "3bbb8720-b58a-11e8-9f50-f966faa4cfbd",
+                     "username": "lin",
+                     "activated": true
+                 }
+             ],
+             "count": 10,
+             "action": "get",
+             "params": {
+                 "limit": [
+                     "10"
+                 ]
+             },
+             "uri": "http://a1.easemob.com/1176180808228091/xiaomauu/users",
+             "timestamp": 1540300479095
+         }
+     }
