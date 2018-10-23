@@ -1,6 +1,7 @@
 package com.carryit.base.besttmwuu.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Post implements Serializable {
     private Integer id;
@@ -29,6 +30,15 @@ public class Post implements Serializable {
 
     private int fabulous;//点赞
 
+    private List<String> imageList;
+
+    public List<String> getImageList() {
+        return imageList;
+    }
+
+    public void setImageList(List<String> imageList) {
+        this.imageList = imageList;
+    }
 
     public Integer getId() {
         return id;
