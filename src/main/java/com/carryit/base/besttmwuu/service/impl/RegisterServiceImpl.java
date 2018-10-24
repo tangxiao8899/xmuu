@@ -5,9 +5,12 @@ import com.alibaba.fastjson.JSONObject;
 import com.base.ResultPojo;
 import com.bean.RegisterReq;
 import com.carryit.base.besttmwuu.dao.UserDao;
+import com.carryit.base.besttmwuu.entity.Member;
 import com.carryit.base.besttmwuu.entity.User;
 import com.carryit.base.besttmwuu.service.HximService;
+import com.carryit.base.besttmwuu.service.MemberService;
 import com.carryit.base.besttmwuu.service.UserService;
+import com.util.NameUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +26,9 @@ public class RegisterServiceImpl implements UserService {
 
     @Autowired
     private HximService hximService;
+
+    @Autowired
+    private MemberService memberService;
 
 
     public User beiginRegister(RegisterReq req) {
@@ -44,8 +50,12 @@ public class RegisterServiceImpl implements UserService {
         boolean result = false;
         try {
             //注册到平台
-            userDao.insertSelective(record);
-
+            int uid = userDao.insertSelective(record);
+            //新增一条会员资料记录
+            Member member = new Member();
+            member.setNickName(NameUtil.getName());
+            member.setUid(uid);
+            //memberService.addMember(member);
             //同步注册到环信
             //1、获取环信token
             String token = null;

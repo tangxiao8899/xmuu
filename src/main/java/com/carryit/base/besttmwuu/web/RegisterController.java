@@ -190,7 +190,7 @@ public class RegisterController extends BaseController {
         return null;
     }
 
-    public JSONObject register(String json) {
+/*    public JSONObject register(String json) {
         try {
             Log.e("请求字符串=" + json);
             if (json == null || "\"\"".equals(json) || json.isEmpty()) {
@@ -235,7 +235,7 @@ public class RegisterController extends BaseController {
             e.printStackTrace();
             return faild("失败~", false);
         }
-    }
+    }*/
 
 
     //TODO
