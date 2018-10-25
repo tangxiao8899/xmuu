@@ -69,5 +69,10 @@ public class MemberServiceImpl implements MemberService {
         memberDao.updateMemberByUid(uid,credit2);
     }
 
+    @Override
+    public Member getMemberByPhone(String phone) {
+        return memberDao.getMemberByPhone(phone);
+    }
+
 
 }

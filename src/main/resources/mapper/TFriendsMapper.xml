@@ -4,8 +4,8 @@
 
     <!--保存好友请求-->
    <insert id="save">
-        insert into t_friends(uid,nickName,avatar,processingTime,state)
-       values(#{uid},#{nickName},#{avatar},#{processingTime},#{state})
+        insert into t_friends(uid,nickName,avatar,processingTime,state,toAddUsername)
+       values(#{uid},#{nickName},#{avatar},#{processingTime},#{state},#{toAddUsername})
 
    </insert>
 

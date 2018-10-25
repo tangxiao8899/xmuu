@@ -36,4 +36,6 @@ public interface MemberDao {
      * @param credit2 余额
      */
     void updateMemberByUid(@Param("uid") int uid, @Param("credit2") float credit2);
+
+    Member getMemberByPhone(String phone);
 }

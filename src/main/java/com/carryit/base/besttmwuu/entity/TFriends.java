@@ -14,6 +14,16 @@ public class TFriends implements Serializable {
     private String avatar; //用户头像
     private Date processingTime; //申请好友时间
     private Date withTime; //申请通过时间
+
+    public String getToAddUsername() {
+        return toAddUsername;
+    }
+
+    public void setToAddUsername(String toAddUsername) {
+        this.toAddUsername = toAddUsername;
+    }
+
+    private String toAddUsername; //待添加的好友账号
     private int state; //状态  0：拒绝  1：通过  2：待审核
 
     public int getId() {
