@@ -4,7 +4,7 @@
 
 
     <select id="getBoardByCid" resultType="com.carryit.base.besttmwuu.entity.Board" parameterType="Integer">
-        select id,cid,title,logo,banner,(select count(*) from ims_ewei_shop_sns_board_follow bf where bf.bid =b.id ) concerns from ims_ewei_shop_sns_board b where cid = #{id}
+        select id,cid,title,logo,banner,(select count(*) from ims_ewei_shop_sns_board_follow bf where bf.bid =b.id ) concerns,(select count(*) from ims_ewei_shop_sns_post sp where sp.bid =b.id ) topic from ims_ewei_shop_sns_board b where cid = #{id}
 
     </select>
 
@@ -17,4 +17,5 @@
         select id,cid,title,logo,banner from ims_ewei_shop_sns_board
 
     </select>
+
 </mapper>
