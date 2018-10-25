@@ -35,9 +35,18 @@ public interface MemberService {
      */
     void updateMemberByUid(@Param("uid") int uid, @Param("credit2") float credit2);
 
+
     void addMember(Member member);
 
     MemberData getMemberDataByUId(int uid);
 
     void updateMemberDataByUId(MemberData req);
+
+    /**
+     * 通过手机号获取member信息
+     * @param phone 手机号
+     * @return member信息
+     */
+    Member getMemberByPhone(String phone);
+
 }
