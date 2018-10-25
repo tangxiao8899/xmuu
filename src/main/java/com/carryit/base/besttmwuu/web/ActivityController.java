@@ -118,14 +118,12 @@ public class ActivityController extends BaseController {
                     if(activityList!=null&&activityList.size()>0){
                         for (Activity activity:activityList) {
                             if(activity.getStartTime()!=null){
-                                SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-                                String date = fm.format(new Date(activity.getStartTime()));
+                                String date = longToDate(Long.parseLong(activity.getStartTime()));
                                 activity.setStartTime(date);
                             }
 
                             if(activity.getEndTime()!=null){
-                                SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-                                String date = fm.format(new Date(activity.getEndTime()));
+                                String date = longToDate(Long.parseLong(activity.getEndTime()));
                                 activity.setEndTime(date);
                             }
 
