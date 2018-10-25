@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class Product implements Serializable {
 
     private int id; //主键ID
-    private int level; //商品等级 0：UU圈主  1：高级VIP 6:副圈主 7：管理员 9：梦想VIP
+    private String level; //商品等级 0：UU圈主  1：高级VIP 6:副圈主 7：管理员 9：梦想VIP
     private String levelName;// 商品名称
     private long price; // 价格
 
@@ -20,11 +20,11 @@ public class Product implements Serializable {
         this.id = id;
     }
 
-    public int getLevel() {
+    public String getLevel() {
         return level;
     }
 
-    public void setLevel(int level) {
+    public void setLevel(String level) {
         this.level = level;
     }
 

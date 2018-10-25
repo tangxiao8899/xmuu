@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -114,6 +115,27 @@ public class ActivityController extends BaseController {
                     int pageSize = jo.getInteger("pageSize");
 
                     List<Activity> activityList = activityService.getPage((pageStart - 1) * pageSize,pageSize);
+                    if(activityList!=null&&activityList.size()>0){
+                        for (Activity activity:activityList) {
+                            if(activity.getStartTime()!=null){
+                                SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                                String date = fm.format(new Date(activity.getStartTime()));
+                                activity.setStartTime(date);
+                            }
+
+                            if(activity.getEndTime()!=null){
+                                SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                                String date = fm.format(new Date(activity.getEndTime()));
+                                activity.setEndTime(date);
+                            }
+
+                            if(activity.getImages()!=null){
+                                List<String> result = Arrays.asList(activity.getImages().split(","));
+                                activity.setImageList(result);
+                            }
+                        }
+                    }
+
                     long count = activityService.getPageCount();
                     Page newpage = new Page();
                     newpage.setList(activityList);

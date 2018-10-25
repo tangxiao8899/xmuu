@@ -19,4 +19,6 @@ public interface OrderService {
      * 修改订单状态
      */
     void update(Order order);
+
+    int queryOrderCount(Integer bid, String level);
 }

@@ -2,10 +2,7 @@ package com.carryit.base.besttmwuu.service.impl;
 
 import com.carryit.base.besttmwuu.dao.MemberDao;
 import com.carryit.base.besttmwuu.dao.imsEweiShopMemberMapper;
-import com.carryit.base.besttmwuu.entity.Level;
-import com.carryit.base.besttmwuu.entity.Member;
-import com.carryit.base.besttmwuu.entity.MemberDTO;
-import com.carryit.base.besttmwuu.entity.imsEweiShopMember;
+import com.carryit.base.besttmwuu.entity.*;
 import com.carryit.base.besttmwuu.service.MemberService;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,6 +64,21 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void updateMemberByUid(int uid, float credit2) {
         memberDao.updateMemberByUid(uid,credit2);
+    }
+
+    @Override
+    public void addMember(Member member) {
+        memberDao.addMember(member);
+    }
+
+    @Override
+    public MemberData getMemberDataByUId(int uid) {
+        return memberDao.getMemberDataByUId(uid);
+    }
+
+    @Override
+    public void updateMemberDataByUId(MemberData req) {
+        memberDao.updateMemberDataByUId(req);
     }
 
 

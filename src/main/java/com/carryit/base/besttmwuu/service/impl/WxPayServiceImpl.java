@@ -38,6 +38,10 @@ public class WxPayServiceImpl implements WxPayService{
     @Autowired
     ImsUserCapitalFlowService imsUserCapitalFlowService;
 
+    private static final  String UU圈主 = "0";
+    private static final  String 副圈主 = "6";
+    private static final  String UC管理员 = "7";
+
 
     @Override
     public JSONObject wxPay(String json) throws Exception{
@@ -76,13 +80,25 @@ public class WxPayServiceImpl implements WxPayService{
             if(!parmJo.containsKey("productId")){ //商品ID
                 jo.put("code",400);
                 jo.put("msg","参数异常");
-                jo.put("data","");
+                jo.put("data",null);
                 return jo;
             }
             if(!parmJo.containsKey("productNum")){ //商品数量
                 jo.put("code",400);
                 jo.put("msg","参数异常");
-                jo.put("data","");
+                jo.put("data",null);
+                return jo;
+            }
+            if(!parmJo.containsKey("bid")){ //圈子id
+                jo.put("code",400);
+                jo.put("msg","参数异常");
+                jo.put("data",null);
+                return jo;
+            }
+            if(!parmJo.containsKey("uid")){ //圈子id
+                jo.put("code",400);
+                jo.put("msg","参数异常");
+                jo.put("data",null);
                 return jo;
             }
 
@@ -92,9 +108,43 @@ public class WxPayServiceImpl implements WxPayService{
             if(StringUtils.isEmpty(product)){
                 jo.put("code",404);
                 jo.put("msg","未找到该产品");
-                jo.put("data","");
+                jo.put("data",null);
                 return jo;
             }
+            if(StringUtils.isEmpty(product.getLevel())){
+                jo.put("code",404);
+                jo.put("msg","未找到该产品");
+                jo.put("data",null);
+                return jo;
+            }
+            //根据圈子id,职位level,查询订单表已支付的订单,判断这个圈子还有没有多的职位可以出售
+            int orderCount = orderService.queryOrderCount(parmJo.getInteger("bid"),product.getLevel());
+            if(UU圈主.equals(product.getLevel())){
+                if(orderCount>=1){
+                    jo.put("code",404);
+                    jo.put("msg","圈主名额已满");
+                    jo.put("data",null);
+                    return jo;
+                }
+            }else if(副圈主.equals(product.getLevel())){
+                if(orderCount>=10){
+                    jo.put("code",404);
+                    jo.put("msg","副圈主名额已满");
+                    jo.put("data",null);
+                    return jo;
+                }
+            }else if(UC管理员.equals(product.getLevel())){
+                if(orderCount>=50){
+                    jo.put("code",404);
+                    jo.put("msg","管理员名额已满");
+                    jo.put("data",null);
+                    return jo;
+                }
+            }
+
+
+
+
 
             Order order = new Order();
             order.setOrdersn(System.currentTimeMillis() + PropertyUtil.random() + ""); //订单号
@@ -102,6 +152,8 @@ public class WxPayServiceImpl implements WxPayService{
             order.setStatus(2); //待付款
             order.setUid(Integer.valueOf(parmJo.getString("uid"))); //下单用户
             order.setPaytype(2); //在线支付
+            order.setBid(Integer.valueOf(parmJo.getString("bid")));
+            order.setLevel(product.getLevel());
             order.setCreatetime(new Date().getTime());//创建时间
 
 
@@ -114,7 +166,7 @@ public class WxPayServiceImpl implements WxPayService{
         }else{
             jo.put("code",400);
             jo.put("msg","参数异常");
-            jo.put("data","");
+            jo.put("data",null);
             return jo;
         }
 
@@ -145,7 +197,7 @@ public class WxPayServiceImpl implements WxPayService{
         {
             jo.put("code",-999);
             jo.put("msg","支付出现异常，请稍后重试!");
-            jo.put("data","");
+            jo.put("data",null);
             return jo;
         }
     }
@@ -162,19 +214,19 @@ public class WxPayServiceImpl implements WxPayService{
             if(!parmJo.containsKey("uid")){ //用户ID
                 jo.put("code",400);
                 jo.put("msg","参数异常");
-                jo.put("data","");
+                jo.put("data",null);
                 return jo;
             }
             if(!parmJo.containsKey("money")){ //充值金额
                 jo.put("code",400);
                 jo.put("msg","参数异常");
-                jo.put("data","");
+                jo.put("data",null);
                 return jo;
             }
             if(!parmJo.containsKey("type")){ //充值类型
                 jo.put("code",400);
                 jo.put("msg","参数异常");
-                jo.put("data","");
+                jo.put("data",null);
                 return jo;
             }
 
@@ -196,7 +248,7 @@ public class WxPayServiceImpl implements WxPayService{
         }else{
             jo.put("code",400);
             jo.put("msg","参数异常");
-            jo.put("data","");
+            jo.put("data",null);
             return jo;
         }
 
@@ -223,7 +275,7 @@ public class WxPayServiceImpl implements WxPayService{
         {
             jo.put("code",-999);
             jo.put("msg","支付出现异常，请稍后重试!");
-            jo.put("data","");
+            jo.put("data",null);
             return jo;
         }
     }
@@ -240,19 +292,19 @@ public class WxPayServiceImpl implements WxPayService{
             if(!parmJo.containsKey("fuid")){ //打赏用户ID
                 jo.put("code",400);
                 jo.put("msg","参数异常");
-                jo.put("data","");
+                jo.put("data",null);
                 return jo;
             }
             if(!parmJo.containsKey("tuid")){ //被打赏用户ID
                 jo.put("code",400);
                 jo.put("msg","参数异常");
-                jo.put("data","");
+                jo.put("data",null);
                 return jo;
             }
             if(!parmJo.containsKey("money")){ //打赏金额
                 jo.put("code",400);
                 jo.put("msg","参数异常");
-                jo.put("data","");
+                jo.put("data",null);
                 return jo;
             }
 
@@ -262,14 +314,14 @@ public class WxPayServiceImpl implements WxPayService{
             if(StringUtils.isEmpty(m)){
                 jo.put("code",404);
                 jo.put("msg","打赏账户不存在");
-                jo.put("data","");
+                jo.put("data",null);
                 return jo;
             }else{
                 float f = m.getCredit2(); //账户余额
                 if(f < Float.valueOf(parmJo.getString("money"))){
                     jo.put("code",400);
                     jo.put("msg","打赏账户余额不足，请先充值");
-                    jo.put("data","");
+                    jo.put("data",null);
                     return jo;
                 }
             }
@@ -291,7 +343,7 @@ public class WxPayServiceImpl implements WxPayService{
         }else{
             jo.put("code",400);
             jo.put("msg","参数异常");
-            jo.put("data","");
+            jo.put("data",null);
             return jo;
         }
 
@@ -318,7 +370,7 @@ public class WxPayServiceImpl implements WxPayService{
         {
             jo.put("code",-999);
             jo.put("msg","支付出现异常，请稍后重试!");
-            jo.put("data","");
+            jo.put("data",null);
             return jo;
         }
     }

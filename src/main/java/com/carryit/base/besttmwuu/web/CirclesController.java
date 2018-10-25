@@ -611,7 +611,7 @@ public class CirclesController extends BaseController {
     @RequestMapping(value = "/getBoardtopic", method = {RequestMethod.GET,
             RequestMethod.POST}, produces = "application/json;charset=UTF-8")
     public JSONObject getBoardtopic(@RequestBody(required = false) String json) {
-        return callHttpReqTask(json, 10);
+        return callHttpReqTask(json, 1010);
     }
 
 

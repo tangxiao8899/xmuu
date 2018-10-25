@@ -29,6 +29,12 @@
             <if test="uid != null">
                 uid,
             </if>
+            <if test="bid != null and bid !=0">
+                bid,
+            </if>
+            <if test="level != null">
+                level,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -55,6 +61,12 @@
             <if test="uid != null">
                 #{uid},
             </if>
+            <if test="bid != null and bid !=0">
+                bid,
+            </if>
+            <if test="level != null">
+                level,
+            </if>
 
         </trim>
     </insert>
@@ -71,5 +83,10 @@
         select id,ordersn,price
         from
         ims_ewei_shop_order
+    </select>
+
+    <!--根据订单号查询订单-->
+    <select id="queryOrderCount" resultType="int">
+        select count(*) from ims_ewei_shop_order where bid=#{bid} and level=#{level} AND status='3'
     </select>
 </mapper>

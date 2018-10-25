@@ -68,6 +68,21 @@ public class MemberController extends BaseController {
         return callHttpReqTask(json, 4);
     }
 
+    //点击我的头像获取资料
+    @RequestMapping(value = "/getMemberByUid", method = {RequestMethod.GET,
+            RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public JSONObject getMemberByUid(@RequestBody(required = false) String json) {
+        return callHttpReqTask(json, 5);
+    }
+
+    //点击我的头像获取资料
+    @RequestMapping(value = "/updateMemberByUid", method = {RequestMethod.GET,
+            RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public JSONObject updateMemberByUid(@RequestBody(required = false) String json) {
+        return callHttpReqTask(json, 6);
+    }
+
+
 
     @Override
     public JSONObject runTask(String json, int cmd) {
@@ -138,6 +153,31 @@ public class MemberController extends BaseController {
                     return faild("失败~", false);
                 }
                 return doObjResp(mb);
+            case 5:
+                MemberData md=new MemberData();
+                try {
+                    BoardReq req = p(json, BoardReq.class);
+                    if(req!=null){
+                        md= memberService.getMemberDataByUId(req.uid);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return faild("失败~", false);
+                }
+                return doObjResp(md);
+            case 6:
+
+            try {
+                MemberData req = p(json, MemberData.class);
+                if(req!=null){
+                    memberService.updateMemberDataByUId(req);
+                    return doObjRespSuccess("更新成功");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                return faild("失败~", false);
+            }
+
 
         }
         return null;

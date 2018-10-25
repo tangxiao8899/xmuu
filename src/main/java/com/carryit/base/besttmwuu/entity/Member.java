@@ -10,11 +10,11 @@ public class Member implements Serializable{
 
     private String avatar;//头像
 
-    private String realName;//昵称
+    private String realName;
 
     private String city;//城市
 
-    private String nickName;//个性签名
+    private String nickName;//昵称
 
     private String level;
 
@@ -25,6 +25,16 @@ public class Member implements Serializable{
     private float credit1;//账户积分
 
     private Integer zhuquanzi;
+
+    private String autograph;
+
+    public String getAutograph() {
+        return autograph;
+    }
+
+    public void setAutograph(String autograph) {
+        this.autograph = autograph;
+    }
 
     public Integer getUid() {
         return uid;

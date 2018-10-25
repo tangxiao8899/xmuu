@@ -4,7 +4,7 @@
 
 
     <select id="findById" resultType="com.carryit.base.besttmwuu.entity.Product" >
-        select id,levelname,price
+        select id,levelname,price,level
         from
         ims_ewei_shop_member_level
         where id = #{id}

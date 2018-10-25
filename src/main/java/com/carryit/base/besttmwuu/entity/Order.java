@@ -20,6 +20,26 @@ public class Order implements Serializable {
 
     private Long createtime;//创建时间java.math.BigInteger
 
+    private String level;
+
+    private int bid;
+
+    public int getBid() {
+        return bid;
+    }
+
+    public void setBid(int bid) {
+        this.bid = bid;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
     public Integer getId() {
         return id;
     }

@@ -8,6 +8,15 @@ public class WxPayReq extends CommonRequest {
     private int productId;
     private int productNum;
     private int uid;
+    private int bid;
+
+    public int getBid() {
+        return bid;
+    }
+
+    public void setBid(int bid) {
+        this.bid = bid;
+    }
 
     public String getRemoteAddrIP() {
         return remoteAddrIP;

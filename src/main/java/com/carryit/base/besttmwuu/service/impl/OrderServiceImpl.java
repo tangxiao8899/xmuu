@@ -28,4 +28,9 @@ public class OrderServiceImpl implements OrderService {
     public void update(Order order) {
         orderDao.update(order);
     }
+
+    @Override
+    public int queryOrderCount(Integer bid, String level) {
+        return orderDao.queryOrderCount(bid,level);
+    }
 }

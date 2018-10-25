@@ -51,11 +51,12 @@ public class RegisterServiceImpl implements UserService {
         try {
             //注册到平台
             int uid = userDao.insertSelective(record);
+
             //新增一条会员资料记录
             Member member = new Member();
             member.setNickName(NameUtil.getName());
             member.setUid(uid);
-            //memberService.addMember(member);
+            memberService.addMember(member);
             //同步注册到环信
             //1、获取环信token
             String token = null;

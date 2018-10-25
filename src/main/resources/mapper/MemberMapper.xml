@@ -73,4 +73,76 @@
 		credit2 = #{credit2}
 		where uid = #{uid}
 	</update>
+
+	<insert id="addMember" parameterType="com.carryit.base.besttmwuu.entity.Member">
+		insert into ims_ewei_shop_member
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+
+			<if test="uid != null and uid !=0">
+				uid,
+			</if>
+
+			<if test="avatar != null">
+				#{avatar},
+			</if>
+
+			<if test="nickName != null">
+				nickName,
+			</if>
+
+			<if test="city != null">
+				city,
+			</if>
+			<if test="autograph != null">
+				autograph,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+
+			<if test="uid != null and uid != 0">
+				#{uid},
+			</if>
+
+			<if test="avatar != null">
+				#{avatar},
+			</if>
+
+			<if test="nickName != null">
+				#{nickName},
+			</if>
+			<if test="city != null">
+				#{city},
+			</if>
+			<if test="autograph != null">
+				#{autograph},
+			</if>
+		</trim>
+	</insert>
+
+	<select id="getMemberDataByUId" resultType="com.carryit.base.besttmwuu.entity.MemberData">
+		select uid,nickName,city,autograph,avatar
+		from ims_ewei_shop_member
+		where uid =#{uid}
+
+	</select>
+
+	<update id="updateMemberDataByUId"  parameterType="com.carryit.base.besttmwuu.entity.MemberData">
+		update ims_ewei_shop_member
+		<set>
+			<if test="nickName != null">
+				nickName = #{nickName},
+			</if>
+			<if test="city != null">
+				city = #{city},
+			</if>
+			<if test="autograph != null">
+				autograph = #{autograph},
+			</if>
+
+			<if test="avatar != null">
+				avatar =#{avatar},
+			</if>
+		</set>
+		where uid = #{uid}
+	</update>
 </mapper>

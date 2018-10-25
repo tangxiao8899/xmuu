@@ -1,6 +1,7 @@
 package com.carryit.base.besttmwuu.dao;
 
 import com.carryit.base.besttmwuu.entity.Order;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,4 +17,6 @@ public interface OrderDao {
     List<Order> queryOrder(String orderCode);
 
     void update(Order order);
+
+    int queryOrderCount(@Param("bid") Integer bid, @Param("level") String level);
 }

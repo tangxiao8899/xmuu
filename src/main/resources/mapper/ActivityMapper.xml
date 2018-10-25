@@ -8,9 +8,10 @@
 	</insert>
 
 	<select id="getPage" resultType="com.carryit.base.besttmwuu.entity.Activity">
-		select a.id,a.uid,a.bid,a.title,a.startTime,a.endTime,a.cerateTime,a.address,a.cost,a.peopleNumber,a.level,a.detail,a.images,b.title board,m.levelname,
+		select a.id,a.uid,a.bid,a.title,a.startTime,a.endTime,a.cerateTime,a.address,a.cost,a.peopleNumber,a.level,a.detail,a.images,b.title board,m.levelname,sm.avatar logo,
 		(select count(*) from t_signup s where s.aid=a.id) joinNumber
 		from t_activity a
+		LEFT JOIN ims_ewei_shop_member sm on a.uid =sm.uid
 		LEFT JOIN ims_ewei_shop_sns_board b on a.bid =b.id
 		LEFT JOIN ims_ewei_shop_member_level m on a.level = m.level
 		ORDER BY a.cerateTime DESC

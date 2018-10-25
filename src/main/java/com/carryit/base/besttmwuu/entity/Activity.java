@@ -1,6 +1,8 @@
 package com.carryit.base.besttmwuu.entity;
 
 import java.io.Serializable;
+import java.util.List;
+
 /*
 *发布活动
  */
@@ -21,6 +23,24 @@ public class Activity implements Serializable{
     private String board;//圈子
     private String levelname;//等级名称
     private int joinNumber; //参加人数
+    private List<String> imageList;
+    private String logo;
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
+
+    public List<String> getImageList() {
+        return imageList;
+    }
+
+    public void setImageList(List<String> imageList) {
+        this.imageList = imageList;
+    }
 
     public Integer getUid() {
         return uid;
