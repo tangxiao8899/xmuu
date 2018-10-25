@@ -1,0 +1,74 @@
+好友相关接口文档
+
+1、发起好友申请
+请求地址：http://ip:port/friend/save
+请求类型：POST
+请求参数：{
+     	"uid": 12, //用户ID
+     	"toAddUsername":"18772374640" 待添加好友账号
+     }
+响应结果：{
+         "code": 200,
+         "msg": "申请发送成功",
+         "data": ""
+     }
+
+2、获取好友列表
+请求地址：http://ip:port/friend/getFriends
+请求类型：POST
+请求参数：{
+     	"uid":2, //用户ID
+     	"pageSize":10, //每页数量
+         "pageIndex":1 //当前页码
+     }
+响应结果：{
+         "code": 200,
+         "msg": "请求成功",
+         "data": [
+             {
+                 "id": 1, //主键ID
+                 "uid": 12, //用户自身ID
+                 "nickName": "王自知Eric", //好友昵称
+                 "avatar": "http://thirdwx.qlogo.cn/mmopen/n1fGhtL2oJQ3L0tff2tO9mpCvXbhq3dpicYdukncIhzdENv35CaplbicYceTjbibdk5El9oZ3u5sWibLfnMggX0QuOZ8mDicFXoBs/132", //好友头像
+                 "processingTime": "2018-10-24T16:00:00.000+0000", //申请时间
+                 "withTime": null, //通过时间
+                 "toAddUsername": "18171277713", //申请好友账户
+                 "state": 2 //状态 0：拒绝  1：通过  2：待审核',
+             },
+             {
+                 "id": 2,
+                 "uid": 12,
+                 "nickName": "@",
+                 "avatar": "http://thirdwx.qlogo.cn/mmopen/ajNVdqHZLLC4XGk36PHkCGWjdFue1ELMiaKkOxhDl5oicNvJqYErb31kyfQejkVKYEEU48qLxYnXvDIClD7T0Pug/132",
+                 "processingTime": "2018-10-24T16:00:00.000+0000",
+                 "withTime": null,
+                 "toAddUsername": "18772374640",
+                 "state": 2
+             }
+         ]
+     }
+
+3、拒绝，通过好友请求
+请求地址：http://ip:port/friend/update
+请求类型：POST
+请求参数：{
+     	"id":1, //主键ID
+     	"state":0,// 0 拒绝  1 通过
+     }
+响应结果：{
+         "code": 200,
+         "msg": "操作成功",
+         "data": ""
+     }
+
+ 4、总的好友请求数
+ 请求地址：http://ip:port/friend/totalFriends
+ 请求类型：POST
+ 请求参数：{
+        "uid":12 //用户自身ID
+      }
+ 响应结果：{
+          "code": 200,
+          "msg": "获取好友申请数成功",
+          "data": 1 //待处理好友请求数  已拒绝，已通过的不在统计范围内
+      }

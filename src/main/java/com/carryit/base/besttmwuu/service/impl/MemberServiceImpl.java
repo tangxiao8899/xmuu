@@ -81,5 +81,9 @@ public class MemberServiceImpl implements MemberService {
         memberDao.updateMemberDataByUId(req);
     }
 
+    @Override
+    public Member getMemberByPhone(String phone) {
+        return memberDao.getMemberByPhone(phone);
 
+    }
 }
