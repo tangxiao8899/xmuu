@@ -7,6 +7,7 @@
      	"productId": 14, //商品ID
      	"productNum":3,//商品数量
      	"uid":2 //下单用户ID
+     	"bid":12 //圈圈ID
      }
 响应结果：{
          "msg": "SUCCESS",

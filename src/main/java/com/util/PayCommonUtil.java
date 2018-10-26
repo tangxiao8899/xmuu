@@ -60,7 +60,7 @@ public class PayCommonUtil {
             SortedMap<Object, Object> parameterMap = new TreeMap<Object, Object>();
             parameterMap.put("appid", PropertyUtil.getProperty("wxpay.appid"));
             parameterMap.put("noncestr", PayCommonUtil.CreateNoncestr());
-            parameterMap.put("packageValue", "Sign=WXPay");
+            parameterMap.put("package", "Sign=WXPay");
             parameterMap.put("partnerid", PropertyUtil.getProperty("wxpay.mchid"));
             parameterMap.put("prepayid", map.get("prepay_id"));
             // 本来生成的时间戳是13位，但是ios必须是10位，所以截取了一下
