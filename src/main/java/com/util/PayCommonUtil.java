@@ -59,10 +59,10 @@ public class PayCommonUtil {
             Map<String, String> map = XMLUtil.doXMLParse(result);
             SortedMap<Object, Object> parameterMap = new TreeMap<Object, Object>();
             parameterMap.put("appid", PropertyUtil.getProperty("wxpay.appid"));
+            parameterMap.put("noncestr", PayCommonUtil.CreateNoncestr());
+            parameterMap.put("packageValue", "Sign=WXPay");
             parameterMap.put("partnerid", PropertyUtil.getProperty("wxpay.mchid"));
             parameterMap.put("prepayid", map.get("prepay_id"));
-            parameterMap.put("packageValue", "Sign=WXPay");
-            parameterMap.put("noncestr", PayCommonUtil.CreateNoncestr());
             // 本来生成的时间戳是13位，但是ios必须是10位，所以截取了一下
             parameterMap.put("timestamp",
                     Long.parseLong(String.valueOf(System.currentTimeMillis()).toString().substring(0, 10)));
