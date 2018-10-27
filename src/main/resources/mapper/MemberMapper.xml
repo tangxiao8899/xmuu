@@ -145,4 +145,13 @@
 		</set>
 		where uid = #{uid}
 	</update>
+
+	<!--通过手机号查询member信息-->
+	<select id="getMemberByPhone" resultType="com.carryit.base.besttmwuu.entity.Member">
+		SELECT m.avatar,m.nickname FROM ims_users u
+		LEFT JOIN ims_ewei_shop_member m
+		ON u.uid = m.uid
+		where u.phone = #{phone}
+	</select>
+
 </mapper>

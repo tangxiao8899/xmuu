@@ -38,9 +38,13 @@ public interface MemberDao {
      */
     void updateMemberByUid(@Param("uid") int uid, @Param("credit2") float credit2);
 
+
     void addMember(Member member);
 
     MemberData getMemberDataByUId(int uid);
 
     void updateMemberDataByUId(MemberData req);
+
+    Member getMemberByPhone(String phone);
+
 }

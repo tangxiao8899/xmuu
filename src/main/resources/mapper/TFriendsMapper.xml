@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.carryit.base.besttmwuu.dao.TFriendsDao">
+
+    <!--保存好友请求-->
+   <insert id="save">
+        insert into t_friends(uid,nickName,avatar,processingTime,state,toAddUsername)
+       values(#{uid},#{nickName},#{avatar},#{processingTime},#{state},#{toAddUsername})
+
+   </insert>
+
+    <!--审核好友申请-->
+    <update id="update">
+    update t_friends
+        set withTime = now(),state = #{state}
+    where id = #{id}
+    </update>
+
+    <!--获取好友列表-->
+    <select id="getFriends" resultType="com.carryit.base.besttmwuu.entity.TFriends">
+        select * from t_friends
+        where uid = #{uid}
+        ORDER BY processingTime DESC
+        limit #{pageIndex}, #{pageSize}
+    </select>
+
+    <!--统计好友申请-->
+    <select id="totalFriends" resultType="int">
+        select count(*) from t_friends
+        where uid = #{uid} and state = 2
+    </select>
+</mapper>

@@ -7,7 +7,7 @@ import java.util.List;
 *发布活动
  */
 public class Activity implements Serializable{
-
+    private Integer id;//活动ID
     private Integer uid; //用户id
     private Integer bid; //圈子id
     private String title;//活动标题
@@ -25,6 +25,14 @@ public class Activity implements Serializable{
     private int joinNumber; //参加人数
     private List<String> imageList;
     private String logo;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getLogo() {
         return logo;

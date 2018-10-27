@@ -38,9 +38,9 @@ public class WxPayServiceImpl implements WxPayService{
     @Autowired
     ImsUserCapitalFlowService imsUserCapitalFlowService;
 
-    private static final  String UU圈主 = "0";
-    private static final  String 副圈主 = "6";
-    private static final  String UC管理员 = "7";
+    private static final  String UUqz = "0";//UU圈主
+    private static final  String Fqz = "6";//副圈主
+    private static final  String UCgly = "7";//UU管理员
 
 
     @Override
@@ -124,21 +124,21 @@ public class WxPayServiceImpl implements WxPayService{
 
 
 
-            if(UU圈主.equals(product.getLevel())){
+            if(UUqz.equals(product.getLevel())){
                 if(orderCount>=1){
                     jo.put("code",404);
                     jo.put("msg","圈主名额已满");
                     jo.put("data",null);
                     return jo;
                 }
-            }else if(副圈主.equals(product.getLevel())){
+            }else if(Fqz.equals(product.getLevel())){
                 if(orderCount>=10){
                     jo.put("code",404);
                     jo.put("msg","副圈主名额已满");
                     jo.put("data",null);
                     return jo;
                 }
-            }else if(UC管理员.equals(product.getLevel())){
+            }else if(UCgly.equals(product.getLevel())){
                 if(orderCount>=50){
                     jo.put("code",404);
                     jo.put("msg","管理员名额已满");
