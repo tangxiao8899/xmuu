@@ -90,7 +90,7 @@ public class ActivityController extends BaseController {
                     Activity newAct = new Activity();
                     JSONObject jo = JSON.parseObject(json);
                     if(jo!=null) {
-                        int id = jo.getInteger("id");
+                        int id = jo.getInteger("aid");
                         if (id != 0) {
                             newAct = activityService.getActivityById(id);
                             newAct.setCerateTime(longToDate(Long.parseLong(newAct.getCerateTime())));
