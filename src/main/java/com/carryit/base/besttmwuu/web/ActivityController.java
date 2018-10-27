@@ -35,6 +35,7 @@ public class ActivityController extends BaseController {
     @Autowired
     private MemberService memberService;
 
+    public static String zero = "0";   //说明是圈主
     public static String one = "1";   //免费活动(活动未结束,未报名)
     public static String two = "2"; //付费活动(活动未结束,未报名,显示金额)
     public static String three = "3"; //已报名(活动未结束)
@@ -110,8 +111,32 @@ public class ActivityController extends BaseController {
                     JSONObject jo = JSON.parseObject(json);
                     if (jo != null) {
                         int id = jo.getInteger("aid");
+                        int uid = jo.getInteger("uid");
                         if (id != 0) {
                             newAct = activityService.getActivityById(id);
+                            if(newAct.getUid()==uid){
+                                newAct.setType(zero);
+                            }
+                            if (Long.parseLong(newAct.getEndTime()) < new Date().getTime()) {
+                                //活动未结束
+                                newAct.setType(four);
+                            }else {
+                                Boolean flag= activityService.getActivityByUIdAndAid(uid,id);
+                                if(flag){
+                                    //已报名
+                                    newAct.setType(three);
+                                }else {
+                                    //未报名
+                                    if(newAct.getCost()>0){
+                                        //收费
+                                        newAct.setType(two);
+                                    }else {
+                                        newAct.setType(one);
+                                    }
+
+                                }
+                            }
+
                             newAct.setCerateTime(longToDate(Long.parseLong(newAct.getCerateTime())));
                             newAct.setEndTime(longToDate(Long.parseLong(newAct.getEndTime())));
                             newAct.setStartTime(longToDate(Long.parseLong(newAct.getStartTime())));
