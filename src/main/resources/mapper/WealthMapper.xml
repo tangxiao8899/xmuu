@@ -8,7 +8,7 @@
     </select>
 
     <select id="queryPage" resultType="com.carryit.base.besttmwuu.entity.UserDTO">
-        SELECT m.realname realName,m.avatar profilePhoto FROM ims_ewei_shop_order o join ims_ewei_shop_member m on o.uid  = m.uid where o.status = 3 and o.createtime &gt;=#{startTime} and o.createtime &lt;=#{endTime} GROUP BY o.openid ORDER BY sum(o.price) desc limit 100;
+        SELECT u.uid,m.realname realName,m.avatar profilePhoto FROM ims_ewei_shop_order o join ims_ewei_shop_member m on o.uid  = m.uid LEFT join ims_users u ON u.uid=m.uid where o.status = 3 and o.createtime &gt;=#{startTime} and o.createtime &lt;=#{endTime} GROUP BY o.openid ORDER BY sum(o.price) desc limit 100;
     </select>
 
     <select id="queryPageCount" resultType="long">
