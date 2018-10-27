@@ -14,9 +14,9 @@ public interface MemberService {
 
     Member getWealthById(int uid);
 
-    int getMemberByUIdAndLevel(int zhuquanzi, int level);
+    int getMemberByUIdAndLevel(int zhuquanzi, String level);
 
-    void updateMemberByUIdAndLevel(int uid, int level);
+    void updateMemberByUIdAndLevel(int uid, String level);
 
     List<Member> getnormalMember(Integer zhuquanzi, long startTime, long endTime, int pageStart, int pageSize);
 

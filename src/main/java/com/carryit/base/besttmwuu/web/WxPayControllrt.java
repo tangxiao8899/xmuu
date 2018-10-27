@@ -165,6 +165,7 @@ public class WxPayControllrt extends BaseController {
                     order.setStatus(3); //付款成功
                     orderService.update(order);
 
+
                     resXml = "<xml>" + "<return_code><![CDATA[SUCCESS]]></return_code>"
                             + "<return_msg><![CDATA[OK]]></return_msg>" + "</xml> ";
                 }

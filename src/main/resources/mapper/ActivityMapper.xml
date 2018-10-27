@@ -23,8 +23,10 @@
 	</select>
 
 	<select id="getActivityById" resultType="com.carryit.base.besttmwuu.entity.Activity">
-		select a.id,a.uid,a.bid,a.title,a.startTime,a.endTime,a.cerateTime,a.address,a.cost,a.peopleNumber,a.level,a.detail,a.images,(select count(*) from t_signup s where s.aid=#{aid}) joinNumber
-	    from t_activity a  WHERE a.id=#{aid}
+		select a.id,a.uid,u.phone a.bid,a.title,a.startTime,a.endTime,a.cerateTime,a.address,a.cost,a.peopleNumber,a.level,a.detail,a.images,(select count(*) from t_signup s where s.aid=#{aid}) joinNumber
+	    from t_activity a
+	      left join ims_users u on a.uid = u.uid
+	      WHERE a.id=#{aid}
 
 </select>
 

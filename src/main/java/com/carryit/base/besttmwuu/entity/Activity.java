@@ -25,6 +25,15 @@ public class Activity implements Serializable{
     private int joinNumber; //参加人数
     private List<String> imageList;
     private String logo;
+    private String phone;
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
     public Integer getId() {
         return id;

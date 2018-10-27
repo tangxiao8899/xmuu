@@ -40,9 +40,8 @@ public class CirclesController extends BaseController {
     @Autowired
     PraiseService praiseService;
 
-    private static String UU圈主 = "0";
-    private static String 副圈主 = "6";
-    private static String UC管理员 = "7";
+    private static final  String Fqz = "6";//副圈主
+    private static final  String UCgly = "7";//UU管理员
 
 
     @RequestMapping(value = "/getCircles", method = {RequestMethod.GET,
@@ -230,14 +229,14 @@ public class CirclesController extends BaseController {
 
                 MemberLevel ml = p(json, MemberLevel.class);
                 try {
-                    if (ml != null && ml.getUid() != 0 && ml.getLevel() != 0) {
+                    if (ml != null && ml.getUid() != 0 && ml.getLevel() != null) {
                         //根据uid查询该用户的主圈子
                         Member mb = memberService.getMemberById(ml.getUid());
                         if (mb != null && mb.getZhuquanzi() != null) {
                             //如果等级level为副圈主 ="6"，查找该圈子副圈主的个数
-                            if (Integer.parseInt(副圈主) == ml.getLevel()) {
+                            if (Fqz.equals(ml.getLevel())) {
 
-                                int fuCount = memberService.getMemberByUIdAndLevel(mb.getZhuquanzi(), Integer.parseInt(副圈主));
+                                int fuCount = memberService.getMemberByUIdAndLevel(mb.getZhuquanzi(), Fqz);
                                 if (fuCount >= 10) {
                                     return faild("副圈主名额已满", false);
                                 } else {
@@ -246,16 +245,18 @@ public class CirclesController extends BaseController {
                                     return doObjRespSuccess("成功");
                                 }
 
-                            } else if (Integer.parseInt(UC管理员) == ml.getLevel()) {
+                            } else if (UCgly.equals(ml.getLevel())) {
                                 //如果等级level为UC管理员 ="7"
-                                int fuCount = memberService.getMemberByUIdAndLevel(mb.getZhuquanzi(), Integer.parseInt(UC管理员));
+                                int fuCount = memberService.getMemberByUIdAndLevel(mb.getZhuquanzi(), ml.getLevel());
                                 if (fuCount >= 50) {
-                                    return faild("UC管理员名额已满", false);
+                                    return faild("UU管理员名额已满", false);
                                 } else {
                                     //更新用户为UC管理员
                                     memberService.updateMemberByUIdAndLevel(ml.getUid(), ml.getLevel());
                                     return doObjRespSuccess("成功");
                                 }
+                            }else {
+                                return faild("数据异常(等级选择错误)", false);
                             }
 
 

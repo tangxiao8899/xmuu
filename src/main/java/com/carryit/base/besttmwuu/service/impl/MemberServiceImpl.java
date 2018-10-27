@@ -27,12 +27,12 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public int getMemberByUIdAndLevel(int zhuquanzi, int level) {
+    public int getMemberByUIdAndLevel(int zhuquanzi, String level) {
         return memberDao.getMemberByUIdAndLevel(zhuquanzi,level);
     }
 
     @Override
-    public void updateMemberByUIdAndLevel(int uid, int level) {
+    public void updateMemberByUIdAndLevel(int uid, String level) {
         memberDao.updateMemberByUIdAndLevel(uid,level);
     }
 

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class MemberLevel implements Serializable {
         private int uid;
-        private int level;
+        private  String level;
 
     public int getUid() {
         return uid;
@@ -14,11 +14,11 @@ public class MemberLevel implements Serializable {
         this.uid = uid;
     }
 
-    public int getLevel() {
+    public String getLevel() {
         return level;
     }
 
-    public void setLevel(int level) {
+    public void setLevel(String level) {
         this.level = level;
     }
 }

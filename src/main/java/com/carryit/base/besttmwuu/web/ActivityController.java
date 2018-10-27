@@ -96,6 +96,10 @@ public class ActivityController extends BaseController {
                             newAct.setCerateTime(longToDate(Long.parseLong(newAct.getCerateTime())));
                             newAct.setEndTime(longToDate(Long.parseLong(newAct.getEndTime())));
                             newAct.setStartTime(longToDate(Long.parseLong(newAct.getStartTime())));
+                            if(newAct.getImages()!=null){
+                                newAct.setImageList(Arrays.asList(newAct.getImages().split(",")));
+                            }
+
                             return doObjResp(newAct);
                         } else {
                             return faild("活动不存在~", false);

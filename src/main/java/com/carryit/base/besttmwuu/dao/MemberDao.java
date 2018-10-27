@@ -17,9 +17,9 @@ public interface MemberDao {
 
     Member getWealthById(int uid);
 
-    int getMemberByUIdAndLevel(@Param("zhuquanzi") int zhuquanzi, @Param("level") int level);
+    int getMemberByUIdAndLevel(@Param("zhuquanzi") int zhuquanzi, @Param("level") String level);
 
-    void updateMemberByUIdAndLevel(@Param("uid") int uid, @Param("level") int level);
+    void updateMemberByUIdAndLevel(@Param("uid") int uid, @Param("level") String level);
 
     List<Member> getnormalMember(@Param("zhuquanzi") Integer zhuquanzi,@Param("startTime") long startTime,@Param("endTime")long endTime, RowBounds rowBounds);
 

@@ -117,11 +117,9 @@ public class WxPayServiceImpl implements WxPayService{
                 jo.put("data",null);
                 return jo;
             }
-            //根据圈子id,职位level,查询订单表已支付的订单,判断这个圈子还有没有多的职位可以出售
-            int orderCount = orderService.queryOrderCount(parmJo.getInteger("bid"),product.getLevel());
-            //根据圈子id,职位level查询member表中该圈子有多少职位,判断和订单数是否匹配,不匹配则报错
 
-
+            //根据圈子id,职位level查询member表中该圈子有多少职位
+            int orderCount = memberService.getMemberByUIdAndLevel(parmJo.getInteger("bid"), product.getLevel());
 
 
             if(UUqz.equals(product.getLevel())){
