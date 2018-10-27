@@ -40,4 +40,34 @@ public class ActivityServiceImpl implements ActivityService {
     public Activity getActivityById(Integer aid) {
         return activityDao.getActivityById(aid);
     }
+
+    @Override
+    public Boolean getActivityByUIdAndAid(int uid, Integer id) {
+        Activity activity = activityDao.getActivityByUIdAndAid(uid,id);
+        if(activity!=null){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    @Override
+    public List<Activity> getmyReleasePage(int uid, int pageStart, int pageSize) {
+        return activityDao.getmyReleasePage(uid,new RowBounds(pageStart,pageSize));
+    }
+
+    @Override
+    public long getmyReleasePageCount(int uid) {
+        return activityDao.getmyReleasePageCount(uid);
+    }
+
+    @Override
+    public List<Activity> getmyActivityPage(int uid, int pageStart, int pageSize) {
+        return activityDao.getmyActivityPage(uid,new RowBounds(pageStart,pageSize));
+    }
+
+    @Override
+    public long getmyActivityCount(int uid) {
+        return activityDao.getmyActivityCount(uid);
+    }
 }

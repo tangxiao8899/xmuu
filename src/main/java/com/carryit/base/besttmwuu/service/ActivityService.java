@@ -17,4 +17,14 @@ public interface ActivityService {
     void signUpRelease(SignUp signUp);
 
     Activity getActivityById(Integer aid);
+
+    Boolean getActivityByUIdAndAid(int uid, Integer id);
+
+    List<Activity> getmyReleasePage(int uid, int i, int pageSize);
+
+    long getmyReleasePageCount(int uid);
+
+    List<Activity> getmyActivityPage(int uid, int i, int pageSize);
+
+    long getmyActivityCount(int uid);
 }

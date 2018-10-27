@@ -18,8 +18,41 @@
 
 	</select>
 
+	<select id="getmyReleasePage" resultType="com.carryit.base.besttmwuu.entity.Activity">
+		select a.id,a.uid,a.bid,a.title,a.startTime,a.endTime,a.cerateTime,a.address,a.cost,a.peopleNumber,a.level,a.detail,a.images,b.title board,m.levelname,sm.avatar logo,
+		(select count(*) from t_signup s where s.aid=a.id) joinNumber
+		from t_activity a
+		LEFT JOIN ims_ewei_shop_member sm on a.uid =sm.uid
+		LEFT JOIN ims_ewei_shop_sns_board b on a.bid =b.id
+		LEFT JOIN ims_ewei_shop_member_level m on a.level = m.level
+		where a.uid =#{uid}
+		ORDER BY a.cerateTime DESC
+
+	</select>
+
+	<select id="getmyActivityPage" resultType="com.carryit.base.besttmwuu.entity.Activity">
+		select a.id,a.uid,a.bid,a.title,a.startTime,a.endTime,a.cerateTime,a.address,a.cost,a.peopleNumber,a.level,a.detail,a.images,b.title board,m.levelname,sm.avatar logo,
+		(select count(*) from t_signup s where s.aid=a.id) joinNumber
+		from t_signup sp
+		LEFT JOIN t_activity a on sp.aid=a.id
+		LEFT JOIN ims_ewei_shop_member sm on a.uid =sm.uid
+		LEFT JOIN ims_ewei_shop_sns_board b on a.bid =b.id
+		LEFT JOIN ims_ewei_shop_member_level m on a.level = m.level
+		where sp.uid =#{uid}
+		ORDER BY a.cerateTime DESC
+
+	</select>
+
+	<select id="getmyActivityCount" resultType="long">
+		select count(*) from t_signup where uid =#{uid}
+	</select>
+
 	<select id="getPageCount" resultType="long">
 		select count(*) from t_activity
+	</select>
+
+	<select id="getmyReleasePageCount" resultType="long">
+		select count(*) from t_activity where uid =#{uid}
 	</select>
 
 	<select id="getActivityById" resultType="com.carryit.base.besttmwuu.entity.Activity">
@@ -34,4 +67,10 @@
 		insert into t_signup (uid,aid,name,phone,sex,age)
 		values (#{uid},#{aid},#{name},#{phone},#{sex},#{age})
 	</insert>
+
+	<select id="getActivityByUIdAndAid" resultType="com.carryit.base.besttmwuu.entity.SignUp">
+		select uid,aid,name,phone,sex,age
+		from t_signup
+		where uid=#{uid} and aid=#{id}
+	</select>
 </mapper>

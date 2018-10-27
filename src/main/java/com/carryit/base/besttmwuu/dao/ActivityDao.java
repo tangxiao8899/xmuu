@@ -22,4 +22,14 @@ public interface ActivityDao {
     void signUpRelease(SignUp signUp);
 
     Activity getActivityById(@Param("aid") Integer aid);
+
+    Activity getActivityByUIdAndAid(@Param("uid") int uid, @Param("id") Integer id);
+
+    List<Activity> getmyReleasePage(@Param("uid") int uid, RowBounds rowBounds);
+
+    long getmyReleasePageCount(@Param("uid") int uid);
+
+    List<Activity> getmyActivityPage(@Param("uid") int uid, RowBounds rowBounds);
+
+    long getmyActivityCount(@Param("uid") int uid);
 }

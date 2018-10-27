@@ -35,6 +35,11 @@ public class ActivityController extends BaseController {
     @Autowired
     private MemberService memberService;
 
+    public static String one = "1";   //免费活动(活动未结束,未报名)
+    public static String two = "2"; //付费活动(活动未结束,未报名,显示金额)
+    public static String three = "3"; //已报名(活动未结束)
+    public static String four = "4"; //活动已结束
+
 
     //发布活动
     @RequestMapping(value = "/release", method = {RequestMethod.GET,
@@ -66,8 +71,22 @@ public class ActivityController extends BaseController {
         return callHttpReqTask(json, 3);
     }
 
+    //我的发布
+    @RequestMapping(value = "/myRelease", method = {RequestMethod.GET,
+            RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public JSONObject myRelease(@RequestBody(required = false) String json) {
+        return callHttpReqTask(json, 4);
+    }
 
-    public static String longToDate(long lo){
+    //我的活动
+    @RequestMapping(value = "/myActivity", method = {RequestMethod.GET,
+            RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public JSONObject myActivity(@RequestBody(required = false) String json) {
+        return callHttpReqTask(json, 5);
+    }
+
+
+    public static String longToDate(long lo) {
         Date date = new Date(lo);
         SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return sd.format(date);
@@ -75,28 +94,28 @@ public class ActivityController extends BaseController {
 
     @Override
     public JSONObject runTask(String json, int cmd) {
-        switch (cmd){
+        switch (cmd) {
             case 0:
                 try {
                     Activity activity = p(json, Activity.class);
                     activityService.add(activity);
-                     return doObjRespSuccess("发布成功");
-                }catch (Exception e){
+                    return doObjRespSuccess("发布成功");
+                } catch (Exception e) {
                     e.printStackTrace();
-                     return faild("发布失败~",false);
+                    return faild("发布失败~", false);
                 }
             case 1:
                 try {
                     Activity newAct = new Activity();
                     JSONObject jo = JSON.parseObject(json);
-                    if(jo!=null) {
+                    if (jo != null) {
                         int id = jo.getInteger("aid");
                         if (id != 0) {
                             newAct = activityService.getActivityById(id);
                             newAct.setCerateTime(longToDate(Long.parseLong(newAct.getCerateTime())));
                             newAct.setEndTime(longToDate(Long.parseLong(newAct.getEndTime())));
                             newAct.setStartTime(longToDate(Long.parseLong(newAct.getStartTime())));
-                            if(newAct.getImages()!=null){
+                            if (newAct.getImages() != null) {
                                 newAct.setImageList(Arrays.asList(newAct.getImages().split(",")));
                             }
 
@@ -104,96 +123,231 @@ public class ActivityController extends BaseController {
                         } else {
                             return faild("活动不存在~", false);
                         }
-                    }else {
+                    } else {
                         return faild("参数异常~", false);
                     }
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
-                    return faild("失败~",false);
+                    return faild("失败~", false);
                 }
             case 2:
                 try {
                     JSONObject jo = JSON.parseObject(json);
-                    if(jo!=null){
-                    int pageStart = jo.getInteger("pageStart");
-                    int pageSize = jo.getInteger("pageSize");
+                    if (jo != null) {
+                        int pageStart = jo.getInteger("pageStart");
+                        int pageSize = jo.getInteger("pageSize");
+                        int uid = jo.getInteger("uid");
 
-                    List<Activity> activityList = activityService.getPage((pageStart - 1) * pageSize,pageSize);
-                    if(activityList!=null&&activityList.size()>0){
-                        for (Activity activity:activityList) {
-                            if(activity.getStartTime()!=null){
-                                String date = longToDate(Long.parseLong(activity.getStartTime()));
-                                activity.setStartTime(date);
-                            }
+                        List<Activity> activityList = activityService.getPage((pageStart - 1) * pageSize, pageSize);
+                        if (activityList != null && activityList.size() > 0) {
+                            for (Activity activity : activityList) {
 
-                            if(activity.getEndTime()!=null){
-                                String date = longToDate(Long.parseLong(activity.getEndTime()));
-                                activity.setEndTime(date);
-                            }
+                                if (Long.parseLong(activity.getEndTime()) < new Date().getTime()) {
+                                    //活动未结束
+                                    activity.setType(four);
+                                }else {
+                                    Boolean flag= activityService.getActivityByUIdAndAid(uid,activity.getId());
+                                    if(flag){
+                                        //已报名
+                                        activity.setType(three);
+                                    }else {
+                                        //未报名
+                                        if(activity.getCost()>0){
+                                            //收费
+                                            activity.setType(two);
+                                        }else {
+                                            activity.setType(one);
+                                        }
 
-                            if(activity.getImages()!=null){
-                                List<String> result = Arrays.asList(activity.getImages().split(","));
-                                activity.setImageList(result);
+                                    }
+                                }
+
+                                if (activity.getStartTime() != null) {
+                                    String date = longToDate(Long.parseLong(activity.getStartTime()));
+                                    activity.setStartTime(date);
+                                }
+
+                                if (activity.getEndTime() != null) {
+                                    String date = longToDate(Long.parseLong(activity.getEndTime()));
+                                    activity.setEndTime(date);
+                                }
+
+                                if (activity.getImages() != null) {
+                                    List<String> result = Arrays.asList(activity.getImages().split(","));
+                                    activity.setImageList(result);
+                                }
+
                             }
                         }
-                    }
 
-                    long count = activityService.getPageCount();
-                    Page newpage = new Page();
-                    newpage.setList(activityList);
-                    newpage.setPageSize(pageSize);
-                    newpage.setTotalSize(count);
-                    return doObjResp(newpage);
-                    }else {
-                        return faild("参数异常~",false);
+                        long count = activityService.getPageCount();
+                        Page newpage = new Page();
+                        newpage.setList(activityList);
+                        newpage.setPageSize(pageSize);
+                        newpage.setTotalSize(count);
+                        return doObjResp(newpage);
+                    } else {
+                        return faild("参数异常~", false);
                     }
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
-                    return faild("失败~",false);
+                    return faild("失败~", false);
                 }
 
             case 3:
                 try {
                     SignUp signUp = p(json, SignUp.class);
-                    if(signUp!=null){
+                    if (signUp != null) {
 
-                        if(signUp.getAid()!=0&&signUp.getUid()!=0){
-                            Activity act =  activityService.getActivityById(signUp.getAid());
+                        if (signUp.getAid() != 0 && signUp.getUid() != 0) {
+                            Boolean flag = activityService.getActivityByUIdAndAid(signUp.getUid(), signUp.getAid());
+                            if(flag){
+                                return faild("您已报名,不能重复报名", false);
+                            }
+                            Activity act = activityService.getActivityById(signUp.getAid());
                             Member member = memberService.getMemberById(signUp.getUid());
+
                             //判断是否符合等级
-                            if(act!=null&&member!=null){
-                            if(member.getLevel().equals(act.getLevel())){
-                                ////判断人员是否满员,参加人数小于总人数
-                                if(act.getJoinNumber()<act.getPeopleNumber()){
-                                    activityService.signUpRelease(signUp);
-                                    return doObjRespSuccess("报名成功");
-                                }else{
-                                    return faild("名额已满",false);
+                            if (act != null && member != null) {
+                                if(act.getUid()==signUp.getUid()){
+                                    return faild("您是圈主,不能报名", false);
                                 }
-                            }else if(StringUtils.isBlank(act.getLevel())){
-                                if(act.getJoinNumber()<act.getPeopleNumber()){
-                                    activityService.signUpRelease(signUp);
-                                    return doObjRespSuccess("报名成功");
-                                }else{
-                                    return faild("名额已满",false);
-                                }
-                            }else {
-                                    return faild("不符合参与等级要求",false);
+                                if (member.getLevel().equals(act.getLevel())) {
+                                    ////判断人员是否满员,参加人数小于总人数
+                                    if (act.getJoinNumber() < act.getPeopleNumber()) {
+                                        activityService.signUpRelease(signUp);
+                                        return doObjRespSuccess("报名成功");
+                                    } else {
+                                        return faild("名额已满", false);
+                                    }
+                                } else if (StringUtils.isBlank(act.getLevel())) {
+                                    if (act.getJoinNumber() < act.getPeopleNumber()) {
+                                        activityService.signUpRelease(signUp);
+                                        return doObjRespSuccess("报名成功");
+                                    } else {
+                                        return faild("名额已满", false);
+                                    }
+                                } else {
+                                    return faild("不符合参与等级要求", false);
                                 }
 
 
-                        }else {
-                            return faild("参数为空~",false);
+                            } else {
+                                return faild("参数为空~", false);
+                            }
+                        } else {
+                            return faild("参数为空~", false);
                         }
-                        }else {
-                            return faild("参数为空~",false);
-                        }
-                    }else {
-                        return faild("参数为空~",false);
+                    } else {
+                        return faild("参数为空~", false);
                     }
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
-                    return faild("失败~",false);
+                    return faild("失败~", false);
+                }
+
+            case 4:
+                try {
+                    JSONObject jo = JSON.parseObject(json);
+                    if (jo != null) {
+                        int pageStart = jo.getInteger("pageStart");
+                        int pageSize = jo.getInteger("pageSize");
+                        int uid = jo.getInteger("uid");
+
+                        List<Activity> activityList = activityService.getmyReleasePage(uid,(pageStart - 1) * pageSize, pageSize);
+                        long releasePagecount = activityService.getmyReleasePageCount(uid);
+                        if (activityList != null && activityList.size() > 0) {
+                            for (Activity activity : activityList) {
+
+                                if (Long.parseLong(activity.getEndTime()) < new Date().getTime()) {
+                                    //活动未结束
+                                    activity.setType(four);
+                                }else {
+                                    //收费
+                                    activity.setType(two);
+
+                                    }
+
+                                if (activity.getStartTime() != null) {
+                                    String date = longToDate(Long.parseLong(activity.getStartTime()));
+                                    activity.setStartTime(date);
+                                }
+
+                                if (activity.getEndTime() != null) {
+                                    String date = longToDate(Long.parseLong(activity.getEndTime()));
+                                    activity.setEndTime(date);
+                                }
+
+                                if (activity.getImages() != null) {
+                                    List<String> result = Arrays.asList(activity.getImages().split(","));
+                                    activity.setImageList(result);
+                                }
+
+                            }
+                        }
+                        Page newpage = new Page();
+                        newpage.setList(activityList);
+                        newpage.setPageSize(pageSize);
+                        newpage.setTotalSize(releasePagecount);
+                        return doObjResp(newpage);
+                    } else {
+                        return faild("参数异常~", false);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return faild("失败~", false);
+                }
+
+            case 5:
+                try {
+                    JSONObject jo = JSON.parseObject(json);
+                    if (jo != null) {
+                        int pageStart = jo.getInteger("pageStart");
+                        int pageSize = jo.getInteger("pageSize");
+                        int uid = jo.getInteger("uid");
+
+                        List<Activity> activityList = activityService.getmyActivityPage(uid,(pageStart - 1) * pageSize, pageSize);
+                        long activityPagecount = activityService.getmyActivityCount(uid);
+                        if (activityList != null && activityList.size() > 0) {
+                            for (Activity activity : activityList) {
+
+                                if (Long.parseLong(activity.getEndTime()) < new Date().getTime()) {
+                                    //活动已结束
+                                    activity.setType(four);
+                                }else {
+                                    //收费
+                                    activity.setType(three);
+
+                                }
+
+                                if (activity.getStartTime() != null) {
+                                    String date = longToDate(Long.parseLong(activity.getStartTime()));
+                                    activity.setStartTime(date);
+                                }
+
+                                if (activity.getEndTime() != null) {
+                                    String date = longToDate(Long.parseLong(activity.getEndTime()));
+                                    activity.setEndTime(date);
+                                }
+
+                                if (activity.getImages() != null) {
+                                    List<String> result = Arrays.asList(activity.getImages().split(","));
+                                    activity.setImageList(result);
+                                }
+
+                            }
+                        }
+                        Page newpage = new Page();
+                        newpage.setList(activityList);
+                        newpage.setPageSize(pageSize);
+                        newpage.setTotalSize(activityPagecount);
+                        return doObjResp(newpage);
+                    } else {
+                        return faild("参数异常~", false);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return faild("失败~", false);
                 }
         }
         return null;

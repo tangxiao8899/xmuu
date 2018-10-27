@@ -15,7 +15,7 @@ public class Activity implements Serializable{
     private String endTime;//活动结束时间，13位毫秒值
     private String cerateTime;//创建时间，13位毫秒值
     private String address;//活动详细地址
-    private float cost; //费用(免费为0.00)
+    private double cost; //费用(免费为0.00)
     private int peopleNumber;//人数
     private String level;//参加人员等级限制
     private String detail;//活动介绍
@@ -26,6 +26,15 @@ public class Activity implements Serializable{
     private List<String> imageList;
     private String logo;
     private String phone;
+    private String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public String getPhone() {
         return phone;
@@ -115,11 +124,11 @@ public class Activity implements Serializable{
         this.address = address;
     }
 
-    public float getCost() {
+    public double getCost() {
         return cost;
     }
 
-    public void setCost(float cost) {
+    public void setCost(double cost) {
         this.cost = cost;
     }
 
