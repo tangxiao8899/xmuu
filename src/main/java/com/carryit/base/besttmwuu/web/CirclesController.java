@@ -185,6 +185,10 @@ public class CirclesController extends BaseController {
                         boardList = boardFollowService.getBoardFollowByUId(_req.uid);
                     if(boardList!=null&&boardList.size()>0){
                         for (Board _bo:boardList) {
+                            if(_bo.getBanner()!=null){
+                                List<String> result = Arrays.asList(_bo.getBanner().split(","));
+                                _bo.setBannerList(result);
+                            }
                             boardListDTO.add(_bo);
                         }
                     }
@@ -256,7 +260,7 @@ public class CirclesController extends BaseController {
 
 
                         } else {
-                            return faild("数据异常（用户没有绑定主圈子）~", false);
+                            return faild("数据异常（用户没有购买主圈子）~", false);
                         }
                     } else {
                         return faild("参数异常~", false);
