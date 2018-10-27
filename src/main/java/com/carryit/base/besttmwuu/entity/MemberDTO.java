@@ -3,7 +3,7 @@ package com.carryit.base.besttmwuu.entity;
 import java.io.Serializable;
 
 public class MemberDTO implements Serializable {
-
+    private String autograph;//个性签名
     private String nickName; //昵称
     private String levelName; //会员等级
     private String corporateName; //公司名字
@@ -13,6 +13,14 @@ public class MemberDTO implements Serializable {
     private String address;//公司地址
     private String companyProfile;//公司简介
     private String banner;
+
+    public String getAutograph() {
+        return autograph;
+    }
+
+    public void setAutograph(String autograph) {
+        this.autograph = autograph;
+    }
 
     public String getNickName() {
         return nickName;
