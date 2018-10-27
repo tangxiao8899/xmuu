@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.carryit.base.besttmwuu.dao.MemberDao;
+import com.carryit.base.besttmwuu.entity.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,8 @@ import com.util.TimeUtils;
 public class SignInServiceImpl implements SignInService {
 	@Autowired
 	SincerityDao sincerityDao;
+	@Autowired
+	MemberDao memberDao;
 
 	@Override
 	public boolean sign(Integer uid, LocalDateTime signDateTime) {
@@ -44,6 +48,9 @@ public class SignInServiceImpl implements SignInService {
 		} else {
 //			执行签到
 			sincerityDao.addOne(newSincerity);
+			Member me = memberDao.getWealthById(uid);
+			me.setCredit1(me.getCredit1()+10);
+			memberDao.updateCredit1(uid,me.getCredit1());
 		}
 		return true;
 	}

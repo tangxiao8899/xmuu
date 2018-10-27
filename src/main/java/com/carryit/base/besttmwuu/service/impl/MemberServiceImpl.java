@@ -86,4 +86,9 @@ public class MemberServiceImpl implements MemberService {
         return memberDao.getMemberByPhone(phone);
 
     }
+
+    @Override
+    public void updateMemberZhuQuanZi(Integer uid, int bid, String level) {
+        memberDao.updateMemberZhuQuanZi(uid,bid,level);
+    }
 }

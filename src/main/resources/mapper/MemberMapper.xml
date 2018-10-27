@@ -74,6 +74,21 @@
 		where uid = #{uid}
 	</update>
 
+	<!--更新账户积分-->
+	<update id="updateCredit1" >
+		update ims_ewei_shop_member set
+		credit1 = #{credit1}
+		where uid = #{uid}
+	</update>
+
+	<!--更新会员主圈子,和会员等级-->
+	<update id="updateMemberZhuQuanZi" >
+		update ims_ewei_shop_member set
+		bid = #{bid},
+		level = #{level}
+		where zhuquanzi = #{uid}
+	</update>
+
 	<insert id="addMember" parameterType="com.carryit.base.besttmwuu.entity.Member">
 		insert into ims_ewei_shop_member
 		<trim prefix="(" suffix=")" suffixOverrides=",">

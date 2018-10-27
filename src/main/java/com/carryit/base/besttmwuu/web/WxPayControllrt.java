@@ -39,6 +39,9 @@ public class WxPayControllrt extends BaseController {
     @Autowired
     OrderService orderService;
 
+    @Autowired
+    private MemberService memberService;
+
 
 
 
@@ -154,8 +157,8 @@ public class WxPayControllrt extends BaseController {
 
                 //判断订单号是否重复
                 List<Order> userList = orderService.queryOrder(out_trade_no);
-                if (userList.size() > 0) {
-                    result = this.setXml("FAIL", "订单号重复");
+                if (userList!=null&&userList.size() > 1) {
+                    result = this.setXml("FAIL", "订单号不存在或者订单号重复");
                     resXml = "<xml>" + "<return_code><![CDATA[FAIL]]></return_code>"
                             + "<return_msg><![CDATA[交易失败]]></return_msg>" + "</xml> ";
                 } else {
@@ -164,6 +167,9 @@ public class WxPayControllrt extends BaseController {
                     order.setOrdersn(out_trade_no);
                     order.setStatus(3); //付款成功
                     orderService.update(order);
+                    //绑定会员表的主圈子和会员等级
+                    memberService.updateMemberZhuQuanZi(userList.get(0).getUid(),userList.get(0).getBid(),userList.get(0).getLevel());
+
 
 
                     resXml = "<xml>" + "<return_code><![CDATA[SUCCESS]]></return_code>"
@@ -225,7 +231,7 @@ public class WxPayControllrt extends BaseController {
 
                 //判断订单号是否重复
                 List<Order> userList = orderService.queryOrder(out_trade_no);
-                if (userList.size() > 0) {
+                if (userList.size() > 1) {
                     result = this.setXml("FAIL", "订单号重复");
                     resXml = "<xml>" + "<return_code><![CDATA[FAIL]]></return_code>"
                             + "<return_msg><![CDATA[交易失败]]></return_msg>" + "</xml> ";
@@ -293,7 +299,7 @@ public class WxPayControllrt extends BaseController {
 
                 //判断订单号是否重复
                 List<Order> userList = orderService.queryOrder(out_trade_no);
-                if (userList.size() > 0) {
+                if (userList.size() > 1) {
                     result = this.setXml("FAIL", "订单号重复");
                     resXml = "<xml>" + "<return_code><![CDATA[FAIL]]></return_code>"
                             + "<return_msg><![CDATA[交易失败]]></return_msg>" + "</xml> ";
