@@ -48,7 +48,7 @@ public class MemberController extends BaseController {
     }
 
     //诚信值
-    @RequestMapping(value = "sincerity", method = {RequestMethod.GET,
+    @RequestMapping(value = "/sincerity", method = {RequestMethod.GET,
             RequestMethod.POST}, produces = "application/json;charset=UTF-8")
     public JSONObject Sincerity(@RequestBody(required = false) String json) {
         return callHttpReqTask(json, 2);
