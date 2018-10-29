@@ -14,6 +14,15 @@ public class Board implements Serializable {
     private int concerns;//关注数
     private Boolean follow; //是否关注
     private List<String> bannerList;//图片集合
+    private int memberNumber;
+
+    public int getMemberNumber() {
+        return memberNumber;
+    }
+
+    public void setMemberNumber(int memberNumber) {
+        this.memberNumber = memberNumber;
+    }
 
     public Integer getId() {
         return id;

@@ -40,8 +40,8 @@ public class CirclesController extends BaseController {
     @Autowired
     PraiseService praiseService;
 
-    private static final  String Fqz = "6";//副圈主
-    private static final  String UCgly = "7";//UU管理员
+    private static final  String Fqz = "1";//副圈主
+    private static final  String UCgly = "2";//UU管理员
 
 
     @RequestMapping(value = "/getCircles", method = {RequestMethod.GET,
@@ -184,6 +184,7 @@ public class CirclesController extends BaseController {
                         boardList = boardFollowService.getBoardFollowByUId(_req.uid);
                     if(boardList!=null&&boardList.size()>0){
                         for (Board _bo:boardList) {
+
                             if(_bo.getBanner()!=null){
                                 List<String> result = Arrays.asList(_bo.getBanner().split(","));
                                 _bo.setBannerList(result);
@@ -233,7 +234,7 @@ public class CirclesController extends BaseController {
                         //根据uid查询该用户的主圈子
                         Member mb = memberService.getMemberById(ml.getUid());
                         if (mb != null && mb.getZhuquanzi() != null) {
-                            //如果等级level为副圈主 ="6"，查找该圈子副圈主的个数
+                            //如果等级level为副圈主 ="1"，查找该圈子副圈主的个数
                             if (Fqz.equals(ml.getLevel())) {
 
                                 int fuCount = memberService.getMemberByUIdAndLevel(mb.getZhuquanzi(), Fqz);
@@ -246,7 +247,7 @@ public class CirclesController extends BaseController {
                                 }
 
                             } else if (UCgly.equals(ml.getLevel())) {
-                                //如果等级level为UC管理员 ="7"
+                                //如果等级level为UC管理员 ="2"
                                 int fuCount = memberService.getMemberByUIdAndLevel(mb.getZhuquanzi(), ml.getLevel());
                                 if (fuCount >= 50) {
                                     return faild("UU管理员名额已满", false);

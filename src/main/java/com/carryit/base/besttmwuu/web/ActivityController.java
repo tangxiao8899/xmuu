@@ -99,7 +99,13 @@ public class ActivityController extends BaseController {
             case 0:
                 try {
                     Activity activity = p(json, Activity.class);
-                    activityService.add(activity);
+                    //发布活动,前端不传圈子id,后台去根据uid去查主圈子
+
+                    Member memberData = memberService.getMemberById(activity.getUid());
+                    if(zero.equals(memberData.getLevel())){
+                        activity.setBid(memberData.getZhuquanzi());
+                        activityService.add(activity);
+                    }
                     return doObjRespSuccess("发布成功");
                 } catch (Exception e) {
                     e.printStackTrace();

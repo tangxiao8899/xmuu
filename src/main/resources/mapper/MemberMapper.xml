@@ -36,14 +36,14 @@
 		select m.id,m.realname,m.avatar,m.nickname,m.level,b.levelname,(select sum(o.price) from ims_ewei_shop_order o where o.uid=m.uid and o.createtime >=#{startTime} and o.createtime &lt;=#{endTime}) credit2
 		from ims_ewei_shop_member m
 		LEFT JOIN ims_ewei_shop_member_level b ON m.level = b.level
-		where m.zhuquanzi =#{zhuquanzi} and m.level not in("0","6","7") order by credit2 desc
+		where m.zhuquanzi =#{zhuquanzi} and m.level not in("0","1","2") order by credit2 desc
 
 	</select>
 
 	<select id="getnormalMemberCount" resultType="long">
 		select count(*)
 		from ims_ewei_shop_member
-		where zhuquanzi =#{zhuquanzi} and level not in("0","6","7")
+		where zhuquanzi =#{zhuquanzi} and level not in("0","1","2")
 
 	</select>
 
@@ -51,14 +51,14 @@
 		select m.id,m.realname,m.avatar,m.nickname,m.level,b.levelname,(select sum(o.price) from ims_ewei_shop_order o where o.uid=m.uid and o.createtime >=#{startTime} and o.createtime &lt;=#{endTime}) credit2
 		from ims_ewei_shop_member m
 		LEFT JOIN ims_ewei_shop_member_level b ON m.level = b.level
-		where m.zhuquanzi =#{zhuquanzi} and m.level in("0","6","7") order by credit2 desc
+		where m.zhuquanzi =#{zhuquanzi} and m.level in("0","1","2") order by credit2 desc
 
 	</select>
 
 	<select id="getadminMemberCount" resultType="long">
 		select count(*)
 		from ims_ewei_shop_member
-		where zhuquanzi =#{zhuquanzi} and level in("0","6","7")
+		where zhuquanzi =#{zhuquanzi} and level in("0","1","2")
 
 	</select>
 
@@ -84,9 +84,9 @@
 	<!--更新会员主圈子,和会员等级-->
 	<update id="updateMemberZhuQuanZi" >
 		update ims_ewei_shop_member set
-		bid = #{bid},
+		zhuquanzi = #{zhuquanzi},
 		level = #{level}
-		where zhuquanzi = #{uid}
+		where uid = #{uid}
 	</update>
 
 	<insert id="addMember" parameterType="com.carryit.base.besttmwuu.entity.Member">
@@ -167,6 +167,11 @@
 		LEFT JOIN ims_ewei_shop_member m
 		ON u.uid = m.uid
 		where u.phone = #{phone}
+	</select>
+
+	<select id="getMember" resultType="com.carryit.base.besttmwuu.entity.Member">
+		select id,uid,level from ims_ewei_shop_member where uid = #{uid} and zhuquanzi = #{bid}
+
 	</select>
 
 </mapper>

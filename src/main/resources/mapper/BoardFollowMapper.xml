@@ -9,7 +9,7 @@
     </select>
 
     <select id="getBoardFollowByUId" resultType="com.carryit.base.besttmwuu.entity.Board">
-        select b.id,b.cid,b.title,b.logo,b.banner from ims_ewei_shop_sns_board  b LEFT JOIN ims_ewei_shop_sns_board_follow bf on bf.bid =b.id where  bf.uid =#{uid}
+        select b.id,b.cid,b.title,b.logo,b.banner, (select count(*) from ims_ewei_shop_member where zhuquanzi = b.id ) memberNumber from ims_ewei_shop_sns_board_follow bf  LEFT JOIN ims_ewei_shop_sns_board  b on bf.bid =b.id where  bf.uid =#{uid}
 
     </select>
 

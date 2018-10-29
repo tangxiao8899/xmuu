@@ -91,4 +91,9 @@ public class MemberServiceImpl implements MemberService {
     public void updateMemberZhuQuanZi(Integer uid, int bid, String level) {
         memberDao.updateMemberZhuQuanZi(uid,bid,level);
     }
+
+    @Override
+    public Member getMember(Integer uid, Integer bid) {
+        return memberDao.getMember(uid,bid);
+    }
 }

@@ -50,4 +50,6 @@ public interface MemberService {
     Member getMemberByPhone(String phone);
 
     void updateMemberZhuQuanZi(Integer uid, int bid, String level);
+
+    Member getMember(Integer uid, Integer bid);
 }

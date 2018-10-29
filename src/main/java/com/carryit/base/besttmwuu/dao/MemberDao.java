@@ -50,4 +50,6 @@ public interface MemberDao {
     void updateCredit1(@Param("uid") Integer uid, @Param("credit1") float credit1);
 
     void updateMemberZhuQuanZi(@Param("uid") Integer uid, @Param("bid") int bid, @Param("level") String level);
+
+    Member getMember(@Param("uid") Integer uid, @Param("bid") Integer bid);
 }
