@@ -77,6 +77,7 @@ public class WxPayControllrt extends BaseController {
     }
 
 
+
     /**
      * 微信提现
      * @param json
@@ -84,6 +85,16 @@ public class WxPayControllrt extends BaseController {
      */
     @RequestMapping(value = "/getCash", method = {RequestMethod.POST}, produces = "application/json;charset=UTF-8")
     public JSONObject getCash(@RequestBody(required = false) String json) {
+        return callHttpReqTask(json, 4);
+    }
+    /**
+     * 报名支付
+     * @param json
+     * @return
+     */
+    @RequestMapping(value = "/wxEntered", method = {RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public JSONObject wxEntered(@RequestBody(required = false) String json) {
+
         return callHttpReqTask(json, 3);
     }
 
@@ -123,13 +134,30 @@ public class WxPayControllrt extends BaseController {
                     logger.error(e.getMessage());
                     return doObjResp(false,-999,"程序异常!");
                 }
-            case 3:
+            case 4:
                 try{
                     return wxPayService.getCash(json);
-                } catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                     logger.error(e.getMessage());
-                    return doObjResp(false,-999,"程序异常!");
+                    return doObjResp(false, -999, "程序异常!");
+                }
+            case 3  :
+                WxPayReq req1 = p(json, WxPayReq.class);
+                if (req1 != null) {
+                    if (req1.getProductNum() <= 0) // 防止抓包修改订单金额造成损失
+                        return doObjResp(false,-999,"付款金额错误!");
+                    else{
+                        try{
+                            return wxPayService.wxEntered(json);
+                        } catch (Exception e){
+                            e.printStackTrace();
+                            logger.error(e.getMessage());
+                            return doObjResp(false,-999,"程序异常!");
+                        }
+                    }
+                } else {
+                    return faild("请求参数异常~", false);
                 }
         }
         return null;

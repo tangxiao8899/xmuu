@@ -53,4 +53,12 @@ public interface WxPayService {
      * @return
      */
     JSONObject getCash(String json)throws Exception;
+
+     /**
+      * 报名支付
+     * @param json
+     * @throws Exception
+     */
+    JSONObject wxEntered(String json) throws Exception;
+
 }

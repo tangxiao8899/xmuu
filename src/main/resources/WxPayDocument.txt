@@ -68,3 +68,26 @@
              "timestamp": 1539937795
          }
      }
+
+4、微信打赏
+请求地址：http://ip:port/wx/wxEntered
+请求类型：POST
+请求参数：{
+     	"fuid":23, //报名用户ID
+     	"money":3,//报名金额
+     	"tuid":4 //发布活动用户ID
+
+     }
+响应结果：{
+         "msg": "SUCCESS",
+         "code": 200,
+         "data": {
+             "appid": "wx18c2cdc67528ee31",
+             "noncestr": "R1c4yNRrJEsfqcFd",
+             "packageValue": "Sign=WXPay",
+             "partnerid": "1514027471",
+             "prepayid": "wx1916295546801796e0cc8eed0445385439",
+             "sign": "B9713384E17EC4B61DCE7DDF1C7B1B11",
+             "timestamp": 1539937795
+         }
+     }

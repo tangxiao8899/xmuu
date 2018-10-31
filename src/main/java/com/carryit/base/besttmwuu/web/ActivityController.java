@@ -122,26 +122,28 @@ public class ActivityController extends BaseController {
                             newAct = activityService.getActivityById(id);
                             if(newAct.getUid()==uid){
                                 newAct.setType(zero);
-                            }
-                            if (Long.parseLong(newAct.getEndTime()) < new Date().getTime()) {
-                                //活动未结束
-                                newAct.setType(four);
                             }else {
-                                Boolean flag= activityService.getActivityByUIdAndAid(uid,id);
-                                if(flag){
-                                    //已报名
-                                    newAct.setType(three);
+                                if (Long.parseLong(newAct.getEndTime()) < new Date().getTime()) {
+                                    //活动已结束
+                                    newAct.setType(four);
                                 }else {
-                                    //未报名
-                                    if(newAct.getCost()>0){
-                                        //收费
-                                        newAct.setType(two);
+                                    Boolean flag= activityService.getActivityByUIdAndAid(uid,id);
+                                    if(flag){
+                                        //已报名
+                                        newAct.setType(three);
                                     }else {
-                                        newAct.setType(one);
-                                    }
+                                        //未报名
+                                        if(newAct.getCost()>0){
+                                            //收费
+                                            newAct.setType(two);
+                                        }else {
+                                            newAct.setType(one);
+                                        }
 
+                                    }
                                 }
                             }
+
 
                             newAct.setCerateTime(longToDate(Long.parseLong(newAct.getCerateTime())));
                             newAct.setEndTime(longToDate(Long.parseLong(newAct.getEndTime())));
