@@ -1,18 +1,6 @@
 package com.util;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.net.ConnectException;
 import java.net.URL;
 import java.security.MessageDigest;
@@ -22,8 +10,15 @@ import java.util.*;
 import javax.net.ssl.*;
 import javax.servlet.http.HttpServletRequest;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClients;
+import org.jdom2.JDOMException;
+import org.jdom2.input.SAXBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.xml.sax.InputSource;
 
 /**
  * 支付工具类
@@ -438,4 +433,32 @@ public class PayCommonUtil {
         }
 
     }
+
+    /**
+     * 发送post请求
+     *
+     * @param url
+     *            请求地址
+     * @param outputEntity
+     *            发送内容
+     * @param isLoadCert
+     *            是否加载证书
+     */
+    public static CloseableHttpResponse Post(String url, String outputEntity, boolean isLoadCert) throws Exception {
+        HttpPost httpPost = new HttpPost(url);
+        // 得指明使用UTF-8编码，否则到API服务器XML的中文不能被成功识别
+        httpPost.addHeader("Content-Type", "text/xml");
+        httpPost.setEntity(new StringEntity(outputEntity, "UTF-8"));
+        if (isLoadCert) {
+            // 加载含有证书的http请求
+            return HttpClients.custom().setSSLSocketFactory(CertUtil.initCert()).build().execute(httpPost);
+        } else {
+            return HttpClients.custom().build().execute(httpPost);
+        }
+    }
+
+
+
+
+
 }

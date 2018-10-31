@@ -2,12 +2,13 @@ package com.carryit.base.besttmwuu.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.base.ResultPojo;
 import com.carryit.base.besttmwuu.entity.*;
 import com.carryit.base.besttmwuu.service.*;
 import com.util.PayCommonUtil;
 import com.util.PropertyUtil;
 import com.util.XMLUtil;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-import javax.annotation.Resource;
 import java.util.*;
 
 @Service("wxPayService")
@@ -508,18 +508,20 @@ public class WxPayServiceImpl implements WxPayService {
 
             parameters.put("mch_appid", PropertyUtil.getProperty("wxpay.appid")); //账户账号appid
             parameters.put("mchid", PropertyUtil.getProperty("wxpay.mchid")); //商户号
-            parameters.put("body", "小马UU-用户提现"); //商品描述
             parameters.put("nonce_str", PayCommonUtil.CreateNoncestr()); //随机字符串
-            parameters.put("sign", "CNY"); //签名
-            parameters.put("partner_trade_no", parmJo.getString("uid") + "_" + System.currentTimeMillis()); //商户订单号
+            parameters.put("partner_trade_no", parmJo.getString("uid") + "A" + System.currentTimeMillis()); //商户订单号
             parameters.put("openid", member.getOpenid()); //用户openid
-            parameters.put("check_name", "NO_CHECK"); //校验用户姓名选项
+            parameters.put("check_name", "FORCE_CHECK"); //校验用户姓名选项
+            parameters.put("re_user_name", member.getRealname()); //真是姓名
             parameters.put("amount", Math.round(Double.valueOf(parmJo.getString("money")) * 100)); //金额
             parameters.put("desc", "用户提现"); //企业付款备注
             parameters.put("spbill_create_ip", PropertyUtil.getIp()); //IP地址
 
-            //往提现申请表保存一条数据
 
+            //往提现申请表保存一条数据
+            //TODO
+
+            //记一笔提现的流水
 
         } else {
             jo.put("code", 400);
@@ -535,16 +537,23 @@ public class WxPayServiceImpl implements WxPayService {
         logger.debug("封装请求参数是：" + requestXML);
 
         // 调用企业付款接口
-        String result = PayCommonUtil.httpsRequest(PropertyUtil.getProperty("wxpay.merchantPay"), "POST", requestXML);
-        logger.debug("调用统一下单接口：" + result);
-        SortedMap<Object, Object> parMap = PayCommonUtil.startWXPay(result);
-        logger.debug("最终的map是：" + parMap.toString());
-        if (parMap != null) {
+        CloseableHttpResponse response = PayCommonUtil.Post(PropertyUtil.getProperty("wxpay.merchantPay"),requestXML , true);
+        String transfersXml = EntityUtils.toString(response.getEntity(), "utf-8");
+        Map<String, String> transferMap = XMLUtil.doXMLParse(transfersXml);
+        if (transferMap.size() > 0) {
+            if (transferMap.get("result_code").equals("SUCCESS") && transferMap.get("return_code").equals("SUCCESS")) {
+                //成功需要进行的逻辑操作，
+                //TODO
+
+                //更新流水的状态
+
+                //更新账户的余额信息
+
+            }
             jo.put("code", 200);
             jo.put("msg", "SUCCESS");
-            jo.put("data", parMap);
+            jo.put("data", "");
             return jo;
-
         } else {
             jo.put("code", -999);
             jo.put("msg", "提现出现异常，请稍后重试!");
@@ -552,6 +561,8 @@ public class WxPayServiceImpl implements WxPayService {
             return jo;
         }
     }
+
+
 
     public JSONObject wxEntered(String json) throws Exception {
         JSONObject jo = new JSONObject();
