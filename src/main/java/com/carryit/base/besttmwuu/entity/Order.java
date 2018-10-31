@@ -24,6 +24,16 @@ public class Order implements Serializable {
 
     private int bid;
 
+    private int paysource;//1打赏，2报名-----来源
+
+    public int getPaysource() {
+        return paysource;
+    }
+
+    public void setPaysource(int paysource) {
+        this.paysource = paysource;
+    }
+
     public int getBid() {
         return bid;
     }

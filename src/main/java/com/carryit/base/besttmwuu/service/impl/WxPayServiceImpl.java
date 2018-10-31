@@ -343,6 +343,7 @@ public class WxPayServiceImpl implements WxPayService {
             order.setUid(Integer.valueOf(parmJo.getString("fuid"))); //下单用户
             order.setPaytype(2); //在线支付
             order.setCreatetime(new Date().getTime());//创建时间
+            order.setPaysource(1);
 
 
             parameters.put("body", "小马UU-用户打赏"); //商品描述
@@ -472,63 +473,71 @@ public class WxPayServiceImpl implements WxPayService {
     @Override
     public JSONObject wxEntered(String json) throws Exception {
         JSONObject jo = new JSONObject();
-        SortedMap<Object, Object> parameters = PayCommonUtil.getWXPrePayID("wxpay.rewardNotifyUrl"); // 获取预付单，此处已做封装，需要工具类
-
+        SortedMap<Object, Object> parameters = PayCommonUtil.getWXPrePayID("wxpay.notifyurl"); // 获取预付单，此处已做封装，需要工具类
         if (!StringUtils.isEmpty(json)) {
             JSONObject parmJo = JSON.parseObject(json);
             //校验授权信息
+            if (!parmJo.containsKey("productId")) { //商品ID
+                jo.put("code", 400);
+                jo.put("msg", "参数异常");
+                jo.put("data", null);
+                return jo;
+            }
+            if (!parmJo.containsKey("productNum")) { //商品数量
+                jo.put("code", 400);
+                jo.put("msg", "参数异常");
+                jo.put("data", null);
+                return jo;
+            }
+            if (!parmJo.containsKey("bid")) { //圈子id
+                jo.put("code", 400);
+                jo.put("msg", "参数异常");
+                jo.put("data", null);
+                return jo;
+            }
+            if (!parmJo.containsKey("uid")) { //用户id
+                jo.put("code", 400);
+                jo.put("msg", "参数异常");
+                jo.put("data", null);
+                return jo;
+            }
+            //生成商品订单
+            Product product = productService.findById(Integer.valueOf(parmJo.getString("productId")));
 
-            if (!parmJo.containsKey("fuid")) { //报名用户ID
-                jo.put("code", 400);
-                jo.put("msg", "参数异常");
-                jo.put("data", null);
-                return jo;
-            }
-            if (!parmJo.containsKey("tuid")) { //发布活动用户ID
-                jo.put("code", 400);
-                jo.put("msg", "参数异常");
-                jo.put("data", null);
-                return jo;
-            }
-            if (!parmJo.containsKey("money")) { //报名金额
-                jo.put("code", 400);
-                jo.put("msg", "参数异常");
-                jo.put("data", null);
-                return jo;
-            }
-
-            //报名
-            //1、检查账户余额是否足够打赏
-            Member m = memberService.getMemberById(Integer.valueOf(parmJo.getString("fuid")));
-            if (StringUtils.isEmpty(m)) {
+            if (StringUtils.isEmpty(product)) {
                 jo.put("code", 404);
-                jo.put("msg", "打赏账户不存在");
+                jo.put("msg", "未找到该产品");
                 jo.put("data", null);
                 return jo;
-            } else {
-                float f = m.getCredit2(); //账户余额
-                if (f < Float.valueOf(parmJo.getString("money"))) {
-                    jo.put("code", 400);
-                    jo.put("msg", "打赏账户余额不足，请先充值");
-                    jo.put("data", null);
-                    return jo;
-                }
+            }
+            if (StringUtils.isEmpty(product.getLevel())) {
+                jo.put("code", 404);
+                jo.put("msg", "未找到该产品");
+                jo.put("data", null);
+                return jo;
             }
 
-            //2、报名下单
+
+
             Order order = new Order();
             order.setOrdersn(System.currentTimeMillis() + PropertyUtil.random() + ""); //订单号
-            order.setPrice(Double.valueOf(parmJo.getString("money"))); //订单价格
+            order.setPrice(product.getPrice() * Double.valueOf(parmJo.getString("productNum"))); //订单价格
             order.setStatus(2); //待付款
-            order.setUid(Integer.valueOf(parmJo.getString("fuid"))); //下单用户
+            order.setUid(Integer.valueOf(parmJo.getString("uid"))); //下单用户
             order.setPaytype(2); //在线支付
+            order.setBid(Integer.valueOf(parmJo.getString("bid")));
+            order.setLevel(product.getLevel());
             order.setCreatetime(new Date().getTime());//创建时间
+            order.setPaysource(2);
 
 
-            parameters.put("body", "小马UU-用户报名"); //商品描述
-            parameters.put("out_trade_no", parmJo.getString("fuid") + "_" + parmJo.getString("tuid") + "_" + System.currentTimeMillis()); // 订单id这里我的订单id生成规则是uid+充值类型+时间
+
+            orderService.save(order);
+//            parameters.put("notify_url",PropertyUtil.getProperty("wxpay.notifyurl"));//通知地址
+            parameters.put("body", "小马UU-" + product.getLevelName()); //商品描述
+            parameters.put("out_trade_no", order.getOrdersn()); // 订单id这里我的订单id生成规则是订单id+时间
             parameters.put("spbill_create_ip", PropertyUtil.getIp());
-            parameters.put("total_fee", Math.round(Double.valueOf(parmJo.getString("money")) * 100)); // 测试时，每次支付一分钱，微信支付所传的金额是以分为单位的，因此实际开发中需要x100
+            parameters.put("total_fee", Math.round(order.getPrice() * 100)); // 测试时，每次支付一分钱，微信支付所传的金额是以分为单位的，因此实际开发中需要x100
         } else {
             jo.put("code", 400);
             jo.put("msg", "参数异常");
@@ -538,6 +547,10 @@ public class WxPayServiceImpl implements WxPayService {
 
 
         // 设置签名
+
+
+//        String sign = PayCommonUtil.wxSignature(parameters,PropertyUtil.getProperty("wxpay.key"));
+
         String sign = PayCommonUtil.createSign("UTF-8", parameters);
         parameters.put("sign", sign);
         // 封装请求参数结束
