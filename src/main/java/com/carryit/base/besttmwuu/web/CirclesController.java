@@ -510,6 +510,26 @@ public class CirclesController extends BaseController {
                 e.printStackTrace();
                 return faild("失败~",false);
             }
+        case 13:
+                List<Board> _boardList = new ArrayList<>();
+                BoardReq _newreq = p(json, BoardReq.class);
+                try {
+                    if (_newreq != null) {
+                        boardList = boardFollowService.getBoardFollowByUId(_newreq.uid);
+                        if(boardList!=null&&boardList.size()>0){
+                            for (Board _bo:boardList) {
+                                if(_bo.getBanner()!=null){
+                                    List<String> result = Arrays.asList(_bo.getBanner().split(","));
+                                    _bo.setBannerList(result);
+                                }
+                            }
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return faild("失败~",false);
+                }
+                return doObjResp(_boardList);
 
         }
         return null;
@@ -538,13 +558,24 @@ public class CirclesController extends BaseController {
 
     /*
     *
-    * 根据用户id获取关注过的圈子（收藏）
+    * 根据用户id获取关注过的圈子（收藏）(title含有全部)
     * */
     @RequestMapping(value = "/getQuanZiByUid", method = {RequestMethod.GET,
             RequestMethod.POST}, produces = "application/json;charset=UTF-8")
     public JSONObject getQuanZiByUid(@RequestBody(required = false) String json) {
         return callHttpReqTask(json, 3);
     }
+
+    /*
+*
+* 根据用户id获取关注过的圈子（收藏）(title没有全部)
+* */
+    @RequestMapping(value = "/getNewQuanZiByUid", method = {RequestMethod.GET,
+            RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public JSONObject getNewQuanZiByUid(@RequestBody(required = false) String json) {
+        return callHttpReqTask(json, 13);
+    }
+
 
     /*
   *

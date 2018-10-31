@@ -5,6 +5,8 @@ import com.base.BaseController;
 import com.bean.req.WxPayReq;
 import com.carryit.base.besttmwuu.entity.Member;
 import com.carryit.base.besttmwuu.entity.Order;
+import com.carryit.base.besttmwuu.entity.SignUp;
+import com.carryit.base.besttmwuu.service.ActivityService;
 import com.carryit.base.besttmwuu.service.MemberService;
 import com.carryit.base.besttmwuu.service.OrderService;
 import com.carryit.base.besttmwuu.service.WxPayService;
@@ -42,8 +44,12 @@ public class WxPayControllrt extends BaseController {
     @Autowired
     private MemberService memberService;
 
+    @Autowired
+    private ActivityService activityService;
 
 
+    private static final  String two = "2";
+    private static final  String three = "3";
 
     /**
      * 获取微信预付单
@@ -123,11 +129,6 @@ public class WxPayControllrt extends BaseController {
                     return doObjResp(false,-999,"程序异常!");
                 }
             case 3:
-                WxPayReq req1 = p(json, WxPayReq.class);
-                if (req1 != null) {
-                    if (req1.getProductNum() <= 0) // 防止抓包修改订单金额造成损失
-                        return doObjResp(false,-999,"付款金额错误!");
-                    else{
                         try{
                             return wxPayService.wxEntered(json);
                         } catch (Exception e){
@@ -135,10 +136,7 @@ public class WxPayControllrt extends BaseController {
                             logger.error(e.getMessage());
                             return doObjResp(false,-999,"程序异常!");
                         }
-                    }
-                } else {
-                    return faild("请求参数异常~", false);
-                }
+
         }
         return null;
     }
@@ -186,16 +184,31 @@ public class WxPayControllrt extends BaseController {
                     resXml = "<xml>" + "<return_code><![CDATA[FAIL]]></return_code>"
                             + "<return_msg><![CDATA[交易失败]]></return_msg>" + "</xml> ";
                 } else {
-                    //更新订单状态
-                    Order order = new Order();
-                    order.setOrdersn(out_trade_no);
-                    order.setStatus(3); //付款成功
-                    orderService.update(order);
-                    //绑定会员表的主圈子和会员等级
-                    memberService.updateMemberZhuQuanZi(userList.get(0).getUid(),userList.get(0).getBid(),userList.get(0).getLevel());
 
+                    if(two.equals(userList.get(0).getPaysource())){
+                        //更新订单状态
+                        Order order = new Order();
+                        order.setOrdersn(out_trade_no);
+                        order.setStatus(3); //付款成功
+                        orderService.update(order);
 
-
+                        SignUp signUp  = new SignUp();
+                        signUp.setAge(userList.get(0).getAge());
+                        signUp.setAid(userList.get(0).getAid());
+                        signUp.setName(userList.get(0).getName());
+                        signUp.setPhone(userList.get(0).getPhone());
+                        signUp.setSex(userList.get(0).getSex());
+                        signUp.setUid(userList.get(0).getUid());
+                        activityService.signUpRelease(signUp);
+                    }else if(three.equals(userList.get(0).getPaysource())){
+                        //更新订单状态
+                        Order order = new Order();
+                        order.setOrdersn(out_trade_no);
+                        order.setStatus(3); //付款成功
+                        orderService.update(order);
+                        //绑定会员表的主圈子和会员等级
+                        memberService.updateMemberZhuQuanZi(userList.get(0).getUid(),userList.get(0).getBid(),userList.get(0).getLevel());
+                    }
                     resXml = "<xml>" + "<return_code><![CDATA[SUCCESS]]></return_code>"
                             + "<return_msg><![CDATA[OK]]></return_msg>" + "</xml> ";
                 }
