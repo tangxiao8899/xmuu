@@ -3,10 +3,7 @@ package com.carryit.base.besttmwuu.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.base.ResultPojo;
-import com.carryit.base.besttmwuu.entity.ImsUserCapitalFlowEntity;
-import com.carryit.base.besttmwuu.entity.Member;
-import com.carryit.base.besttmwuu.entity.Order;
-import com.carryit.base.besttmwuu.entity.Product;
+import com.carryit.base.besttmwuu.entity.*;
 import com.carryit.base.besttmwuu.service.*;
 import com.util.PayCommonUtil;
 import com.util.PropertyUtil;
@@ -467,6 +464,93 @@ public class WxPayServiceImpl implements WxPayService {
         entity2.setType(0); //收入
 
         imsUserCapitalFlowService.save(entity2);
+    }
+
+    @Override
+    public JSONObject getCash(String json) throws Exception{
+        JSONObject jo = new JSONObject();
+        SortedMap<Object, Object> parameters = new TreeMap<Object, Object>();
+        if (!StringUtils.isEmpty(json)) {
+            JSONObject parmJo = JSON.parseObject(json);
+            //校验授权信息
+
+            if (!parmJo.containsKey("uid")) { //用户ID
+                jo.put("code", 400);
+                jo.put("msg", "参数异常");
+                jo.put("data", "");
+                return jo;
+            }
+            if (!parmJo.containsKey("money")) { //提现金额
+                jo.put("code", 400);
+                jo.put("msg", "参数异常");
+                jo.put("data", "");
+                return jo;
+            }
+
+
+            MemberData member = memberService.getMemberDataByUId(Integer.valueOf(parmJo.getString("uid")));
+            if(StringUtils.isEmpty(member)){
+                jo.put("code", 404);
+                jo.put("msg", "该账户不存在");
+                jo.put("data", "");
+                return jo;
+            }else{
+                double credit = member.getCredit2(); //可提现余额
+                //校验提现金额是否超过可提现余额
+                if(Double.valueOf(parmJo.getString("money")) > credit){
+                    jo.put("code", 400);
+                    jo.put("msg", "提现金额超出可提现余额");
+                    jo.put("data", "");
+                    return jo;
+                }
+            }
+
+            parameters.put("mch_appid", PropertyUtil.getProperty("wxpay.appid")); //账户账号appid
+            parameters.put("mchid", PropertyUtil.getProperty("wxpay.mchid")); //商户号
+            parameters.put("body", "小马UU-用户提现"); //商品描述
+            parameters.put("nonce_str", PayCommonUtil.CreateNoncestr()); //随机字符串
+            parameters.put("sign", "CNY"); //签名
+            parameters.put("partner_trade_no", parmJo.getString("uid") + "_" + System.currentTimeMillis()); //商户订单号
+            parameters.put("openid", member.getOpenid()); //用户openid
+            parameters.put("check_name", "NO_CHECK"); //校验用户姓名选项
+            parameters.put("amount", Math.round(Double.valueOf(parmJo.getString("money")) * 100)); //金额
+            parameters.put("desc", "用户提现"); //企业付款备注
+            parameters.put("spbill_create_ip", PropertyUtil.getIp()); //IP地址
+
+            //往提现申请表保存一条数据
+
+
+            } else {
+            jo.put("code", 400);
+            jo.put("msg", "参数异常");
+            jo.put("data", null);
+            return jo;
+        }
+
+
+        // 设置签名
+        String sign = PayCommonUtil.createSign("UTF-8", parameters);
+        parameters.put("sign", sign);
+        // 封装请求参数结束
+        String requestXML = PayCommonUtil.getRequestXml(parameters); // 获取xml结果
+        logger.debug("封装请求参数是：" + requestXML);
+        // 调用企业付款接口
+        String result = PayCommonUtil.httpsRequest(PropertyUtil.getProperty("wxpay.merchantPay"), "POST", requestXML);
+        logger.debug("调用统一下单接口：" + result);
+        SortedMap<Object, Object> parMap = PayCommonUtil.startWXPay(result);
+        logger.debug("最终的map是：" + parMap.toString());
+        if (parMap != null) {
+            jo.put("code", 200);
+            jo.put("msg", "SUCCESS");
+            jo.put("data", parMap);
+            return jo;
+
+        } else {
+            jo.put("code", -999);
+            jo.put("msg", "提现出现异常，请稍后重试!");
+            jo.put("data", null);
+            return jo;
+        }
     }
 
 

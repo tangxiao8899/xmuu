@@ -135,7 +135,7 @@
 	</insert>
 
 	<select id="getMemberDataByUId" resultType="com.carryit.base.besttmwuu.entity.MemberData">
-		select uid,nickName,city,autograph,avatar
+		select uid,nickName,city,autograph,avatar,openid,realname,credit2
 		from ims_ewei_shop_member
 		where uid =#{uid}
 

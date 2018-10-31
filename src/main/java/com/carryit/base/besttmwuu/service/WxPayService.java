@@ -46,4 +46,11 @@ public interface WxPayService {
      * @param total_fee 订单总金额
      */
     void updateRewardInfo(String out_trade_no, String total_fee);
+
+    /**
+     * 微信提现
+     * @param json
+     * @return
+     */
+    JSONObject getCash(String json)throws Exception;
 }

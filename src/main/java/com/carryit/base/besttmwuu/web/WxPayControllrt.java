@@ -77,6 +77,15 @@ public class WxPayControllrt extends BaseController {
     }
 
 
+    /**
+     * 微信提现
+     * @param json
+     * @return
+     */
+    @RequestMapping(value = "/getCash", method = {RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public JSONObject getCash(@RequestBody(required = false) String json) {
+        return callHttpReqTask(json, 3);
+    }
 
     @Override
     public JSONObject runTask(String json, int cmd) {
@@ -114,7 +123,14 @@ public class WxPayControllrt extends BaseController {
                     logger.error(e.getMessage());
                     return doObjResp(false,-999,"程序异常!");
                 }
-
+            case 3:
+                try{
+                    return wxPayService.getCash(json);
+                } catch (Exception e){
+                    e.printStackTrace();
+                    logger.error(e.getMessage());
+                    return doObjResp(false,-999,"程序异常!");
+                }
         }
         return null;
     }
