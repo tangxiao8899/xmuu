@@ -46,4 +46,12 @@ public interface WxPayService {
      * @param total_fee 订单总金额
      */
     void updateRewardInfo(String out_trade_no, String total_fee);
+
+    /**
+     * 报名支付
+     * @param json
+     * @return
+     * @throws Exception
+     */
+    JSONObject wxEntered(String json) throws Exception;
 }

@@ -76,7 +76,15 @@ public class WxPayControllrt extends BaseController {
         return callHttpReqTask(json, 2);
     }
 
-
+    /**
+     * 报名支付
+     * @param json
+     * @return
+     */
+    @RequestMapping(value = "/wxEntered", method = {RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public JSONObject wxEntered(@RequestBody(required = false) String json) {
+        return callHttpReqTask(json, 3);
+    }
 
     @Override
     public JSONObject runTask(String json, int cmd) {
@@ -114,7 +122,14 @@ public class WxPayControllrt extends BaseController {
                     logger.error(e.getMessage());
                     return doObjResp(false,-999,"程序异常!");
                 }
-
+            case 3 :
+                try{
+                    return wxPayService.wxEntered(json);
+                } catch (Exception e){
+                    e.printStackTrace();
+                    logger.error(e.getMessage());
+                    return doObjResp(false,-999,"程序异常!");
+                }
         }
         return null;
     }

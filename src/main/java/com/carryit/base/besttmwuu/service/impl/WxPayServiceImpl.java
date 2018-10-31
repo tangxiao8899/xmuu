@@ -469,5 +469,98 @@ public class WxPayServiceImpl implements WxPayService {
         imsUserCapitalFlowService.save(entity2);
     }
 
+    @Override
+    public JSONObject wxEntered(String json) throws Exception {
+        JSONObject jo = new JSONObject();
+        SortedMap<Object, Object> parameters = PayCommonUtil.getWXPrePayID("wxpay.rewardNotifyUrl"); // 获取预付单，此处已做封装，需要工具类
+
+        if (!StringUtils.isEmpty(json)) {
+            JSONObject parmJo = JSON.parseObject(json);
+            //校验授权信息
+
+            if (!parmJo.containsKey("fuid")) { //报名用户ID
+                jo.put("code", 400);
+                jo.put("msg", "参数异常");
+                jo.put("data", null);
+                return jo;
+            }
+            if (!parmJo.containsKey("tuid")) { //发布活动用户ID
+                jo.put("code", 400);
+                jo.put("msg", "参数异常");
+                jo.put("data", null);
+                return jo;
+            }
+            if (!parmJo.containsKey("money")) { //报名金额
+                jo.put("code", 400);
+                jo.put("msg", "参数异常");
+                jo.put("data", null);
+                return jo;
+            }
+
+            //报名
+            //1、检查账户余额是否足够打赏
+            Member m = memberService.getMemberById(Integer.valueOf(parmJo.getString("fuid")));
+            if (StringUtils.isEmpty(m)) {
+                jo.put("code", 404);
+                jo.put("msg", "打赏账户不存在");
+                jo.put("data", null);
+                return jo;
+            } else {
+                float f = m.getCredit2(); //账户余额
+                if (f < Float.valueOf(parmJo.getString("money"))) {
+                    jo.put("code", 400);
+                    jo.put("msg", "打赏账户余额不足，请先充值");
+                    jo.put("data", null);
+                    return jo;
+                }
+            }
+
+            //2、报名下单
+            Order order = new Order();
+            order.setOrdersn(System.currentTimeMillis() + PropertyUtil.random() + ""); //订单号
+            order.setPrice(Double.valueOf(parmJo.getString("money"))); //订单价格
+            order.setStatus(2); //待付款
+            order.setUid(Integer.valueOf(parmJo.getString("fuid"))); //下单用户
+            order.setPaytype(2); //在线支付
+            order.setCreatetime(new Date().getTime());//创建时间
+
+
+            parameters.put("body", "小马UU-用户报名"); //商品描述
+            parameters.put("out_trade_no", parmJo.getString("fuid") + "_" + parmJo.getString("tuid") + "_" + System.currentTimeMillis()); // 订单id这里我的订单id生成规则是uid+充值类型+时间
+            parameters.put("spbill_create_ip", PropertyUtil.getIp());
+            parameters.put("total_fee", Math.round(Double.valueOf(parmJo.getString("money")) * 100)); // 测试时，每次支付一分钱，微信支付所传的金额是以分为单位的，因此实际开发中需要x100
+        } else {
+            jo.put("code", 400);
+            jo.put("msg", "参数异常");
+            jo.put("data", null);
+            return jo;
+        }
+
+
+        // 设置签名
+        String sign = PayCommonUtil.createSign("UTF-8", parameters);
+        parameters.put("sign", sign);
+        // 封装请求参数结束
+        String requestXML = PayCommonUtil.getRequestXml(parameters); // 获取xml结果
+        logger.debug("封装请求参数是：" + requestXML);
+        // 调用统一下单接口
+        String result = PayCommonUtil.httpsRequest(PropertyUtil.getProperty("wxpay.payUrl"), "POST", requestXML);
+        logger.debug("调用统一下单接口：" + result);
+        SortedMap<Object, Object> parMap = PayCommonUtil.startWXPay(result);
+        logger.debug("最终的map是：" + parMap.toString());
+        if (parMap != null) {
+            jo.put("code", 200);
+            jo.put("msg", "SUCCESS");
+            jo.put("data", parMap);
+            return jo;
+
+        } else {
+            jo.put("code", -999);
+            jo.put("msg", "支付出现异常，请稍后重试!");
+            jo.put("data", null);
+            return jo;
+        }
+    }
+
 
 }
