@@ -15,7 +15,7 @@ public class CertUtil {
     public static SSLConnectionSocketFactory initCert() throws Exception {
         FileInputStream instream = null;
         KeyStore keyStore = KeyStore.getInstance("PKCS12");
-        instream = new FileInputStream(new File(PropertyUtil.getProperty("wxpay.weixinConstant")));
+        instream = new FileInputStream(new File(System.getProperty("user.dir")+"\\src\\main\\resources\\apiclient_cert.p12"));
         keyStore.load(instream, PropertyUtil.getProperty("wxpay.mchid").toCharArray());
 
         if (null != instream) {
