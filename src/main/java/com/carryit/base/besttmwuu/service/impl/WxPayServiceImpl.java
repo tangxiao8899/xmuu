@@ -526,7 +526,13 @@ public class WxPayServiceImpl implements WxPayService {
             //TODO
 
             //记一笔提现的流水
+            ImsUserCapitalFlowEntity entity = new ImsUserCapitalFlowEntity();
+            entity.setUid(Integer.valueOf(parmJo.getString("uid")));
+            entity.setPrice(Math.round(Double.valueOf(parmJo.getString("money")) * 100)); //记录单位为分
+            entity.setSource(2); //提现
+            entity.setType(1); //支出
 
+            imsUserCapitalFlowService.save(entity);
         } else {
             jo.put("code", 400);
             jo.put("msg", "参数异常");
@@ -547,16 +553,28 @@ public class WxPayServiceImpl implements WxPayService {
         if (transferMap.size() > 0) {
             if (transferMap.get("result_code").equals("SUCCESS") && transferMap.get("return_code").equals("SUCCESS")) {
                 //成功需要进行的逻辑操作，
-                //TODO
-
-                //更新流水的状态
-
                 //更新账户的余额信息
 
+                String partnerTradeNo = transferMap.get("partner_trade_no");
+                String uid = partnerTradeNo.split("A")[0];
+
+                String  amount = transferMap.get("amount"); //金额
+
+                Member member = memberService.getMemberById(Integer.valueOf(uid));
+                if (!StringUtils.isEmpty(member)) {
+                    float Credit = 0f;
+                    Credit = member.getCredit2() - Float.valueOf(amount);
+                    //更新用户账户情况
+                    memberService.updateMemberByUid(Integer.valueOf(uid), Credit);
+                }
+                jo.put("code", 200);
+                jo.put("msg", "SUCCESS");
+                jo.put("data", "");
+                return jo;
             }
-            jo.put("code", 200);
-            jo.put("msg", "SUCCESS");
-            jo.put("data", "");
+            jo.put("code", -999);
+            jo.put("msg", "业务处理异常!");
+            jo.put("data", null);
             return jo;
         } else {
             jo.put("code", -999);
