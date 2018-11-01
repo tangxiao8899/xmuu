@@ -176,7 +176,7 @@ public class ActivityController extends BaseController {
                             for (Activity activity : activityList) {
 
                                 if (Long.parseLong(activity.getEndTime()) < new Date().getTime()) {
-                                    //活动未结束
+                                    //活动结束
                                     activity.setType(four);
                                 }else {
                                     Boolean flag= activityService.getActivityByUIdAndAid(uid,activity.getId());
@@ -238,6 +238,10 @@ public class ActivityController extends BaseController {
                                 return faild("您已报名,不能重复报名", false);
                             }
                             Activity act = activityService.getActivityById(signUp.getAid());
+                            if (Long.parseLong(act.getEndTime()) < new Date().getTime()) {
+                                //活动结束
+                                return faild("活动结束", false);
+                            }
                             Member member = memberService.getMemberById(signUp.getUid());
 
                             //判断是否符合等级
@@ -293,7 +297,7 @@ public class ActivityController extends BaseController {
                             for (Activity activity : activityList) {
 
                                 if (Long.parseLong(activity.getEndTime()) < new Date().getTime()) {
-                                    //活动未结束
+                                    //活动结束
                                     activity.setType(four);
                                 }else {
                                     //收费
@@ -345,7 +349,7 @@ public class ActivityController extends BaseController {
                             for (Activity activity : activityList) {
 
                                 if (Long.parseLong(activity.getEndTime()) < new Date().getTime()) {
-                                    //活动已结束
+                                    //活动结束
                                     activity.setType(four);
                                 }else {
                                     //收费

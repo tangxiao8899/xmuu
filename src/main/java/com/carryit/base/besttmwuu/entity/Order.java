@@ -24,13 +24,60 @@ public class Order implements Serializable {
 
     private int bid;
 
-    private int paysource;//1打赏，2报名-----来源
+    private int aid;
 
-    public int getPaysource() {
+    private String name;//姓名
+    private String phone;
+    private String sex;//(0女，1男)
+    private String age;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    public int getAid() {
+        return aid;
+    }
+
+    public void setAid(int aid) {
+        this.aid = aid;
+    }
+
+    private String paysource;//1打赏，2报名--3商城购买---来源
+
+    public String getPaysource() {
         return paysource;
     }
 
-    public void setPaysource(int paysource) {
+    public void setPaysource(String paysource) {
         this.paysource = paysource;
     }
 

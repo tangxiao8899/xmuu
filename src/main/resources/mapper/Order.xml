@@ -35,6 +35,21 @@
             <if test="level != null">
                 level,
             </if>
+            <if test="paysource != null">
+                paysource,
+            </if>
+            <if test="age != null">
+                age,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -62,10 +77,25 @@
                 #{uid},
             </if>
             <if test="bid != null and bid !=0">
-                bid,
+                #{bid},
             </if>
             <if test="level != null">
-                level,
+                #{level},
+            </if>
+            <if test="paysource != null">
+                #{paysource},
+            </if>
+            <if test="age != null">
+                #{age},
+            </if>
+            <if test="name != null">
+                #{name},
+            </if>
+            <if test="phone != null">
+                #{phone},
+            </if>
+            <if test="sex != null">
+                #{sex},
             </if>
 
         </trim>

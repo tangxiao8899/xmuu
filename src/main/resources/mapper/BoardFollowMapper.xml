@@ -44,12 +44,19 @@
     </select>
 
     <select id="getAllBoardTopic" resultType="com.carryit.base.besttmwuu.entity.Post">
-        select sp.id,sp.bid,m.avatar,sp.content,sp.image,m.nickname,sp.createtime from ims_ewei_shop_sns_post sp JOIN ims_ewei_shop_member m on sp.uid=m.uid where sp.bid =#{bid} ORDER by sp.createtime desc
+        select sp.id,sp.bid,m.avatar,sp.content,sp.image,m.nickname,sp.createtime from ims_ewei_shop_sns_post sp JOIN ims_ewei_shop_member m on sp.uid=m.uid
+        where 1=1
+        <if test="bid != null and bid != 0">
+           AND sp.bid =#{bid}
+        </if>
+          ORDER by sp.createtime desc
 
     </select>
     <select id="getAllBoardTopicCount" resultType="long">
-        select count(*) from ims_ewei_shop_sns_post where bid =#{bid}
-
+        select count(*) from ims_ewei_shop_sns_post where 1=1
+        <if test="bid != null and bid != 0">
+            AND bid =#{bid}
+        </if>
     </select>
 
     <select id="getboardIDListUId" resultType="int">
