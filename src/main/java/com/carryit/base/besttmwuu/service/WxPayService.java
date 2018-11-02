@@ -48,10 +48,17 @@ public interface WxPayService {
     void updateRewardInfo(String out_trade_no, String total_fee);
 
     /**
-     * 报名支付
+     * 微信提现
      * @param json
      * @return
+     */
+    JSONObject getCash(String json)throws Exception;
+
+     /**
+      * 报名支付
+     * @param json
      * @throws Exception
      */
     JSONObject wxEntered(String json) throws Exception;
+
 }
