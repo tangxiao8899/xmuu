@@ -30,4 +30,6 @@ public interface TFriendsService {
      * @return
      */
     ResultPojo totalFriends(String json);
+
+    ResultPojo isFriends(String json);
 }

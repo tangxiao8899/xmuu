@@ -2,12 +2,13 @@ package com.carryit.base.besttmwuu.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.base.ResultPojo;
 import com.carryit.base.besttmwuu.entity.*;
 import com.carryit.base.besttmwuu.service.*;
 import com.util.PayCommonUtil;
 import com.util.PropertyUtil;
 import com.util.XMLUtil;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.*;
 
 @Service("wxPayService")
@@ -34,6 +35,9 @@ public class WxPayServiceImpl implements WxPayService {
 
     @Autowired
     ActivityService activityService;
+
+    @Autowired
+    CashApplyService cashApplyService;
 
     @Autowired
     ImsUserCapitalFlowService imsUserCapitalFlowService;
@@ -122,12 +126,12 @@ public class WxPayServiceImpl implements WxPayService {
             Member me = memberService.getMemberById(parmJo.getInteger("uid"));
 
 
-            if (me != null && me.getZhuquanzi()!=0) {
+            if (me != null && me.getZhuquanzi() != 0) {
                 //说明已经是会员,购买过圈子
-                if(Integer.valueOf(parmJo.getString("productId"))>=Integer.valueOf(me.getLevel())){
+                if (Integer.valueOf(parmJo.getString("productId")) >= Integer.valueOf(me.getLevel())) {
                     //说明买过同等级或者小于的会员,不能购买
                     jo.put("code", 404);
-                    jo.put("msg", "您是"+me.getLevelName()+",不能购买此会员");
+                    jo.put("msg", "您是" + me.getLevelName() + ",不能购买此会员");
                     jo.put("data", null);
                     return jo;
                 }
@@ -472,6 +476,143 @@ public class WxPayServiceImpl implements WxPayService {
     }
 
     @Override
+    public JSONObject getCash(String json) throws Exception {
+        JSONObject jo = new JSONObject();
+        SortedMap<Object, Object> parameters = new TreeMap<Object, Object>();
+        if (!StringUtils.isEmpty(json)) {
+            JSONObject parmJo = JSON.parseObject(json);
+            //校验授权信息
+
+            if (!parmJo.containsKey("uid")) { //用户ID
+                jo.put("code", 400);
+                jo.put("msg", "参数异常");
+                jo.put("data", "");
+                return jo;
+            }
+            if (!parmJo.containsKey("money")) { //提现金额
+                jo.put("code", 400);
+                jo.put("msg", "参数异常");
+                jo.put("data", "");
+                return jo;
+            }
+
+
+            MemberData member = memberService.getMemberDataByUId(Integer.valueOf(parmJo.getString("uid")));
+            if (StringUtils.isEmpty(member)) {
+                jo.put("code", 404);
+                jo.put("msg", "该账户不存在");
+                jo.put("data", "");
+                return jo;
+            } else {
+                double credit = member.getCredit2(); //可提现余额
+                //校验提现金额是否超过可提现余额
+                if (Double.valueOf(parmJo.getString("money")) > credit) {
+                    jo.put("code", 400);
+                    jo.put("msg", "提现金额超出可提现余额");
+                    jo.put("data", "");
+                    return jo;
+                }
+            }
+
+            parameters.put("mch_appid", PropertyUtil.getProperty("wxpay.appid")); //账户账号appid
+            parameters.put("mchid", PropertyUtil.getProperty("wxpay.mchid")); //商户号
+            parameters.put("nonce_str", PayCommonUtil.CreateNoncestr()); //随机字符串
+            parameters.put("openid", member.getOpenid()); //用户openid
+            parameters.put("check_name", "FORCE_CHECK"); //校验用户姓名选项
+            parameters.put("re_user_name", member.getRealname()); //真是姓名
+            parameters.put("amount", Math.round(Double.valueOf(parmJo.getString("money")) * 100)); //金额
+            parameters.put("desc", "用户提现"); //企业付款备注
+            parameters.put("spbill_create_ip", PropertyUtil.getIp()); //IP地址
+
+
+            //往提现申请表保存一条数据
+            CashApply cashApply = new CashApply();
+            cashApply.setId(cashApplyService.findMaxId()+1);
+            cashApply.setOpenid(member.getOpenid());
+            cashApply.setCreatetime((int)(System.currentTimeMillis()/1000));
+            cashApply.setLogno("RW"+PayCommonUtil.getDateStr()+System.currentTimeMillis());
+            cashApply.setMoney(BigDecimal.valueOf(Math.round(Double.valueOf(parmJo.getString("money")) * 100)));
+            cashApply.setStatus(0); //提现申请
+            cashApply.setTitle("余额提现");
+            cashApply.setType(1);
+            cashApplyService.save(cashApply);
+
+            parameters.put("partner_trade_no", parmJo.getString("uid") + "A" +cashApply.getId()+"A"+ System.currentTimeMillis()); //商户订单号
+
+            //记一笔提现的流水
+            ImsUserCapitalFlowEntity entity = new ImsUserCapitalFlowEntity();
+            entity.setUid(Integer.valueOf(parmJo.getString("uid")));
+            entity.setPrice(Math.round(Double.valueOf(parmJo.getString("money")) * 100)); //记录单位为分
+            entity.setSource(2); //提现
+            entity.setType(1); //支出
+
+            imsUserCapitalFlowService.save(entity);
+        } else {
+            jo.put("code", 400);
+            jo.put("msg", "参数异常");
+            jo.put("data", null);
+            return jo;
+        }
+
+        String sign = PayCommonUtil.createSign("UTF-8", parameters);
+        parameters.put("sign", sign);
+        // 封装请求参数结束
+        String requestXML = PayCommonUtil.getRequestXml(parameters); // 获取xml结果
+        logger.debug("封装请求参数是：" + requestXML);
+
+        // 调用企业付款接口
+        CloseableHttpResponse response = PayCommonUtil.Post(PropertyUtil.getProperty("wxpay.merchantPay"),requestXML , true);
+        String transfersXml = EntityUtils.toString(response.getEntity(), "utf-8");
+        Map<String, String> transferMap = XMLUtil.doXMLParse(transfersXml);
+        if (transferMap.size() > 0) {
+            String partnerTradeNo = transferMap.get("partner_trade_no");
+            String uid = partnerTradeNo.split("A")[0];
+            String  amount = transferMap.get("amount"); //金额
+
+            //更新提现状态
+            String _id = partnerTradeNo.split("A")[1];
+            if (transferMap.get("result_code").equals("SUCCESS") && transferMap.get("return_code").equals("SUCCESS")) {
+                //成功需要进行的逻辑操作，
+
+
+                CashApply ca = new CashApply();
+                ca.setId(Integer.valueOf(_id));
+                ca.setStatus(1);
+                cashApplyService.update(ca);
+
+                //更新账户的余额信息
+                Member member = memberService.getMemberById(Integer.valueOf(uid));
+                if (!StringUtils.isEmpty(member)) {
+                    float Credit = 0f;
+                    Credit = member.getCredit2() - Float.valueOf(amount);
+                    //更新用户账户情况
+                    memberService.updateMemberByUid(Integer.valueOf(uid), Credit);
+                }
+
+                jo.put("code", 200);
+                jo.put("msg", "SUCCESS");
+                jo.put("data", "");
+                return jo;
+            }else{
+                CashApply ca = new CashApply();
+                ca.setId(Integer.valueOf(_id));
+                ca.setStatus(-1);
+                cashApplyService.update(ca);
+                jo.put("code", 400);
+                jo.put("msg", "提现失败");
+                jo.put("data", "");
+                return jo;
+            }
+        } else {
+            jo.put("code", -999);
+            jo.put("msg", "提现出现异常，请稍后重试!");
+            jo.put("data", null);
+            return jo;
+        }
+    }
+
+
+
     public JSONObject wxEntered(String json) throws Exception {
         JSONObject jo = new JSONObject();
         SortedMap<Object, Object> parameters = PayCommonUtil.getWXPrePayID("wxpay.notifyurl"); // 获取预付单，此处已做封装，需要工具类
@@ -550,11 +691,13 @@ public class WxPayServiceImpl implements WxPayService {
             order.setPaytype(2); //在线支付
             order.setAid(parmJo.getInteger("aid"));//活动id
             order.setCreatetime(new Date().getTime());//创建时间
+
             order.setPaysource("2");
             order.setAge(parmJo.getString("age"));
             order.setName(parmJo.getString("name"));
             order.setPhone(parmJo.getString("phone"));
             order.setSex(parmJo.getString("sex"));
+
             orderService.save(order);
 
 //            parameters.put("notify_url",PropertyUtil.getProperty("wxpay.notifyurl"));//通知地址
@@ -570,13 +713,6 @@ public class WxPayServiceImpl implements WxPayService {
         }
 
 
-        // 设置签名
-
-
-//        String sign = PayCommonUtil.wxSignature(parameters,PropertyUtil.getProperty("wxpay.key"));
-
-        String sign = PayCommonUtil.createSign("UTF-8", parameters);
-        parameters.put("sign", sign);
         // 封装请求参数结束
         String requestXML = PayCommonUtil.getRequestXml(parameters); // 获取xml结果
         logger.debug("封装请求参数是：" + requestXML);
@@ -593,11 +729,12 @@ public class WxPayServiceImpl implements WxPayService {
 
         } else {
             jo.put("code", -999);
+
+
             jo.put("msg", "支付出现异常，请稍后重试!");
+
             jo.put("data", null);
             return jo;
         }
     }
-
-
 }

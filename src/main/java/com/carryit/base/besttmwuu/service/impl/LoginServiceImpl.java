@@ -2,8 +2,11 @@ package com.carryit.base.besttmwuu.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.bean.LoginReq;
+import com.carryit.base.besttmwuu.entity.Member;
+import com.carryit.base.besttmwuu.entity.MemberData;
 import com.carryit.base.besttmwuu.entity.User;
 import com.carryit.base.besttmwuu.service.LoginService;
+import com.carryit.base.besttmwuu.service.MemberService;
 import com.carryit.base.besttmwuu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +21,9 @@ public class LoginServiceImpl implements LoginService {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    MemberService memberService;
 
     @Autowired
     HttpServletRequest request;
@@ -53,6 +59,30 @@ public class LoginServiceImpl implements LoginService {
                         JSONObject data = new JSONObject();
                         data.put("token",key);
                         data.put("uid",key.split("_")[0]);
+
+                        User user = userService.getUserById(Integer.valueOf(key.split("_")[0]));
+                        data.put("phone",user.getPhone()==null?"":user.getPhone());
+                        data.put("idCard",user.getIdCard()==null?"":user.getIdCard());
+                        data.put("username",user.getUserName()==null?"":user.getUserName());
+                        data.put("address",user.getAddress()==null?"":user.getAddress());
+                        data.put("age",user.getAge()==null?"":user.getAge());
+                        data.put("password",user.getPassword()==null?"":user.getPassword());
+                        data.put("companyProfile",user.getCompanyProfile()==null?"":user.getCompanyProfile());
+                        data.put("corporateName",user.getCorporateName()==null?"":user.getCorporateName());
+                        data.put("education",user.getEducation()==null?"":user.getEducation());
+                        data.put("mailbox",user.getMailbox()==null?"":user.getMailbox());
+                        data.put("marriage",user.getMarriage()==null?"":user.getMarriage());
+                        data.put("need",user.getNeed()==null?"":user.getNeed());
+                        data.put("services",user.getServices()==null?"":user.getServices());
+                        data.put("sex",user.getSex()==null?"":user.getSex());
+                        MemberData m = memberService.getMemberDataByUId(Integer.valueOf(key.split("_")[0]));
+
+                        if(!StringUtils.isEmpty(m)){
+                            data.put("level",m.getLevel());
+                            data.put("nickName",m.getNickName()==null?"":m.getNickName());
+                            data.put("autograph",m.getAutograph()==null?"":m.getAutograph());
+                        }
+
                         data.put("hxu",key.split("_")[1]);
                         data.put("hxp",key.split("_")[2]);
                         jo.put("code",200);
@@ -102,6 +132,28 @@ public class LoginServiceImpl implements LoginService {
                 response.addCookie(cookie);
                 data.put("token",k);
                 data.put("uid",user.getUid());
+                data.put("phone",user.getPhone()==null?"":user.getPhone());
+                data.put("idCard",user.getIdCard()==null?"":user.getIdCard());
+                data.put("username",user.getUserName()==null?"":user.getUserName());
+                data.put("address",user.getAddress()==null?"":user.getAddress());
+                data.put("age",user.getAge()==null?"":user.getAge());
+                data.put("password",user.getPassword()==null?"":user.getPassword());
+                data.put("companyProfile",user.getCompanyProfile()==null?"":user.getCompanyProfile());
+                data.put("corporateName",user.getCorporateName()==null?"":user.getCorporateName());
+                data.put("education",user.getEducation()==null?"":user.getEducation());
+                data.put("mailbox",user.getMailbox()==null?"":user.getMailbox());
+                data.put("marriage",user.getMarriage()==null?"":user.getMarriage());
+                data.put("need",user.getNeed()==null?"":user.getNeed());
+                data.put("services",user.getServices()==null?"":user.getServices());
+                data.put("sex",user.getSex()==null?"":user.getSex());
+
+                MemberData m = memberService.getMemberDataByUId(user.getUid());
+
+               if(!StringUtils.isEmpty(m)){
+                   data.put("level",m.getLevel());
+                   data.put("nickName",m.getNickName()==null?"":m.getNickName());
+                   data.put("autograph",m.getAutograph()==null?"":m.getAutograph());
+               }
                 data.put("hxu",user.getPhone());
                 data.put("hxp",user.getPassword());
                 jo.put("code",200);

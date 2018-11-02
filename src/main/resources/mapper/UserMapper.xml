@@ -184,4 +184,10 @@
 		password = #{password}
 		where phone = #{phone}
 	</update>
+
+	<!--通过ID查-->
+	<select id="getUserById" resultType="com.carryit.base.besttmwuu.entity.User">
+		select * from ims_users where uid = #{id}
+
+	</select>
 </mapper>
