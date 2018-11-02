@@ -23,7 +23,7 @@
          }
      }
 
-2、微信充值、提现接口
+2、微信充值
 请求地址：http://ip:port/wx/wxRecharge
 请求类型：POST
 请求参数：{
@@ -91,3 +91,23 @@
              "timestamp": 1539937795
          }
      }
+
+ 4、微信提现
+ 请求地址：http://ip:port/wx/getCash
+ 请求类型：POST
+ 请求参数：{
+           	"uid": 10, //提现用户ID
+           	"money":0.01 //提现金额
+           }
+ 响应结果：{
+          "msg": "SUCCESS",
+          "code": 200,
+          "data": {
+              "mch_appid": "wxec38b8ff840bd989",
+              "mchid": "10013274",
+              "nonce_str": "lxuDzMnRjpcXzxLx0q",
+              "partner_trade_no": "10013574201505191526582441",
+              "payment_no": "1000018301201505190181489473",
+              "payment_time": "2015-05-19 15：26：59"
+          }
+      }
