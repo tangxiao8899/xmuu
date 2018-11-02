@@ -36,7 +36,7 @@ public class CirclesServiceImpl implements CirclesService {
             int pageSize = Integer.valueOf(subJo.getString("pageSize")); //每页数量
             int pageIndex = Integer.valueOf(subJo.getString("pageIndex")); //当前页
 
-            int index = pageIndex >1 ? pageSize * (pageIndex-1) +1 : pageIndex;
+            int index = pageIndex >1 ? pageSize * (pageIndex-1)  : pageIndex -1;
             int size = index == 0 ? pageSize: pageIndex * pageSize;
 
             List<Circles> list = circlesDao.getCirclesInfo(title,index,size);
