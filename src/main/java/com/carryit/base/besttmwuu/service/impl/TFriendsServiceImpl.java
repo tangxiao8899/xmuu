@@ -7,8 +7,10 @@ import com.bean.req.FriendsReq;
 import com.carryit.base.besttmwuu.dao.TFriendsDao;
 import com.carryit.base.besttmwuu.entity.Member;
 import com.carryit.base.besttmwuu.entity.TFriends;
+import com.carryit.base.besttmwuu.entity.User;
 import com.carryit.base.besttmwuu.service.MemberService;
 import com.carryit.base.besttmwuu.service.TFriendsService;
+import com.carryit.base.besttmwuu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,9 @@ public class TFriendsServiceImpl implements TFriendsService {
     @Autowired
     private MemberService memberService;
 
+    @Autowired
+    private UserService userService;
+
     @Override
     public ResultPojo save(FriendsReq friends) {
         ResultPojo rp = new ResultPojo();
@@ -35,11 +40,11 @@ public class TFriendsServiceImpl implements TFriendsService {
 
         Member m = memberService.getMemberByPhone(phone);
 
-        if(StringUtils.isEmpty(m)){
+        if (StringUtils.isEmpty(m)) {
             rp.setCode(404);
-            rp.setMsg("用户名为"+ phone + "的好友不存在");
+            rp.setMsg("用户名为" + phone + "的好友不存在");
             rp.setData("");
-        }else{
+        } else {
             TFriends f = new TFriends();
             f.setToAddUsername(phone);
             f.setAvatar(m.getAvatar());
@@ -75,22 +80,22 @@ public class TFriendsServiceImpl implements TFriendsService {
     @Override
     public ResultPojo getFriends(String json) {
         ResultPojo rp = new ResultPojo();
-        if(StringUtils.isEmpty(json)){
+        if (StringUtils.isEmpty(json)) {
             rp.setData("");
             rp.setMsg("请求参数不能为空");
             rp.setCode(400);
 
-        }else{
+        } else {
             JSONObject subJo = JSON.parseObject(json);
             String uid = subJo.getString("uid");
             int pageSize = Integer.valueOf(subJo.getString("pageSize")); //每页数量
             int pageIndex = Integer.valueOf(subJo.getString("pageIndex")); //当前页
 
-            int index = pageIndex >1 ? pageSize * (pageIndex-1)  : pageIndex -1;
-            int size = index == 0 ? pageSize: pageIndex * pageSize;
+            int index = pageIndex > 1 ? pageSize * (pageIndex - 1) : pageIndex - 1;
+            int size = index == 0 ? pageSize : pageIndex * pageSize;
 
-            List<TFriends> list = dao.getFriends(Integer.valueOf(uid),index,size);
-            rp.setData(list == null ? "":list);
+            List<TFriends> list = dao.getFriends(Integer.valueOf(uid), index, size);
+            rp.setData(list == null ? "" : list);
             rp.setMsg("请求成功");
             rp.setCode(200);
 
@@ -102,11 +107,11 @@ public class TFriendsServiceImpl implements TFriendsService {
     @Override
     public ResultPojo totalFriends(String json) {
         ResultPojo rp = new ResultPojo();
-        if(StringUtils.isEmpty(json)){
+        if (StringUtils.isEmpty(json)) {
             rp.setData("");
             rp.setMsg("请求参数不能为空");
             rp.setCode(400);
-        }else{
+        } else {
             JSONObject subJo = JSON.parseObject(json);
             String uid = subJo.getString("uid");
             int totalFriends = dao.totalFriends(Integer.valueOf(uid));
@@ -115,6 +120,42 @@ public class TFriendsServiceImpl implements TFriendsService {
             rp.setMsg("获取好友申请数成功");
             rp.setCode(200);
         }
+        return rp;
+    }
+
+    @Override
+    public ResultPojo isFriends(String json) {
+        ResultPojo rp = new ResultPojo();
+        if (StringUtils.isEmpty(json)) {
+            rp.setData("");
+            rp.setMsg("请求参数不能为空");
+            rp.setCode(400);
+
+        } else {
+            JSONObject subJo = JSON.parseObject(json);
+
+            String loginUid = subJo.getString("loginUid");
+            String showUid = subJo.getString("showUid");
+            if (!StringUtils.isEmpty(loginUid) && !StringUtils.isEmpty(showUid)) {
+                User user = userService.getUserById(Integer.parseInt(showUid));
+                TFriends tf = dao.isFriends(loginUid, user.getPhone());
+                if(tf==null){
+                    rp.setData(true);
+                    rp.setMsg("是好友");
+                    rp.setCode(200);
+                }else {
+                    rp.setData(false);
+                    rp.setMsg("不是好友");
+                    rp.setCode(200);
+                }
+            } else {
+                rp.setData("");
+                rp.setMsg("请求参数不能为空");
+                rp.setCode(400);
+            }
+
+        }
+
         return rp;
     }
 }

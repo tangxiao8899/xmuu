@@ -382,7 +382,7 @@
   </select>
 
   <select id="getcommentBypid" resultType="com.carryit.base.besttmwuu.entity.Post">
-    select sp.id,sp.content,m.nickname,sp.createtime from ims_ewei_shop_sns_post sp JOIN ims_ewei_shop_member m on sp.uid=m.uid where sp.pid =#{id} ORDER by sp.createtime desc
+    select sp.id,sp.content,m.nickname,sp.createtime from ims_ewei_shop_sns_post sp JOIN ims_ewei_shop_member m on sp.uid=m.uid where sp.pid =#{id} ORDER by sp.createtime ASC
   </select>
 
 </mapper>
