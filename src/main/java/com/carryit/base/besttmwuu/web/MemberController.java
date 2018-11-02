@@ -1,16 +1,17 @@
 package com.carryit.base.besttmwuu.web;
 
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.base.BaseController;
 import com.base.ServiceConfig;
 import com.bean.req.BoardReq;
+import com.carryit.base.besttmwuu.dao.TFriendsDao;
 import com.carryit.base.besttmwuu.entity.*;
-import com.carryit.base.besttmwuu.service.GlobounService;
-import com.carryit.base.besttmwuu.service.MemberService;
-import com.carryit.base.besttmwuu.service.SincerityService;
+import com.carryit.base.besttmwuu.service.*;
 import com.util.Log;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,6 +32,9 @@ public class MemberController extends BaseController {
 
     @Autowired
     private SincerityService sincerityService;
+
+    @Autowired
+    private TFriendsService tFriendsService;
 
     //用户中心
     @RequestMapping(value = "/member", method = {RequestMethod.GET,
@@ -144,9 +148,16 @@ public class MemberController extends BaseController {
             case 4:
                 MemberDTO mb=new MemberDTO();
                 try {
-                    BoardReq req = p(json, BoardReq.class);
-                    if(req!=null){
-                        mb= memberService.showMember(req.uid);
+                    JSONObject subJo = JSON.parseObject(json);
+                    String loginUid = subJo.getString("loginUid");
+                    String showUid = subJo.getString("showUid");
+                    if (!StringUtils.isEmpty(loginUid) && !StringUtils.isEmpty(showUid)) {
+                        mb= memberService.showMember(Integer.parseInt(loginUid));
+                        boolean friends = tFriendsService.isFriends(loginUid, showUid);
+                        mb.setFriends(friends+"");
+
+                    } else {
+                        return faild("参数异常~", false);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

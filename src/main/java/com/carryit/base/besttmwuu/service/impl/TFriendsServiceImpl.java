@@ -124,38 +124,14 @@ public class TFriendsServiceImpl implements TFriendsService {
     }
 
     @Override
-    public ResultPojo isFriends(String json) {
-        ResultPojo rp = new ResultPojo();
-        if (StringUtils.isEmpty(json)) {
-            rp.setData("");
-            rp.setMsg("请求参数不能为空");
-            rp.setCode(400);
+    public boolean isFriends(String loginUid, String showUid) {
 
+        User user = userService.getUserById(Integer.parseInt(showUid));
+        TFriends tf = dao.isFriends(loginUid, user.getPhone());
+        if (tf == null) {
+            return false;
         } else {
-            JSONObject subJo = JSON.parseObject(json);
-
-            String loginUid = subJo.getString("loginUid");
-            String showUid = subJo.getString("showUid");
-            if (!StringUtils.isEmpty(loginUid) && !StringUtils.isEmpty(showUid)) {
-                User user = userService.getUserById(Integer.parseInt(showUid));
-                TFriends tf = dao.isFriends(loginUid, user.getPhone());
-                if(tf==null){
-                    rp.setData(true);
-                    rp.setMsg("是好友");
-                    rp.setCode(200);
-                }else {
-                    rp.setData(false);
-                    rp.setMsg("不是好友");
-                    rp.setCode(200);
-                }
-            } else {
-                rp.setData("");
-                rp.setMsg("请求参数不能为空");
-                rp.setCode(400);
-            }
-
+            return true;
         }
-
-        return rp;
     }
 }

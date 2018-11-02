@@ -103,25 +103,4 @@ public class FriendsController {
 
         }
     }
-
-    /**
-     *
-     *
-     * @param json
-     * @return
-     */
-    @RequestMapping(value = "/isFriends", method = {RequestMethod.POST}, produces = "application/json;charset=UTF-8")
-    public ResultPojo isFriends(@RequestBody(required = false) String json) {
-        try {
-            return friendsService.isFriends(json);
-        } catch (Exception e) {
-            e.printStackTrace();
-            ResultPojo jo = new ResultPojo();
-            jo.setCode(2);
-            jo.setMsg("失败");
-            jo.setData("");
-            return jo;
-
-        }
-    }
 }

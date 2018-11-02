@@ -13,6 +13,15 @@ public class MemberDTO implements Serializable {
     private String address;//公司地址
     private String companyProfile;//公司简介
     private String banner;
+    private String friends;
+
+    public String getFriends() {
+        return friends;
+    }
+
+    public void setFriends(String friends) {
+        this.friends = friends;
+    }
 
     public String getAutograph() {
         return autograph;

@@ -9,7 +9,7 @@
     </select>
 
     <select id="getBoardById" resultType="com.carryit.base.besttmwuu.entity.Board" parameterType="Integer">
-        select id,cid,title,logo,banner from ims_ewei_shop_sns_board b where id = #{bid}
+        select id,cid,title,logo,banner,advertisement from ims_ewei_shop_sns_board b where id = #{bid}
 
     </select>
 

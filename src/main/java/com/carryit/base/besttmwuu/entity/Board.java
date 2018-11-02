@@ -15,6 +15,15 @@ public class Board implements Serializable {
     private Boolean follow; //是否关注
     private List<String> bannerList;//图片集合
     private int memberNumber;
+    private String advertisement; //banner图地址
+
+    public String getAdvertisement() {
+        return advertisement;
+    }
+
+    public void setAdvertisement(String advertisement) {
+        this.advertisement = advertisement;
+    }
 
     public int getMemberNumber() {
         return memberNumber;

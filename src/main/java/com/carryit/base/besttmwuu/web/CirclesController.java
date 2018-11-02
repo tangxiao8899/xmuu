@@ -380,6 +380,10 @@ public class CirclesController extends BaseController {
                     if (req != null) {
                         boa = boardService.getBoardById(req.bid);
                         boardDetail.setBoard(boa);
+                        if(boa!=null&&boa.getAdvertisement()!=null){
+                            List<String> result = Arrays.asList(boa.getAdvertisement().split(","));
+                            boardDetail.setAdvertisement(result);
+                        }
                         nbf = boardFollowService.getBoardByUid(req.uid, req.bid);// 查询该用户是否关注该圈子
                         if (nbf != null) {
                             boardDetail.setFollow("1");

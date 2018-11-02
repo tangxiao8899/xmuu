@@ -31,5 +31,5 @@ public interface TFriendsService {
      */
     ResultPojo totalFriends(String json);
 
-    ResultPojo isFriends(String json);
+    boolean isFriends(String uid,String mid);
 }
