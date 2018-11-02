@@ -515,9 +515,9 @@ public class CirclesController extends BaseController {
                 BoardReq _newreq = p(json, BoardReq.class);
                 try {
                     if (_newreq != null) {
-                        boardList = boardFollowService.getBoardFollowByUId(_newreq.uid);
-                        if(boardList!=null&&boardList.size()>0){
-                            for (Board _bo:boardList) {
+                        _boardList = boardFollowService.getBoardFollowByUId(_newreq.uid);
+                        if(_boardList!=null&&_boardList.size()>0){
+                            for (Board _bo:_boardList) {
                                 if(_bo.getBanner()!=null){
                                     List<String> result = Arrays.asList(_bo.getBanner().split(","));
                                     _bo.setBannerList(result);
