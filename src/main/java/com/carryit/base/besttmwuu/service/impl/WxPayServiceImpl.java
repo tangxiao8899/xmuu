@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 @Service("wxPayService")
@@ -34,6 +35,9 @@ public class WxPayServiceImpl implements WxPayService {
 
     @Autowired
     ActivityService activityService;
+
+    @Autowired
+    CashApplyService cashApplyService;
 
     @Autowired
     ImsUserCapitalFlowService imsUserCapitalFlowService;
@@ -513,7 +517,6 @@ public class WxPayServiceImpl implements WxPayService {
             parameters.put("mch_appid", PropertyUtil.getProperty("wxpay.appid")); //账户账号appid
             parameters.put("mchid", PropertyUtil.getProperty("wxpay.mchid")); //商户号
             parameters.put("nonce_str", PayCommonUtil.CreateNoncestr()); //随机字符串
-            parameters.put("partner_trade_no", parmJo.getString("uid") + "A" + System.currentTimeMillis()); //商户订单号
             parameters.put("openid", member.getOpenid()); //用户openid
             parameters.put("check_name", "FORCE_CHECK"); //校验用户姓名选项
             parameters.put("re_user_name", member.getRealname()); //真是姓名
@@ -523,7 +526,18 @@ public class WxPayServiceImpl implements WxPayService {
 
 
             //往提现申请表保存一条数据
-            //TODO
+            CashApply cashApply = new CashApply();
+            cashApply.setId(cashApplyService.findMaxId()+1);
+            cashApply.setOpenid(member.getOpenid());
+            cashApply.setCreatetime((int)(System.currentTimeMillis()/1000));
+            cashApply.setLogno("RW"+PayCommonUtil.getDateStr()+System.currentTimeMillis());
+            cashApply.setMoney(BigDecimal.valueOf(Math.round(Double.valueOf(parmJo.getString("money")) * 100)));
+            cashApply.setStatus(0); //提现申请
+            cashApply.setTitle("余额提现");
+            cashApply.setType(1);
+            cashApplyService.save(cashApply);
+
+            parameters.put("partner_trade_no", parmJo.getString("uid") + "A" +cashApply.getId()+"A"+ System.currentTimeMillis()); //商户订单号
 
             //记一笔提现的流水
             ImsUserCapitalFlowEntity entity = new ImsUserCapitalFlowEntity();
@@ -551,15 +565,22 @@ public class WxPayServiceImpl implements WxPayService {
         String transfersXml = EntityUtils.toString(response.getEntity(), "utf-8");
         Map<String, String> transferMap = XMLUtil.doXMLParse(transfersXml);
         if (transferMap.size() > 0) {
+            String partnerTradeNo = transferMap.get("partner_trade_no");
+            String uid = partnerTradeNo.split("A")[0];
+            String  amount = transferMap.get("amount"); //金额
+
+            //更新提现状态
+            String _id = partnerTradeNo.split("A")[1];
             if (transferMap.get("result_code").equals("SUCCESS") && transferMap.get("return_code").equals("SUCCESS")) {
                 //成功需要进行的逻辑操作，
+
+
+                CashApply ca = new CashApply();
+                ca.setId(Integer.valueOf(_id));
+                ca.setStatus(1);
+                cashApplyService.update(ca);
+
                 //更新账户的余额信息
-
-                String partnerTradeNo = transferMap.get("partner_trade_no");
-                String uid = partnerTradeNo.split("A")[0];
-
-                String  amount = transferMap.get("amount"); //金额
-
                 Member member = memberService.getMemberById(Integer.valueOf(uid));
                 if (!StringUtils.isEmpty(member)) {
                     float Credit = 0f;
@@ -567,15 +588,21 @@ public class WxPayServiceImpl implements WxPayService {
                     //更新用户账户情况
                     memberService.updateMemberByUid(Integer.valueOf(uid), Credit);
                 }
+
                 jo.put("code", 200);
                 jo.put("msg", "SUCCESS");
                 jo.put("data", "");
                 return jo;
+            }else{
+                CashApply ca = new CashApply();
+                ca.setId(Integer.valueOf(_id));
+                ca.setStatus(-1);
+                cashApplyService.update(ca);
+                jo.put("code", 400);
+                jo.put("msg", "提现失败");
+                jo.put("data", "");
+                return jo;
             }
-            jo.put("code", -999);
-            jo.put("msg", "业务处理异常!");
-            jo.put("data", null);
-            return jo;
         } else {
             jo.put("code", -999);
             jo.put("msg", "提现出现异常，请稍后重试!");
