@@ -12,6 +12,15 @@ public class MemberData implements Serializable {
     private String openid;  //微信OPENID
     private String realname; //真是姓名
     private double credit2; //账户余额
+    private int level;
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
 
     public String getOpenid() {
         return openid;
