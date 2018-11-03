@@ -33,8 +33,6 @@
     <!--获取好友列表-->
     <select id="isFriends" resultType="com.carryit.base.besttmwuu.entity.TFriends">
         select * from t_friends
-        where uid = #{uid} and toAddUsername = #{phone}
-        ORDER BY processingTime DESC
-        limit #{pageIndex}, #{pageSize}
+        where uid = #{loginUid} and toAddUsername = #{phone}
     </select>
 </mapper>
