@@ -14,6 +14,7 @@
 		LEFT JOIN ims_ewei_shop_member sm on a.uid =sm.uid
 		LEFT JOIN ims_ewei_shop_sns_board b on a.bid =b.id
 		LEFT JOIN ims_ewei_shop_member_level m on a.level = m.level
+
 		ORDER BY a.cerateTime DESC
 
 	</select>

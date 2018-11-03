@@ -43,8 +43,8 @@ public class ActivityServiceImpl implements ActivityService {
 
     @Override
     public Boolean getActivityByUIdAndAid(int uid, Integer id) {
-        Activity activity = activityDao.getActivityByUIdAndAid(uid,id);
-        if(activity!=null){
+        SignUp signUp = activityDao.getActivityByUIdAndAid(uid,id);
+        if(signUp!=null){
             return true;
         }else {
             return false;

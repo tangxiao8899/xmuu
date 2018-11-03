@@ -23,7 +23,7 @@ public interface ActivityDao {
 
     Activity getActivityById(@Param("aid") Integer aid);
 
-    Activity getActivityByUIdAndAid(@Param("uid") int uid, @Param("id") Integer id);
+    SignUp getActivityByUIdAndAid(@Param("uid") int uid, @Param("id") Integer id);
 
     List<Activity> getmyReleasePage(@Param("uid") int uid, RowBounds rowBounds);
 
