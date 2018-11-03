@@ -3,6 +3,7 @@ package com.carryit.base.besttmwuu.dao;
 import com.carryit.base.besttmwuu.entity.Activity;
 import com.carryit.base.besttmwuu.entity.Board;
 import com.carryit.base.besttmwuu.entity.SignUp;
+import com.carryit.base.besttmwuu.entity.SignUpDTO;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Repository;
@@ -32,4 +33,8 @@ public interface ActivityDao {
     List<Activity> getmyActivityPage(@Param("uid") int uid, RowBounds rowBounds);
 
     long getmyActivityCount(@Param("uid") int uid);
+
+    SignUpDTO getQuanZhuSignUp(@Param("aid") int aid);
+
+    List<SignUpDTO> getSignUpInfo(@Param("aid") int aid);
 }

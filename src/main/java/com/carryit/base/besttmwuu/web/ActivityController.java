@@ -5,10 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.base.BaseController;
 import com.bean.Page;
 import com.bean.req.BoardReq;
-import com.carryit.base.besttmwuu.entity.Activity;
-import com.carryit.base.besttmwuu.entity.Member;
-import com.carryit.base.besttmwuu.entity.SignUp;
-import com.carryit.base.besttmwuu.entity.UserLevel;
+import com.carryit.base.besttmwuu.entity.*;
 import com.carryit.base.besttmwuu.service.ActivityService;
 import com.carryit.base.besttmwuu.service.MemberService;
 import com.carryit.base.besttmwuu.service.UserLevelService;
@@ -86,6 +83,13 @@ public class ActivityController extends BaseController {
         return callHttpReqTask(json, 5);
     }
 
+    //获取报名人的信息
+    @RequestMapping(value = "/getSignUpInfo", method = {RequestMethod.GET,
+            RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public JSONObject getSignUpInfo(@RequestBody(required = false) String json) {
+        return callHttpReqTask(json, 6);
+    }
+
 
     public static String longToDate(long lo) {
         Date date = new Date(lo);
@@ -102,7 +106,7 @@ public class ActivityController extends BaseController {
                     //发布活动,前端不传圈子id,后台去根据uid去查主圈子
 
                     Member memberData = memberService.getMemberById(activity.getUid());
-                    if(zero.equals(memberData.getLevel())){
+                    if (zero.equals(memberData.getLevel())) {
                         activity.setBid(memberData.getZhuquanzi());
                         activityService.add(activity);
                     }
@@ -120,23 +124,23 @@ public class ActivityController extends BaseController {
                         int uid = jo.getInteger("uid");
                         if (id != 0) {
                             newAct = activityService.getActivityById(id);
-                            if(newAct.getUid()==uid){
+                            if (newAct.getUid() == uid) {
                                 newAct.setType(zero);
-                            }else {
+                            } else {
                                 if (Long.parseLong(newAct.getEndTime()) < new Date().getTime()) {
                                     //活动已结束
                                     newAct.setType(four);
-                                }else {
-                                    Boolean flag= activityService.getActivityByUIdAndAid(uid,id);
-                                    if(flag){
+                                } else {
+                                    Boolean flag = activityService.getActivityByUIdAndAid(uid, id);
+                                    if (flag) {
                                         //已报名
                                         newAct.setType(three);
-                                    }else {
+                                    } else {
                                         //未报名
-                                        if(newAct.getCost()>0){
+                                        if (newAct.getCost() > 0) {
                                             //收费
                                             newAct.setType(two);
-                                        }else {
+                                        } else {
                                             newAct.setType(one);
                                         }
 
@@ -178,17 +182,17 @@ public class ActivityController extends BaseController {
                                 if (Long.parseLong(activity.getEndTime()) < new Date().getTime()) {
                                     //活动结束
                                     activity.setType(four);
-                                }else {
-                                    Boolean flag= activityService.getActivityByUIdAndAid(uid,activity.getId());
-                                    if(flag){
+                                } else {
+                                    Boolean flag = activityService.getActivityByUIdAndAid(uid, activity.getId());
+                                    if (flag) {
                                         //已报名
                                         activity.setType(three);
-                                    }else {
+                                    } else {
                                         //未报名
-                                        if(activity.getCost()>0){
+                                        if (activity.getCost() > 0) {
                                             //收费
                                             activity.setType(two);
-                                        }else {
+                                        } else {
                                             activity.setType(one);
                                         }
 
@@ -234,7 +238,7 @@ public class ActivityController extends BaseController {
 
                         if (signUp.getAid() != 0 && signUp.getUid() != 0) {
                             Boolean flag = activityService.getActivityByUIdAndAid(signUp.getUid(), signUp.getAid());
-                            if(flag){
+                            if (flag) {
                                 return faild("您已报名,不能重复报名", false);
                             }
                             Activity act = activityService.getActivityById(signUp.getAid());
@@ -246,7 +250,7 @@ public class ActivityController extends BaseController {
 
                             //判断是否符合等级
                             if (act != null && member != null) {
-                                if(act.getUid()==signUp.getUid()){
+                                if (act.getUid() == signUp.getUid()) {
                                     return faild("您是圈主,不能报名", false);
                                 }
                                 if (member.getLevel().equals(act.getLevel())) {
@@ -291,7 +295,7 @@ public class ActivityController extends BaseController {
                         int pageSize = jo.getInteger("pageSize");
                         int uid = jo.getInteger("uid");
 
-                        List<Activity> activityList = activityService.getmyReleasePage(uid,(pageStart - 1) * pageSize, pageSize);
+                        List<Activity> activityList = activityService.getmyReleasePage(uid, (pageStart - 1) * pageSize, pageSize);
                         long releasePagecount = activityService.getmyReleasePageCount(uid);
                         if (activityList != null && activityList.size() > 0) {
                             for (Activity activity : activityList) {
@@ -299,11 +303,11 @@ public class ActivityController extends BaseController {
                                 if (Long.parseLong(activity.getEndTime()) < new Date().getTime()) {
                                     //活动结束
                                     activity.setType(four);
-                                }else {
+                                } else {
                                     //收费
                                     activity.setType(two);
 
-                                    }
+                                }
 
                                 if (activity.getStartTime() != null) {
                                     String date = longToDate(Long.parseLong(activity.getStartTime()));
@@ -343,7 +347,7 @@ public class ActivityController extends BaseController {
                         int pageSize = jo.getInteger("pageSize");
                         int uid = jo.getInteger("uid");
 
-                        List<Activity> activityList = activityService.getmyActivityPage(uid,(pageStart - 1) * pageSize, pageSize);
+                        List<Activity> activityList = activityService.getmyActivityPage(uid, (pageStart - 1) * pageSize, pageSize);
                         long activityPagecount = activityService.getmyActivityCount(uid);
                         if (activityList != null && activityList.size() > 0) {
                             for (Activity activity : activityList) {
@@ -351,7 +355,7 @@ public class ActivityController extends BaseController {
                                 if (Long.parseLong(activity.getEndTime()) < new Date().getTime()) {
                                     //活动结束
                                     activity.setType(four);
-                                }else {
+                                } else {
                                     //收费
                                     activity.setType(three);
 
@@ -382,6 +386,27 @@ public class ActivityController extends BaseController {
                     } else {
                         return faild("参数异常~", false);
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return faild("失败~", false);
+                }
+            case 6:
+                SignUpDTO signUpDTO = new SignUpDTO();
+                List<SignUpDTO> SignUpDTOList = new ArrayList<>();
+                SignUpResp signUpResp = new SignUpResp();
+                try {
+                    JSONObject jo = JSON.parseObject(json);
+                    if (jo != null) {
+                        int aid = jo.getInteger("aid");
+                        signUpDTO = activityService.getQuanZhuSignUp(aid);
+                        SignUpDTOList = activityService.getSignUpInfo(aid);
+                        signUpResp.setSignUpDTO(signUpDTO);
+                        signUpResp.setSignUpList(SignUpDTOList);
+                        return doObjResp(signUpResp);
+                    } else {
+                        return faild("查无该动态~", false);
+                    }
+
                 } catch (Exception e) {
                     e.printStackTrace();
                     return faild("失败~", false);

@@ -4,6 +4,7 @@ import com.carryit.base.besttmwuu.dao.ActivityDao;
 import com.carryit.base.besttmwuu.dao.BoardDao;
 import com.carryit.base.besttmwuu.entity.Activity;
 import com.carryit.base.besttmwuu.entity.SignUp;
+import com.carryit.base.besttmwuu.entity.SignUpDTO;
 import com.carryit.base.besttmwuu.service.ActivityService;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,5 +70,15 @@ public class ActivityServiceImpl implements ActivityService {
     @Override
     public long getmyActivityCount(int uid) {
         return activityDao.getmyActivityCount(uid);
+    }
+
+    @Override
+    public SignUpDTO getQuanZhuSignUp(int aid) {
+        return activityDao.getQuanZhuSignUp(aid);
+    }
+
+    @Override
+    public List<SignUpDTO> getSignUpInfo(int aid) {
+        return activityDao.getSignUpInfo(aid);
     }
 }

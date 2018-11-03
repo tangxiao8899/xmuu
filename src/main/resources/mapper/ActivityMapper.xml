@@ -74,4 +74,16 @@
 		from t_signup
 		where uid=#{uid} and aid=#{id}
 	</select>
+
+	<select id="getQuanZhuSignUp" resultType="com.carryit.base.besttmwuu.entity.SignUpDTO">
+		select a.uid,sm.nickName,sm.avatar
+		from t_activity a left join ims_ewei_shop_member sm on a.uid = sm.uid
+		where a.id=#{aid}
+	</select>
+
+	<select id="getSignUpInfo" resultType="com.carryit.base.besttmwuu.entity.SignUpDTO">
+		select a.uid,sm.nickName,sm.avatar
+		from t_signup a left join ims_ewei_shop_member sm on a.uid = sm.uid
+		where a.aid=#{aid}
+	</select>
 </mapper>
