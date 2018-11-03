@@ -66,7 +66,7 @@
         </set>
     </update>
     
-    <select id="querySincerityByUserId" parameterType="com.carryit.base.besttmwuu.entity.Sincerity" resultType="com.carryit.base.besttmwuu.entity.Sincerity">
+    <select id="querySincerityByUserId" resultType="com.carryit.base.besttmwuu.entity.Sincerity">
     	select id, uid, number, DATE_FORMAT(updateTime,'%Y-%m-%d %H:%i:%s') updateTime from t_sincerity where uid=#{uid}
     </select>
     

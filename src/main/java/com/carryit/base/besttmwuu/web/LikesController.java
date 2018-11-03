@@ -81,10 +81,15 @@ public class LikesController extends BaseController {
                     if (req!=null) {
     //                    likeService.saveCreditNumber(req.uid);
     //                	签到
-                        signInService.sign(req.uid, LocalDateTime.now());
-                        return doObjRespSuccess("签到成功");
+                        boolean sign = signInService.sign(req.uid, LocalDateTime.now());
+                        if(sign){
+                            return doObjRespSuccess("签到成功");
+                        }else {
+                            return faild("您今天已经签到哟~", false);
+                        }
+
                     } else {
-                        return faild("失败~", false);
+                        return faild("失败，参数异常~", false);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
