@@ -62,9 +62,8 @@ public class ImageController extends BaseController {
                 file.transferTo(tempFile); //到这里tempFile即是上传上来的文件。
                 //图片压缩,小余50kb不压缩
                 if(file.getSize()<60*1024){
-                    File realFile=new File(realPath, filesName);
-                    realFile.createNewFile();
-                    file.transferTo(realFile);
+                    File newtempFile=new File(realPath, filesName);
+                    Thumbnails.of(tempFile).scale(1f).toFile(newtempFile);
                     urls.add(domain_name+"/image/"+filesName);
                     tempFile.delete();
                 }else if(file.getSize()<500*1024) {
