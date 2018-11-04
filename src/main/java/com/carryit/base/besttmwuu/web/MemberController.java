@@ -152,6 +152,7 @@ public class MemberController extends BaseController {
                     String loginUid = subJo.getString("loginUid");
                     String showUid = subJo.getString("showUid");
                     if (!StringUtils.isEmpty(loginUid) && !StringUtils.isEmpty(showUid)) {
+
                         mb= memberService.showMember(Integer.parseInt(loginUid));
                         boolean friends = tFriendsService.isFriends(loginUid, showUid);
                         mb.setFriends(friends+"");

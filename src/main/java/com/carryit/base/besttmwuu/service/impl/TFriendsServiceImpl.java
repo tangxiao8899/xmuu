@@ -108,17 +108,24 @@ public class TFriendsServiceImpl implements TFriendsService {
     public ResultPojo totalFriends(String json) {
         ResultPojo rp = new ResultPojo();
         if (StringUtils.isEmpty(json)) {
-//            rp.setData("");
+            rp.setData("");
             rp.setMsg("请求参数不能为空");
             rp.setCode(400);
         } else {
             JSONObject subJo = JSON.parseObject(json);
             String uid = subJo.getString("uid");
             int totalFriends = dao.totalFriends(Integer.valueOf(uid));
+            if (totalFriends==0)
+            {
+                rp.setData(null);
+                rp.setMsg("获取好友申请数成功");
+                rp.setCode(200);
+            }else {
+                rp.setData(totalFriends);
+                rp.setMsg("获取好友申请数成功");
+                rp.setCode(200);
+            }
 
-            rp.setData(totalFriends);
-            rp.setMsg("获取好友申请数成功");
-            rp.setCode(200);
         }
         return rp;
     }
@@ -128,6 +135,9 @@ public class TFriendsServiceImpl implements TFriendsService {
 
         User user = userService.getUserById(Integer.parseInt(showUid));
         TFriends tf = dao.isFriends(loginUid, user.getPhone());
+        if (loginUid.equals(showUid)){
+            return true;
+        }
         if (tf == null) {
             return false;
         } else {
