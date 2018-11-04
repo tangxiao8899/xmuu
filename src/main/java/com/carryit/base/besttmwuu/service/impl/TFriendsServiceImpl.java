@@ -115,17 +115,9 @@ public class TFriendsServiceImpl implements TFriendsService {
             JSONObject subJo = JSON.parseObject(json);
             String uid = subJo.getString("uid");
             int totalFriends = dao.totalFriends(Integer.valueOf(uid));
-            if (totalFriends==0)
-            {
-                rp.setData(null);
-                rp.setMsg("获取好友申请数成功");
-                rp.setCode(200);
-            }else {
-                rp.setData(totalFriends);
-                rp.setMsg("获取好友申请数成功");
-                rp.setCode(200);
-            }
-
+            rp.setData(totalFriends);
+            rp.setMsg("获取好友申请数成功");
+            rp.setCode(200);
         }
         return rp;
     }
