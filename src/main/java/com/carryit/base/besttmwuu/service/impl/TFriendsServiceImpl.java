@@ -108,7 +108,7 @@ public class TFriendsServiceImpl implements TFriendsService {
     public ResultPojo totalFriends(String json) {
         ResultPojo rp = new ResultPojo();
         if (StringUtils.isEmpty(json)) {
-            rp.setData("");
+//            rp.setData("");
             rp.setMsg("请求参数不能为空");
             rp.setCode(400);
         } else {
