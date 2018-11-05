@@ -1,5 +1,6 @@
 package com.carryit.base.besttmwuu.dao;
 
+import com.bean.req.FriendsReq;
 import com.carryit.base.besttmwuu.entity.TFriends;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -27,7 +28,7 @@ public interface TFriendsDao {
      * @param pageSize 每页数量
      * @return 好友列表
      */
-    List<TFriends> getFriends(@Param("uid") int uid,@Param("pageIndex") int pageIndex, @Param("pageSize")int pageSize);
+    List<TFriends> getFriends(@Param("phone") String phone,@Param("pageIndex") int pageIndex, @Param("pageSize")int pageSize);
 
     /**
      * 统计好友请求数
@@ -37,4 +38,6 @@ public interface TFriendsDao {
     int totalFriends(int uid);
 
     TFriends isFriends(@Param("loginUid") String loginUid, @Param("phone") String phone);
+
+    FriendsReq getAllByUidPhone(@Param("phone") String phone,@Param("uid") int uid);
 }

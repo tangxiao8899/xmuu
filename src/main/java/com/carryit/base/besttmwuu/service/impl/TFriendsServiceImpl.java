@@ -44,18 +44,27 @@ public class TFriendsServiceImpl implements TFriendsService {
             rp.setCode(404);
             rp.setMsg("用户名为" + phone + "的好友不存在");
             rp.setData("");
-        } else {
-            TFriends f = new TFriends();
-            f.setToAddUsername(phone);
-            f.setAvatar(m.getAvatar());
-            f.setNickName(m.getNickName());
-            f.setProcessingTime(new Date());
-            f.setUid(friends.getUid());
-            f.setState(2); //申请时  默认是待审核状态
-            dao.save(f);
-            rp.setCode(200);
-            rp.setMsg("申请发送成功");
-            rp.setData("");
+        }  else {
+            //匹配数据库看有没有数据
+            FriendsReq friendsReq=dao.getAllByUidPhone(phone,friends.getUid());
+            if (StringUtils.isEmpty(friendsReq)){
+                TFriends f = new TFriends();
+                f.setToAddUsername(phone);
+                f.setAvatar(m.getAvatar());
+                f.setNickName(m.getNickName());
+                f.setProcessingTime(new Date());
+                f.setUid(friends.getUid());
+                f.setState(2); //申请时  默认是待审核状态
+                dao.save(f);
+                rp.setCode(200);
+                rp.setMsg("申请发送成功");
+                rp.setData("");
+            }
+            else {
+                rp.setCode(200);
+                rp.setMsg("已经添加好友,请等待通过");
+                rp.setData("");
+            }
         }
         return rp;
     }
@@ -87,14 +96,14 @@ public class TFriendsServiceImpl implements TFriendsService {
 
         } else {
             JSONObject subJo = JSON.parseObject(json);
-            String uid = subJo.getString("uid");
+            String phone = subJo.getString("phone");
             int pageSize = Integer.valueOf(subJo.getString("pageSize")); //每页数量
             int pageIndex = Integer.valueOf(subJo.getString("pageIndex")); //当前页
 
             int index = pageIndex > 1 ? pageSize * (pageIndex - 1) : pageIndex - 1;
             int size = index == 0 ? pageSize : pageIndex * pageSize;
 
-            List<TFriends> list = dao.getFriends(Integer.valueOf(uid), index, size);
+            List<TFriends> list = dao.getFriends(phone, index, size);
             rp.setData(list == null ? "" : list);
             rp.setMsg("请求成功");
             rp.setCode(200);

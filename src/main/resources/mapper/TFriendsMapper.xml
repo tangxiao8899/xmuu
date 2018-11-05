@@ -18,10 +18,7 @@
 
     <!--获取好友列表-->
     <select id="getFriends" resultType="com.carryit.base.besttmwuu.entity.TFriends">
-        select * from t_friends
-        where uid = #{uid}
-        ORDER BY processingTime DESC
-        limit #{pageIndex}, #{pageSize}
+        SELECT m.nickname,m.avatar,m.uid FROM ims_ewei_shop_member m WHERE m.uid IN(SELECT uid FROM t_friends WHERE toAddUsername = #{phone}) limit #{pageIndex}, #{pageSize}
     </select>
 
     <!--统计好友申请-->
@@ -35,4 +32,10 @@
         select * from t_friends
         where uid = #{loginUid} and toAddUsername = #{phone}
     </select>
+
+    <!--根据手机号码和uid查询数据-->
+    <select id="getAllByUidPhone" resultType="com.bean.req.FriendsReq">
+        SELECT * FROM t_friends WHERE uid = #{uid} and toAddUsername = #{phone};
+    </select>
+
 </mapper>
