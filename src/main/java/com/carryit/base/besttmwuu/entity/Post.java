@@ -8,6 +8,8 @@ public class Post implements Serializable {
 
     private Integer bid;
 
+    private Integer uid;
+
     private String avatar;//头像
 
     private String content;//动态文字
@@ -31,6 +33,14 @@ public class Post implements Serializable {
     private int fabulous;//点赞
 
     private List<String> imageList;
+
+    public Integer getUid() {
+        return uid;
+    }
+
+    public void setUid(Integer uid) {
+        this.uid = uid;
+    }
 
     public List<String> getImageList() {
         return imageList;
