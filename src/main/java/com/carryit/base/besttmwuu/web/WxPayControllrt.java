@@ -101,7 +101,7 @@ public class WxPayControllrt extends BaseController {
     @RequestMapping(value = "/wxEntered", method = {RequestMethod.POST}, produces = "application/json;charset=UTF-8")
     public JSONObject wxEntered(@RequestBody(required = false) String json) {
 
-        return callHttpReqTask(json, 3);
+        return callHttpReqTask(json, 5);
     }
 
     @Override
@@ -148,7 +148,7 @@ public class WxPayControllrt extends BaseController {
                     logger.error(e.getMessage());
                     return doObjResp(false, -999, "程序异常!");
                 }
-            case 3  :
+            case 5  :
                 try {
                     return wxPayService.wxEntered(json);
                 } catch (Exception e) {

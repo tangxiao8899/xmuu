@@ -615,7 +615,8 @@ public class WxPayServiceImpl implements WxPayService {
 
     public JSONObject wxEntered(String json) throws Exception {
         JSONObject jo = new JSONObject();
-        SortedMap<Object, Object> parameters = PayCommonUtil.getWXPrePayID("wxpay.notifyurl"); // 获取预付单，此处已做封装，需要工具类
+//        SortedMap<Object, Object> parameters = PayCommonUtil.getWXPrePayID("wxpay.notifyurl"); // 获取预付单，此处已做封装，需要工具类
+        SortedMap<Object, Object> parameters = PayCommonUtil.getWXPrePayID("wxpay.rechargeNotifyUrl");
         if (!StringUtils.isEmpty(json)) {
             JSONObject parmJo = JSON.parseObject(json);
             //校验授权信息
@@ -685,7 +686,6 @@ public class WxPayServiceImpl implements WxPayService {
 
             Order order = new Order();
             order.setOrdersn(System.currentTimeMillis() + PropertyUtil.random() + ""); //订单号
-            order.setPrice(act.getCost()); //订单价格
             order.setStatus(2); //待付款
             order.setUid(parmJo.getInteger("uid")); //下单用户
             order.setPaytype(2); //在线支付
@@ -713,6 +713,8 @@ public class WxPayServiceImpl implements WxPayService {
         }
 
 
+        String sign = PayCommonUtil.createSign("UTF-8", parameters);
+        parameters.put("sign", sign);
         // 封装请求参数结束
         String requestXML = PayCommonUtil.getRequestXml(parameters); // 获取xml结果
         logger.debug("封装请求参数是：" + requestXML);
