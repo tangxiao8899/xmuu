@@ -255,7 +255,10 @@ public class ActivityController extends BaseController {
                                 }
                                 if (member.getLevel().equals(act.getLevel())) {
                                     ////判断人员是否满员,参加人数小于总人数
-                                    if (act.getJoinNumber() < act.getPeopleNumber()) {
+                                    if (act.getPeopleNumber()==0) {
+                                        activityService.signUpRelease(signUp);
+                                        return doObjRespSuccess("报名成功");
+                                    } else if (act.getJoinNumber() < act.getPeopleNumber()) {
                                         activityService.signUpRelease(signUp);
                                         return doObjRespSuccess("报名成功");
                                     } else {
