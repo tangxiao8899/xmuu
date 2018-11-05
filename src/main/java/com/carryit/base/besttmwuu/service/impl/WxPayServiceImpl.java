@@ -686,6 +686,7 @@ public class WxPayServiceImpl implements WxPayService {
 
             Order order = new Order();
             order.setOrdersn(System.currentTimeMillis() + PropertyUtil.random() + ""); //订单号
+            order.setPrice(act.getCost());
             order.setStatus(2); //待付款
             order.setUid(parmJo.getInteger("uid")); //下单用户
             order.setPaytype(2); //在线支付
