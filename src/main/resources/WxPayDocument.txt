@@ -69,14 +69,17 @@
          }
      }
 
-4、微信打赏
+4、微信活动报名支付
 请求地址：http://ip:port/wx/wxEntered
 请求类型：POST
-请求参数：{
-     	"fuid":23, //报名用户ID
-     	"money":3,//报名金额
-     	"tuid":4 //发布活动用户ID
+{
 
+		"uid":288,
+		"aid":24,
+		"age":24,
+		"name":111,
+		"phone":18772384740,
+		"sex":1
      }
 响应结果：{
          "msg": "SUCCESS",
