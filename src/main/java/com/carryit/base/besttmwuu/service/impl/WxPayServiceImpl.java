@@ -660,22 +660,29 @@ public class WxPayServiceImpl implements WxPayService {
                     jo.put("data", null);
                     return jo;
                 }
+
                 if (member.getLevel().equals(act.getLevel())) {
                     ////判断人员是否满员,参加人数小于总人数
-                    if (act.getJoinNumber() >= act.getPeopleNumber()) {
+                    if(act.getPeopleNumber()!=0){
+                        if (act.getJoinNumber() >= act.getPeopleNumber()) {
 
-                        jo.put("code", 404);
-                        jo.put("msg", "名额已满");
-                        jo.put("data", null);
-                        return jo;
+                            jo.put("code", 404);
+                            jo.put("msg", "名额已满");
+                            jo.put("data", null);
+                            return jo;
+                        }
                     }
+
                 } else if (org.apache.commons.lang3.StringUtils.isBlank(act.getLevel())) {
-                    if (act.getJoinNumber() >= act.getPeopleNumber()) {
-                        jo.put("code", 404);
-                        jo.put("msg", "名额已满");
-                        jo.put("data", null);
-                        return jo;
+                    if(act.getPeopleNumber()!=0){
+                        if (act.getJoinNumber() >= act.getPeopleNumber()) {
+                            jo.put("code", 404);
+                            jo.put("msg", "名额已满");
+                            jo.put("data", null);
+                            return jo;
+                        }
                     }
+
                 }
             } else {
                 jo.put("code", 404);
@@ -686,6 +693,7 @@ public class WxPayServiceImpl implements WxPayService {
 
             Order order = new Order();
             order.setOrdersn(System.currentTimeMillis() + PropertyUtil.random() + ""); //订单号
+            order.setPrice(act.getCost()); //订单价格
             order.setStatus(2); //待付款
             order.setUid(parmJo.getInteger("uid")); //下单用户
             order.setPaytype(2); //在线支付
