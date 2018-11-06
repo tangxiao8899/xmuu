@@ -24,7 +24,7 @@
     <!--统计好友申请-->
     <select id="totalFriends" resultType="int">
         select count(*) from t_friends
-        where uid = #{uid} and state = 2
+        where toAddUsername = #{phone} and state = 2
     </select>
 
     <!--获取好友列表-->

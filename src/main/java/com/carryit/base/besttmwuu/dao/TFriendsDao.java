@@ -35,7 +35,7 @@ public interface TFriendsDao {
      * @param uid 用户ID
      * @return 总的好友请求数
      */
-    int totalFriends(int uid);
+    int totalFriends(String phone);
 
     TFriends isFriends(@Param("loginUid") String loginUid, @Param("phone") String phone);
 
