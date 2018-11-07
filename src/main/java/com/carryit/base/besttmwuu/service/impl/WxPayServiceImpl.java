@@ -349,7 +349,7 @@ public class WxPayServiceImpl implements WxPayService {
             order.setPaytype(2); //在线支付
             order.setCreatetime(new Date().getTime());//创建时间
             order.setPaysource("1");
-
+            orderService.save(order);
 
             parameters.put("body", "小马UU-用户打赏"); //商品描述
             parameters.put("out_trade_no", parmJo.getString("fuid") + "_" + parmJo.getString("tuid") + "_" + System.currentTimeMillis()); // 订单id这里我的订单id生成规则是uid+充值类型+时间
