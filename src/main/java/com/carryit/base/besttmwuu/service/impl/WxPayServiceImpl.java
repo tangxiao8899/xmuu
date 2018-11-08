@@ -252,6 +252,7 @@ public class WxPayServiceImpl implements WxPayService {
             order.setStatus(2); //待付款
             order.setUid(Integer.valueOf(parmJo.getString("uid"))); //下单用户
             order.setPaytype(2); //在线支付
+            order.setPaysource("4");
             order.setCreatetime(new Date().getTime());//创建时间
 
 
@@ -298,11 +299,9 @@ public class WxPayServiceImpl implements WxPayService {
     public JSONObject wxReward(String json) throws Exception {
         JSONObject jo = new JSONObject();
         SortedMap<Object, Object> parameters = PayCommonUtil.getWXPrePayID("wxpay.rewardNotifyUrl"); // 获取预付单，此处已做封装，需要工具类
-
         if (!StringUtils.isEmpty(json)) {
             JSONObject parmJo = JSON.parseObject(json);
             //校验授权信息
-
             if (!parmJo.containsKey("fuid")) { //打赏用户ID
                 jo.put("code", 400);
                 jo.put("msg", "参数异常");
@@ -349,7 +348,7 @@ public class WxPayServiceImpl implements WxPayService {
             order.setPaytype(2); //在线支付
             order.setCreatetime(new Date().getTime());//创建时间
             order.setPaysource("1");
-
+            orderService.save(order);
 
             parameters.put("body", "小马UU-用户打赏"); //商品描述
             parameters.put("out_trade_no", parmJo.getString("fuid") + "_" + parmJo.getString("tuid") + "_" + System.currentTimeMillis()); // 订单id这里我的订单id生成规则是uid+充值类型+时间
@@ -470,6 +469,54 @@ public class WxPayServiceImpl implements WxPayService {
         entity2.setUid(Integer.valueOf(tuid));
         entity2.setPrice(Long.valueOf(total_fee) * 100); //记录单位为分
         entity2.setSource(1); //打赏
+        entity2.setType(0); //收入
+
+        imsUserCapitalFlowService.save(entity2);
+    }
+
+    @Override
+    @Transactional
+    public void updatewxEnteredInfo(String out_trade_no, String total_fee) {
+        //TODO 待后期优化
+
+        //更新订单状态
+        Order order = new Order();
+        order.setOrdersn(out_trade_no);
+        order.setStatus(3); //付款成功
+        //支付成功，更新订单状态
+        orderService.update(order);
+
+
+        //报名用户ID
+        String fuid = out_trade_no.split("_")[0];
+        //发布活动用户ID
+        String tuid = out_trade_no.split("_")[1];
+
+        //查询Member表账户信息
+        Member fmember = memberService.getMemberById(Integer.valueOf(fuid));
+        Member tmember = memberService.getMemberById(Integer.valueOf(tuid));
+
+        float Creditf = fmember.getCredit2() - Float.valueOf(total_fee);
+        float Creditt = tmember.getCredit2() + Float.valueOf(total_fee);
+
+        //更新用户账户情况
+        memberService.updateMemberByUid(Integer.valueOf(fuid), Creditf);
+        memberService.updateMemberByUid(Integer.valueOf(tuid), Creditt);
+
+        //记录资金流水
+        ImsUserCapitalFlowEntity entity = new ImsUserCapitalFlowEntity();
+        entity.setUid(Integer.valueOf(fuid));
+        entity.setPrice(Long.valueOf(total_fee) * 100); //记录单位为分
+        entity.setSource(0); //充值
+        entity.setType(1); //支出
+
+        imsUserCapitalFlowService.save(entity);
+
+
+        ImsUserCapitalFlowEntity entity2 = new ImsUserCapitalFlowEntity();
+        entity2.setUid(Integer.valueOf(tuid));
+        entity2.setPrice(Long.valueOf(total_fee) * 100); //记录单位为分
+        entity2.setSource(1); //报名
         entity2.setType(0); //收入
 
         imsUserCapitalFlowService.save(entity2);
@@ -616,7 +663,7 @@ public class WxPayServiceImpl implements WxPayService {
     public JSONObject wxEntered(String json) throws Exception {
         JSONObject jo = new JSONObject();
 //        SortedMap<Object, Object> parameters = PayCommonUtil.getWXPrePayID("wxpay.notifyurl"); // 获取预付单，此处已做封装，需要工具类
-        SortedMap<Object, Object> parameters = PayCommonUtil.getWXPrePayID("wxpay.rechargeNotifyUrl");
+        SortedMap<Object, Object> parameters = PayCommonUtil.getWXPrePayID("wxpay.wxEnteredNotifyUrl");
         if (!StringUtils.isEmpty(json)) {
             JSONObject parmJo = JSON.parseObject(json);
             //校验授权信息
