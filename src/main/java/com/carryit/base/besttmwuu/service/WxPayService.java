@@ -42,10 +42,11 @@ public interface WxPayService {
 
     /**
      * 更新打赏账户信息
-     * @param out_trade_no 商户订单号
+     * @param fuid 打赏用户ID
+     * @param tuid 被打赏用户ID
      * @param total_fee 订单总金额
      */
-    void updateRewardInfo(String out_trade_no, String total_fee);
+    void updateRewardInfo(String fuid, String tuid, String total_fee);
 
     /**
      * 微信提现
