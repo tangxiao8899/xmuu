@@ -77,4 +77,18 @@
     <update id="updateOne" parameterType="com.carryit.base.besttmwuu.entity.Sincerity">
     	update t_sincerity set updateTime=#{updateTime}, number=#{number} where uid=#{uid}
     </update>
+
+    <select id="getSincerityList" resultType="com.carryit.base.besttmwuu.entity.UserDTO">
+        select s.uid,m.nickname,m.avatar profilePhoto
+        from t_sincerity s
+        join ims_ewei_shop_member m on s.uid  = m.uid where s.createTime &gt;= #{startTime}  and s.createTime &lt;= #{endTime}
+        GROUP BY s.uid ORDER BY sum(s.number) desc limit 6;
+    </select>
+
+    <select id="queryList" resultType="com.carryit.base.besttmwuu.entity.UserDTO">
+        select s.uid,m.nickname,m.avatar profilePhoto
+        from t_sincerity s
+        join ims_ewei_shop_member m on s.uid  = m.uid where s.createTime &gt;= #{startTime}  and s.createTime &lt;= #{endTime}
+        GROUP BY s.uid ORDER BY sum(s.number) desc limit 100;
+    </select>
 </mapper>

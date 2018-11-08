@@ -9,6 +9,7 @@ import com.bean.resp.BoardResp;
 import com.carryit.base.besttmwuu.entity.Board;
 import com.carryit.base.besttmwuu.entity.UserDTO;
 import com.carryit.base.besttmwuu.service.BoardService;
+import com.carryit.base.besttmwuu.service.SincerityService;
 import com.carryit.base.besttmwuu.service.WealthService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,11 +36,21 @@ public class IndexController extends BaseController {
     @Autowired
     BoardService boardService;
 
-    //每周上榜
+    @Autowired
+    private SincerityService sincerityService;
+
+    //每周上榜,根据每周累加的诚信表t_sincerity的number字段的值来排行！
     @RequestMapping(value = "/onTheList", method = {RequestMethod.GET,
             RequestMethod.POST}, produces = "application/json;charset=UTF-8")
     public JSONObject onTheList(@RequestBody(required = false) String json) {
         return callHttpReqTask(json, 0);
+    }
+
+    //点击更多，返回100个
+    @RequestMapping(value = "/queryAllWealth", method = {RequestMethod.GET,
+            RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public JSONObject queryPage(@RequestBody(required = false) String json) {
+        return callHttpReqTask(json, 1);
     }
 
     @Override
@@ -59,24 +70,22 @@ public class IndexController extends BaseController {
         String imptimeBegin = sdf.format(cal.getTime());
         cal.add(Calendar.DATE, 6);
         String imptimeEnd = sdf.format(cal.getTime());
+//            startTime = sdf.parse(imptimeBegin + " 00:00:00").getTime();
+//            endTime = sdf.parse(imptimeEnd + " 23:59:59").getTime();
 
-        long startTime = 0;
-        long endTime = 0;
-        try {
-            startTime = sdf.parse(imptimeBegin + " 00:00:00").getTime();
-            endTime = sdf.parse(imptimeEnd + " 23:59:59").getTime();
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return faild("失败~", false);
-        }
+        String startTime = imptimeBegin + " 00:00:00";
+        String endTime = imptimeEnd + " 23:59:59";
+
+
         switch (cmd) {
             case 0:
                 List<Board> boardList = new ArrayList<>();
                 List<UserDTO> userList = new ArrayList<>();
                 BoardResp br = new BoardResp();
                 try {
-                    //查每周财富值前六名
-                    userList = wealthService.onTheList(startTime, endTime);
+                    //查每周诚信值值前六名
+                    //userList = wealthService.onTheList(startTime, endTime);
+                    userList =  sincerityService.getSincerityList(startTime, endTime);
                     //查所有的小圈子
                     boardList = boardService.getAllBoard();
                     br.setBoardList(boardList);
@@ -90,7 +99,8 @@ public class IndexController extends BaseController {
 
                 List<UserDTO> list = new ArrayList<>();
                 try {
-                    list = wealthService.queryPage(startTime, endTime);
+                   // list = wealthService.queryPage(startTime, endTime);
+                    list = sincerityService.queryList(startTime, endTime);
                 } catch (Exception e) {
                     e.printStackTrace();
                     return faild("失败~", false);
@@ -103,10 +113,5 @@ public class IndexController extends BaseController {
 
 
 
-//点击更多，返回100个财富榜
-    @RequestMapping(value = "/queryAllWealth", method = {RequestMethod.GET,
-            RequestMethod.POST}, produces = "application/json;charset=UTF-8")
-    public JSONObject queryPage(@RequestBody(required = false) String json) {
-        return callHttpReqTask(json, 1);
-    }
+
 }

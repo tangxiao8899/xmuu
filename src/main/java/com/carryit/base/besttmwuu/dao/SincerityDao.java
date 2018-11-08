@@ -4,6 +4,8 @@ import com.carryit.base.besttmwuu.entity.Sincerity;
 
 import java.util.List;
 
+import com.carryit.base.besttmwuu.entity.UserDTO;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -21,4 +23,8 @@ public interface SincerityDao {
 	void addOne(Sincerity newSincerity);
 	
 	void updateOne(Sincerity sincerity);
+
+    List<UserDTO> getSincerityList(@Param("startTime") String startTime, @Param("endTime") String endTime);
+
+    List<UserDTO> queryList(@Param("startTime") String startTime, @Param("endTime") String endTime);
 }
