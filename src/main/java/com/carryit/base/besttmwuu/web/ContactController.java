@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.configurationprocessor.json.JSONArray;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -36,51 +37,26 @@ public class ContactController extends BaseController {
 	/**
 	 * 获取当前用户的所有联系人中，还未添加好友的人员&好友
 	 * 返回數據格式：
+	 * 
 	 * {
     "msg": "ok",
     "code": 200,
-    "data": {
-        "notFriends": [
-            {
-                "uid": 2,
-                "phone": "17762369527",
-                "nickname": null,
-                "avatar": null
-            },
-            {
-                "uid": 4,
-                "phone": "18772374640",
-                "nickname": null,
-                "avatar": null
-            },
-            {
-                "uid": 23,
-                "phone": "13571860966",
-                "nickname": "@",
-                "avatar": "http://thirdwx.qlogo.cn/mmopen/ajNVdqHZLLC4XGk36PHkCGWjdFue1ELMiaKkOxhDl5oicNvJqYErb31kyfQejkVKYEEU48qLxYnXvDIClD7T0Pug/132132"
-            },
-            {
-                "uid": 19,
-                "phone": "18171277713",
-                "nickname": "王自知Eric",
-                "avatar": "http://thirdwx.qlogo.cn/mmopen/n1fGhtL2oJQ3L0tff2tO9mpCvXbhq3dpicYdukncIhzdENv35CaplbicYceTjbibdk5El9oZ3u5sWibLfnMggX0QuOZ8mDicFXoBs/132"
-            },
-            {
-                "uid": 20,
-                "phone": "18727582389",
-                "nickname": "幻影 黄R",
-                "avatar": "http://thirdwx.qlogo.cn/mmopen/LIND77SSex8olfQZcR9Mmjx8YMrnG2yAice3RyVAvlugUuSRK2iaSApd1CnR5ibPO8CVC6QAkceWNpOUQRoHI5ohfVw3mFEx3sK/132"
-            }
-        ],
-        "friends": [
-            {
-                "uid": 21,
-                "phone": "15171635573",
-                "nickname": "",
-                "avatar": ""
-            }
-        ]
-    }
+    "data": [
+        {
+            "uid": 10,
+            "phone": "18772374640",
+            "isFriends": true,
+            "nickname": "周杨",
+            "avatar": "http://thirdwx.qlogo.cn/mmopen/Q3auHgzwzM7LPct8ZDAPgVAWjYkcyib1ae3wjgU9ib8UEaJr036LoOMX5Y2NFVZo66nJJu8QpmWWyNKTZRwCTna3zcrU6NGhPyiaIyr8Zs4w3I/132"
+        },
+        {
+            "uid": 26,
+            "phone": "13522129197",
+            "isFriends": false,
+            "nickname": "陆荣前^0^正能量",
+            "avatar": "http://thirdwx.qlogo.cn/mmopen/n1fGhtL2oJSJsAyxrdXqKHUHhcdJahloIBiaUGUkC2ictjofPNQAwiaRjNVSGjWUKIuicn0fksMayZJw6sqyuibm6mo5XKZK9MGF3/132"
+        }
+    ]
 }
 	 * */
     @RequestMapping(value = "/contactswithoutadd", method = {RequestMethod.POST}, produces = "application/json;charset=UTF-8")
@@ -97,13 +73,13 @@ public class ContactController extends BaseController {
      * 
      * 
      * 返回参数格式：
-	   {
-		    "msg": "ok",
-		    "code": 200,
-		    "data": {
-		        "count": 1
-		    }
-		}
+	{
+    "msg": "ok",
+    "code": 200,
+    "data": {
+        "count": 2
+    }
+}
      * */
     @RequestMapping(value = "/friendsCount", method = {RequestMethod.POST}, produces = "application/json;charset=UTF-8")
     public JSONObject getFriendsCount(@RequestBody(required = false) String json) {
@@ -112,23 +88,6 @@ public class ContactController extends BaseController {
 
 	@Override
 	public JSONObject runTask(String json, int cmd) {
-		if(cmd == 0) {
-//			获取当前用户的所有联系人中，还未添加好友的人员&好友
-			ContactsWithoudAddReq contactsWithoudAddReq = p(json, ContactsWithoudAddReq.class);
-			if(contactsWithoudAddReq == null 
-					|| contactsWithoudAddReq.getPhones() == null 
-					|| contactsWithoudAddReq.getPhones().size() < 1
-					|| contactsWithoudAddReq.getUid() == 0) {
-				return doArraysResp(null, 400, "参数不符合要求");
-			}
-			List<ImsUsers> notFriends = contactService.getContactsWithoutAdd(contactsWithoudAddReq.getUid(), contactsWithoudAddReq.getPhones());
-			List<ImsUsers> friends = contactService.getFriends(contactsWithoudAddReq.getUid());
-			
-			JSONObject result = new JSONObject();
-			result.put("notFriends", convertFrom(notFriends));
-			result.put("friends", convertFrom(friends));
-			return doObjResp(result, 200, "ok");
-		}
 		
 		switch (cmd) {
 		case 0:
@@ -140,8 +99,19 @@ public class ContactController extends BaseController {
 					|| contactsWithoudAddReq.getUid() == 0) {
 				return doArraysResp(null, 400, "参数不符合要求");
 			}
+//			获取当前用户的所有联系人中，还未添加好友的人员&好友
+			if(contactsWithoudAddReq == null 
+					|| contactsWithoudAddReq.getPhones() == null 
+					|| contactsWithoudAddReq.getPhones().size() < 1
+					|| contactsWithoudAddReq.getUid() == 0) {
+				return doArraysResp(null, 400, "参数不符合要求");
+			}
 			List<ImsUsers> notFriends = contactService.getContactsWithoutAdd(contactsWithoudAddReq.getUid(), contactsWithoudAddReq.getPhones());
-			return doArraysResp(notFriends.stream().map(user -> user.getPhone()).collect(Collectors.toList()));
+			List<ImsUsers> friends = contactService.getFriends(contactsWithoudAddReq.getUid());
+			
+			List<ContactUserResp> allUsers = convertFrom(notFriends, false);
+			allUsers.addAll(convertFrom(friends, true));
+			return doArraysResp(allUsers, 200, "ok");
 		case 1:
 //			查询
 			ContactsWithoudAddReq user = p(json, ContactsWithoudAddReq.class);
@@ -149,16 +119,16 @@ public class ContactController extends BaseController {
 					|| user.getUid() == 0) {
 				return doObjResp(null, 400, "参数不符合要求, 例如{'uid':12}");
 			}
-			List<ImsUsers> friends = contactService.getFriends(user.getUid());
+			List<ImsUsers> friends2 = contactService.getFriends(user.getUid());
 			JSONObject resp = new JSONObject();
-			resp.put("count", friends.size());
+			resp.put("count", friends2.size());
 			return doObjResp(resp, 200, "ok");
 		}
 		return null;
 	}
 	
 	
-	private List<ContactUserResp> convertFrom(List<ImsUsers> users) {
+	private List<ContactUserResp> convertFrom(List<ImsUsers> users, Boolean isFriends) {
 		List<ContactUserResp> result = new ArrayList<>();
 		for(ImsUsers user: users) {
 			ContactUserResp userResp = new ContactUserResp();
@@ -168,6 +138,7 @@ public class ContactController extends BaseController {
 				userResp.setNickname(member.getNickname());
 				userResp.setAvatar(member.getAvatar());
 			}
+			userResp.setIsFriends(isFriends);
 			result.add(userResp);
 		}
 		

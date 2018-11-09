@@ -8,6 +8,8 @@ public class ContactUserResp {
 	private String nickname;
 	
 	private String avatar;
+	
+	private Boolean isFriends;
 
 	public Integer getUid() {
 		return uid;
@@ -40,6 +42,15 @@ public class ContactUserResp {
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
 	}
+
+	public Boolean getIsFriends() {
+		return isFriends;
+	}
+
+	public void setIsFriends(Boolean isFriends) {
+		this.isFriends = isFriends;
+	}
+	
 	
 	
 }
