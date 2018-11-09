@@ -13,10 +13,10 @@ public class CashController {
 
     Logger logger = LoggerFactory.getLogger(CashController.class);
 
-    @RequestMapping(value = "/cashLogin")
-    public String cashLogin(String phone ,Integer password) {
+    @RequestMapping(value = "/login")
+    public String cashLogin() {
         logger.info("=====");
-        return "/resources/templates/login.html";
+        return "login";
 
     }
 }
