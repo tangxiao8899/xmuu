@@ -30,7 +30,7 @@ public interface WxPayService {
      * @return
      * @throws Exception
      */
-    JSONObject wxReward(String json ) throws Exception;
+    JSONObject wxReward(String json );
 
 
     /**

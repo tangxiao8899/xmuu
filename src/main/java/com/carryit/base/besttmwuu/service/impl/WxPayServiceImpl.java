@@ -296,7 +296,7 @@ public class WxPayServiceImpl implements WxPayService {
     }
 
     @Override
-    public JSONObject wxReward(String json) throws Exception {
+    public JSONObject wxReward(String json) {
         JSONObject jo = new JSONObject();
 //        SortedMap<Object, Object> parameters = PayCommonUtil.getWXPrePayID("wxpay.rewardNotifyUrl"); // 获取预付单，此处已做封装，需要工具类
         if (!StringUtils.isEmpty(json)) {
@@ -340,7 +340,19 @@ public class WxPayServiceImpl implements WxPayService {
             }
 
             //资金够，开始打赏，变更两个账户金额
-            updateRewardInfo(parmJo.getString("fuid"),parmJo.getString("tuid"),parmJo.getString("money"));
+            try {
+                updateRewardInfo(parmJo.getString("fuid"), parmJo.getString("tuid"), parmJo.getString("money"));
+                jo.put("code", 200);
+                jo.put("msg", "打赏成功");
+                jo.put("data", "");
+                return jo;
+            }catch (Exception e){
+                e.printStackTrace();
+                jo.put("code", 200);
+                jo.put("msg", "打赏异常，请稍后重试");
+                jo.put("data", "");
+                return jo;
+            }
 
         } else {
             jo.put("code", 400);
@@ -348,10 +360,6 @@ public class WxPayServiceImpl implements WxPayService {
             jo.put("data", null);
             return jo;
         }
-
-        return jo;
-
-
     }
 
     @Override
@@ -396,14 +404,6 @@ public class WxPayServiceImpl implements WxPayService {
     @Override
     @Transactional
     public void updateRewardInfo(String fuid, String tuid,String total_fee) {
-        //TODO 待后期优化
-
-        //更新订单状态
-        Order order = new Order();
-
-        order.setStatus(3); //付款成功
-        //支付成功，更新订单状态
-        orderService.update(order);
 
         //查询Member表账户信息
         Member fmember = memberService.getMemberById(Integer.valueOf(fuid));
@@ -419,8 +419,8 @@ public class WxPayServiceImpl implements WxPayService {
         //记录资金流水
         ImsUserCapitalFlowEntity entity = new ImsUserCapitalFlowEntity();
         entity.setUid(Integer.valueOf(fuid));
-        entity.setPrice(Long.valueOf(total_fee) * 100); //记录单位为分
-        entity.setSource(0); //充值
+        entity.setPrice(Math.round(Double.valueOf(total_fee) * 100)); //记录单位为分
+        entity.setSource(1); //打赏
         entity.setType(1); //支出
 
         imsUserCapitalFlowService.save(entity);
@@ -428,7 +428,7 @@ public class WxPayServiceImpl implements WxPayService {
 
         ImsUserCapitalFlowEntity entity2 = new ImsUserCapitalFlowEntity();
         entity2.setUid(Integer.valueOf(tuid));
-        entity2.setPrice(Long.valueOf(total_fee) * 100); //记录单位为分
+        entity2.setPrice(Math.round(Double.valueOf(total_fee) * 100)); //记录单位为分
         entity2.setSource(1); //打赏
         entity2.setType(0); //收入
 
