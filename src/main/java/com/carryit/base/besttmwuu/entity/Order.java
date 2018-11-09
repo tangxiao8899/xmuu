@@ -71,7 +71,7 @@ public class Order implements Serializable {
         this.aid = aid;
     }
 
-    private String paysource;//1打赏，2报名--3商城购买，4充值---来源
+    private String paysource;//3商城购买，4充值---来源
 
     public String getPaysource() {
         return paysource;

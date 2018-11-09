@@ -8,7 +8,7 @@ import java.util.Date;
 public class ImsUserCapitalFlowEntity {
     private Integer id;
     private Integer uid; //用户ID
-    private Long price; //变更金额
+    private float price; //变更金额
     private int type;  //变更类型  0：收入  1：支出
     private int source; //资金来源  0：充值  1：打赏
     private Date createTime; //创建时间
@@ -29,11 +29,11 @@ public class ImsUserCapitalFlowEntity {
         this.uid = uid;
     }
 
-    public Long getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 

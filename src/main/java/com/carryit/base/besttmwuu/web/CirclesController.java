@@ -420,17 +420,21 @@ public class CirclesController extends BaseController {
                          long praiseCount  = praiseService.getPraiseCount(post.getId());
                          //点赞头像
                          List<String> avatarList = praiseService.getPraiseImage(post.getId());
-
-                         trendsData.setPost(post);
-                         trendsData.setCommentList(commentList);
-                         trendsData.setPraiseCount(praiseCount);
-                         trendsData.setAvatarList(avatarList);
-                         TrendsDataList.add(trendsData);
                          if(post.getCreatetime()!=0){
                              SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
                              String date = fm.format(new Date(post.getCreatetime()));
                              post.setCreateDate(date);
                          }
+                         if(post.getImage()!=null){
+                             List<String> result = Arrays.asList(post.getImage().split(","));
+                             post.setImageList(result);
+                         }
+                         trendsData.setPost(post);
+                         trendsData.setCommentList(commentList);
+                         trendsData.setPraiseCount(praiseCount);
+                         trendsData.setAvatarList(avatarList);
+                         TrendsDataList.add(trendsData);
+
                      }
                  }
                   topicCount =  boardFollowService.getAllBoardTopicCount(boardTopic.getBid());

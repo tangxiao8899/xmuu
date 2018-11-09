@@ -205,23 +205,6 @@ public class WxPayControllrt extends BaseController {
                     resXml = "<xml>" + "<return_code><![CDATA[FAIL]]></return_code>"
                             + "<return_msg><![CDATA[交易失败]]></return_msg>" + "</xml> ";
                 } else {
-
-                    if(two.equals(userList.get(0).getPaysource())){
-                        //更新订单状态
-                        Order order = new Order();
-                        order.setOrdersn(out_trade_no);
-                        order.setStatus(3); //付款成功
-                        orderService.update(order);
-
-                        SignUp signUp  = new SignUp();
-                        signUp.setAge(userList.get(0).getAge());
-                        signUp.setAid(userList.get(0).getAid());
-                        signUp.setName(userList.get(0).getName());
-                        signUp.setPhone(userList.get(0).getPhone());
-                        signUp.setSex(userList.get(0).getSex());
-                        signUp.setUid(userList.get(0).getUid());
-                        activityService.signUpRelease(signUp);
-                    }else if(three.equals(userList.get(0).getPaysource())){
                         //更新订单状态
                         Order order = new Order();
                         order.setOrdersn(out_trade_no);
@@ -250,7 +233,6 @@ public class WxPayControllrt extends BaseController {
             out.close();
 
         }
-    }
 
     /**
      * 充值异步通知
@@ -296,74 +278,6 @@ public class WxPayControllrt extends BaseController {
                 } else {
                     //更新订单状态，记录资金流水
                     wxPayService.updateRechargeInfo(out_trade_no,total_fee);
-
-                    resXml = "<xml>" + "<return_code><![CDATA[SUCCESS]]></return_code>"
-                            + "<return_msg><![CDATA[OK]]></return_msg>" + "</xml> ";
-                }
-
-                {
-
-                }
-            } else {
-                resXml = "<xml>" + "<return_code><![CDATA[FAIL]]></return_code>"
-                        + "<return_msg><![CDATA[通知签名验证失败]]></return_msg>" + "</xml> ";
-            }
-
-            // 处理业务完毕，将业务结果通知给微信
-            // ------------------------------
-            BufferedOutputStream out = new BufferedOutputStream(response.getOutputStream());
-            out.write(resXml.getBytes());
-            out.flush();
-            out.close();
-
-        }
-    }
-
-    /**
-     * 报名支付异步通知
-     */
-    @RequestMapping("/wxEnteredNotify")
-    @ResponseBody
-    public void wxEnteredNotify(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String result = PayCommonUtil.reciverWx(request); // 接收到异步的参数
-        Map<String, String> m = new HashMap<String, String>();// 解析xml成map
-        if (m != null && !"".equals(m)) {
-            m = XMLUtil.doXMLParse(result);
-        }
-        // 过滤空 设置 TreeMap
-        SortedMap<Object, Object> packageParams = new TreeMap<Object, Object>();
-        Iterator it = m.keySet().iterator();
-        while (it.hasNext()) {
-            String parameter = (String) it.next();
-            String parameterValue = m.get(parameter);
-            String v = "";
-            if (null != parameterValue) {
-                v = parameterValue.trim();
-            }
-            packageParams.put(parameter, v);
-        }
-        // 判断签名是否正确
-        String resXml = "";
-        if (PayCommonUtil.isTenpaySign("UTF-8", packageParams)) {
-            if ("SUCCESS".equals((String) packageParams.get("return_code"))) {
-                // 如果返回成功
-                String mch_id = (String) packageParams.get("mch_id"); // 商户号
-                String out_trade_no = (String) packageParams.get("out_trade_no"); // 商户订单号
-                String total_fee = (String) packageParams.get("total_fee");
-                // String transaction_id = (String)
-                // packageParams.get("transaction_id"); // 微信支付订单号
-                // 查询订单 根据订单号查询订单
-
-                //判断订单号是否重复
-                List<Order> userList = orderService.queryOrder(out_trade_no);
-                if (userList.size() > 1) {
-                    result = this.setXml("FAIL", "订单号重复");
-                    resXml = "<xml>" + "<return_code><![CDATA[FAIL]]></return_code>"
-                            + "<return_msg><![CDATA[交易失败]]></return_msg>" + "</xml> ";
-                } else {
-                    //更新两个 用户账户情况，记录资金流水
-                    wxPayService.updatewxEnteredInfo(out_trade_no,total_fee);
-
 
                     resXml = "<xml>" + "<return_code><![CDATA[SUCCESS]]></return_code>"
                             + "<return_msg><![CDATA[OK]]></return_msg>" + "</xml> ";
