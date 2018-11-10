@@ -1,6 +1,7 @@
 package com.carryit.base.besttmwuu.service;
 
 
+import com.carryit.base.besttmwuu.entity.Sincerity;
 import com.carryit.base.besttmwuu.entity.UserDTO;
 
 import java.util.List;

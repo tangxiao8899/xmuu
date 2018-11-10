@@ -1,6 +1,7 @@
 package com.carryit.base.besttmwuu.service.impl;
 
 import com.carryit.base.besttmwuu.dao.SincerityDao;
+import com.carryit.base.besttmwuu.entity.Sincerity;
 import com.carryit.base.besttmwuu.entity.UserDTO;
 import com.carryit.base.besttmwuu.service.SincerityService;
 import org.springframework.beans.factory.annotation.Autowired;
