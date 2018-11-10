@@ -63,7 +63,7 @@
 	</select>
 
 	<select id="showMember" resultType="com.carryit.base.besttmwuu.entity.MemberDTO">
-		SELECT a.nickName,a.autograph,b.levelname levelName,u.corporateName,s.number sincerity,u.phone,u.mailbox,u.address,u.companyProfile,a.avatar banner FROM ims_users u LEFT JOIN t_sincerity s ON u.uid=s.uid LEFT JOIN
+		SELECT a.nickName,a.autograph,b.levelname levelName,u.corporateName,count(s.number) sincerity,u.phone,u.mailbox,u.address,u.companyProfile,a.avatar banner FROM ims_users u LEFT JOIN t_sincerity s ON u.uid=s.uid LEFT JOIN
 		ims_ewei_shop_member a ON u.uid=a.uid LEFT JOIN ims_ewei_shop_member_level b ON a.level = b.level WHERE a.uid = #{uid}
 	</select>
 

@@ -65,7 +65,7 @@
  请求地址：http://ip:port/friend/totalFriends
  请求类型：POST
  请求参数：{
-        "uid":12 //用户自身ID
+        "phone":18772374640 //用户自身ID
       }
  响应结果：{
           "code": 200,
