@@ -9,5 +9,7 @@ public interface UserService {
 
     int updatePassWord(String json);
 
+    User getUserByPoneAndPassword(String phone);
+
     //boolean updateByPhone(User user);
 }

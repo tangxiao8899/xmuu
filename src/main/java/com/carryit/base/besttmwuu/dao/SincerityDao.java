@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 public interface SincerityDao {
 
 
-    Sincerity getNumberById(int uid);
+    int getNumberById(int uid);
 
     boolean insterLikes(int uid);
 

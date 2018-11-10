@@ -85,6 +85,11 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    @Override
+    public User getUserByPoneAndPassword(String phone) {
+        return userDao.getUserByPoneAndPassword(phone);
+    }
+
 //    @Override
 //    public boolean updateByPhone(User user) {
 //        boolean result = false;
