@@ -86,6 +86,14 @@ public class IndexController extends BaseController {
                     //查每周诚信值值前六名
                     //userList = wealthService.onTheList(startTime, endTime);
                     userList =  sincerityService.getSincerityList(startTime, endTime);
+                    if(userList.size()>0){
+                        for (UserDTO user:userList) {
+                            if(user.getSincerity()>100){
+                                user.setSincerity(100);
+                            }
+                        }
+                    }
+
                     //查所有的小圈子
                     boardList = boardService.getAllBoard();
                     br.setBoardList(boardList);
@@ -101,6 +109,13 @@ public class IndexController extends BaseController {
                 try {
                    // list = wealthService.queryPage(startTime, endTime);
                     list = sincerityService.queryList(startTime, endTime);
+                    if(list.size()>0){
+                        for (UserDTO user:list) {
+                            if(user.getSincerity()>100){
+                                user.setSincerity(100);
+                            }
+                        }
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                     return faild("失败~", false);

@@ -7,7 +7,7 @@ public class UserDTO implements Serializable {
     private String nickname;  //名字
     private String profilePhoto; //头像
     private String WealthValue; //财富值
-    private String sincerity; //诚信值
+    private int sincerity; //诚信值
     private Integer seq;
 
     public Integer getUid() {
@@ -26,11 +26,11 @@ public class UserDTO implements Serializable {
         this.seq = seq;
     }
 
-    public String getSincerity() {
+    public int getSincerity() {
         return sincerity;
     }
 
-    public void setSincerity(String sincerity) {
+    public void setSincerity(int sincerity) {
         this.sincerity = sincerity;
     }
 

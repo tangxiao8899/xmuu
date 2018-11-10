@@ -3,28 +3,25 @@ package com.carryit.base.besttmwuu.web;
 import com.alibaba.fastjson.JSONObject;
 import com.base.BaseController;
 import com.bean.req.WxPayReq;
-import com.carryit.base.besttmwuu.entity.Member;
 import com.carryit.base.besttmwuu.entity.Order;
-import com.carryit.base.besttmwuu.entity.SignUp;
-import com.carryit.base.besttmwuu.service.ActivityService;
+import com.carryit.base.besttmwuu.entity.Sincerity;
 import com.carryit.base.besttmwuu.service.MemberService;
 import com.carryit.base.besttmwuu.service.OrderService;
+import com.carryit.base.besttmwuu.service.SincerityService;
 import com.carryit.base.besttmwuu.service.WxPayService;
 import com.util.PayCommonUtil;
+import com.util.TimeUtils;
 import com.util.XMLUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedOutputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @RestController
@@ -45,7 +42,7 @@ public class WxPayControllrt extends BaseController {
     private MemberService memberService;
 
     @Autowired
-    private ActivityService activityService;
+    private SincerityService sincerityService;
 
 
     private static final  String two = "2";
@@ -103,6 +100,16 @@ public class WxPayControllrt extends BaseController {
 
         return callHttpReqTask(json, 5);
     }
+    /**
+     * 账单
+     * @param json
+     * @return
+     */
+    @RequestMapping(value = "/getBills", method = {RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public JSONObject getBillsbyUid(@RequestBody(required = false) String json) {
+
+        return callHttpReqTask(json, 6);
+    }
 
     @Override
     public JSONObject runTask(String json, int cmd) {
@@ -156,6 +163,14 @@ public class WxPayControllrt extends BaseController {
                     logger.error(e.getMessage());
                     return doObjResp(false, -999, "程序异常!");
                 }
+            case 6  :
+                try {
+                    return wxPayService.getBillsbyUid(json);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    logger.error(e.getMessage());
+                    return doObjResp(false, -999, "程序异常!");
+                }
 
 
         }
@@ -200,7 +215,7 @@ public class WxPayControllrt extends BaseController {
 
                 //判断订单号是否重复
                 List<Order> userList = orderService.queryOrder(out_trade_no);
-                if (userList!=null&&userList.size() > 1) {
+                if (userList==null||userList.size() > 1) {
                     result = this.setXml("FAIL", "订单号不存在或者订单号重复");
                     resXml = "<xml>" + "<return_code><![CDATA[FAIL]]></return_code>"
                             + "<return_msg><![CDATA[交易失败]]></return_msg>" + "</xml> ";
@@ -212,6 +227,14 @@ public class WxPayControllrt extends BaseController {
                         orderService.update(order);
                         //绑定会员表的主圈子和会员等级
                         memberService.updateMemberZhuQuanZi(userList.get(0).getUid(),userList.get(0).getBid(),userList.get(0).getLevel());
+                        //给充值和商城购买，100RMB等于1分的换算，给t_sincerity表诚信值number+1分，不够100不加，最高100分，
+                    if(userList.get(0).getPrice()>=100){
+                        int ceil = (int)Math.floor(userList.get(0).getPrice() / 100);
+                        Sincerity newSincerity = new Sincerity();
+                        newSincerity.setUid(userList.get(0).getUid());
+                        newSincerity.setNumber(ceil);
+                        sincerityService.addOne(newSincerity);
+                    }
                     }
                     resXml = "<xml>" + "<return_code><![CDATA[SUCCESS]]></return_code>"
                             + "<return_msg><![CDATA[OK]]></return_msg>" + "</xml> ";
@@ -271,14 +294,20 @@ public class WxPayControllrt extends BaseController {
 
                 //判断订单号是否重复
                 List<Order> userList = orderService.queryOrder(out_trade_no);
-                if (userList.size() > 1) {
+                if (userList==null||userList.size() > 1) {
                     result = this.setXml("FAIL", "订单号重复");
                     resXml = "<xml>" + "<return_code><![CDATA[FAIL]]></return_code>"
                             + "<return_msg><![CDATA[交易失败]]></return_msg>" + "</xml> ";
                 } else {
                     //更新订单状态，记录资金流水
                     wxPayService.updateRechargeInfo(out_trade_no,total_fee);
-
+                    if(userList.get(0).getPrice()>=100){
+                        int ceil = (int)Math.floor(userList.get(0).getPrice() / 100);
+                        Sincerity newSincerity = new Sincerity();
+                        newSincerity.setUid(userList.get(0).getUid());
+                        newSincerity.setNumber(ceil);
+                        sincerityService.addOne(newSincerity);
+                    }
                     resXml = "<xml>" + "<return_code><![CDATA[SUCCESS]]></return_code>"
                             + "<return_msg><![CDATA[OK]]></return_msg>" + "</xml> ";
                 }

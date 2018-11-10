@@ -39,4 +39,9 @@ public class SincerityServiceImpl implements SincerityService {
     public List<UserDTO> queryList(String startTime, String endTime) {
         return sincerityDao.queryList(startTime,endTime);
     }
+
+    @Override
+    public void addOne(Sincerity newSincerity) {
+        sincerityDao.addOne(newSincerity);
+    }
 }

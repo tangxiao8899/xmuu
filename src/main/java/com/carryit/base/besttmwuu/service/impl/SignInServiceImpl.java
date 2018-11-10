@@ -28,44 +28,28 @@ public class SignInServiceImpl implements SignInService {
 
 	@Override
 	public boolean sign(Integer uid, LocalDateTime signDateTime) {
-					
+
 //		查询该用户所有签到记录
-		Sincerity sincerities = sincerityDao.querySincerityByUserId(uid);
-
+		List<Sincerity> sincerities = sincerityDao.querySincerityByUserId(uid);
 //		过滤出指定日期的签到记录
-//		List<Sincerity> sinceritiesBySpecialDate = sincerities.stream()
-//				.filter(sincerity -> TimeUtils.getLocalDateTimeFromDate(sincerity.getUpdateTime()).toLocalDate().equals(signDateTime.toLocalDate()))
-//				.collect(Collectors.toList());
-
-		if(sincerities!=null) {
-			//判断今天有没有签到
-			boolean today = TimeUtils.isToday(sincerities.getUpdateTime());
-			if(today){
-				return false;
-			}else {
-				sincerities.setUpdateTime(TimeUtils.getDateFromLocalDateTime(signDateTime));
-				sincerities.setNumber(sincerities.getNumber() + 1);
-				sincerityDao.updateOne(sincerities);
-
-				Member me = memberDao.getWealthById(uid);
-				me.setCredit1(me.getCredit1()+10);
-				memberDao.updateCredit1(uid,me.getCredit1());
-			}
-
-		} else {
-			//执行签到
-			//构造sincerity对象
+		List<Sincerity> sinceritiesBySpecialDate = sincerities.stream()
+				.filter(sincerity -> TimeUtils.getLocalDateTimeFromDate(sincerity.getCreateTime()).toLocalDate().equals(signDateTime.toLocalDate()))
+				.collect(Collectors.toList());
+//		如果指定日期没签到，则执行签到
+		if(sinceritiesBySpecialDate == null || sinceritiesBySpecialDate.size() == 0) {
 			Sincerity newSincerity = new Sincerity();
 			newSincerity.setUid(uid);
-			newSincerity.setUpdateTime(TimeUtils.getDateFromLocalDateTime(signDateTime));
-			newSincerity.setNumber(1F);
+			newSincerity.setNumber(1);
 			sincerityDao.addOne(newSincerity);
 
 			Member me = memberDao.getWealthById(uid);
 			me.setCredit1(me.getCredit1()+10);
 			memberDao.updateCredit1(uid,me.getCredit1());
+			return true;
+		} else {
+			return false;
 		}
-		return true;
+
 	}
 
 }

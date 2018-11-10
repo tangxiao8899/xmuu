@@ -67,7 +67,7 @@
     </update>
     
     <select id="querySincerityByUserId" resultType="com.carryit.base.besttmwuu.entity.Sincerity">
-    	select id, uid, number, DATE_FORMAT(updateTime,'%Y-%m-%d %H:%i:%s') updateTime from t_sincerity where uid=#{uid}
+    	select id, uid, number, DATE_FORMAT(createTime,'%Y-%m-%d %H:%i:%s') createTime from t_sincerity where uid=#{uid}
     </select>
     
     <insert id="addOne" parameterType="com.carryit.base.besttmwuu.entity.Sincerity" useGeneratedKeys="true">
@@ -79,16 +79,16 @@
     </update>
 
     <select id="getSincerityList" resultType="com.carryit.base.besttmwuu.entity.UserDTO">
-        select s.uid,m.nickname,m.avatar profilePhoto
+        select s.uid,m.nickname,m.avatar profilePhoto,sum(s.number) sincerity
         from t_sincerity s
         join ims_ewei_shop_member m on s.uid  = m.uid where s.createTime &gt;= #{startTime}  and s.createTime &lt;= #{endTime}
-        GROUP BY s.uid ORDER BY sum(s.number) desc limit 6;
+        GROUP BY s.uid ORDER BY sum(s.number) desc limit 6
     </select>
 
     <select id="queryList" resultType="com.carryit.base.besttmwuu.entity.UserDTO">
-        select s.uid,m.nickname,m.avatar profilePhoto
+        select s.uid,m.nickname,m.avatar profilePhoto ,sum(s.number) sincerity
         from t_sincerity s
         join ims_ewei_shop_member m on s.uid  = m.uid where s.createTime &gt;= #{startTime}  and s.createTime &lt;= #{endTime}
-        GROUP BY s.uid ORDER BY sum(s.number) desc limit 100;
+        GROUP BY s.uid ORDER BY sum(s.number) desc limit 100
     </select>
 </mapper>

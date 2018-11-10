@@ -85,7 +85,7 @@ public class LikesController extends BaseController {
                         if(sign){
                             return doObjRespSuccess("签到成功");
                         }else {
-                            return faild("您今天已经签到哟~", false);
+                            return faild("您今天已经签到了哟~", false);
                         }
 
                     } else {

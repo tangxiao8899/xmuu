@@ -8,4 +8,10 @@
         values(#{uid},#{price},#{type},#{source},NOW())
     </insert>
 
+    <select id="getBillsbyUid" resultType="com.carryit.base.besttmwuu.entity.ImsUserCapitalFlowEntity">
+        select cf.id,cf.uid,cf.price formatPrice,cf.price price,cf.type,cf.source,m.avatar,m.nickName,DATE_FORMAT(cf.createTime,'%Y-%m-%d %H:%i:%s') createTime
+        from ims_user_capital_flow cf
+        left join ims_ewei_shop_member m on cf.uid  = m.uid where cf.uid = #{uid}
+    </select>
+
 </mapper>

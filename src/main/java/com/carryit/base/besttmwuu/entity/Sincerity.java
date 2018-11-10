@@ -9,7 +9,7 @@ public class Sincerity implements Serializable{
 
     private Integer uid;//用户ID
 
-    private float number;//值
+    private int number;//值
 
     private Date createTime;//创建时间
 
@@ -33,11 +33,11 @@ public class Sincerity implements Serializable{
         this.uid = uid;
     }
 
-    public float getNumber() {
+    public int getNumber() {
         return number;
     }
 
-    public void setNumber(float number) {
+    public void setNumber(int number) {
         this.number = number;
     }
 

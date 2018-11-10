@@ -18,4 +18,6 @@ public interface SincerityService {
     List<UserDTO> getSincerityList(String startTime, String endTime);
 
     List<UserDTO> queryList(String startTime, String endTime);
+
+    void addOne(Sincerity newSincerity);
 }

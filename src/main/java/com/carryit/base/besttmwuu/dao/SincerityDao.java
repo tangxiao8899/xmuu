@@ -17,8 +17,8 @@ public interface SincerityDao {
     boolean insterLikes(int uid);
 
     void updateCredit(int uid);
-    
-    Sincerity querySincerityByUserId(int uid);
+
+    List<Sincerity> querySincerityByUserId(int uid);
 
 	void addOne(Sincerity newSincerity);
 	

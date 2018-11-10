@@ -61,4 +61,11 @@ public interface WxPayService {
      * @throws Exception
      */
     JSONObject wxEntered(String json) throws Exception;
+
+    /**
+     * 账单查询
+     * @param json
+     * @return
+     */
+    JSONObject getBillsbyUid(String json);
 }

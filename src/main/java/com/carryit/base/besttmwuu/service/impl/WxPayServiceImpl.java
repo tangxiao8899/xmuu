@@ -17,6 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service("wxPayService")
@@ -45,7 +47,6 @@ public class WxPayServiceImpl implements WxPayService {
     private static final String UUqz = "0";//UU圈主
     private static final String Fqz = "1";//副圈主
     private static final String UCgly = "2";//UU管理员
-
 
     @Override
     public JSONObject wxPay(String json) throws Exception {
@@ -85,7 +86,7 @@ public class WxPayServiceImpl implements WxPayService {
                 jo.put("data", null);
                 return jo;
             }
-            if (!parmJo.containsKey("productNum")) { //商品数量
+            if (!parmJo.containsKey("productNum")) { //商品价格
                 jo.put("code", 400);
                 jo.put("msg", "参数异常");
                 jo.put("data", null);
@@ -419,7 +420,7 @@ public class WxPayServiceImpl implements WxPayService {
         //记录资金流水
         ImsUserCapitalFlowEntity entity = new ImsUserCapitalFlowEntity();
         entity.setUid(Integer.valueOf(fuid));
-        entity.setPrice(Math.round(Double.valueOf(total_fee) * 100)); //记录单位为分
+        entity.setPrice(Float.valueOf(total_fee)); //记录单位为分
         entity.setSource(1); //打赏
         entity.setType(1); //支出
 
@@ -428,7 +429,7 @@ public class WxPayServiceImpl implements WxPayService {
 
         ImsUserCapitalFlowEntity entity2 = new ImsUserCapitalFlowEntity();
         entity2.setUid(Integer.valueOf(tuid));
-        entity2.setPrice(Math.round(Double.valueOf(total_fee) * 100)); //记录单位为分
+        entity2.setPrice(Float.valueOf(total_fee)); //记录单位为分
         entity2.setSource(1); //打赏
         entity2.setType(0); //收入
 
@@ -437,7 +438,7 @@ public class WxPayServiceImpl implements WxPayService {
 
     /*报名后更新用户余额.更新资金流水记录*/
     @Transactional
-    public void updatewxEnteredInfo(String fuid, String tuid,Float total_fee) {
+    public void updatewxEnteredInfo(int fuid, int tuid,float total_fee) {
 
         //查询Member表账户信息
         Member fmember = memberService.getMemberById(Integer.valueOf(fuid));
@@ -453,8 +454,8 @@ public class WxPayServiceImpl implements WxPayService {
         //记录资金流水
         ImsUserCapitalFlowEntity entity = new ImsUserCapitalFlowEntity();
         entity.setUid(Integer.valueOf(fuid));
-//        entity.setPrice(Math.round(total_fee) * 100); //记录单位为分
-        entity.setSource(3); //充值
+        entity.setPrice(total_fee); //记录单位为分
+        entity.setSource(3); //报名
         entity.setType(1); //支出
 
         imsUserCapitalFlowService.save(entity);
@@ -462,7 +463,7 @@ public class WxPayServiceImpl implements WxPayService {
 
         ImsUserCapitalFlowEntity entity2 = new ImsUserCapitalFlowEntity();
         entity2.setUid(Integer.valueOf(tuid));
-      //  entity2.setPrice(Long.valueOf(total_fee) * 100); //记录单位为分
+        entity2.setPrice(total_fee); //记录单位为分
         entity2.setSource(3); //报名
         entity2.setType(0); //收入
 
@@ -536,7 +537,7 @@ public class WxPayServiceImpl implements WxPayService {
             //记一笔提现的流水
             ImsUserCapitalFlowEntity entity = new ImsUserCapitalFlowEntity();
             entity.setUid(Integer.valueOf(parmJo.getString("uid")));
-            entity.setPrice(Math.round(Double.valueOf(parmJo.getString("money")) * 100)); //记录单位为分
+            entity.setPrice(Float.valueOf(parmJo.getString("money"))); //记录单位为元
             entity.setSource(2); //提现
             entity.setType(1); //支出
 
@@ -624,6 +625,30 @@ public class WxPayServiceImpl implements WxPayService {
                 jo.put("data", null);
                 return jo;
             }
+            if (!parmJo.containsKey("age")) {
+                jo.put("code", 400);
+                jo.put("msg", "参数异常");
+                jo.put("data", null);
+                return jo;
+            }
+            if (!parmJo.containsKey("name")) {
+                jo.put("code", 400);
+                jo.put("msg", "参数异常");
+                jo.put("data", null);
+                return jo;
+            }
+            if (!parmJo.containsKey("phone")) {
+                jo.put("code", 400);
+                jo.put("msg", "参数异常");
+                jo.put("data", null);
+                return jo;
+            }
+            if (!parmJo.containsKey("sex")) {
+                jo.put("code", 400);
+                jo.put("msg", "参数异常");
+                jo.put("data", null);
+                return jo;
+            }
             //查询活动信息
             Activity act = activityService.getActivityById(parmJo.getInteger("aid"));
             Member member = memberService.getMemberById(parmJo.getInteger("uid"));
@@ -680,45 +705,93 @@ public class WxPayServiceImpl implements WxPayService {
                 }
 
                 float f = member.getCredit2(); //账户余额
-                if (f < Float.valueOf((float)act.getCost())) {
+                if (f < (float)act.getCost()) {
                     jo.put("code", 400);
                     jo.put("msg", "打赏账户余额不足，请先充值");
                     jo.put("data", null);
                     return jo;
                 }
-                //资金够，开始打赏，变更两个账户金额
+                //资金够，开始报名，变更两个账户金额
                 try {
-                    updateRewardInfo(parmJo.getString("fuid"), parmJo.getString("tuid"), parmJo.getString("money"));
+                    updatewxEnteredInfo(parmJo.getInteger("uid"), act.getUid(), (float)act.getCost());
+                    //新增报名
+                    SignUp signUp = new SignUp();
+                    signUp.setUid(parmJo.getInteger("uid"));
+                    signUp.setAid(parmJo.getInteger("aid"));
+                    signUp.setName(parmJo.getString("name"));
+                    signUp.setPhone(parmJo.getString("phone"));
+                    signUp.setAge(parmJo.getString("age"));
+                    activityService.signUpRelease(signUp);
                     jo.put("code", 200);
-                    jo.put("msg", "打赏成功");
-                    jo.put("data", "");
+                    jo.put("msg", "报名成功");
+                    jo.put("data", null);
                     return jo;
                 }catch (Exception e){
                     e.printStackTrace();
-                    jo.put("code", 200);
-                    jo.put("msg", "打赏异常，请稍后重试");
-                    jo.put("data", "");
+                    jo.put("code", 400);
+                    jo.put("msg", "报名失败，请稍后重试");
+                    jo.put("data", null);
                     return jo;
                 }
-
-
-
             } else {
                 jo.put("code", 404);
                 jo.put("msg", "未找到该活动");
                 jo.put("data", null);
                 return jo;
             }
-
-
         } else {
             jo.put("code", 400);
             jo.put("msg", "参数异常");
             jo.put("data", null);
             return jo;
         }
+    }
 
-           // return jo;
+    @Override
+    public JSONObject getBillsbyUid(String json) {
+        JSONObject jo = new JSONObject();
+        if (!StringUtils.isEmpty(json)) {
+            JSONObject parmJo = JSON.parseObject(json);
+            if (!parmJo.containsKey("uid")) { //用户ID
+                jo.put("code", 400);
+                jo.put("msg", "参数异常");
+                jo.put("data", null);
+                return jo;
+            }
+            List<ImsUserCapitalFlowEntity> bills = new ArrayList<>();
+             bills =  imsUserCapitalFlowService.getBillsbyUid(parmJo.getInteger("uid"));
+            DecimalFormat df   = new DecimalFormat("######0.00");
+            if(bills!=null&&bills.size()>0){
+                for (ImsUserCapitalFlowEntity bill:bills) {
+                    if(bill.getType()==0){//收入
+                        bill.setTypeName("收入");
+                        bill.setFormatPrice("+"+bill.getFormatPrice());
+                    }else if(bill.getType()==1){
+                        bill.setTypeName("支出");
+                        bill.setFormatPrice("-"+bill.getFormatPrice());
+                    }
+                    if(bill.getSource()==0){//资金来源  0：充值  1：打赏 2:提现 3:报名支付
+                        bill.setSourceName("充值");
+                    }else if(bill.getSource()==1){
+                        bill.setSourceName("打赏");
+                    }else if(bill.getSource()==2){
+                        bill.setSourceName("提现");
+                    }else if(bill.getSource()==3){
+                        bill.setSourceName("报名支付");
+                    }
+                }
+            }
+            jo.put("code", 200);
+            jo.put("msg", "查询成功");
+            jo.put("data", bills);
+            return jo;
+
+    }else {
+            jo.put("code", 400);
+            jo.put("msg", "参数异常");
+            jo.put("data", null);
+            return jo;
         }
     }
+}
 
