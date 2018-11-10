@@ -1,15 +1,13 @@
 package com.carryit.base.besttmwuu.service;
 
 
-import com.carryit.base.besttmwuu.entity.Sincerity;
 import com.carryit.base.besttmwuu.entity.UserDTO;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 public interface SincerityService {
 
-    Sincerity getNumberById(int uid);
+    int getNumberById(int uid);
 
     boolean addLikes(int uid);
 

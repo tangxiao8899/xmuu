@@ -92,11 +92,11 @@ public class MemberController extends BaseController {
     public JSONObject runTask(String json, int cmd) {
         switch (cmd) {
             case 0:
-                Member member=new Member();
+                Member member = new Member();
                 try {
                     BoardReq req = p(json, BoardReq.class);
-                    if(req!=null){
-                        member= memberService.getMemberById(req.uid);
+                    if (req != null) {
+                        member = memberService.getMemberById(req.uid);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -104,17 +104,17 @@ public class MemberController extends BaseController {
                 }
                 return doObjResp(member);
             case 1:
-                Member mem =new Member();
-                float Wealth =0;
+                Member mem = new Member();
+                float Wealth = 0;
 
                 try {
                     BoardReq req = p(json, BoardReq.class);
                     if (req != null) {
-                        mem=memberService.getWealthById(req.uid);
-                        if(mem==null){
+                        mem = memberService.getWealthById(req.uid);
+                        if (mem == null) {
                             return faild("用户不存在~", false);
                         }
-                        Wealth=mem.getCredit2();
+                        Wealth = mem.getCredit2();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -122,11 +122,12 @@ public class MemberController extends BaseController {
                 }
                 return doObjResp(Wealth);
             case 2:
-                Sincerity sincerity=new Sincerity();
+//                Sincerity sincerity=new Sincerity();
+                int sincerity = 0;
                 try {
                     BoardReq req = p(json, BoardReq.class);
-                    if(req!=null){
-                        sincerity=sincerityService.getNumberById(req.uid);
+                    if (req != null) {
+                        sincerity = sincerityService.getNumberById(req.uid);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -134,11 +135,11 @@ public class MemberController extends BaseController {
                 }
                 return doObjResp(sincerity);
             case 3:
-                Globouns globouns=new Globouns();
+                Globouns globouns = new Globouns();
                 try {
                     BoardReq req = p(json, BoardReq.class);
-                    if(req!=null){
-                        globouns=globounService.getFindAll(req.uid);
+                    if (req != null) {
+                        globouns = globounService.getFindAll(req.uid);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -146,16 +147,16 @@ public class MemberController extends BaseController {
                 }
                 return doObjResp(globouns);
             case 4:
-                MemberDTO mb=new MemberDTO();
+                MemberDTO mb = new MemberDTO();
                 try {
                     JSONObject subJo = JSON.parseObject(json);
                     String loginUid = subJo.getString("loginUid");
                     String showUid = subJo.getString("showUid");
                     if (!StringUtils.isEmpty(loginUid) && !StringUtils.isEmpty(showUid)) {
 
-                        mb= memberService.showMember(Integer.parseInt(loginUid));
+                        mb = memberService.showMember(Integer.parseInt(loginUid));
                         boolean friends = tFriendsService.isFriends(loginUid, showUid);
-                        mb.setFriends(friends+"");
+                        mb.setFriends(friends + "");
 
                     } else {
                         return faild("参数异常~", false);
@@ -166,11 +167,11 @@ public class MemberController extends BaseController {
                 }
                 return doObjResp(mb);
             case 5:
-                MemberData md=new MemberData();
+                MemberData md = new MemberData();
                 try {
                     BoardReq req = p(json, BoardReq.class);
-                    if(req!=null){
-                        md= memberService.getMemberDataByUId(req.uid);
+                    if (req != null) {
+                        md = memberService.getMemberDataByUId(req.uid);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -179,16 +180,16 @@ public class MemberController extends BaseController {
                 return doObjResp(md);
             case 6:
 
-            try {
-                MemberData req = p(json, MemberData.class);
-                if(req!=null){
-                    memberService.updateMemberDataByUId(req);
-                    return doObjRespSuccess("更新成功");
+                try {
+                    MemberData req = p(json, MemberData.class);
+                    if (req != null) {
+                        memberService.updateMemberDataByUId(req);
+                        return doObjRespSuccess("更新成功");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return faild("失败~", false);
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-                return faild("失败~", false);
-            }
 
 
         }

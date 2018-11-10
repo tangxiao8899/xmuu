@@ -17,7 +17,13 @@
 		from ims_users
 		where uid = #{uid}
 	</select>
+	<!--后台登录用户匹配数据库-->
+	<select id="getUserByPoneAndPassword" resultType="com.carryit.base.besttmwuu.entity.User">
 
+		SELECT phone password from ims_users where phone=#{phone}
+
+
+	</select>
 
 	<insert id="insertSelective" parameterType="com.carryit.base.besttmwuu.entity.User" useGeneratedKeys="true" keyProperty="uid">
 		insert into ims_users

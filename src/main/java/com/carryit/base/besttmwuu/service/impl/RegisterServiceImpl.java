@@ -96,6 +96,11 @@ public class RegisterServiceImpl implements UserService {
 
     }
 
+    @Override
+    public User getUserByPoneAndPassword(String phone) {
+        return userDao.getUserByPoneAndPassword(phone);
+    }
+
     public int updateUser(User newUser) {
         int i = userDao.updateUser(newUser);
         return i;
