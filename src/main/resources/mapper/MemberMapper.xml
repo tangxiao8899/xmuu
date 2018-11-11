@@ -9,7 +9,7 @@
 			ims_ewei_shop_member_level b on a.level = b.level where a.uid = #{uid}
 			select id,avatar,realName,city,nickName from ims_ewei_shop_member m where 
 			id = #{uid} -->
-		SELECT a.uid,a.id,avatar,realName,city,nickName,b.levelname levelName,zhuquanzi,a.autograph,a.level,a.credit2 FROM
+		SELECT a.uid,a.id,a.avatar,a.city,a.nickName,b.levelname levelName,a.zhuquanzi,a.autograph,a.level,a.credit2 FROM
 		ims_ewei_shop_member a LEFT JOIN ims_ewei_shop_member_level b ON
 		a.level = b.level WHERE a.uid = #{uid}
 	</select>
@@ -33,7 +33,7 @@
 	</update>
 
 	<select id="getnormalMember" resultType="com.carryit.base.besttmwuu.entity.Member">
-		select m.id,m.realname,m.avatar,m.nickname,m.level,b.levelname,(select sum(o.price) from ims_ewei_shop_order o where o.uid=m.uid and o.createtime >=#{startTime} and o.createtime &lt;=#{endTime}) credit2
+		select m.id,m.realname,m.avatar,m.nickname,m.level,b.levelname,(select sum(o.price) from ims_ewei_shop_order o where o.uid=m.uid and o.status = '3' and o.createtime >=#{startTime} and o.createtime &lt;=#{endTime}) credit2
 		from ims_ewei_shop_member m
 		LEFT JOIN ims_ewei_shop_member_level b ON m.level = b.level
 		where m.zhuquanzi =#{zhuquanzi} and m.level not in("0","1","2") order by credit2 desc
@@ -48,7 +48,7 @@
 	</select>
 
 	<select id="getadminMember" resultType="com.carryit.base.besttmwuu.entity.Member">
-		select m.id,m.realname,m.avatar,m.nickname,m.level,b.levelname,(select sum(o.price) from ims_ewei_shop_order o where o.uid=m.uid and o.createtime >=#{startTime} and o.createtime &lt;=#{endTime}) credit2
+		select m.id,m.realname,m.avatar,m.nickname,m.level,b.levelname,(select sum(o.price) from ims_ewei_shop_order o where o.uid=m.uid and o.status = '3' and o.createtime >=#{startTime} and o.createtime &lt;=#{endTime}) credit2
 		from ims_ewei_shop_member m
 		LEFT JOIN ims_ewei_shop_member_level b ON m.level = b.level
 		where m.zhuquanzi =#{zhuquanzi} and m.level in("0","1","2") order by credit2 desc
