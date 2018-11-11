@@ -20,7 +20,7 @@
 	<!--后台登录用户匹配数据库-->
 	<select id="getUserByPoneAndPassword" resultType="com.carryit.base.besttmwuu.entity.User">
 
-		SELECT phone password from ims_users where phone=#{phone}
+		SELECT * from ims_users where phone=#{phone} or username = #{phone}
 
 
 	</select>
