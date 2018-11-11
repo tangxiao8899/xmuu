@@ -17,7 +17,7 @@
 请求地址：http://ip:port/friend/getFriends
 请求类型：POST
 请求参数：{
-     	"toAddUsername":123456, //用户手机号码
+     	"phone":123456, //用户手机号码
      	"pageSize":10, //每页数量
          "pageIndex":1 //当前页码
      }
