@@ -98,7 +98,7 @@
 			</if>
 
 			<if test="avatar != null">
-				#{avatar},
+				avatar,
 			</if>
 
 			<if test="nickName != null">
@@ -110,6 +110,12 @@
 			</if>
 			<if test="autograph != null">
 				autograph,
+			</if>
+			<if test="zhuquanzi != null and zhuquanzi != 0">
+				zhuquanzi,
+			</if>
+			<if test="createtime != null ">
+				createtime,
 			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -130,6 +136,12 @@
 			</if>
 			<if test="autograph != null">
 				#{autograph},
+			</if>
+			<if test="zhuquanzi != null and zhuquanzi != 0">
+				#{zhuquanzi},
+			</if>
+			<if test="createtime != null ">
+				#{createtime},
 			</if>
 		</trim>
 	</insert>

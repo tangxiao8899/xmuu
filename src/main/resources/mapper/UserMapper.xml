@@ -25,7 +25,7 @@
 
 	</select>
 
-	<insert id="insertSelective" parameterType="com.carryit.base.besttmwuu.entity.User" useGeneratedKeys="true" keyProperty="uid">
+	<insert id="insertSelective" parameterType="com.carryit.base.besttmwuu.entity.User" useGeneratedKeys="true" keyProperty="uid" keyColumn="uid">
 		insert into ims_users
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 

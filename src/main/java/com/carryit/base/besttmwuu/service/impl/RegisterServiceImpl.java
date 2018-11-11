@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 @Service("registerService")
 public class RegisterServiceImpl implements UserService {
@@ -55,7 +56,9 @@ public class RegisterServiceImpl implements UserService {
             //新增一条会员资料记录
             Member member = new Member();
             member.setNickName(NameUtil.getName());
-            member.setUid(uid);
+            member.setZhuquanzi(record.getBid());
+            member.setUid(record.getUid());
+            member.setCreatetime(new Date().getTime()+"");
             memberService.addMember(member);
             //同步注册到环信
             //1、获取环信token

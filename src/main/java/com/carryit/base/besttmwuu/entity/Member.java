@@ -28,6 +28,16 @@ public class Member implements Serializable{
 
     private String autograph;
 
+    private String createtime;
+
+    public String getCreatetime() {
+        return createtime;
+    }
+
+    public void setCreatetime(String createtime) {
+        this.createtime = createtime;
+    }
+
     public String getAutograph() {
         return autograph;
     }

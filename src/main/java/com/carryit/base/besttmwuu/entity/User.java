@@ -35,6 +35,16 @@ public class User implements Serializable {
 
     private String sex;//性别
 
+    private int bid;
+
+    public int getBid() {
+        return bid;
+    }
+
+    public void setBid(int bid) {
+        this.bid = bid;
+    }
+
     public Integer getUid() {
         return uid;
     }
