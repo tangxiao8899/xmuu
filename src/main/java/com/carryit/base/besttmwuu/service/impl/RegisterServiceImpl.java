@@ -59,6 +59,7 @@ public class RegisterServiceImpl implements UserService {
             member.setZhuquanzi(record.getBid());
             member.setUid(record.getUid());
             member.setCreatetime(new Date().getTime()+"");
+            member.setAvatar("http://xm.besttmw.com/besttmwuu-0.0.1/index_img/logo.jpg");
             memberService.addMember(member);
             //同步注册到环信
             //1、获取环信token

@@ -319,14 +319,14 @@ public class WxPayServiceImpl implements WxPayService {
             //1、检查账户余额是否足够打赏
             Member m = memberService.getMemberById(Integer.valueOf(parmJo.getString("fuid")));
             if (StringUtils.isEmpty(m)) {
-                jo.put("code", 404);
+                jo.put("code", 200);
                 jo.put("msg", "打赏账户不存在");
                 jo.put("data", 2);
                 return jo;
             } else {
                 float f = m.getCredit2(); //账户余额
                 if (f < Float.valueOf(parmJo.getString("money"))) {
-                    jo.put("code", 400);
+                    jo.put("code", 200);
                     jo.put("msg", "打赏账户余额不足，请先充值");
                     jo.put("data", 1);
                     return jo;
