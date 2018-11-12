@@ -319,14 +319,14 @@ public class WxPayServiceImpl implements WxPayService {
             //1、检查账户余额是否足够打赏
             Member m = memberService.getMemberById(Integer.valueOf(parmJo.getString("fuid")));
             if (StringUtils.isEmpty(m)) {
-                jo.put("code", 200);
+                jo.put("code", 404);
                 jo.put("msg", "打赏账户不存在");
                 jo.put("data", 2);
                 return jo;
             } else {
                 float f = m.getCredit2(); //账户余额
                 if (f < Float.valueOf(parmJo.getString("money"))) {
-                    jo.put("code", 200);
+                    jo.put("code", 400);
                     jo.put("msg", "打赏账户余额不足，请先充值");
                     jo.put("data", 1);
                     return jo;
@@ -676,7 +676,7 @@ public class WxPayServiceImpl implements WxPayService {
                 if(act.getUid()==parmJo.getInteger("uid")){
                     jo.put("code", 200);
                     jo.put("msg", "圈主不能报名");
-                    jo.put("data", 4);
+                    jo.put("data", null);
                     return jo;
                 }
 
@@ -685,9 +685,9 @@ public class WxPayServiceImpl implements WxPayService {
                     if(act.getPeopleNumber()!=0){
                         if (act.getJoinNumber() >= act.getPeopleNumber()) {
 
-                            jo.put("code", 200);
+                            jo.put("code", 404);
                             jo.put("msg", "名额已满");
-                            jo.put("data", 5);
+                            jo.put("data", null);
                             return jo;
                         }
                     }
@@ -695,9 +695,9 @@ public class WxPayServiceImpl implements WxPayService {
                 } else if (org.apache.commons.lang3.StringUtils.isBlank(act.getLevel())) {
                     if(act.getPeopleNumber()!=0){
                         if (act.getJoinNumber() >= act.getPeopleNumber()) {
-                            jo.put("code", 200);
+                            jo.put("code", 404);
                             jo.put("msg", "名额已满");
-                            jo.put("data", 5);
+                            jo.put("data", null);
                             return jo;
                         }
                     }
@@ -706,7 +706,7 @@ public class WxPayServiceImpl implements WxPayService {
 
                 float f = member.getCredit2(); //账户余额
                 if (f < (float)act.getCost()) {
-                    jo.put("code", 200);
+                    jo.put("code", 400);
                     jo.put("msg", "报名账户余额不足，请先充值");
                     jo.put("data", 1);
                     return jo;
