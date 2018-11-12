@@ -690,7 +690,7 @@ public class WxPayServiceImpl implements WxPayService {
                 if(act.getUid()==parmJo.getInteger("uid")){
                     jo.put("code", 200);
                     jo.put("msg", "圈主不能报名");
-                    jo.put("data", null);
+                    jo.put("data", 4);
                     return jo;
                 }
 
@@ -701,7 +701,7 @@ public class WxPayServiceImpl implements WxPayService {
 
                             jo.put("code", 200);
                             jo.put("msg", "名额已满");
-                            jo.put("data", null);
+                            jo.put("data", 5);
                             return jo;
                         }
                     }
@@ -711,7 +711,7 @@ public class WxPayServiceImpl implements WxPayService {
                         if (act.getJoinNumber() >= act.getPeopleNumber()) {
                             jo.put("code", 200);
                             jo.put("msg", "名额已满");
-                            jo.put("data", null);
+                            jo.put("data", 5);
                             return jo;
                         }
                     }
