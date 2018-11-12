@@ -100,10 +100,9 @@ public class TFriendsServiceImpl implements TFriendsService {
             int pageSize = Integer.valueOf(subJo.getString("pageSize")); //每页数量
             int pageIndex = Integer.valueOf(subJo.getString("pageIndex")); //当前页
 
-            int index = pageIndex > 1 ? pageSize * (pageIndex - 1) : pageIndex - 1;
-            int size = index == 0 ? pageSize : pageIndex * pageSize;
+            int index = pageSize*(pageIndex-1);
 
-            List<TFriends> list = dao.getFriends(phone, index, size);
+            List<TFriends> list = dao.getFriends(phone, index, pageSize);
             rp.setData(list == null ? "" : list);
             rp.setMsg("请求成功");
             rp.setCode(200);

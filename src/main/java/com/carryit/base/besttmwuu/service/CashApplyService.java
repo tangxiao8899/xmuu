@@ -1,6 +1,12 @@
 package com.carryit.base.besttmwuu.service;
 
+
 import com.carryit.base.besttmwuu.entity.CashApply;
+import com.carryit.base.besttmwuu.entity.CashDataDTO;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+
 
 public interface CashApplyService {
 
@@ -21,4 +27,18 @@ public interface CashApplyService {
      * @return
      */
     int findMaxId();
+
+    /**
+     * 提现数据
+     * @param phone 提现手机号
+     * @return
+     */
+    List<CashDataDTO> cashData(@Param("phone") String phone,@Param("page") int page,@Param("limit") int limit);
+
+    /**
+     * 提现统计数量
+     * @param phone
+     * @return
+     */
+    int count(String phone);
 }

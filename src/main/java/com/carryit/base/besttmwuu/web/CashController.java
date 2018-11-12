@@ -1,7 +1,9 @@
 package com.carryit.base.besttmwuu.web;
 
 import com.alibaba.fastjson.JSONObject;
+import com.carryit.base.besttmwuu.entity.CashDataDTO;
 import com.carryit.base.besttmwuu.entity.User;
+import com.carryit.base.besttmwuu.service.CashApplyService;
 import com.carryit.base.besttmwuu.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,19 +18,38 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/cashLogin")
 public class CashController extends HttpServlet {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private CashApplyService cashApplyService;
+
     Logger logger = LoggerFactory.getLogger(CashController.class);
+
+    /**
+     * 登录页面
+      * @return
+     */
     @RequestMapping(value = "/login")
     public String cashLogin(){
         logger.info("=====");
         return "login";
     }
 
+    /**
+     * 登录
+     * @param req
+     * @param resp
+     * @return
+     * @throws ServletException
+     * @throws IOException
+     */
     @RequestMapping(value = "/txLogin")
     @ResponseBody
     public JSONObject txLogin(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -47,15 +68,63 @@ public class CashController extends HttpServlet {
             jo.put("code",401);
             jo.put("msg","密码不正确");
         }else {
+            req.getSession().setAttribute("user",user.getUserName());
             jo.put("code",200);
             jo.put("msg","登录成功");
         }
         return jo;
     }
 
+    /**
+     * 首页
+     * @return
+     */
     @RequestMapping(value = "/index")
     public String index(){
-        logger.info("=====");
         return "index";
+    }
+
+    /**
+     * 登录用户
+     * @param req
+     * @return
+     */
+    @RequestMapping("/loginUser")
+    @ResponseBody
+    public JSONObject loginUser(HttpServletRequest req){
+        JSONObject jo = new JSONObject();
+        jo.put("username",req.getSession().getAttribute("user"));
+        return jo;
+    }
+
+    /**
+     * 提现页面
+     * @return
+     */
+    @RequestMapping("/getCash")
+    public String getCash(){
+        return "views/cash";
+    }
+
+    /**
+     * 提现数据
+     * @return
+     */
+    @RequestMapping("/cashData")
+    @ResponseBody
+    public JSONObject cashData(HttpServletRequest request){
+        JSONObject jo = new JSONObject();
+        String phone = request.getParameter("phone");
+        int page = Integer.valueOf(request.getParameter("page"));Integer.valueOf(request.getParameter("page"));
+        int limit = Integer.valueOf(request.getParameter("limit"));
+        List<CashDataDTO> list = cashApplyService.cashData(phone,page,limit);
+
+        int count = cashApplyService.count(phone);
+        jo.put("code",0);
+        jo.put("msg","");
+        jo.put("data",list);
+        jo.put("count",count);
+
+        return jo;
     }
 }

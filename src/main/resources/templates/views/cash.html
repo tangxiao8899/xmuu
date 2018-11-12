@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../assets/css/layui.css">
+    <link rel="stylesheet" href="../assets/css/view.css"/>
+    <link rel="icon" href="/favicon.ico">
+    <title>管理后台</title>
+</head>
+<body class="layui-view-body">
+    <div class="layui-content">
+
+        <div class="layui-row">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="form-box">
+                        <div class="layui-form layui-form-item">
+                            <div class="layui-inline">
+                                <div class="layui-form-mid">手机号:</div>
+                                <div class="layui-input-inline" style="width: 100px;">
+                                  <input type="text" autocomplete="off" class="layui-input">
+                                </div>
+                                <button class="layui-btn layui-btn-blue">查询</button>
+                            </div>
+                        </div>
+                        <table id="demo"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../assets/layui.all.js"></script>
+    <script>
+    var $ = layui.$;
+      var element = layui.element;
+  var table = layui.table;
+  var form = layui.form;
+
+    table.render({
+    elem: '#demo'
+    ,url:'cashData'
+     ,page: true
+     ,limits: [10,20,30,60,90,150,300]
+	  ,limit: 10
+    ,cols: [
+        [
+      {field:'nickname ', title:'会员类型', width:150}
+      ,{field:'avatar', title:'类型-APP余额', width:80}
+      ,{field:'money', title:'应到账余额/手续费', width:100}
+      ,{field:'mobile', title:'提现手机号', width:80, sort: true}
+      ,{field:'createtime', title:'提现时间', width:120}
+      ,{field:'status', title:'状态', width:100, sort: true}
+      ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
+    ]
+    ]
+,done: function(res, page, count){
+			//如果是异步请求数据方式，res即为你接口返回的信息。
+			//如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
+
+			//分类显示中文名称
+			$("[data-field='nickname']").children().each(function(){
+				$(this).text(res.data.nickname)
+			})
+			$("[data-field='avatar']").children().each(function(){
+
+			})
+			$("[data-field='money']").children().each(function(){
+				$(this).text(res.data.money)
+			})
+
+			console.log(res.data);
+
+			//得到当前页码
+			console.log(page);
+			//console.log(limit);
+			//得到数据总量
+			console.log(count);
+   }
+
+  });
+    </script>
+</body>
+</html>

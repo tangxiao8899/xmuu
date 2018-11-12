@@ -21,10 +21,9 @@
 
             <ul class="layui-nav layui-layout-right">
                 <li class="layui-nav-item">
-                    <a href="javascript:;">BieJun</a>
+                    <a href="javascript:;"><span id="user"></span></a>
                     <dl class="layui-nav-child">
-                        <dd><a href="">帮助中心</a></dd>
-                        <dd><a href="login.html">退出</a></dd>
+                        <dd><a href="login">退出</a></dd>
                     </dl>
                 </li>
             </ul>
@@ -35,7 +34,7 @@
 
                 <div class="custom-logo">
                     <img src="../assets/images/logo.png" alt=""/>
-                    <h1>Admin Pro</h1>
+                    <h1>小马UU</h1>
                 </div>
                 <ul id="Nav" class="layui-nav layui-nav-tree">
                     <li class="layui-nav-item">
@@ -44,34 +43,7 @@
                             <em>主页</em>
                         </a>
                         <dl class="layui-nav-child">
-                            <dd><a href="../views/console.html">控制台</a></dd>
-                        </dl>
-                    </li>
-                    <li class="layui-nav-item">
-                        <a href="javascript:;">
-                            <i class="layui-icon">&#xe857;</i>
-                            <em>组件</em>
-                        </a>
-                        <dl class="layui-nav-child">
-                            <dd><a href="../views/form.html">表单</a></dd>
-                            <dd>
-                                <a href="javascript:;">页面</a>
-                                <dl class="layui-nav-child">
-                                    <dd>
-                                        <a href="login.html">登录页</a>
-                                    </dd>
-                                </dl>
-                            </dd>
-                        </dl>
-                    </li>
-                    <li class="layui-nav-item">
-                        <a href="javascript:;">
-                            <i class="layui-icon">&#xe612;</i>
-                            <em>用户</em>
-                        </a>
-                        <dl class="layui-nav-child">
-                            <dd><a href="../views/users.html">用户组</a></dd>
-                            <dd><a href="../views/operaterule.html">权限配置</a></dd>
+                            <dd><a href="getCash">提现记录</a></dd>
                         </dl>
                     </li>
                 </ul>
@@ -93,6 +65,7 @@
         <div class="mobile-mask"></div>
     </div>
     <script src="../assets/layui.js"></script>
-    <script src="../index.js" data-main="home"></script>
+    <script src="../assets/jquery-3.3.1.min.js"></script>
+    <script src="../assets/index.js" data-main="home"></script>
 </body>
 </html>

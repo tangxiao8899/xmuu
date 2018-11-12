@@ -21,4 +21,26 @@
         select max(id) from ims_ewei_shop_member_log
 
     </select>
+
+    <!--提现数据-->
+    <select id="cashData" resultType="com.carryit.base.besttmwuu.entity.CashDataDTO">
+        SELECT l.id,m.avatar,m.nickname,l.createtime,l.`status`,l.money,m.mobile from ims_ewei_shop_member_log l
+        LEFT JOIN ims_ewei_shop_member m
+        ON l.openid = m.openid
+        where l.type = 1
+        <choose>
+            <when test="phone != null and phone != '' ">
+                and m.mobile = #{phone}
+            </when>
+        </choose>
+        limit #{page},#{limit}
+    </select>
+
+    <!--统计提现数-->
+    <select id="count" resultType="int">
+        SELECT count(*) from ims_ewei_shop_member_log l
+        LEFT JOIN ims_ewei_shop_member m
+        ON l.openid = m.openid
+        where l.type = 1
+    </select>
 </mapper>
