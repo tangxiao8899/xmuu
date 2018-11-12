@@ -699,7 +699,7 @@ public class WxPayServiceImpl implements WxPayService {
                     if(act.getPeopleNumber()!=0){
                         if (act.getJoinNumber() >= act.getPeopleNumber()) {
 
-                            jo.put("code", 404);
+                            jo.put("code", 200);
                             jo.put("msg", "名额已满");
                             jo.put("data", null);
                             return jo;
@@ -709,7 +709,7 @@ public class WxPayServiceImpl implements WxPayService {
                 } else if (org.apache.commons.lang3.StringUtils.isBlank(act.getLevel())) {
                     if(act.getPeopleNumber()!=0){
                         if (act.getJoinNumber() >= act.getPeopleNumber()) {
-                            jo.put("code", 404);
+                            jo.put("code", 200);
                             jo.put("msg", "名额已满");
                             jo.put("data", null);
                             return jo;
@@ -720,7 +720,7 @@ public class WxPayServiceImpl implements WxPayService {
 
                 float f = member.getCredit2(); //账户余额
                 if (f < (float)act.getCost()) {
-                    jo.put("code", 400);
+                    jo.put("code", 200);
                     jo.put("msg", "报名账户余额不足，请先充值");
                     jo.put("data", 1);
                     return jo;
