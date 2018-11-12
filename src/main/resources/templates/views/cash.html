@@ -8,6 +8,18 @@
     <link rel="stylesheet" href="../assets/css/view.css"/>
     <link rel="icon" href="/favicon.ico">
     <title>管理后台</title>
+    <style type="text/css">
+
+        .layui-table-cell {
+            height: 80px;
+            line-height: 80px;
+        }
+        .m{
+             height: 20px;
+            line-height: 20px;
+        }
+    </style>
+
 </head>
 <body class="layui-view-body">
     <div class="layui-content">
@@ -37,49 +49,42 @@
       var element = layui.element;
   var table = layui.table;
   var form = layui.form;
+   var util = layui.util;
 
     table.render({
     elem: '#demo'
     ,url:'cashData'
      ,page: true
-     ,limits: [10,20,30,60,90,150,300]
-	  ,limit: 10
+     ,limits: [5,10,20,50,100]
+	  ,limit: 5
     ,cols: [
         [
-      {field:'nickname ', title:'会员类型', width:150}
-      ,{field:'avatar', title:'类型-APP余额', width:80}
-      ,{field:'money', title:'应到账余额/手续费', width:100}
-      ,{field:'mobile', title:'提现手机号', width:80, sort: true}
-      ,{field:'createtime', title:'提现时间', width:120}
-      ,{field:'status', title:'状态', width:100, sort: true}
+      {field:'nickname ', title:'会员', width: 200,templet: function(d){
+        return  '<img  style="width:50px;height:50px;" src="'+d.avatar+'" alt=""/>'+'<span style="margin-left: 10px">'+ d.nickname +'</span>'
+      }}
+      ,{field:'money', title:'应到账/实到/手续费', minWidth:100,templet:function(d){
+        return  '<p class="m">提现金额:'+ d.money +'</p>'+ '<p class="m">实到金额'+ d.money*0.9 +'</p>'+ '<p class="m">手续费'+ d.money*0.1 +'</p>'
+      }}
+      ,{field:'mobile', title:'提现手机号', width:150, sort: true}
+      ,{field:'createtime', title:'提现时间', width:120, templet: "<div>{{layui.util.toDateString(d.createtime, 'yyyy-MM-dd HH:mm:ss')}}</div>"}
+      ,{field:'status', title:'状态', width:100, sort: true,templet:function(d){
+        return getstatus(d.status);
+       }}
       ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
+        ]
     ]
-    ]
-,done: function(res, page, count){
-			//如果是异步请求数据方式，res即为你接口返回的信息。
-			//如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
-
-			//分类显示中文名称
-			$("[data-field='nickname']").children().each(function(){
-				$(this).text(res.data.nickname)
-			})
-			$("[data-field='avatar']").children().each(function(){
-
-			})
-			$("[data-field='money']").children().each(function(){
-				$(this).text(res.data.money)
-			})
-
-			console.log(res.data);
-
-			//得到当前页码
-			console.log(page);
-			//console.log(limit);
-			//得到数据总量
-			console.log(count);
-   }
-
   });
+
+function getstatus(s){
+    if(s==0){
+         return "申请中";
+    }else if(s ==1){
+        return "通过";
+
+    }else if(s ==-1){
+        return "拒绝";
+    }
+    }
     </script>
 </body>
 </html>
