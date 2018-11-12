@@ -315,6 +315,22 @@ public class WxPayServiceImpl implements WxPayService {
                 return jo;
             }
 
+            if (Float.valueOf(parmJo.getString("money"))==0) { //打赏金额
+                jo.put("code", 400);
+                jo.put("msg", "金额不能为0");
+                jo.put("data", null);
+                return jo;
+            }
+
+            if(Integer.valueOf(parmJo.getString("fuid"))==Integer.valueOf(parmJo.getString("tuid"))){
+                jo.put("code", 400);
+                jo.put("msg", "不能给自己打赏");
+                jo.put("data", null);
+                return jo;
+            }
+
+
+
             //打赏
             //1、检查账户余额是否足够打赏
             Member m = memberService.getMemberById(Integer.valueOf(parmJo.getString("fuid")));
