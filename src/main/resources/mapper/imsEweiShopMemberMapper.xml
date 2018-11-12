@@ -1297,4 +1297,8 @@
       levelendtime = #{levelendtime,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="findNicknameavatarAndByUid" parameterType="int" resultMap="BaseResultMap">
+  	select nickname, avatar from ims_ewei_shop_member where uid = #{uid}
+  </select>
 </mapper>

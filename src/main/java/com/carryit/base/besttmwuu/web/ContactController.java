@@ -17,8 +17,10 @@ import com.base.BaseController;
 import com.bean.ContactUserResp;
 import com.bean.req.ContactsWithoudAddReq;
 import com.carryit.base.besttmwuu.entity.ImsUsers;
+import com.carryit.base.besttmwuu.entity.imsEweiShopMember;
 import com.carryit.base.besttmwuu.entity.imsMcMembersWithBLOBs;
 import com.carryit.base.besttmwuu.service.ContactService;
+import com.carryit.base.besttmwuu.service.ImsEweiShopMemberService;
 import com.carryit.base.besttmwuu.service.ImsMcMemberService;
 
 /**
@@ -32,7 +34,7 @@ public class ContactController extends BaseController {
 	ContactService contactService;
 	
 	@Autowired
-	ImsMcMemberService memberService;
+	ImsEweiShopMemberService memberService;
 	
 	/**
 	 * 获取当前用户的所有联系人中，还未添加好友的人员&好友
@@ -133,7 +135,7 @@ public class ContactController extends BaseController {
 		for(ImsUsers user: users) {
 			ContactUserResp userResp = new ContactUserResp();
 			BeanUtils.copyProperties(user, userResp);
-			imsMcMembersWithBLOBs member = memberService.findMemberByUid(user.getUid());
+			imsEweiShopMember member = memberService.findNicknameavatarAndByUid(user.getUid());
 			if(member != null) {
 				userResp.setNickname(member.getNickname());
 				userResp.setAvatar(member.getAvatar());
