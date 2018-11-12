@@ -316,33 +316,31 @@ public class WxPayServiceImpl implements WxPayService {
             }
 
             if (Float.valueOf(parmJo.getString("money"))==0) { //打赏金额
-                jo.put("code", 400);
+                jo.put("code", 200);
                 jo.put("msg", "金额不能为0");
-                jo.put("data", null);
+                jo.put("data", 4);
                 return jo;
             }
 
             if(Integer.valueOf(parmJo.getString("fuid"))==Integer.valueOf(parmJo.getString("tuid"))){
-                jo.put("code", 400);
+                jo.put("code", 200);
                 jo.put("msg", "不能给自己打赏");
-                jo.put("data", null);
+                jo.put("data", 3);
                 return jo;
             }
-
-
 
             //打赏
             //1、检查账户余额是否足够打赏
             Member m = memberService.getMemberById(Integer.valueOf(parmJo.getString("fuid")));
             if (StringUtils.isEmpty(m)) {
-                jo.put("code", 404);
+                jo.put("code", 200);
                 jo.put("msg", "打赏账户不存在");
                 jo.put("data", 2);
                 return jo;
             } else {
                 float f = m.getCredit2(); //账户余额
                 if (f < Float.valueOf(parmJo.getString("money"))) {
-                    jo.put("code", 400);
+                    jo.put("code", 200);
                     jo.put("msg", "打赏账户余额不足，请先充值");
                     jo.put("data", 1);
                     return jo;
