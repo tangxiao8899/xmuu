@@ -321,14 +321,14 @@ public class WxPayServiceImpl implements WxPayService {
             if (StringUtils.isEmpty(m)) {
                 jo.put("code", 404);
                 jo.put("msg", "打赏账户不存在");
-                jo.put("data", null);
+                jo.put("data", 2);
                 return jo;
             } else {
                 float f = m.getCredit2(); //账户余额
                 if (f < Float.valueOf(parmJo.getString("money"))) {
                     jo.put("code", 400);
                     jo.put("msg", "打赏账户余额不足，请先充值");
-                    jo.put("data", null);
+                    jo.put("data", 1);
                     return jo;
                 }
             }
@@ -338,13 +338,13 @@ public class WxPayServiceImpl implements WxPayService {
                 updateRewardInfo(parmJo.getString("fuid"), parmJo.getString("tuid"), parmJo.getString("money"));
                 jo.put("code", 200);
                 jo.put("msg", "打赏成功");
-                jo.put("data", null);
+                jo.put("data", 0);
                 return jo;
             }catch (Exception e){
                 e.printStackTrace();
                 jo.put("code", 200);
                 jo.put("msg", "打赏异常，请稍后重试");
-                jo.put("data", null);
+                jo.put("data", 2);
                 return jo;
             }
 
@@ -656,17 +656,17 @@ public class WxPayServiceImpl implements WxPayService {
 
                 if (Long.parseLong(act.getEndTime()) < new Date().getTime()) {
                 //活动结束
-                jo.put("code", 404);
+                jo.put("code", 200);
                 jo.put("msg", "活动结束");
-                jo.put("data", null);
+                jo.put("data", 2);
                 return jo;
             }
 
             Boolean flag = activityService.getActivityByUIdAndAid(parmJo.getInteger("uid"), parmJo.getInteger("aid"));
             if(flag){
-                jo.put("code", 404);
+                jo.put("code", 200);
                 jo.put("msg", "您已报名,不能重复报名");
-                jo.put("data", null);
+                jo.put("data", 3);
                 return jo;
             }
 
@@ -674,9 +674,9 @@ public class WxPayServiceImpl implements WxPayService {
             //判断是否符合等级
 
                 if(act.getUid()==parmJo.getInteger("uid")){
-                    jo.put("code", 404);
+                    jo.put("code", 200);
                     jo.put("msg", "圈主不能报名");
-                    jo.put("data", null);
+                    jo.put("data", 4);
                     return jo;
                 }
 
@@ -685,9 +685,9 @@ public class WxPayServiceImpl implements WxPayService {
                     if(act.getPeopleNumber()!=0){
                         if (act.getJoinNumber() >= act.getPeopleNumber()) {
 
-                            jo.put("code", 404);
+                            jo.put("code", 200);
                             jo.put("msg", "名额已满");
-                            jo.put("data", null);
+                            jo.put("data", 5);
                             return jo;
                         }
                     }
@@ -695,9 +695,9 @@ public class WxPayServiceImpl implements WxPayService {
                 } else if (org.apache.commons.lang3.StringUtils.isBlank(act.getLevel())) {
                     if(act.getPeopleNumber()!=0){
                         if (act.getJoinNumber() >= act.getPeopleNumber()) {
-                            jo.put("code", 404);
+                            jo.put("code", 200);
                             jo.put("msg", "名额已满");
-                            jo.put("data", null);
+                            jo.put("data", 5);
                             return jo;
                         }
                     }
@@ -706,9 +706,9 @@ public class WxPayServiceImpl implements WxPayService {
 
                 float f = member.getCredit2(); //账户余额
                 if (f < (float)act.getCost()) {
-                    jo.put("code", 400);
-                    jo.put("msg", "打赏账户余额不足，请先充值");
-                    jo.put("data", null);
+                    jo.put("code", 200);
+                    jo.put("msg", "报名账户余额不足，请先充值");
+                    jo.put("data", 1);
                     return jo;
                 }
                 //资金够，开始报名，变更两个账户金额
@@ -724,7 +724,7 @@ public class WxPayServiceImpl implements WxPayService {
                     activityService.signUpRelease(signUp);
                     jo.put("code", 200);
                     jo.put("msg", "报名成功");
-                    jo.put("data", null);
+                    jo.put("data", 0);
                     return jo;
                 }catch (Exception e){
                     e.printStackTrace();
