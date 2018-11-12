@@ -338,13 +338,13 @@ public class WxPayServiceImpl implements WxPayService {
                 updateRewardInfo(parmJo.getString("fuid"), parmJo.getString("tuid"), parmJo.getString("money"));
                 jo.put("code", 200);
                 jo.put("msg", "打赏成功");
-                jo.put("data", "");
+                jo.put("data", null);
                 return jo;
             }catch (Exception e){
                 e.printStackTrace();
                 jo.put("code", 200);
                 jo.put("msg", "打赏异常，请稍后重试");
-                jo.put("data", "");
+                jo.put("data", null);
                 return jo;
             }
 
@@ -481,13 +481,13 @@ public class WxPayServiceImpl implements WxPayService {
             if (!parmJo.containsKey("uid")) { //用户ID
                 jo.put("code", 400);
                 jo.put("msg", "参数异常");
-                jo.put("data", "");
+                jo.put("data", null);
                 return jo;
             }
             if (!parmJo.containsKey("money")) { //提现金额
                 jo.put("code", 400);
                 jo.put("msg", "参数异常");
-                jo.put("data", "");
+                jo.put("data", null);
                 return jo;
             }
 
@@ -496,7 +496,7 @@ public class WxPayServiceImpl implements WxPayService {
             if (StringUtils.isEmpty(member)) {
                 jo.put("code", 404);
                 jo.put("msg", "该账户不存在");
-                jo.put("data", "");
+                jo.put("data", null);
                 return jo;
             } else {
                 double credit = member.getCredit2(); //可提现余额
@@ -504,7 +504,7 @@ public class WxPayServiceImpl implements WxPayService {
                 if (Double.valueOf(parmJo.getString("money")) > credit) {
                     jo.put("code", 400);
                     jo.put("msg", "提现金额超出可提现余额");
-                    jo.put("data", "");
+                    jo.put("data", null);
                     return jo;
                 }
             }
@@ -586,7 +586,7 @@ public class WxPayServiceImpl implements WxPayService {
 
                 jo.put("code", 200);
                 jo.put("msg", "SUCCESS");
-                jo.put("data", "");
+                jo.put("data", null);
                 return jo;
             }else{
                 CashApply ca = new CashApply();
@@ -595,7 +595,7 @@ public class WxPayServiceImpl implements WxPayService {
                 cashApplyService.update(ca);
                 jo.put("code", 400);
                 jo.put("msg", "提现失败");
-                jo.put("data", "");
+                jo.put("data", null);
                 return jo;
             }
         } else {
