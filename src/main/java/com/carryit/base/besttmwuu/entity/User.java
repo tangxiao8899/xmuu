@@ -1,7 +1,5 @@
 package com.carryit.base.besttmwuu.entity;
 
-import com.bean.Domain;
-
 import java.io.Serializable;
 
 public class User implements Serializable {

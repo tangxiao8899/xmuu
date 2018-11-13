@@ -1,6 +1,8 @@
 package com.base;
 
-public class ResultPojo {
+import java.io.Serializable;
+
+public class ResultPojo implements Serializable {
 
     private Integer code;
     private String msg;

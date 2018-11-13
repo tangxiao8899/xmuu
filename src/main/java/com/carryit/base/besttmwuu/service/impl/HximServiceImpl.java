@@ -4,15 +4,28 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.base.ResultPojo;
+import com.carryit.base.besttmwuu.dao.MemberDao;
+import com.carryit.base.besttmwuu.entity.FriendResp;
+import com.carryit.base.besttmwuu.entity.FriendRespUser;
+import com.carryit.base.besttmwuu.entity.Member;
 import com.carryit.base.besttmwuu.entity.User;
 import com.carryit.base.besttmwuu.service.HximService;
 import com.util.JerseyClientUtil;
 import com.util.PropertyUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.base.BaseController.p;
+
 @Service
 public class HximServiceImpl implements HximService {
+
+    @Autowired
+    private MemberDao memberDao;
 
     @Override
     public ResultPojo getToken() throws Exception {
@@ -126,6 +139,27 @@ public class HximServiceImpl implements HximService {
                 rp.setMsg("请求参数异常");
             } else {
                 rp = JerseyClientUtil.postTokenMethod(jo.getString("token"), "/users/" + jo.getString("owner_username") + "/"+jo.getString("type")+"/users" ,2);
+                FriendResp rpData = new FriendResp();
+                if (rp.getData() != null) {
+                    Object o = JSONObject.toJSON(rp.getData());
+                    String s = JSON.toJSONString(o);
+                    rpData = p(s, FriendResp.class);
+                    List<FriendRespUser> frList = new ArrayList<>();
+                    if (rpData.getData() != null && rpData.getData().size() > 0) {
+                        for (String phone : rpData.getData()) {
+                            FriendRespUser frp = new FriendRespUser();
+                            Member member = memberDao.getMemberByPhone(phone);
+                            frp.setAvatar(member.getAvatar());
+                            frp.setUid(member.getUid());
+                            frp.setNickName(member.getNickName());
+                            frp.setPhone(phone);
+                            frList.add(frp);
+                        }
+                    }
+                    rpData.setFriendRespUser(frList);
+                    rp.setData(rpData);
+                }
+
             }
         } else {
             rp.setCode(400);
