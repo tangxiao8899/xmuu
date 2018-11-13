@@ -128,17 +128,25 @@ public class HximServiceImpl implements HximService {
         ResultPojo rp = new ResultPojo();
         if (!StringUtils.isEmpty(json)) {
             JSONObject jo = JSON.parseObject(json);
-            //校验授权信息
-            if (!jo.containsKey("token")) {
-                rp.setCode(401);
-                rp.setMsg("请先获取授权信息");
-                return rp;
+            rp = getToken();
+            JSONObject subjo = JSON.parseObject(rp.getData().toString());
+            String token ="";
+            if(subjo.containsKey("access_token")){
+                 token = subjo.getString("access_token");
+                if(StringUtils.isEmpty(token)){
+                    rp.setCode(400);
+                    rp.setMsg("token请求异常");
+                }
+            }else {
+                rp.setCode(400);
+                rp.setMsg("token请求异常");
             }
+
             if (!jo.containsKey("owner_username") || !jo.containsKey("type")) {
                 rp.setCode(400);
                 rp.setMsg("请求参数异常");
             } else {
-                rp = JerseyClientUtil.postTokenMethod(jo.getString("token"), "/users/" + jo.getString("owner_username") + "/"+jo.getString("type")+"/users" ,2);
+                rp = JerseyClientUtil.postTokenMethod(token, "/users/" + jo.getString("owner_username") + "/"+jo.getString("type")+"/users" ,2);
                 FriendResp rpData = new FriendResp();
                 if (rp.getData() != null) {
                     Object o = JSONObject.toJSON(rp.getData());
