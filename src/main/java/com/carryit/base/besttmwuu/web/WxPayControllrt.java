@@ -90,6 +90,18 @@ public class WxPayControllrt extends BaseController {
     public JSONObject getCash(@RequestBody(required = false) String json) {
         return callHttpReqTask(json, 4);
     }
+
+    /**
+     * 手动提现
+     * @param json
+     * @return
+     */
+    @RequestMapping(value = "/manualCash", method = {RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public JSONObject manualCash(@RequestBody(required = false) String json) {
+        return callHttpReqTask(json, 7);
+    }
+
+
     /**
      * 报名支付
      * @param json
@@ -171,7 +183,14 @@ public class WxPayControllrt extends BaseController {
                     logger.error(e.getMessage());
                     return doObjResp(false, -999, "程序异常!");
                 }
-
+            case 7 :
+                try {
+                    return  wxPayService.manualCash(json);
+                }catch (Exception e){
+                    e.printStackTrace();
+                    logger.error(e.getMessage());
+                    return doObjResp(false, -999, "程序异常!");
+                }
 
         }
         return null;

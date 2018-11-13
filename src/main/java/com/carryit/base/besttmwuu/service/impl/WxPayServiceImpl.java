@@ -807,5 +807,71 @@ public class WxPayServiceImpl implements WxPayService {
             return jo;
         }
     }
+
+    @Override
+    public JSONObject manualCash(String json){
+        JSONObject jo = new JSONObject();
+        if (!StringUtils.isEmpty(json)) {
+            JSONObject parmJo = JSON.parseObject(json);
+            //校验授权信息
+
+            if (!parmJo.containsKey("uid")) { //用户ID
+                jo.put("code", 200);
+                jo.put("msg", "参数异常");
+                jo.put("data", 4);
+                return jo;
+            }
+            if (!parmJo.containsKey("money")) { //提现金额
+                jo.put("code", 200);
+                jo.put("msg", "参数异常");
+                jo.put("data", 4);
+                return jo;
+            }
+            MemberData member = memberService.getMemberDataByUId(Integer.valueOf(parmJo.getString("uid")));
+            if (StringUtils.isEmpty(member)) {
+                jo.put("code", 200);
+                jo.put("msg", "该账户不存在");
+                jo.put("data", 2);
+                return jo;
+            } else {
+                double credit = member.getCredit2(); //可提现余额
+                //校验提现金额是否超过可提现余额
+                if (Double.valueOf(parmJo.getString("money")) > credit) {
+                    jo.put("code", 200);
+                    jo.put("msg", "提现金额超出可提现余额");
+                    jo.put("data", 1);
+                    return jo;
+                }
+            }
+            //往提现申请表保存一条数据
+            CashApply cashApply = new CashApply();
+            cashApply.setId(cashApplyService.findMaxId()+1);
+            cashApply.setOpenid(member.getOpenid());
+            cashApply.setCreatetime((int)(System.currentTimeMillis()/1000));
+            cashApply.setLogno("RW"+PayCommonUtil.getDateStr()+System.currentTimeMillis());
+            cashApply.setMoney(BigDecimal.valueOf(Math.round(Double.valueOf(parmJo.getString("money")))));
+            cashApply.setStatus(0); //提现申请
+            cashApply.setTitle("余额提现");
+            cashApply.setType(1);
+            cashApplyService.save(cashApply);
+
+            //记一笔提现的流水
+            ImsUserCapitalFlowEntity entity = new ImsUserCapitalFlowEntity();
+            entity.setUid(Integer.valueOf(parmJo.getString("uid")));
+            entity.setPrice(Float.valueOf(parmJo.getString("money"))); //记录单位为元
+            entity.setSource(2); //提现
+            entity.setType(1); //支出
+            imsUserCapitalFlowService.save(entity);
+        } else {
+            jo.put("code", 200);
+            jo.put("msg", "参数异常");
+            jo.put("data", 4);
+            return jo;
+        }
+        jo.put("code", 200);
+        jo.put("msg", "SUCCESS");
+        jo.put("data", 0);
+        return jo;
+    }
 }
 
