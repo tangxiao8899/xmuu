@@ -39,8 +39,9 @@ public class CashController extends HttpServlet {
       * @return
      */
     @RequestMapping(value = "/login")
-    public String cashLogin(){
+    public String cashLogin(HttpServletRequest request){
         logger.info("=====");
+        request.getSession().removeAttribute("user");
         return "login";
     }
 
