@@ -81,6 +81,7 @@ public class LoginServiceImpl implements LoginService {
                             data.put("level",m.getLevel());
                             data.put("nickName",m.getNickName()==null?"":m.getNickName());
                             data.put("autograph",m.getAutograph()==null?"":m.getAutograph());
+                            data.put("avatar",m.getAvatar()==null?"":m.getAvatar());
                         }
 
                         data.put("hxu",key.split("_")[1]);
@@ -153,6 +154,7 @@ public class LoginServiceImpl implements LoginService {
                    data.put("level",m.getLevel());
                    data.put("nickName",m.getNickName()==null?"":m.getNickName());
                    data.put("autograph",m.getAutograph()==null?"":m.getAutograph());
+                   data.put("avatar",m.getAvatar()==null?"":m.getAvatar());
                }
                 data.put("hxu",user.getPhone());
                 data.put("hxp",user.getPassword());

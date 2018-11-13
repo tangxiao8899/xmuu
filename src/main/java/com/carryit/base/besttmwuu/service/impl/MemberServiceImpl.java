@@ -58,7 +58,17 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public MemberDTO showMember(int uid) {
-        return memberDao.showMember(uid);
+        MemberDTO memberDTO=new MemberDTO();
+        memberDTO=memberDao.showMember(uid);
+        if (memberDTO.getCompanyProfile()==null)
+        {
+            memberDTO.setCompanyProfile("");
+        }
+        if (memberDTO.getCorporateName()==null)
+        {
+            memberDTO.setCorporateName("");
+        }
+        return memberDTO;
     }
 
     @Override
