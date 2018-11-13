@@ -96,7 +96,7 @@
 			<if test="uid != null and uid !=0">
 				uid,
 			</if>
-			<if test="uid != null and uid !=0">
+			<if test="level != null">
 				level,
 			</if>
 			<if test="avatar != null">
@@ -125,7 +125,7 @@
 			<if test="uid != null and uid != 0">
 				#{uid},
 			</if>
-			<if test="uid != null and uid != 0">
+			<if test="level != null ">
 				#{level},
 			</if>
 			<if test="avatar != null">
