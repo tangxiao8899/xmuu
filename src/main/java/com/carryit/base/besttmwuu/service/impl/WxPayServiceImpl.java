@@ -493,32 +493,32 @@ public class WxPayServiceImpl implements WxPayService {
             //校验授权信息
 
             if (!parmJo.containsKey("uid")) { //用户ID
-                jo.put("code", 400);
+                jo.put("code", 200);
                 jo.put("msg", "参数异常");
-                jo.put("data", null);
+                jo.put("data", 4);
                 return jo;
             }
             if (!parmJo.containsKey("money")) { //提现金额
-                jo.put("code", 400);
+                jo.put("code", 200);
                 jo.put("msg", "参数异常");
-                jo.put("data", null);
+                jo.put("data", 4);
                 return jo;
             }
 
 
             MemberData member = memberService.getMemberDataByUId(Integer.valueOf(parmJo.getString("uid")));
             if (StringUtils.isEmpty(member)) {
-                jo.put("code", 404);
+                jo.put("code", 200);
                 jo.put("msg", "该账户不存在");
-                jo.put("data", null);
+                jo.put("data", 2);
                 return jo;
             } else {
                 double credit = member.getCredit2(); //可提现余额
                 //校验提现金额是否超过可提现余额
                 if (Double.valueOf(parmJo.getString("money")) > credit) {
-                    jo.put("code", 400);
+                    jo.put("code", 200);
                     jo.put("msg", "提现金额超出可提现余额");
-                    jo.put("data", null);
+                    jo.put("data", 1);
                     return jo;
                 }
             }
@@ -559,7 +559,7 @@ public class WxPayServiceImpl implements WxPayService {
         } else {
             jo.put("code", 400);
             jo.put("msg", "参数异常");
-            jo.put("data", null);
+            jo.put("data", 4);
             return jo;
         }
 
@@ -600,22 +600,22 @@ public class WxPayServiceImpl implements WxPayService {
 
                 jo.put("code", 200);
                 jo.put("msg", "SUCCESS");
-                jo.put("data", null);
+                jo.put("data", 0);
                 return jo;
             }else{
                 CashApply ca = new CashApply();
                 ca.setId(Integer.valueOf(_id));
                 ca.setStatus(-1);
                 cashApplyService.update(ca);
-                jo.put("code", 400);
+                jo.put("code", 200);
                 jo.put("msg", "提现失败");
-                jo.put("data", null);
+                jo.put("data", 3);
                 return jo;
             }
         } else {
-            jo.put("code", -999);
+            jo.put("code", 200);
             jo.put("msg", "提现出现异常，请稍后重试!");
-            jo.put("data", null);
+            jo.put("data", 5);
             return jo;
         }
     }
