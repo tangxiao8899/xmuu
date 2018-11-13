@@ -2,6 +2,7 @@ package com.carryit.base.besttmwuu.entity;
 
 public class CashDataDTO {
     private int id;
+    private int uid;
     private String avatar;
     private String nickname;
     private long createtime;
@@ -59,6 +60,14 @@ public class CashDataDTO {
 
     public String getMobile() {
         return mobile;
+    }
+
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
     }
 
     public void setMobile(String mobile) {

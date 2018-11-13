@@ -1,6 +1,7 @@
 package com.carryit.base.besttmwuu.web;
 
 import com.alibaba.fastjson.JSONObject;
+import com.carryit.base.besttmwuu.entity.CashApply;
 import com.carryit.base.besttmwuu.entity.CashDataDTO;
 import com.carryit.base.besttmwuu.entity.User;
 import com.carryit.base.besttmwuu.service.CashApplyService;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -125,6 +127,39 @@ public class CashController extends HttpServlet {
         jo.put("data",list);
         jo.put("count",count);
 
+        return jo;
+    }
+
+    /**
+     * 修改状态
+     * @param request
+     * @return
+     */
+    @RequestMapping("/updateStatus")
+    @ResponseBody
+    public JSONObject updateStatus(HttpServletRequest request){
+        JSONObject jo = new JSONObject();
+        CashDataDTO dto = new CashDataDTO();
+
+        String id = request.getParameter("id");
+        String status = request.getParameter("status");
+        if("1".equals(status)){
+            String money = request.getParameter("money");
+            String uid = request.getParameter("uid");
+           dto.setMoney(Double.valueOf(money));
+           dto.setUid(Integer.valueOf(uid));
+
+        }
+        dto.setId(Integer.valueOf(id));
+        dto.setStatus(Integer.valueOf(status));
+        try {
+            cashApplyService.updateCash(dto);
+            jo.put("code",200);
+            jo.put("msg","修改成功");
+        }catch (Exception e){
+            jo.put("code",500);
+            jo.put("msg","修改失败");
+        }
         return jo;
     }
 }
