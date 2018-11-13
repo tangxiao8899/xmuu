@@ -3,9 +3,12 @@ package com.carryit.base.besttmwuu.service.impl;
 import com.carryit.base.besttmwuu.dao.CashApplyDao;
 import com.carryit.base.besttmwuu.entity.CashApply;
 import com.carryit.base.besttmwuu.entity.CashDataDTO;
+import com.carryit.base.besttmwuu.entity.Member;
 import com.carryit.base.besttmwuu.service.CashApplyService;
+import com.carryit.base.besttmwuu.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -15,6 +18,9 @@ public class CashApplyServiceImpl implements CashApplyService {
 
     @Autowired
     CashApplyDao cashApplyDao;
+
+    @Autowired
+    MemberService memberService;
 
     @Override
     public void save(CashApply cashApply) {
@@ -40,5 +46,20 @@ public class CashApplyServiceImpl implements CashApplyService {
     @Override
     public int count(String phone) {
         return cashApplyDao.count(phone);
+    }
+
+    @Override
+    @Transactional
+    public void updateCash(CashDataDTO dto) {
+        //更新状态
+        CashApply cashApply = new CashApply();
+        cashApply.setId(dto.getId());
+        cashApply.setStatus(dto.getStatus());
+        cashApplyDao.update(cashApply);
+        //更新账户信息,账户余额减
+        if(dto.getStatus() == 1){
+            Member m = memberService.getMemberById(dto.getUid());
+            memberService.updateMemberByUid(dto.getUid(),m.getCredit2() -(float) dto.getMoney());
+        }
     }
 }

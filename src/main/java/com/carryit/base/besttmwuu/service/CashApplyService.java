@@ -40,5 +40,8 @@ public interface CashApplyService {
      * @param phone
      * @return
      */
-    int count(String phone);
+    int count(@Param("phone") String phone);
+
+
+    void updateCash(CashDataDTO dto);
 }

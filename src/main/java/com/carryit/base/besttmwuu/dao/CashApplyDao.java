@@ -35,5 +35,5 @@ public interface CashApplyDao {
      */
     List<CashDataDTO> cashData(@Param("phone") String phone,@Param("page") int page,@Param("limit") int limit);
 
-    int count(String phone);
+    int count(@Param("phone") String phone);
 }

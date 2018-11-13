@@ -68,4 +68,6 @@ public interface WxPayService {
      * @return
      */
     JSONObject getBillsbyUid(String json);
+
+    JSONObject manualCash(String json);
 }
