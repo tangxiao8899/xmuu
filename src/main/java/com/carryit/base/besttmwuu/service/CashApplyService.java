@@ -42,6 +42,9 @@ public interface CashApplyService {
      */
     int count(@Param("phone") String phone);
 
-
+    /**
+     * 修改提现状态
+     * @param dto
+     */
     void updateCash(CashDataDTO dto);
 }

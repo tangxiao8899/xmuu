@@ -84,7 +84,9 @@ function getstatus(s){
                 url: "updateStatus" ,
                 data: {
                     "id":data.id,
-                    "status":-1
+                    "status":-1,
+                    "money":data.money,
+                     "uid":data.uid
                 },
                 success: function (result) {
                     if (result.code == 200) {
@@ -93,11 +95,11 @@ function getstatus(s){
                             });
                             layer.close(index);
                     }else{
-                        layer.alert(result.msg);
+                        alert(result.msg);
                         }
                 },
                 error : function() {
-                    layer.alert("请求异常！");
+                    alert("请求异常！");
                 }
             });
 
@@ -110,9 +112,7 @@ function getstatus(s){
                 url: "updateStatus" ,
                 data: {
                     "id":data.id,
-                    "status":1,
-                    "money":data.money,
-                    "uid":data.uid
+                    "status":1
                 },
                 success: function (result) {
                     if (result.code == 200) {

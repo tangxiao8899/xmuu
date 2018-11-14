@@ -6,6 +6,7 @@ import com.carryit.base.besttmwuu.entity.CashDataDTO;
 import com.carryit.base.besttmwuu.entity.User;
 import com.carryit.base.besttmwuu.service.CashApplyService;
 import com.carryit.base.besttmwuu.service.UserService;
+import com.util.PropertyUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,7 +71,10 @@ public class CashController extends HttpServlet {
         }else if(!password.equals(user.getPassword())){
             jo.put("code",401);
             jo.put("msg","密码不正确");
-        }else {
+        }else if(!PropertyUtil.getProperty("login_salt").equals(user.getSalt())){
+            jo.put("code",401);
+            jo.put("msg","没有登录权限！，请联系管理员");
+        } else {
             req.getSession().setAttribute("user",user.getUserName());
             jo.put("code",200);
             jo.put("msg","登录成功");
@@ -144,7 +148,7 @@ public class CashController extends HttpServlet {
 
         String id = request.getParameter("id");
         String status = request.getParameter("status");
-        if("1".equals(status)){
+        if("-1".equals(status)){ //拒绝时，需要回退之前扣除金额
             String money = request.getParameter("money");
             String uid = request.getParameter("uid");
            dto.setMoney(Double.valueOf(money));

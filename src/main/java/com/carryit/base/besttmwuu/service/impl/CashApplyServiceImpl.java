@@ -56,10 +56,10 @@ public class CashApplyServiceImpl implements CashApplyService {
         cashApply.setId(dto.getId());
         cashApply.setStatus(dto.getStatus());
         cashApplyDao.update(cashApply);
-        //更新账户信息,账户余额减
-        if(dto.getStatus() == 1){
+        //如果是拒绝，回退之前扣除金额
+        if(dto.getStatus() == -1){
             Member m = memberService.getMemberById(dto.getUid());
-            memberService.updateMemberByUid(dto.getUid(),m.getCredit2() -(float) dto.getMoney());
+            memberService.updateMemberByUid(dto.getUid(),m.getCredit2() + (float) dto.getMoney());
         }
     }
 }

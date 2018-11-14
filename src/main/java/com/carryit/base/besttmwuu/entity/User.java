@@ -7,6 +7,16 @@ public class User implements Serializable {
 
     private String userName;    //姓名
 
+    private String salt;//盐值
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
     private String password;   //密码
 
     private Integer age;   //年龄

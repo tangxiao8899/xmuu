@@ -24,10 +24,21 @@
 
     <!--提现数据-->
     <select id="cashData" resultType="com.carryit.base.besttmwuu.entity.CashDataDTO">
-        SELECT l.id,m.uid,m.avatar,m.nickname,l.createtime,l.`status`,l.money,m.mobile from ims_ewei_shop_member_log l
+        SELECT
+        l.id,
+        m.uid,
+        m.avatar,
+        m.nickname,
+        l.createtime,
+        l.`status`,
+        l.money,
+        u.phone as mobile
+        FROM
+        ims_ewei_shop_member_log l
         LEFT JOIN ims_ewei_shop_member m
-        ON l.openid = m.openid
-        where l.type = 1
+        LEFT JOIN ims_users u ON m.uid = u.uid ON l.openid = m.openid
+        WHERE
+        l.type = 1
         <choose>
             <when test="phone != null and phone != '' ">
                 and m.mobile = #{phone}

@@ -809,6 +809,7 @@ public class WxPayServiceImpl implements WxPayService {
     }
 
     @Override
+    @Transactional
     public JSONObject manualCash(String json){
         JSONObject jo = new JSONObject();
         if (!StringUtils.isEmpty(json)) {
@@ -854,6 +855,9 @@ public class WxPayServiceImpl implements WxPayService {
             cashApply.setTitle("余额提现");
             cashApply.setType(1);
             cashApplyService.save(cashApply);
+
+            //发起提现申请，直接先扣除账户余额，后台通过后，修改状态，后台拒绝，回退扣除金额
+            memberService.updateMemberByUid(member.getUid(),(float) member.getCredit2() - Float.valueOf(parmJo.getString("money")));
 
             //记一笔提现的流水
             ImsUserCapitalFlowEntity entity = new ImsUserCapitalFlowEntity();
