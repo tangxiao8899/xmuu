@@ -5,10 +5,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.base.ResultPojo;
 import com.carryit.base.besttmwuu.dao.MemberDao;
-import com.carryit.base.besttmwuu.entity.FriendResp;
-import com.carryit.base.besttmwuu.entity.FriendRespUser;
-import com.carryit.base.besttmwuu.entity.Member;
-import com.carryit.base.besttmwuu.entity.User;
+import com.carryit.base.besttmwuu.entity.*;
 import com.carryit.base.besttmwuu.service.HximService;
 import com.util.JerseyClientUtil;
 import com.util.PropertyUtil;
@@ -84,11 +81,18 @@ public class HximServiceImpl implements HximService {
         ResultPojo rp = new ResultPojo();
         if (!StringUtils.isEmpty(json)) {
             JSONObject jo = JSON.parseObject(json);
-            //校验授权信息
-            if (!jo.containsKey("token")) {
-                rp.setCode(401);
-                rp.setMsg("请先获取授权信息");
-                return rp;
+            rp = getToken();
+            JSONObject subjo = JSON.parseObject(rp.getData().toString());
+            String token ="";
+            if(subjo.containsKey("access_token")){
+                token = subjo.getString("access_token");
+                if(StringUtils.isEmpty(token)){
+                    rp.setCode(400);
+                    rp.setMsg("token请求异常");
+                }
+            }else {
+                rp.setCode(400);
+                rp.setMsg("token请求异常");
             }
             if (!jo.containsKey("owner_username") || !jo.containsKey("friend_username")) {
                 rp.setCode(400);
@@ -112,8 +116,10 @@ public class HximServiceImpl implements HximService {
                             break;
                     }
                 }
-
                 rp = JerseyClientUtil.postTokenMethod(jo.getString("token"), "/users/" + jo.getString("owner_username") + "/contacts/users/" + jo.getString("friend_username"),type);
+                TFriends dFriends=new TFriends();
+
+
             }
         } else {
             rp.setCode(400);
