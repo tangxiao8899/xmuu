@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class UserDTO implements Serializable {
     private Integer uid; //用户id
-    private String nickname;  //名字
+    private String nickName;  //名字
     private String profilePhoto; //头像
     private String WealthValue; //财富值
     private int sincerity; //诚信值
@@ -34,12 +34,12 @@ public class UserDTO implements Serializable {
         this.sincerity = sincerity;
     }
 
-    public String getNickname() {
-        return nickname;
+    public String getNickName() {
+        return nickName;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 
     public String getProfilePhoto() {
