@@ -1,7 +1,9 @@
 package com.carryit.base.besttmwuu.service.impl;
 
+import com.bean.req.TredsReq;
 import com.carryit.base.besttmwuu.dao.MemberDao;
 import com.carryit.base.besttmwuu.entity.*;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,6 +51,21 @@ public class ImsEweiShopSnsPostServiceImpl implements ImsEweiShopSnsPostService 
 	@Override
 	public List<Post> getcommentBypid(Integer id) {
 		return postMapper.getcommentBypid(id);
+	}
+
+	@Override
+	public List<Post> getTredsList(int uid, int pageStart, int pageSize) {
+		return postMapper.getTredsList(uid,new RowBounds(pageStart,pageSize));
+	}
+
+	@Override
+	public long getTredsCount(int uid) {
+		return postMapper.getTredsCount(uid);
+	}
+
+	@Override
+	public void delTreds(Integer id) {
+		postMapper.delTreds(id);
 	}
 
 }

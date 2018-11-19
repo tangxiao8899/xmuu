@@ -385,4 +385,19 @@
     select sp.id,sp.content,m.nickname,sp.createtime from ims_ewei_shop_sns_post sp JOIN ims_ewei_shop_member m on sp.uid=m.uid where sp.pid =#{id} ORDER by sp.createtime ASC
   </select>
 
+  <select id="getTredsList" resultType="com.carryit.base.besttmwuu.entity.Post">
+    select sp.id,sp.bid,m.avatar,sp.content,sp.image,m.nickname,sp.createtime from ims_ewei_shop_sns_post sp JOIN ims_ewei_shop_member m on sp.uid=m.uid
+    where sp.pid is null and sp.uid = #{uid} ORDER by sp.createtime desc
+</select>
+
+  <select id="getTredsCount" resultType="long">
+    select count(*) from ims_ewei_shop_sns_post sp JOIN ims_ewei_shop_member m on sp.uid=m.uid
+    where sp.pid is null and sp.uid = #{uid}
+  </select>
+
+  <delete id="delTreds" parameterType="java.lang.Integer">
+    delete from ims_ewei_shop_sns_post
+    where id = #{id} OR pid = #{id}
+  </delete>
+
 </mapper>

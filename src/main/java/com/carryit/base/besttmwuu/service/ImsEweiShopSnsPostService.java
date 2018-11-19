@@ -1,5 +1,6 @@
 package com.carryit.base.besttmwuu.service;
 
+import com.bean.req.TredsReq;
 import com.carryit.base.besttmwuu.entity.ImsEweiShopSnsPostWithBLOBs;
 import com.carryit.base.besttmwuu.entity.Post;
 
@@ -14,4 +15,10 @@ public interface ImsEweiShopSnsPostService {
 	void addTreds(ImsEweiShopSnsPostWithBLOBs imsEweiShopSnsPostWithBLOBs);
 
 	List<Post> getcommentBypid(Integer id);
+
+    List<Post> getTredsList(int uid, int pageStart, int pageSize);
+
+    long getTredsCount(int uid);
+
+	void delTreds(Integer id);
 }
