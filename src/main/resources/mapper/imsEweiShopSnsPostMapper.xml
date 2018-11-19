@@ -386,7 +386,7 @@
   </select>
 
   <select id="getTredsList" resultType="com.carryit.base.besttmwuu.entity.Post">
-    select sp.id,sp.bid,m.avatar,sp.content,sp.image,m.nickname,sp.createtime from ims_ewei_shop_sns_post sp JOIN ims_ewei_shop_member m on sp.uid=m.uid
+    select sp.id,sp.bid,m.avatar,sp.content,sp.image,m.nickname,sp.createtime,b.title from ims_ewei_shop_sns_post sp left JOIN ims_ewei_shop_member m on sp.uid=m.uid left JOIN ims_ewei_shop_sns_board b on sp.bid=b.id
     where sp.pid is null and sp.uid = #{uid} ORDER by sp.createtime desc
 </select>
 
