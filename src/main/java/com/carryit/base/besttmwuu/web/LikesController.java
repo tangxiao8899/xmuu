@@ -239,7 +239,7 @@ public class LikesController extends BaseController {
 //            	删除动态
                 try {
                     JSONObject parmJo = JSON.parseObject(json);
-                    if (!parmJo.containsKey("uid")) { //用户ID
+                    if (!parmJo.containsKey("id")) { //用户ID
                         return faild("参数异常~", false);
                     }
 
