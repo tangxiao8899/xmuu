@@ -85,7 +85,7 @@ public class LikesController extends BaseController {
     //查询动态接口
     @RequestMapping(value = "/delTreds", method = {RequestMethod.POST}, produces = "application/json;charset=UTF-8")
     public JSONObject delTreds(@RequestBody(required = false) String json) {
-        return callHttpReqTask(json, 6);
+        return callHttpReqTask(json, 5);
     }
 
 
