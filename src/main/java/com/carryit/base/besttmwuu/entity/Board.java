@@ -16,6 +16,15 @@ public class Board implements Serializable {
     private List<String> bannerList;//图片集合
     private int memberNumber;
     private String advertisement; //banner图地址
+    private String culturewall;//文化墙
+
+    public String getCulturewall() {
+        return culturewall;
+    }
+
+    public void setCulturewall(String culturewall) {
+        this.culturewall = culturewall;
+    }
 
     public String getAdvertisement() {
         return advertisement;

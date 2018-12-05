@@ -1,5 +1,7 @@
 package com.carryit.base.besttmwuu.web;
 
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -146,7 +148,9 @@ public class LikesController extends BaseController {
                         imsEweiShopSnsPostWithBLOBs.setPid(commentReq.getPid());
                         imsEweiShopSnsPostWithBLOBs.setUid(commentReq.getUid());
                         //imsEweiShopSnsPostWithBLOBs.setBid(commentReq.getBid());
-                        imsEweiShopSnsPostWithBLOBs.setContent(commentReq.getContent());
+                        String emojiStr= URLEncoder.encode(imsEweiShopSnsPostWithBLOBs.getContent(), "utf-8");
+                        imsEweiShopSnsPostWithBLOBs.setContent(emojiStr);
+//                        imsEweiShopSnsPostWithBLOBs.setContent(commentReq.getContent());
     //                	保存
                         postService.addOne(imsEweiShopSnsPostWithBLOBs);
                         return doObjRespSuccess("评论成功");
@@ -163,10 +167,9 @@ public class LikesController extends BaseController {
                     TredsReq tredsReq = p(json, TredsReq.class);
                     if(tredsReq!=null){
                         ImsEweiShopSnsPostWithBLOBs imsEweiShopSnsPostWithBLOBs = new ImsEweiShopSnsPostWithBLOBs();
-
                         imsEweiShopSnsPostWithBLOBs.setUid(tredsReq.getUid());
                         imsEweiShopSnsPostWithBLOBs.setBid(tredsReq.getBid());
-                        imsEweiShopSnsPostWithBLOBs.setContent(tredsReq.getContent());
+                        imsEweiShopSnsPostWithBLOBs.setContent(URLEncoder.encode(imsEweiShopSnsPostWithBLOBs.getContent(), "utf-8"));
                         imsEweiShopSnsPostWithBLOBs.setImages(tredsReq.getImage());
     //                	保存
                         postService.addTreds(imsEweiShopSnsPostWithBLOBs);
@@ -194,6 +197,7 @@ public class LikesController extends BaseController {
 
                                 //根据动态查评论
                                 List<Post> newCommentList = postService.getcommentBypid(post.getId());
+
                                 //查找点赞数
                                 long newPraiseCount  = praiseService.getPraiseCount(post.getId());
                                 //点赞头像

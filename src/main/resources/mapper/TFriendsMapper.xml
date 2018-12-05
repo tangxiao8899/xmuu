@@ -30,7 +30,7 @@
     <!--获取好友列表-->
     <select id="isFriends" resultType="com.carryit.base.besttmwuu.entity.TFriends">
         select * from t_friends
-        where uid = #{loginUid} and toAddUsername = #{phone}
+        where uid = #{loginUid} and toAddUsername = #{phone} AND state = 1
     </select>
 
     <!--根据手机号码和uid查询数据-->

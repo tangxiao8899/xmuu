@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.bean.Page;
 import com.carryit.base.besttmwuu.dao.CirclesDao;
+import com.carryit.base.besttmwuu.entity.Board;
 import com.carryit.base.besttmwuu.entity.Circles;
 import com.carryit.base.besttmwuu.service.CirclesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,11 @@ public class CirclesServiceImpl implements CirclesService {
         }
 
         return jo;
+    }
+
+    @Override
+    public void updateCulturewallByBid(Board culturewall) {
+        circlesDao.updateCulturewallByBid(culturewall);
     }
 
 

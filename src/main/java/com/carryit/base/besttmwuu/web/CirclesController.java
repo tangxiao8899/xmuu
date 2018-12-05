@@ -539,7 +539,17 @@ public class CirclesController extends BaseController {
                     return faild("失败~",false);
                 }
                 return doObjResp(_boardList);
-
+            case 14:
+                try{
+                    Board culturewall = p(json, Board.class);
+                    if (culturewall != null) {
+                        circlesService.updateCulturewallByBid(culturewall);
+                        return doObjRespSuccess("更新成功");
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                    return faild("失败~",false);
+                }
         }
         return null;
     }
@@ -672,4 +682,13 @@ public class CirclesController extends BaseController {
     }
 
 
+    /*
+    * 根据bid更新文化墙
+    *
+    * */
+    @RequestMapping(value = "/updateCulturewall", method = {RequestMethod.GET,
+            RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public JSONObject updateCulturewall(@RequestBody(required = false) String json) {
+        return callHttpReqTask(json, 14);
+    }
 }

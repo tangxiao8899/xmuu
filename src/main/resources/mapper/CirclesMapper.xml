@@ -15,4 +15,22 @@
         ORDER BY id ASC
         limit #{pageIndex}, #{pageSize}
     </select>
+
+
+    <!--根据圈子ID更新文化墙-->
+    <update id="updateCulturewallByBid" parameterType="com.carryit.base.besttmwuu.entity.Board">
+        UPDATE ims_ewei_shop_sns_board
+        <set>
+
+            <if test="id != null">
+                id = #{id},
+            </if>
+
+            <if test="culturewall != null">
+                culturewall =#{culturewall},
+            </if>
+        </set>
+        where id = #{id}
+
+    </update>
 </mapper>
