@@ -61,6 +61,7 @@ public class CirclesController extends BaseController {
 
     @Override
     public JSONObject runTask(String json, int cmd) {
+        //分红机制
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         //获取当前月第一天：
         Calendar c = Calendar.getInstance();

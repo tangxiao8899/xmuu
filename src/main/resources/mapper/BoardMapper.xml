@@ -9,7 +9,7 @@
     </select>
 
     <select id="getBoardById" resultType="com.carryit.base.besttmwuu.entity.Board" parameterType="Integer">
-        select id,cid,title,logo,banner,advertisement from ims_ewei_shop_sns_board b where id = #{bid}
+        select id,cid,title,logo,banner,advertisement,(select count(*) from ims_ewei_shop_sns_board_follow bf where bf.bid =b.id ) concerns,(select count(*) from ims_ewei_shop_sns_post sp where sp.bid =b.id ) topic from ims_ewei_shop_sns_board b where id = #{bid}
 
     </select>
 
