@@ -444,6 +444,14 @@ public class CirclesController extends BaseController {
                              List<String> result = Arrays.asList(post.getImage().split(","));
                              post.setImageList(result);
                          }
+                         //查询该用户是否点赞
+                         nbf = boardFollowService.getBoardByUid(boardTopic.getUid(), boardTopic.getBid());// 查询该用户是否关注该圈子
+                         if (nbf != null) {
+                             post.setFabulous(1);
+                         } else {
+                             post.setFabulous(0);
+                         }
+
                          trendsData.setPost(post);
                          trendsData.setCommentList(commentList);
                          trendsData.setPraiseCount(praiseCount);

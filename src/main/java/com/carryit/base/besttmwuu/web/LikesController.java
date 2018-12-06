@@ -147,11 +147,8 @@ public class LikesController extends BaseController {
                         ImsEweiShopSnsPostWithBLOBs imsEweiShopSnsPostWithBLOBs = new ImsEweiShopSnsPostWithBLOBs();
                         imsEweiShopSnsPostWithBLOBs.setPid(commentReq.getPid());
                         imsEweiShopSnsPostWithBLOBs.setUid(commentReq.getUid());
-                        //imsEweiShopSnsPostWithBLOBs.setBid(commentReq.getBid());
-                        String emojiStr= URLEncoder.encode(imsEweiShopSnsPostWithBLOBs.getContent(), "utf-8");
-                        imsEweiShopSnsPostWithBLOBs.setContent(emojiStr);
-//                        imsEweiShopSnsPostWithBLOBs.setContent(commentReq.getContent());
-    //                	保存
+                        imsEweiShopSnsPostWithBLOBs.setContent(URLEncoder.encode(commentReq.getContent(), "utf-8"));
+                        //保存
                         postService.addOne(imsEweiShopSnsPostWithBLOBs);
                         return doObjRespSuccess("评论成功");
                     }else {
@@ -169,7 +166,7 @@ public class LikesController extends BaseController {
                         ImsEweiShopSnsPostWithBLOBs imsEweiShopSnsPostWithBLOBs = new ImsEweiShopSnsPostWithBLOBs();
                         imsEweiShopSnsPostWithBLOBs.setUid(tredsReq.getUid());
                         imsEweiShopSnsPostWithBLOBs.setBid(tredsReq.getBid());
-                        imsEweiShopSnsPostWithBLOBs.setContent(URLEncoder.encode(imsEweiShopSnsPostWithBLOBs.getContent(), "utf-8"));
+                        imsEweiShopSnsPostWithBLOBs.setContent(URLEncoder.encode(tredsReq.getContent(), "utf-8"));
                         imsEweiShopSnsPostWithBLOBs.setImages(tredsReq.getImage());
     //                	保存
                         postService.addTreds(imsEweiShopSnsPostWithBLOBs);
