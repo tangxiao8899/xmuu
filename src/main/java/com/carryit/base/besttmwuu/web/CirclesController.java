@@ -9,6 +9,7 @@ import com.carryit.base.besttmwuu.entity.*;
 import com.carryit.base.besttmwuu.service.*;
 import com.util.Log;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -380,6 +383,10 @@ public class CirclesController extends BaseController {
                     BoardReq req = p(json, BoardReq.class);
                     if (req != null) {
                         boa = boardService.getBoardById(req.bid);
+                        if(StringUtils.isNotBlank(boa.getCulturewall())){
+                            String emojiStr = URLDecoder.decode(boa.getCulturewall(), "utf-8");
+                            boa.setCulturewall(emojiStr);
+                        }
                         boardDetail.setBoard(boa);
                         if(boa!=null&&boa.getAdvertisement()!=null){
                             List<String> result = Arrays.asList(boa.getAdvertisement().split(","));
@@ -414,9 +421,16 @@ public class CirclesController extends BaseController {
                   if(postList!=null&&postList.size()>0){
                      for (Post post:postList) {
                          TrendsData trendsData = new TrendsData();
-
+                         if(post.getContent()!=null){
+                             post.setContent(URLDecoder.decode(post.getContent(), "utf-8"));
+                         }
                          //根据动态查评论
                          List<Post> commentList = postService.getcommentBypid(post.getId());
+                         if(commentList!=null&&commentList.size()>0){
+                             for (Post po:commentList) {
+                                 po.setContent(URLDecoder.decode(po.getContent(), "utf-8"));
+                             }
+                         }
                          //查找点赞数
                          long praiseCount  = praiseService.getPraiseCount(post.getId());
                          //点赞头像
@@ -470,8 +484,18 @@ public class CirclesController extends BaseController {
                                 for (Post post:postList) {
                                     TrendsData newTrendsData = new TrendsData();
 
+                                    if(post.getContent()!=null){
+                                        post.setContent(URLDecoder.decode(post.getContent(), "utf-8"));
+                                    }
                                     //根据动态查评论
                                     List<Post> newCommentList = postService.getcommentBypid(post.getId());
+
+                                    if(newCommentList!=null&&newCommentList.size()>0){
+                                        for (Post po:newCommentList) {
+                                            po.setContent(URLDecoder.decode(po.getContent(), "utf-8"));
+                                        }
+                                    }
+
                                     //查找点赞数
                                     long newPraiseCount  = praiseService.getPraiseCount(post.getId());
                                     //点赞头像
@@ -543,8 +567,30 @@ public class CirclesController extends BaseController {
                 try{
                     Board culturewall = p(json, Board.class);
                     if (culturewall != null) {
+                        String encodeCulturewall = URLEncoder.encode(culturewall.getCulturewall(), "utf-8");
+                        culturewall.setCulturewall(encodeCulturewall);
                         circlesService.updateCulturewallByBid(culturewall);
                         return doObjRespSuccess("更新成功");
+                    }else {
+                        return faild("参数缺失~",false);
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                    return faild("失败~",false);
+                }
+
+            case 15:
+                try{
+                    BoardManage _bm = p(json, BoardManage.class);
+                    if (_bm != null) {
+                        Member member = memberService.getMember(_bm.getUid(), _bm.getBid());
+                        if(member!=null&&member.getLevel().equals("0")){
+                            return doObjResp("true");
+                        }else {
+                            return doObjResp("false");
+                        }
+                    }else {
+                        return faild("参数缺失~",false);
                     }
                 }catch (Exception e){
                     e.printStackTrace();
@@ -690,5 +736,15 @@ public class CirclesController extends BaseController {
             RequestMethod.POST}, produces = "application/json;charset=UTF-8")
     public JSONObject updateCulturewall(@RequestBody(required = false) String json) {
         return callHttpReqTask(json, 14);
+    }
+
+    /*
+ * 判断是否为该圈子的圈主
+ *
+ * */
+    @RequestMapping(value = "/isQuanZhu", method = {RequestMethod.GET,
+            RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public JSONObject isQuanZhu(@RequestBody(required = false) String json) {
+        return callHttpReqTask(json, 15);
     }
 }

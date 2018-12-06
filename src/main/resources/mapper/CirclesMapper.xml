@@ -21,16 +21,10 @@
     <update id="updateCulturewallByBid" parameterType="com.carryit.base.besttmwuu.entity.Board">
         UPDATE ims_ewei_shop_sns_board
         <set>
-
-            <if test="id != null">
-                id = #{id},
-            </if>
-
             <if test="culturewall != null">
                 culturewall =#{culturewall},
             </if>
         </set>
         where id = #{id}
-
     </update>
 </mapper>
