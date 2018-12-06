@@ -445,11 +445,11 @@ public class CirclesController extends BaseController {
                              post.setImageList(result);
                          }
                          //查询该用户是否点赞
-                         nbf = boardFollowService.getBoardByUid(boardTopic.getUid(), boardTopic.getBid());// 查询该用户是否关注该圈子
-                         if (nbf != null) {
-                             post.setFabulous(1);
-                         } else {
-                             post.setFabulous(0);
+                         TPraise pr = praiseService.getPraise(boardTopic.getUid(),post.getId());
+                         if(pr==null){
+                             post.setFabulous(0);//没有点赞
+                         }else {
+                             post.setFabulous(1);//已经点赞
                          }
 
                          trendsData.setPost(post);

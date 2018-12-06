@@ -191,9 +191,16 @@ public class LikesController extends BaseController {
                         if(tredsReqList!=null&&tredsReqList.size()>0){
                             for (Post post:tredsReqList) {
                                 TrendsData newTrendsData = new TrendsData();
-
+                                if(post.getContent()!=null){
+                                    post.setContent(URLDecoder.decode(post.getContent(), "utf-8"));
+                                }
                                 //根据动态查评论
                                 List<Post> newCommentList = postService.getcommentBypid(post.getId());
+                                if(newCommentList!=null&&newCommentList.size()>0){
+                                    for (Post po:newCommentList) {
+                                        po.setContent(URLDecoder.decode(po.getContent(), "utf-8"));
+                                    }
+                                }
 
                                 //查找点赞数
                                 long newPraiseCount  = praiseService.getPraiseCount(post.getId());
