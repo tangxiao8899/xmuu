@@ -6,6 +6,7 @@ import com.bean.Page;
 import com.carryit.base.besttmwuu.dao.CirclesDao;
 import com.carryit.base.besttmwuu.entity.Board;
 import com.carryit.base.besttmwuu.entity.Circles;
+import com.carryit.base.besttmwuu.entity.Culturewall;
 import com.carryit.base.besttmwuu.service.CirclesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,7 +50,7 @@ public class CirclesServiceImpl implements CirclesService {
     }
 
     @Override
-    public void updateCulturewallByBid(Board culturewall) {
+    public void updateCulturewallByBid(Culturewall culturewall) {
         circlesDao.updateCulturewallByBid(culturewall);
     }
 

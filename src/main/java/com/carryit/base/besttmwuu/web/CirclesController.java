@@ -573,7 +573,7 @@ public class CirclesController extends BaseController {
                 return doObjResp(_boardList);
             case 14:
                 try{
-                    Board culturewall = p(json, Board.class);
+                    Culturewall culturewall = p(json, Culturewall.class);
                     if (culturewall != null) {
                         String encodeCulturewall = URLEncoder.encode(culturewall.getCulturewall(), "utf-8");
                         culturewall.setCulturewall(encodeCulturewall);
