@@ -117,7 +117,7 @@ public class LikesController extends BaseController {
             case 1:
                 try {
                     PraiseReq pReq = p(json, PraiseReq.class);
-                    if(pReq!=null){
+                    if(pReq!=null&&pReq.id!=0&&pReq.uid!=0){
     //                    userPostService.updateFabulousByUid(breq.uid);
                         if("0".equals(pReq.getFabulous())){
                             praiseService.deletepraise(pReq.id,pReq.uid);
