@@ -80,6 +80,13 @@
 		credit1 = #{credit1}
 		where uid = #{uid}
 	</update>
+	<!--隐藏和显示手机号码-->
+	<update id="updateUserByUid" parameterType="com.carryit.base.besttmwuu.entity.UserReq">
+		update ims_user set
+		phoneHide = #{phoneHide}
+		where uid = #{uid}
+	</update>
+
 
 	<!--更新会员主圈子,和会员等级-->
 	<update id="updateMemberZhuQuanZi" >

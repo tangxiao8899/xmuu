@@ -106,4 +106,9 @@ public class MemberServiceImpl implements MemberService {
     public Member getMember(Integer uid, Integer bid) {
         return memberDao.getMember(uid,bid);
     }
+
+    @Override
+    public void updateUserByUid(UserReq uReq) {
+        memberDao.updateUserByUid(uReq);
+    }
 }
