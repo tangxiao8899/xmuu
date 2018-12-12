@@ -127,7 +127,7 @@ public class WxPayServiceImpl implements WxPayService {
 
             if (me != null && me.getZhuquanzi() != 0) {
                 //说明已经是会员,购买过圈子
-                if (Integer.valueOf(parmJo.getString("productId")) >= Integer.valueOf(me.getLevel())) {
+                if (Integer.valueOf(product.getLevel()) >= Integer.valueOf(me.getLevel())) {
                     //说明买过同等级或者小于的会员,不能购买
                     jo.put("code", 404);
                     jo.put("msg", "您是" + me.getLevelName() + ",不能购买此会员");
