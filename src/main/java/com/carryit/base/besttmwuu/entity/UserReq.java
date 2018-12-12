@@ -2,7 +2,7 @@ package com.carryit.base.besttmwuu.entity;
 
 public class UserReq {
     private Integer uid;
-    private Integer phoneHide;
+    private Integer hidePhone;
 
 
     public Integer getUid() {
@@ -13,11 +13,11 @@ public class UserReq {
         this.uid = uid;
     }
 
-    public Integer getPhoneHide() {
-        return phoneHide;
+    public Integer getHidePhone() {
+        return hidePhone;
     }
 
-    public void setPhoneHide(Integer phoneHide) {
-        this.phoneHide = phoneHide;
+    public void setHidePhone(Integer hidePhone) {
+        this.hidePhone = hidePhone;
     }
 }

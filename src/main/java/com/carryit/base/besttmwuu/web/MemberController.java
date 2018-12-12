@@ -201,12 +201,12 @@ public class MemberController extends BaseController {
                 User user=new User();
                 try {
                     UserReq uReq=p(json,UserReq.class);
-                        if (uReq.getPhoneHide()==1) {
+                        if (uReq.getHidePhone()==1) {
                             memberService.updateUserByUid(uReq);
                             return doObjRespSuccess("隐藏成功");
 
                         }
-                        if (uReq.getPhoneHide()==2) {
+                        if (uReq.getHidePhone()==2) {
                             memberService.updateUserByUid(uReq);
                             return doObjRespSuccess("显示成功");
                         }
