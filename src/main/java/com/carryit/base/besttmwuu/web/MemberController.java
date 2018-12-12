@@ -17,13 +17,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @RestController
 @RequestMapping("/member")
 public class MemberController extends BaseController {
-
+    @Autowired
+    private UserService userService;
     @Autowired
     private MemberService memberService;
 
@@ -86,7 +89,11 @@ public class MemberController extends BaseController {
         return callHttpReqTask(json, 6);
     }
 
-
+    //隐藏和显示手机号码
+    @RequestMapping(value = "/phoneHide", method = {RequestMethod.GET,
+            RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public JSONObject phoneHide(@RequestBody(required = false) String json) {
+        return callHttpReqTask(json, 7);}
 
     @Override
     public JSONObject runTask(String json, int cmd) {
@@ -190,7 +197,24 @@ public class MemberController extends BaseController {
                     e.printStackTrace();
                     return faild("失败~", false);
                 }
+            case 7:
+                User user=new User();
+                try {
+                    UserReq uReq=p(json,UserReq.class);
+                        if (uReq.getHidePhone()==1) {
+                            memberService.updateUserByUid(uReq);
+                            return doObjRespSuccess("隐藏成功");
 
+                        }
+                        if (uReq.getHidePhone()==2) {
+                            memberService.updateUserByUid(uReq);
+                            return doObjRespSuccess("显示成功");
+                        }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return faild("失败~",false);
+                }
 
         }
         return null;

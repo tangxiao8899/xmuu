@@ -1,9 +1,6 @@
 package com.carryit.base.besttmwuu.dao;
 
-import com.carryit.base.besttmwuu.entity.Level;
-import com.carryit.base.besttmwuu.entity.Member;
-import com.carryit.base.besttmwuu.entity.MemberDTO;
-import com.carryit.base.besttmwuu.entity.MemberData;
+import com.carryit.base.besttmwuu.entity.*;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Repository;
@@ -52,4 +49,6 @@ public interface MemberDao {
     void updateMemberZhuQuanZi(@Param("uid") Integer uid, @Param("bid") int bid, @Param("level") String level);
 
     Member getMember(@Param("uid") Integer uid, @Param("bid") Integer bid);
+
+    void updateUserByUid(UserReq uReq);
 }

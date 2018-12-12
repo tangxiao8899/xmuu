@@ -1,9 +1,6 @@
 package com.carryit.base.besttmwuu.service;
 
-import com.carryit.base.besttmwuu.entity.Level;
-import com.carryit.base.besttmwuu.entity.Member;
-import com.carryit.base.besttmwuu.entity.MemberDTO;
-import com.carryit.base.besttmwuu.entity.MemberData;
+import com.carryit.base.besttmwuu.entity.*;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -52,4 +49,6 @@ public interface MemberService {
     void updateMemberZhuQuanZi(Integer uid, int bid, String level);
 
     Member getMember(Integer uid, Integer bid);
+
+    void updateUserByUid(UserReq uReq);
 }
