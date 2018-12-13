@@ -147,7 +147,7 @@ public class MemberController extends BaseController {
                             sincerity="******";
                         }
                         else if (user.getHideSincerity()==2) {
-                            sincerity = String.valueOf(sincerityService.getNumberById(req.uid));
+                            sincerity = String.valueOf(sincerityService.getNumberById(req.uid)+".0");
 //                            sincerityService.getNumberById(req.uid);
                         }
                     }
