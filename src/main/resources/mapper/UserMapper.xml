@@ -13,7 +13,7 @@
 	<select id="selectByPrimaryKey" resultType="com.carryit.base.besttmwuu.entity.User"
 		>
 		select
-		uid,phone
+		uid,phone,hideSincerity
 		from ims_users
 		where uid = #{uid}
 	</select>

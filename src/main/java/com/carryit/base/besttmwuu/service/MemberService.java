@@ -51,4 +51,6 @@ public interface MemberService {
     Member getMember(Integer uid, Integer bid);
 
     void updateUserByUid(UserReq uReq);
+
+    void updateSincerityByUid(UserQeq uQeq);
 }

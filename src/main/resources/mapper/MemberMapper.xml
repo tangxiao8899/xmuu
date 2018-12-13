@@ -86,6 +86,12 @@
 		hidePhone = #{hidePhone}
 		where uid = #{uid}
 	</update>
+	<!--隐藏和显示诚信值-->
+	<update id="updateSincerityByUid" parameterType="com.carryit.base.besttmwuu.entity.UserQeq">
+		update ims_users set
+		hideSincerity = #{hideSincerity}
+		where uid = #{uid}
+	</update>
 
 
 	<!--更新会员主圈子,和会员等级-->

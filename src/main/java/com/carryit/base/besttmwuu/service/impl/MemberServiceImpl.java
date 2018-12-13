@@ -111,4 +111,9 @@ public class MemberServiceImpl implements MemberService {
     public void updateUserByUid(UserReq uReq) {
         memberDao.updateUserByUid(uReq);
     }
+
+    @Override
+    public void updateSincerityByUid(UserQeq uQeq) {
+        memberDao.updateSincerityByUid(uQeq);
+    }
 }

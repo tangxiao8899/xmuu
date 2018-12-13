@@ -51,4 +51,6 @@ public interface MemberDao {
     Member getMember(@Param("uid") Integer uid, @Param("bid") Integer bid);
 
     void updateUserByUid(UserReq uReq);
+
+    void updateSincerityByUid(UserQeq uQeq);
 }

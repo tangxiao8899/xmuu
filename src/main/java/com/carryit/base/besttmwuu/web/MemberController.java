@@ -95,6 +95,13 @@ public class MemberController extends BaseController {
     public JSONObject phoneHide(@RequestBody(required = false) String json) {
         return callHttpReqTask(json, 7);}
 
+    //隐藏和显示诚信值
+    @RequestMapping(value = "/phoneSincerity", method = {RequestMethod.GET,
+            RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public JSONObject phoneSincerity(@RequestBody(required = false) String json) {
+        return callHttpReqTask(json, 8);}
+
+
     @Override
     public JSONObject runTask(String json, int cmd) {
         switch (cmd) {
@@ -130,11 +137,19 @@ public class MemberController extends BaseController {
                 return doObjResp(Wealth);
             case 2:
 //                Sincerity sincerity=new Sincerity();
-                int sincerity = 0;
+                String sincerity = "0";
                 try {
+                    User user=new User();
                     BoardReq req = p(json, BoardReq.class);
                     if (req != null) {
-                        sincerity = sincerityService.getNumberById(req.uid);
+                        user=userService.getUserById(req.uid);
+                        if (user.getHideSincerity()==1){
+                            sincerity="******";
+                        }
+                        else if (user.getHideSincerity()==2) {
+                            sincerity = String.valueOf(sincerityService.getNumberById(req.uid));
+//                            sincerityService.getNumberById(req.uid);
+                        }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -218,7 +233,24 @@ public class MemberController extends BaseController {
                     e.printStackTrace();
                     return faild("失败~",false);
                 }
+            case 8:
+                User user1=new User();
+                try {
+                    UserQeq uQeq=p(json,UserQeq.class);
+                    if (uQeq.getHideSincerity()==1) {
+                        memberService.updateSincerityByUid(uQeq);
+                        return doObjRespSuccess("隐藏成功");
 
+                    }
+                    if (uQeq.getHideSincerity()==2) {
+                        memberService.updateSincerityByUid(uQeq);
+                        return doObjRespSuccess("显示成功");
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return faild("失败~",false);
+                }
         }
         return null;
     }
