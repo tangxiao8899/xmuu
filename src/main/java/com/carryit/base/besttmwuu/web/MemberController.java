@@ -162,6 +162,9 @@ public class MemberController extends BaseController {
                     if (!StringUtils.isEmpty(loginUid) && !StringUtils.isEmpty(showUid)) {
 
                         mb = memberService.showMember(Integer.parseInt(showUid));
+                        if(mb.getHidePhone()==1){
+                            mb.setPhone(mb.getPhone().replaceAll("(\\d{3})\\d{4}(\\d{4})","$1****$2"));
+                        }
                         boolean friends = tFriendsService.isFriends(loginUid, showUid);
                         mb.setFriends(friends + "");
 

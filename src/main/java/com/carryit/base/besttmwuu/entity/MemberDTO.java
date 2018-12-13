@@ -14,6 +14,15 @@ public class MemberDTO implements Serializable {
     private String companyProfile;//公司简介
     private String banner;
     private String friends;
+    private Integer hidePhone;
+
+    public Integer getHidePhone() {
+        return hidePhone;
+    }
+
+    public void setHidePhone(Integer hidePhone) {
+        this.hidePhone = hidePhone;
+    }
 
     public String getFriends() {
         return friends;
