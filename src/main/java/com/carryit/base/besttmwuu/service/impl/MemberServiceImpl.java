@@ -1,7 +1,6 @@
 package com.carryit.base.besttmwuu.service.impl;
 
 import com.carryit.base.besttmwuu.dao.MemberDao;
-import com.carryit.base.besttmwuu.dao.imsEweiShopMemberMapper;
 import com.carryit.base.besttmwuu.entity.*;
 import com.carryit.base.besttmwuu.service.MemberService;
 import org.apache.ibatis.session.RowBounds;
@@ -115,5 +114,15 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void updateSincerityByUid(UserQeq uQeq) {
         memberDao.updateSincerityByUid(uQeq);
+    }
+
+    @Override
+    public UserCodeRep getUserByCode(UserCode userCode) {
+        return memberDao.getUserByCode(userCode);
+    }
+
+    @Override
+    public UserCodeRep getAllByCode(UserCode userCode) {
+        return memberDao.getAllByCode(userCode);
     }
 }

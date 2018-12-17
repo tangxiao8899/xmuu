@@ -53,4 +53,8 @@ public interface MemberDao {
     void updateUserByUid(UserReq uReq);
 
     void updateSincerityByUid(UserQeq uQeq);
+
+    UserCodeRep getUserByCode(UserCode userCode);
+
+    UserCodeRep getAllByCode(UserCode userCode);
 }

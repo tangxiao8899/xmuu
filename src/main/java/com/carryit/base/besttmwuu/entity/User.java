@@ -45,24 +45,34 @@ public class User implements Serializable {
 
     private int bid;
 
-    private int hidePhone;//隐藏手机号码
+    private Integer hidePhone;//隐藏手机号码
 
-    private int hideSincerity;//隐藏诚信值
+    private Integer hideSincerity;//隐藏诚信值
 
-    public int getHideSincerity() {
-        return hideSincerity;
-    }
+    private String iCode;//邀请码
 
-    public void setHideSincerity(int hideSincerity) {
-        this.hideSincerity = hideSincerity;
-    }
-
-    public int getHidePhone() {
+    public Integer getHidePhone() {
         return hidePhone;
     }
 
-    public void setHidePhone(int hidePhone) {
+    public void setHidePhone(Integer hidePhone) {
         this.hidePhone = hidePhone;
+    }
+
+    public Integer getHideSincerity() {
+        return hideSincerity;
+    }
+
+    public void setHideSincerity(Integer hideSincerity) {
+        this.hideSincerity = hideSincerity;
+    }
+
+    public String getiCode() {
+        return iCode;
+    }
+
+    public void setiCode(String iCode) {
+        this.iCode = iCode;
     }
 
     public int getBid() {

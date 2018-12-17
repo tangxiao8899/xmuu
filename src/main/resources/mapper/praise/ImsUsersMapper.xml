@@ -258,52 +258,55 @@
       <if test="mailbox != null" >
         mailbox,
       </if>
+      <if test="iCode" >
+        iCode,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="uid != null" >
-        #{uid,jdbcType=INTEGER},
+        #{uid},
       </if>
       <if test="groupid != null" >
-        #{groupid,jdbcType=INTEGER},
+        #{groupid},
       </if>
       <if test="username != null" >
-        #{username,jdbcType=VARCHAR},
+        #{username},
       </if>
       <if test="password != null" >
-        #{password,jdbcType=VARCHAR},
+        #{password},
       </if>
       <if test="salt != null" >
-        #{salt,jdbcType=VARCHAR},
+        #{salt},
       </if>
       <if test="status != null" >
-        #{status,jdbcType=TINYINT},
+        #{status},
       </if>
       <if test="joindate != null" >
-        #{joindate,jdbcType=INTEGER},
+        #{joindate},
       </if>
       <if test="joinip != null" >
-        #{joinip,jdbcType=VARCHAR},
+        #{joinip},
       </if>
       <if test="lastvisit != null" >
-        #{lastvisit,jdbcType=INTEGER},
+        #{lastvisit},
       </if>
       <if test="lastip != null" >
-        #{lastip,jdbcType=VARCHAR},
+        #{lastip},
       </if>
       <if test="remark != null" >
-        #{remark,jdbcType=VARCHAR},
+        #{remark},
       </if>
       <if test="ucuserid != null" >
-        #{ucuserid,jdbcType=INTEGER},
+        #{ucuserid},
       </if>
       <if test="viptime != null" >
-        #{viptime,jdbcType=VARCHAR},
+        #{viptime},
       </if>
       <if test="starttime != null" >
-        #{starttime,jdbcType=INTEGER},
+        #{starttime},
       </if>
       <if test="endtime != null" >
-        #{endtime,jdbcType=INTEGER},
+        #{endtime},
       </if>
       <if test="credit1 != null" >
         #{credit1,jdbcType=DECIMAL},
@@ -315,49 +318,52 @@
         #{type,jdbcType=TINYINT},
       </if>
       <if test="ownerUid != null" >
-        #{ownerUid,jdbcType=INTEGER},
+        #{ownerUid},
       </if>
       <if test="founderGroupid != null" >
-        #{founderGroupid,jdbcType=TINYINT},
+        #{founderGroupid},
       </if>
       <if test="agentid != null" >
-        #{agentid,jdbcType=INTEGER},
+        #{agentid},
       </if>
       <if test="registerType != null" >
-        #{registerType,jdbcType=TINYINT},
+        #{registerType},
       </if>
       <if test="openid != null" >
-        #{openid,jdbcType=VARCHAR},
+        #{openid},
       </if>
       <if test="age != null" >
-        #{age,jdbcType=INTEGER},
+        #{age},
       </if>
       <if test="idcard != null" >
-        #{idcard,jdbcType=VARCHAR},
+        #{idcard},
       </if>
       <if test="phone != null" >
-        #{phone,jdbcType=VARCHAR},
+        #{phone},
       </if>
       <if test="address != null" >
-        #{address,jdbcType=VARCHAR},
+        #{address},
       </if>
       <if test="speciality != null" >
-        #{speciality,jdbcType=VARCHAR},
+        #{speciality},
       </if>
       <if test="need != null" >
-        #{need,jdbcType=VARCHAR},
+        #{need},
       </if>
       <if test="education != null" >
-        #{education,jdbcType=VARCHAR},
+        #{education},
       </if>
       <if test="issingle != null" >
-        #{issingle,jdbcType=VARCHAR},
+        #{issingle},
       </if>
       <if test="corporatename != null" >
-        #{corporatename,jdbcType=VARCHAR},
+        #{corporatename},
       </if>
       <if test="mailbox != null" >
-        #{mailbox,jdbcType=VARCHAR},
+        #{mailbox},
+      </if>
+      <if test="iCode != null" >
+        #{iCode},
       </if>
     </trim>
   </insert>

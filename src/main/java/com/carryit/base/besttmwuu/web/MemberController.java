@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.base.BaseController;
 import com.base.ServiceConfig;
+import com.bean.Page;
 import com.bean.req.BoardReq;
 import com.carryit.base.besttmwuu.dao.TFriendsDao;
 import com.carryit.base.besttmwuu.entity.*;
@@ -100,8 +101,16 @@ public class MemberController extends BaseController {
             RequestMethod.POST}, produces = "application/json;charset=UTF-8")
     public JSONObject phoneSincerity(@RequestBody(required = false) String json) {
         return callHttpReqTask(json, 8);}
-
-
+    //我的团队直属
+    @RequestMapping(value = "/team", method = {RequestMethod.GET,
+            RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public JSONObject team(@RequestBody(required = false) String json) {
+        return callHttpReqTask(json, 9);}
+    //我的团队三级
+    @RequestMapping(value = "/subordinate", method = {RequestMethod.GET,
+            RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public JSONObject subordinate(@RequestBody(required = false) String json) {
+        return callHttpReqTask(json, 10);}
     @Override
     public JSONObject runTask(String json, int cmd) {
         switch (cmd) {
@@ -234,7 +243,6 @@ public class MemberController extends BaseController {
                     return faild("失败~",false);
                 }
             case 8:
-                User user1=new User();
                 try {
                     UserQeq uQeq=p(json,UserQeq.class);
                     if (uQeq.getHideSincerity()==1) {
@@ -251,6 +259,43 @@ public class MemberController extends BaseController {
                     e.printStackTrace();
                     return faild("失败~",false);
                 }
+            case 9:
+                Page page = new Page();
+                JSONObject jo = new JSONObject();
+                UserCodeRep userCodeRep=new UserCodeRep();
+                //直属集合
+                List<Member> nm = new ArrayList<>();
+                long count = 0;
+                try{
+                    UserCode userCode=p(json,UserCode.class);
+                    if (userCode.getiCode()!=null){
+                        userCodeRep=memberService.getUserByCode(userCode);
+                    }
+                    page.setList(nm);
+                    page.setPageSize(userCode.getPageSize());
+                    page.setTotalSize(userCode.getPageStart());
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                    return faild("失败~",false);
+                }
+                return doObjResp(userCodeRep);
+
+            case 10:
+                UserCodeRep userRep=new UserCodeRep();
+                try{
+                    UserCode userCode=p(json,UserCode.class);
+                    if (userCode.getiCode()!=null){
+                        userRep=memberService.getAllByCode(userCode);
+                    }else {
+                        return faild("没有下级团队~", false);
+                    }
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                    return faild("失败~",false);
+                }
+                return doObjResp(userRep);
         }
         return null;
     }
