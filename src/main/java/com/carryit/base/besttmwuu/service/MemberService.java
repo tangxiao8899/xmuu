@@ -1,5 +1,6 @@
 package com.carryit.base.besttmwuu.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.carryit.base.besttmwuu.entity.*;
 import org.apache.ibatis.annotations.Param;
 
@@ -54,9 +55,9 @@ public interface MemberService {
 
     void updateSincerityByUid(UserQeq uQeq);
 
-    UserCodeRep getUserByCode(UserCode userCode);
+    JSONObject getUserByCode(UserCode userCode);
 
-    UserCodeRep getAllByCode(UserCode userCode);
+    JSONObject getAllByCode(UserCode userCode);
 
 
 }

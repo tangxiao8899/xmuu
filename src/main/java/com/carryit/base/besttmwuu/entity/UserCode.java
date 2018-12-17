@@ -7,8 +7,11 @@ public class UserCode implements Serializable {
     private String iCode;
     private int pageStart;
     private int pageSize;
+    private int currentResult;
 
     public int getPageStart() {
+        if (pageStart <= 0)
+            pageStart = 1;
         return pageStart;
     }
 
@@ -39,4 +42,16 @@ public class UserCode implements Serializable {
     public void setiCode(String iCode) {
         this.iCode = iCode;
     }
+
+    public int getCurrentResult() {
+        currentResult = (getPageStart() - 1) * getPageSize();
+        if (currentResult < 0)
+            currentResult = 0;
+        return currentResult;
+    }
+
+    public void setCurrentResult(int currentResult) {
+        this.currentResult = currentResult;
+    }
+
 }

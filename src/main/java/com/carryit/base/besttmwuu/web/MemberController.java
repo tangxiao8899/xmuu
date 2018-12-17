@@ -260,33 +260,22 @@ public class MemberController extends BaseController {
                     return faild("失败~",false);
                 }
             case 9:
-                Page page = new Page();
-                JSONObject jo = new JSONObject();
-                UserCodeRep userCodeRep=new UserCodeRep();
-                //直属集合
-                List<Member> nm = new ArrayList<>();
-                long count = 0;
                 try{
                     UserCode userCode=p(json,UserCode.class);
                     if (userCode.getiCode()!=null){
-                        userCodeRep=memberService.getUserByCode(userCode);
+                        return memberService.getUserByCode(userCode);
                     }
-                    page.setList(nm);
-                    page.setPageSize(userCode.getPageSize());
-                    page.setTotalSize(userCode.getPageStart());
+
 
                 }catch (Exception e){
                     e.printStackTrace();
                     return faild("失败~",false);
                 }
-                return doObjResp(userCodeRep);
-
             case 10:
-                UserCodeRep userRep=new UserCodeRep();
                 try{
                     UserCode userCode=p(json,UserCode.class);
                     if (userCode.getiCode()!=null){
-                        userRep=memberService.getAllByCode(userCode);
+                        return memberService.getAllByCode(userCode);
                     }else {
                         return faild("没有下级团队~", false);
                     }
@@ -295,7 +284,7 @@ public class MemberController extends BaseController {
                     e.printStackTrace();
                     return faild("失败~",false);
                 }
-                return doObjResp(userRep);
+
         }
         return null;
     }

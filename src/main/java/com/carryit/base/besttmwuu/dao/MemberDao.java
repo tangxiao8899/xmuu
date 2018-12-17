@@ -54,7 +54,15 @@ public interface MemberDao {
 
     void updateSincerityByUid(UserQeq uQeq);
 
-    UserCodeRep getUserByCode(UserCode userCode);
+    List<UserCodeRep> getUserByCode(UserCode userCode);
 
-    UserCodeRep getAllByCode(UserCode userCode);
+    /**
+     * 指数人数
+     * @return
+     */
+    int count(UserCode userCode);
+
+    List<UserCodeRep> getAllByCode(UserCode userCode);
+
+    int allCount(UserCode userCode);
 }

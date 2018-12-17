@@ -1,5 +1,6 @@
 package com.carryit.base.besttmwuu.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.carryit.base.besttmwuu.dao.MemberDao;
 import com.carryit.base.besttmwuu.entity.*;
 import com.carryit.base.besttmwuu.service.MemberService;
@@ -117,12 +118,41 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public UserCodeRep getUserByCode(UserCode userCode) {
-        return memberDao.getUserByCode(userCode);
+    public JSONObject getUserByCode(UserCode userCode) {
+        JSONObject jo = new JSONObject();
+       try {
+           List<UserCodeRep> list = memberDao.getUserByCode(userCode);
+           int count = memberDao.count(userCode);
+           jo.put("data",list);
+           jo.put("count",count);
+           jo.put("msg","操作成功");
+           jo.put("code",200);
+       }catch (Exception e){
+           e.printStackTrace();
+           jo.put("msg",e.getMessage());
+           jo.put("code",500);
+       }
+
+        return jo;
     }
 
     @Override
-    public UserCodeRep getAllByCode(UserCode userCode) {
-        return memberDao.getAllByCode(userCode);
+    public  JSONObject getAllByCode(UserCode userCode) {
+
+      JSONObject jo = new JSONObject();
+
+      try {
+          List<UserCodeRep> list =  memberDao.getAllByCode(userCode);
+
+          int count = memberDao.allCount(userCode);jo.put("data",list);
+          jo.put("count",count);
+          jo.put("msg","操作成功");
+          jo.put("code",200);
+      }catch (Exception e){
+          e.printStackTrace();
+          jo.put("msg",e.getMessage());
+          jo.put("code",500);
+      }
+       return jo;
     }
 }

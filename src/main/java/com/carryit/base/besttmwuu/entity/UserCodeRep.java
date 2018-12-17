@@ -2,7 +2,7 @@ package com.carryit.base.besttmwuu.entity;
 
 import java.io.Serializable;
 
-public class UserCodeRep implements Serializable {
+public class UserCodeRep   implements Serializable {
     private String avatar;//头像
 
     private String nickname;//昵称
@@ -12,6 +12,8 @@ public class UserCodeRep implements Serializable {
     private String createtime;//创建时间
 
     private String subordinate;//下限几级
+
+    private String phone; //手机号
 
     public String getAvatar() {
         return avatar;
@@ -49,5 +51,13 @@ public class UserCodeRep implements Serializable {
 
     public void setSubordinate(String subordinate) {
         this.subordinate = subordinate;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }
