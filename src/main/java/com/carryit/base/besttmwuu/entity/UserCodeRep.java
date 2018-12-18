@@ -3,6 +3,7 @@ package com.carryit.base.besttmwuu.entity;
 import java.io.Serializable;
 
 public class UserCodeRep   implements Serializable {
+    private Integer uid;
     private String avatar;//头像
 
     private String nickname;//昵称
@@ -14,6 +15,14 @@ public class UserCodeRep   implements Serializable {
     private String subordinate;//下限几级
 
     private String phone; //手机号
+
+    public Integer getUid() {
+        return uid;
+    }
+
+    public void setUid(Integer uid) {
+        this.uid = uid;
+    }
 
     public String getAvatar() {
         return avatar;

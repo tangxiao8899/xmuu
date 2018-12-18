@@ -3,6 +3,7 @@ package com.carryit.base.besttmwuu.entity;
 import java.io.Serializable;
 
 public class MemberDTO implements Serializable {
+    private Integer uid;
     private String autograph;//个性签名
     private String nickName; //昵称
     private String levelName; //会员等级
@@ -15,6 +16,14 @@ public class MemberDTO implements Serializable {
     private String banner;
     private String friends;
     private Integer hidePhone;
+
+    public Integer getUid() {
+        return uid;
+    }
+
+    public void setUid(Integer uid) {
+        this.uid = uid;
+    }
 
     public Integer getHidePhone() {
         return hidePhone;
