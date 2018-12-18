@@ -204,7 +204,7 @@
 	</select>
 	<!--查询直属-->
 	<select id="getUserByCode" resultType="com.carryit.base.besttmwuu.entity.UserCodeRep">
-		select m.uid,m.avatar,m.nickname,m.createtime,m.level,u.phone, 1 as subordinate from ims_users u right join ims_ewei_shop_member m ON u.uid = m.uid where u.iCode=#{iCode}
+		select m.uid,m.avatar,m.nickname,m.createtime,l.levelname,u.phone, 1 as subordinate from ims_users u right join ims_ewei_shop_member m ON u.uid = m.uid right join ims_ewei_shop_member_level l on m.level=l.level where u.iCode=#{iCode}
 		limit #{currentResult},#{pageSize}
 	</select>
 
@@ -220,11 +220,12 @@
 		m.avatar,
 		m.nickname,
 		m.createtime,
-		m. LEVEL,
+		l.levelname,
 		u.phone, 1 as subordinate
 		FROM
 		ims_users u
 		RIGHT JOIN ims_ewei_shop_member m ON u.uid = m.uid
+		right join ims_ewei_shop_member_level l on m.level=l.level
 		WHERE
 		u.iCode = #{iCode}
 		UNION
@@ -233,11 +234,12 @@
 		m.avatar,
 		m.nickname,
 		m.createtime,
-		m. LEVEL,
+		l.levelname,
 		u.phone,2 as subordinate
 		FROM
 		ims_users u
 		RIGHT JOIN ims_ewei_shop_member m ON u.uid = m.uid
+		right join ims_ewei_shop_member_level l on m.level=l.level
 		WHERE
 		u.iCode  in  (SELECT u.phone FROM ims_users u RIGHT JOIN ims_ewei_shop_member m ON u.uid = m.uid WHERE u.iCode = #{iCode})
 		UNION
@@ -246,18 +248,20 @@
 		m.avatar,
 		m.nickname,
 		m.createtime,
-		m. LEVEL,
+		l.levelname,
 		u.phone,3 as subordinate
 		FROM
 		ims_users u
 		RIGHT JOIN ims_ewei_shop_member m ON u.uid = m.uid
+		right join ims_ewei_shop_member_level l on m.level=l.level
 		WHERE
 		u.iCode in (SELECT u.phone
 		FROM
 		ims_users u
 		RIGHT JOIN ims_ewei_shop_member m ON u.uid = m.uid
+		right join ims_ewei_shop_member_level l on m.level=l.level
 		WHERE
-		u.iCode  in  (SELECT u.phone FROM ims_users u RIGHT JOIN ims_ewei_shop_member m ON u.uid = m.uid WHERE u.iCode = #{iCode}) )
+		u.iCode  in  (SELECT u.phone FROM ims_users u RIGHT JOIN ims_ewei_shop_member m ON u.uid = m.uid right join ims_ewei_shop_member_level l on m.level=l.level WHERE u.iCode = #{iCode}) )
 		limit #{currentResult},#{pageSize}
 	</select>
 

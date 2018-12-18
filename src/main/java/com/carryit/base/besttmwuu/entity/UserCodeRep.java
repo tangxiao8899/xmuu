@@ -8,7 +8,7 @@ public class UserCodeRep   implements Serializable {
 
     private String nickname;//昵称
 
-    private Integer level;//等级
+    private String  levelname;//等级
 
     private String createtime;//创建时间
 
@@ -40,10 +40,12 @@ public class UserCodeRep   implements Serializable {
         this.nickname = nickname;
     }
 
-    public Integer getLevel() { return level; }
+    public String getLevelname() {
+        return levelname;
+    }
 
-    public void setLevel(Integer level) {
-        this.level = level;
+    public void setLevelname(String levelname) {
+        this.levelname = levelname;
     }
 
     public String getCreatetime() {
