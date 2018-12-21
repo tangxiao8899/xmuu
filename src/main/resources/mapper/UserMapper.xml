@@ -70,7 +70,10 @@
 			</if>
 			<if test="sex != null">
 				sex,
-		</if>
+			</if>
+			<if test="iCode != null">
+				iCode,
+			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 
@@ -115,6 +118,9 @@
 			</if>
 			<if test="sex != null">
 				#{sex,jdbcType=VARCHAR},
+			</if>
+			<if test="iCode != null">
+				#{iCode,jdbcType=VARCHAR},
 			</if>
 		</trim>
 	</insert>
