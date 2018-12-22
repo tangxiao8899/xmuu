@@ -28,11 +28,11 @@ import java.util.*;
 @RequestMapping("/wx")
 public class WxPayControllrt extends BaseController {
     private static final String UUqz = "0";//UU圈主
-    private static final String Fqz = "1";//副圈主
-    private static final String UCgly = "2";//UU管理员
-    private static final String GVIP = "3";//高级VIP
-    private static final String MVIP = "4";//梦想VIP
-    private static final String CWQZ = "6";//常务圈主
+    private static final String CWQZ = "1";//常务圈主
+    private static final String Fqz = "2";//副圈主
+    private static final String UCgly = "3";//UU管理员
+    private static final String GVIP = "4";//高级VIP
+    private static final String MVIP = "5";//梦想VIP
     Logger logger = LoggerFactory.getLogger(WxPayControllrt.class);
 
     public static final int WX_PAY = 0;
