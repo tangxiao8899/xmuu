@@ -302,7 +302,7 @@
 
 
 	<select id="getLevelByICode" resultType="com.carryit.base.besttmwuu.entity.Member">
-		SELECT m.level FROM ims_users u RIGHT JOIN ims_ewei_shop_member m ON u.uid=m.uid WHERE phone=#{iCode}
+		SELECT m.level,m.uid FROM ims_users u RIGHT JOIN ims_ewei_shop_member m ON u.uid=m.uid WHERE phone=#{iCode}
 
 	</select>
 	<select id="getICodeByUid" resultType="com.carryit.base.besttmwuu.entity.User">

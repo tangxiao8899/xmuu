@@ -27,7 +27,12 @@ import java.util.*;
 @RestController
 @RequestMapping("/wx")
 public class WxPayControllrt extends BaseController {
-
+    private static final String UUqz = "0";//UU圈主
+    private static final String Fqz = "1";//副圈主
+    private static final String UCgly = "2";//UU管理员
+    private static final String GVIP = "3";//高级VIP
+    private static final String MVIP = "4";//梦想VIP
+    private static final String CWQZ = "6";//常务圈主
     Logger logger = LoggerFactory.getLogger(WxPayControllrt.class);
 
     public static final int WX_PAY = 0;
@@ -250,6 +255,135 @@ public class WxPayControllrt extends BaseController {
                         //绑定会员表的主圈子和会员等级
                         memberService.updateMemberZhuQuanZi(userList.get(0).getUid(),userList.get(0).getBid(),userList.get(0).getLevel());
                         //给充值和商城购买，100RMB等于1分的换算，给t_sincerity表诚信值number+1分，不够100不加，最高100分，
+                    //根据UID查找iCode
+                    String iCode=memberService.getICodeByUid(userList.get(0).getUid());
+                    //根据iCode查找uid直推人的level
+                    if (iCode!=null){
+                        Member member=memberService.getLevelByICode(iCode);
+                        if(MVIP.equals(userList.get(0).getLevel())){
+                            if (member.getLevel().equals(MVIP)){
+                                //直接梦想VIP价格30%加给直推人
+                                //逻辑判断更新数据库余额字段方法没写
+                                updateDirectpushInfo(member.getUid(), (float) (userList.get(0).getPrice()*0.3));
+                            }else if (member.getLevel().equals(GVIP)){
+                                //高级VIP的40%价格加给直推人
+                                updateDirectpushInfo(member.getUid(), (float) (userList.get(0).getPrice()*0.4));
+                            }else if (member.getLevel().equals(UCgly)){
+                                //管理员的20%价格加给直推人
+                                updateDirectpushInfo(member.getUid(), (float) (userList.get(0).getPrice()*0.2));
+                            }else if (member.getLevel().equals(Fqz)){
+                                //副圈主的20%价格加给直推人
+                                updateDirectpushInfo(member.getUid(), (float) (userList.get(0).getPrice()*0.2));
+                            }else if (member.getLevel().equals(CWQZ)){
+                                //常务圈主的10%价格加给直推人
+                                updateDirectpushInfo(member.getUid(), (float) (userList.get(0).getPrice()*0.1));
+                            }else if (member.getLevel().equals(UUqz)){
+                                //圈主的10%价格加给直推人
+                                updateDirectpushInfo(member.getUid(), (float) (userList.get(0).getPrice()*0.1));
+                            }
+
+                        }else if (GVIP.equals(userList.get(0).getLevel())){
+                            if (member.getLevel().equals(MVIP)){
+                                //直接梦想VIP价格30%加给直推人
+                                updateDirectpushInfo(member.getUid(), (float) (userList.get(0).getPrice()*0.3));
+                            }else if (member.getLevel().equals(GVIP)){
+                                //高级VIP的40%价格加给直推人
+                                updateDirectpushInfo(member.getUid(), (float) (userList.get(0).getPrice()*0.4));
+                            }else if (member.getLevel().equals(UCgly)){
+                                //管理员的40%价格加给直推人
+                                updateDirectpushInfo(member.getUid(), (float) (userList.get(0).getPrice()*0.4));
+                            }else if (member.getLevel().equals(Fqz)){
+                                //副圈主的40%价格加给直推人
+                                updateDirectpushInfo(member.getUid(), (float) (userList.get(0).getPrice()*0.4));
+                            }else if (member.getLevel().equals(CWQZ)){
+                                //常务圈主的20%价格加给直推人
+                                updateDirectpushInfo(member.getUid(), (float) (userList.get(0).getPrice()*0.2));
+                            }else if (member.getLevel().equals(UUqz)){
+                                //圈主的20%价格加给直推人
+                                updateDirectpushInfo(member.getUid(), (float) (userList.get(0).getPrice()*0.2));
+                            }
+                        }else if (UCgly.equals(userList.get(0).getLevel())){
+                            if (member.getLevel().equals(MVIP)){
+                                //直接梦想VIP价格30%加给直推人
+                                updateDirectpushInfo(member.getUid(), (float) (userList.get(0).getPrice()*0.3));
+                            }else if (member.getLevel().equals(GVIP)){
+                                //高级VIP的40%价格加给直推人
+                                updateDirectpushInfo(member.getUid(), (float) (userList.get(0).getPrice()*0.4));
+                            }else if (member.getLevel().equals(UCgly)){
+                                //高级VIP的55%价格加给直推人
+                                updateDirectpushInfo(member.getUid(), (float) (userList.get(0).getPrice()*0.55));
+                            }else if (member.getLevel().equals(Fqz)){
+                                //高级VIP的55%价格加给直推人
+                                updateDirectpushInfo(member.getUid(), (float) (userList.get(0).getPrice()*0.55));
+                            }else if (member.getLevel().equals(CWQZ)){
+                                //常务圈主的22%价格加给直推人
+                                updateDirectpushInfo(member.getUid(), (float) (userList.get(0).getPrice()*0.22));
+                            }else if (member.getLevel().equals(UUqz)){
+                                //圈主的22%价格加给直推人
+                                updateDirectpushInfo(member.getUid(), (float) (userList.get(0).getPrice()*0.22));
+                            }
+                        }else if (Fqz.equals(userList.get(0).getLevel())){
+                            if (member.getLevel().equals(MVIP)){
+                                //直接梦想VIP价格30%加给直推人
+                                updateDirectpushInfo(member.getUid(), (float) (userList.get(0).getPrice()*0.3));
+                            }else if (member.getLevel().equals(GVIP)){
+                                //高级VIP的40%价格加给直推人
+                                updateDirectpushInfo(member.getUid(), (float) (userList.get(0).getPrice()*0.4));
+                            }else if (member.getLevel().equals(UCgly)){
+                                //高级VIP的65%价格加给直推人
+                                updateDirectpushInfo(member.getUid(), (float) (userList.get(0).getPrice()*0.65));
+                            }else if (member.getLevel().equals(Fqz)){
+                                //高级VIP的65%价格加给直推人
+                                updateDirectpushInfo(member.getUid(), (float) (userList.get(0).getPrice()*0.65));
+                            }else if (member.getLevel().equals(CWQZ)){
+                                //常务圈主的22%价格加给直推人
+                                updateDirectpushInfo(member.getUid(), (float) (userList.get(0).getPrice()*0.22));
+                            }else if (member.getLevel().equals(UUqz)){
+                                //圈主的22%价格加给直推人
+                                updateDirectpushInfo(member.getUid(), (float) (userList.get(0).getPrice()*0.22));
+                            }
+                        }else if (CWQZ.equals(userList.get(0).getLevel())){
+                            if (member.getLevel().equals(MVIP)){
+                                //直接梦想VIP价格30%加给直推人
+                                updateDirectpushInfo(member.getUid(), (float) (userList.get(0).getPrice()*0.3));
+                            }else if (member.getLevel().equals(GVIP)){
+                                //高级VIP的40%价格加给直推人
+                                updateDirectpushInfo(member.getUid(), (float) (userList.get(0).getPrice()*0.4));
+                            }else if (member.getLevel().equals(UCgly)){
+                                //高级VIP的70%价格加给直推人
+                                updateDirectpushInfo(member.getUid(), (float) (userList.get(0).getPrice()*0.7));
+                            }else if (member.getLevel().equals(Fqz)){
+                                //高级VIP的70%价格加给直推人
+                                updateDirectpushInfo(member.getUid(), (float) (userList.get(0).getPrice()*0.7));
+                            }else if (member.getLevel().equals(CWQZ)){
+                                //常务圈主的23%价格加给直推人
+                                updateDirectpushInfo(member.getUid(), (float) (userList.get(0).getPrice()*0.23));
+                            }else if (member.getLevel().equals(UUqz)){
+                                //圈主的23%价格加给直推人
+                                updateDirectpushInfo(member.getUid(), (float) (userList.get(0).getPrice()*0.23));
+                            }
+                        }else if (UUqz.equals(userList.get(0).getLevel())){
+                            if (member.getLevel().equals(MVIP)){
+                                //直接梦想VIP价格30%加给直推人
+                                updateDirectpushInfo(member.getUid(), (float) (userList.get(0).getPrice()*0.3));
+                            }else if (member.getLevel().equals(GVIP)){
+                                //高级VIP的40%价格加给直推人
+                                updateDirectpushInfo(member.getUid(), (float) (userList.get(0).getPrice()*0.4));
+                            }else if (member.getLevel().equals(UCgly)){
+                                //高级VIP的75%价格加给直推人
+                                updateDirectpushInfo(member.getUid(), (float) (userList.get(0).getPrice()*0.75));
+                            }else if (member.getLevel().equals(Fqz)){
+                                //高级VIP的75%价格加给直推人
+                                updateDirectpushInfo(member.getUid(), (float) (userList.get(0).getPrice()*0.75));
+                            }else if (member.getLevel().equals(CWQZ)){
+                                //常务圈主的23%价格加给直推人
+                                updateDirectpushInfo(member.getUid(), (float) (userList.get(0).getPrice()*0.25));
+                            }else if (member.getLevel().equals(UUqz)){
+                                //圈主的23%价格加给直推人
+                                updateDirectpushInfo(member.getUid(), (float) (userList.get(0).getPrice()*0.25));
+                            }
+                        }
+                    }
                     if(userList.get(0).getPrice()>=100){
                         int ceil = (int)Math.floor(userList.get(0).getPrice() / 100);
                         Sincerity newSincerity = new Sincerity();

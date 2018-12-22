@@ -110,7 +110,7 @@
 
     <!--根据订单号查询订单-->
     <select id="queryOrder" resultType="com.carryit.base.besttmwuu.entity.Order">
-        select id,ordersn,price
+        select id,ordersn,price,level
         from
         ims_ewei_shop_order
     </select>
