@@ -155,4 +155,14 @@ public class MemberServiceImpl implements MemberService {
       }
        return jo;
     }
+
+    @Override
+    public Member getLevelByICode(String iCode) {
+        return memberDao.getLevelByICode(iCode);
+    }
+
+    @Override
+    public String getICodeByUid(Integer uid) {
+        return memberDao.getICodeByUid(uid);
+    }
 }

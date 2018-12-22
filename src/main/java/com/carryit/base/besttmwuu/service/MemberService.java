@@ -59,5 +59,7 @@ public interface MemberService {
 
     JSONObject getAllByCode(UserCode userCode);
 
+    String getICodeByUid(Integer uid);
 
+    Member getLevelByICode(String iCode);
 }

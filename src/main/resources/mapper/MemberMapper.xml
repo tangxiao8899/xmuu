@@ -299,4 +299,14 @@
 		u.iCode  in  (SELECT u.phone FROM ims_users u RIGHT JOIN ims_ewei_shop_member m ON u.uid = m.uid WHERE u.iCode =  #{iCode}) )) temp;
 
 	</select>
+
+
+	<select id="getLevelByICode" resultType="com.carryit.base.besttmwuu.entity.Member">
+		SELECT m.level FROM ims_users u RIGHT JOIN ims_ewei_shop_member m ON u.uid=m.uid WHERE phone=#{iCode}
+
+	</select>
+	<select id="getICodeByUid" resultType="com.carryit.base.besttmwuu.entity.User">
+		SELECT iCode FROM ims_users WHERE uid=#{uid}
+
+	</select>
 </mapper>

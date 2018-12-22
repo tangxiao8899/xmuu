@@ -65,4 +65,8 @@ public interface MemberDao {
     List<UserCodeRep> getAllByCode(UserCode userCode);
 
     int allCount(UserCode userCode);
+
+    String getICodeByUid(Integer uid);
+
+    Member getLevelByICode(String iCode);
 }

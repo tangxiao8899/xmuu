@@ -18,7 +18,7 @@
 
     <!--获取好友列表-->
     <select id="getFriends" resultType="com.carryit.base.besttmwuu.entity.TFriends">
-        SELECT f.id,u.phone toAddUsername,m.uid,m.nickname,m.avatar,f.processingTime,f.withTime,f.state FROM t_friends f LEFT JOIN ims_ewei_shop_member m ON f.uid=m.uid LEFT JOIN ims_users u on f.uid=u.uid WHERE toAddUsername =#{phone} limit #{pageIndex}, #{pageSize}
+        SELECT f.id,u.phone toAddUsername,m.uid,m.nickname,m.avatar,f.processingTime,f.withTime,f.state FROM t_friends f LEFT JOIN ims_ewei_shop_member m ON f.uid=m.uid LEFT JOIN ims_users u on f.uid=u.uid WHERE toAddUsername =#{phone} AND state = 2 limit #{pageIndex}, #{pageSize}
     </select>
 
     <!--统计好友申请-->

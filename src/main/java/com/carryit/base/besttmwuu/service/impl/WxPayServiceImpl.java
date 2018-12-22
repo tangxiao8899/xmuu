@@ -47,6 +47,9 @@ public class WxPayServiceImpl implements WxPayService {
     private static final String UUqz = "0";//UU圈主
     private static final String Fqz = "1";//副圈主
     private static final String UCgly = "2";//UU管理员
+    private static final String GVIP = "3";//高级VIP
+    private static final String MVIP = "4";//梦想VIP
+    private static final String CWQZ = "6";//常务圈主
 
     @Override
     public JSONObject wxPay(String json) throws Exception {
@@ -145,6 +148,13 @@ public class WxPayServiceImpl implements WxPayService {
                     jo.put("data", null);
                     return jo;
                 }
+            }else if (CWQZ.equals(product.getLevel())) {
+                if (orderCount >= 1) {
+                    jo.put("code", 404);
+                    jo.put("msg", "常务圈主名额已满");
+                    jo.put("data", null);
+                    return jo;
+                }
             } else if (Fqz.equals(product.getLevel())) {
                 if (orderCount >= 10) {
                     jo.put("code", 404);
@@ -174,6 +184,108 @@ public class WxPayServiceImpl implements WxPayService {
             order.setPaysource("3");
             orderService.save(order);
             SortedMap<Object, Object> parameters = PayCommonUtil.getWXPrePayID("wxpay.notifyurl"); // 获取预付单，此处已做封装，需要工具类
+
+/*          //根据UID查找iCode
+            String iCode=memberService.getICodeByUid(parmJo.getInteger("uid"));
+            //根据iCode查找uid直推人的level
+            if (iCode!=null){
+                Member member=memberService.getLevelByICode(iCode);
+                if(MVIP.equals(product.getLevel())){
+                    if (member.getLevel().equals(MVIP)){
+                        //直接梦想VIP价格30%加给直推人
+                        //逻辑判断更新数据库余额字段方法没写
+
+                    }else if (member.getLevel().equals(GVIP)){
+                        //高级VIP的40%价格加给直推人
+                    }else if (member.getLevel().equals(UCgly)){
+                        //管理员的20%价格加给直推人
+                    }else if (member.getLevel().equals(Fqz)){
+                        //副圈主的20%价格加给直推人
+                    }else if (member.getLevel().equals(CWQZ)){
+                        //常务圈主的10%价格加给直推人
+                    }else if (member.getLevel().equals(UUqz)){
+                        //圈主的10%价格加给直推人
+                    }
+
+                }else if (GVIP.equals(product.getLevel())){
+                    if (member.getLevel().equals(MVIP)){
+                        //直接梦想VIP价格30%加给直推人
+
+                    }else if (member.getLevel().equals(GVIP)){
+                        //高级VIP的40%价格加给直推人
+                    }else if (member.getLevel().equals(UCgly)){
+                        //管理员的40%价格加给直推人
+                    }else if (member.getLevel().equals(Fqz)){
+                        //副圈主的40%价格加给直推人
+                    }else if (member.getLevel().equals(CWQZ)){
+                        //常务圈主的20%价格加给直推人
+                    }else if (member.getLevel().equals(UUqz)){
+                        //圈主的20%价格加给直推人
+                    }
+                }else if (UCgly.equals(product.getLevel())){
+                    if (member.getLevel().equals(MVIP)){
+                        //直接梦想VIP价格30%加给直推人
+
+                    }else if (member.getLevel().equals(GVIP)){
+                        //高级VIP的40%价格加给直推人
+                    }else if (member.getLevel().equals(UCgly)){
+                        //高级VIP的55%价格加给直推人
+                    }else if (member.getLevel().equals(Fqz)){
+                        //高级VIP的55%价格加给直推人
+                    }else if (member.getLevel().equals(CWQZ)){
+                        //常务圈主的22%价格加给直推人
+                    }else if (member.getLevel().equals(UUqz)){
+                        //圈主的22%价格加给直推人
+                    }
+                }else if (Fqz.equals(product.getLevel())){
+                    if (member.getLevel().equals(MVIP)){
+                        //直接梦想VIP价格30%加给直推人
+
+                    }else if (member.getLevel().equals(GVIP)){
+                        //高级VIP的40%价格加给直推人
+                    }else if (member.getLevel().equals(UCgly)){
+                        //高级VIP的65%价格加给直推人
+                    }else if (member.getLevel().equals(Fqz)){
+                        //高级VIP的65%价格加给直推人
+                    }else if (member.getLevel().equals(CWQZ)){
+                        //常务圈主的22%价格加给直推人
+                    }else if (member.getLevel().equals(UUqz)){
+                        //圈主的22%价格加给直推人
+                    }
+                }else if (CWQZ.equals(product.getLevel())){
+                    if (member.getLevel().equals(MVIP)){
+                        //直接梦想VIP价格30%加给直推人
+
+                    }else if (member.getLevel().equals(GVIP)){
+                        //高级VIP的40%价格加给直推人
+                    }else if (member.getLevel().equals(UCgly)){
+                        //高级VIP的70%价格加给直推人
+                    }else if (member.getLevel().equals(Fqz)){
+                        //高级VIP的70%价格加给直推人
+                    }else if (member.getLevel().equals(CWQZ)){
+                        //常务圈主的23%价格加给直推人
+                    }else if (member.getLevel().equals(UUqz)){
+                        //圈主的23%价格加给直推人
+                    }
+                }else if (UUqz.equals(product.getLevel())){
+                    if (member.getLevel().equals(MVIP)){
+                        //直接梦想VIP价格30%加给直推人
+
+                    }else if (member.getLevel().equals(GVIP)){
+                        //高级VIP的40%价格加给直推人
+                    }else if (member.getLevel().equals(UCgly)){
+                        //高级VIP的75%价格加给直推人
+                    }else if (member.getLevel().equals(Fqz)){
+                        //高级VIP的75%价格加给直推人
+                    }else if (member.getLevel().equals(CWQZ)){
+                        //常务圈主的23%价格加给直推人
+                    }else if (member.getLevel().equals(UUqz)){
+                        //圈主的23%价格加给直推人
+                    }
+                }
+            }
+*/
+
 
             parameters.put("body", "小马UU-" + product.getLevelName()); //商品描述
             parameters.put("out_trade_no", order.getOrdersn()); // 订单id这里我的订单id生成规则是订单id+时间
