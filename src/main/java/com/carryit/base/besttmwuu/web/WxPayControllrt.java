@@ -3,18 +3,18 @@ package com.carryit.base.besttmwuu.web;
 import com.alibaba.fastjson.JSONObject;
 import com.base.BaseController;
 import com.bean.req.WxPayReq;
+import com.carryit.base.besttmwuu.entity.ImsUserCapitalFlowEntity;
+import com.carryit.base.besttmwuu.entity.Member;
 import com.carryit.base.besttmwuu.entity.Order;
 import com.carryit.base.besttmwuu.entity.Sincerity;
-import com.carryit.base.besttmwuu.service.MemberService;
-import com.carryit.base.besttmwuu.service.OrderService;
-import com.carryit.base.besttmwuu.service.SincerityService;
-import com.carryit.base.besttmwuu.service.WxPayService;
+import com.carryit.base.besttmwuu.service.*;
 import com.util.PayCommonUtil;
 import com.util.TimeUtils;
 import com.util.XMLUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -43,6 +43,9 @@ public class WxPayControllrt extends BaseController {
 
     @Autowired
     private SincerityService sincerityService;
+
+    @Autowired
+    ImsUserCapitalFlowService imsUserCapitalFlowService;
 
 
     private static final  String two = "2";
@@ -361,6 +364,28 @@ public class WxPayControllrt extends BaseController {
     {
         return "<xml><return_code><![CDATA[" + return_code + "]]></return_code><return_msg><![CDATA[" + return_msg
                 + "]]></return_msg></xml>";
+    }
+
+    //直推
+    @Transactional
+    public void updateDirectpushInfo(Integer uid, Float total_fee) {
+
+        //查询Member表账户信息
+        Member fmember = memberService.getMemberById(uid);
+
+        float Creditf = fmember.getCredit2() + total_fee;
+
+        //更新用户账户情况
+        memberService.updateMemberByUid(uid, Creditf);
+
+        //记录资金流水
+        ImsUserCapitalFlowEntity entity = new ImsUserCapitalFlowEntity();
+        entity.setUid(uid);
+        entity.setPrice(total_fee);
+        entity.setSource(4); //打赏
+        entity.setType(0); //收入
+
+        imsUserCapitalFlowService.save(entity);
     }
 
 }

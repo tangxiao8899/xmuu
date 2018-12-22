@@ -896,7 +896,7 @@ public class WxPayServiceImpl implements WxPayService {
                         bill.setTypeName("支出");
                         bill.setFormatPrice("-"+bill.getFormatPrice());
                     }
-                    if(bill.getSource()==0){//资金来源  0：充值  1：打赏 2:提现 3:报名支付
+                    if(bill.getSource()==0){//资金来源  0：充值  1：打赏 2:提现 3:报名支付 4:直推
                         bill.setSourceName("充值");
                     }else if(bill.getSource()==1){
                         bill.setSourceName("打赏");
@@ -904,6 +904,8 @@ public class WxPayServiceImpl implements WxPayService {
                         bill.setSourceName("提现");
                     }else if(bill.getSource()==3){
                         bill.setSourceName("报名支付");
+                    }else if(bill.getSource()==4){
+                        bill.setSourceName("直推");
                     }
                 }
             }
