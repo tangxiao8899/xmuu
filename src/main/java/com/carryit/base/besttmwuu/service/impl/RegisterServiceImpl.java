@@ -59,7 +59,7 @@ public class RegisterServiceImpl implements UserService {
             member.setZhuquanzi(record.getBid());
             member.setUid(record.getUid());
             member.setCreatetime(new Date().getTime()+"");
-            member.setAvatar("http://xm.besttmw.com/besttmwuu-0.0.1/index_img/logo.jpg");
+            member.setAvatar("http://47.105.163.51/besttmwuu-0.0.1/index_img/logo.jpg");
             member.setLevel("5");
             memberService.addMember(member);
             //同步注册到环信

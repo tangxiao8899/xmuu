@@ -37,7 +37,7 @@ public class EasyMobApiUtils {
 		List<String> phones = new ArrayList<>();
 		String result = "";
 		try {
-			result = HttpClientUtil.post("http://xm.besttmw.com/besttmwuu-0.0.1/hx/getFriends", JSON.toJSONString(params));	
+			result = HttpClientUtil.post("http://47.105.163.51/besttmwuu-0.0.1/hx/getFriends", JSON.toJSONString(params));
 		} catch ( IOException e) {
 			e.printStackTrace();
 		}
@@ -55,7 +55,7 @@ public class EasyMobApiUtils {
 	public static String getToken() {
 		String content = "";
 		try {
-			content = HttpClientUtil.post("http://xm.besttmw.com/besttmwuu-0.0.1/hx/getToken", "");
+			content = HttpClientUtil.post("http://47.105.163.51/besttmwuu-0.0.1/hx/getToken", "");
 		} catch (IOException e) {	
 			e.printStackTrace();
 		}
