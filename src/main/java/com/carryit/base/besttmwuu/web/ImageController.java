@@ -64,22 +64,22 @@ public class ImageController extends BaseController {
                 if(file.getSize()<60*1024){
                     File newtempFile=new File(realPath, filesName);
                     Thumbnails.of(tempFile).scale(1f).toFile(newtempFile);
-                    urls.add(domain_name+"/image/"+filesName);
+                    urls.add(domain_name+"/images/"+filesName);
                     tempFile.delete();
                 }else if(file.getSize()<500*1024) {
                     File newtempFile=new File(realPath, filesName);
                     Thumbnails.of(tempFile).scale(0.7f).toFile(newtempFile);
-                    urls.add(domain_name+"/image/"+filesName);
+                    urls.add(domain_name+"/images/"+filesName);
                     tempFile.delete();
                 }else if(file.getSize()<1.5*1024*1024) {
                     File newtempFile=new File(realPath, filesName);
                     Thumbnails.of(tempFile).scale(0.43f).toFile(newtempFile);
-                    urls.add(domain_name+"/image/"+filesName);
+                    urls.add(domain_name+"/images/"+filesName);
                     tempFile.delete();
                 }else {
                     File newtempFile=new File(realPath, filesName);
                     Thumbnails.of(tempFile).scale(0.35f).toFile(newtempFile);
-                    urls.add(domain_name+"/image/"+filesName);
+                    urls.add(domain_name+"/images/"+filesName);
                     tempFile.delete();
                 }
 
