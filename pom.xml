@@ -5,12 +5,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.carryit.base</groupId>
-	<artifactId>besttmwuu</artifactId>
+	<artifactId>xmuu</artifactId>
 	<version>0.0.1</version>
 	<packaging>${project.packaging}</packaging>
 
-	<name>besttmwuu</name>
-	<description>com.besttmw.uu</description>
+	<name>xmuu</name>
+	<description>com.xmuu.uu</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>

@@ -1,4 +1,4 @@
-package com.carryit.base.besttmwuu;
+package com.carryit.base.xmuu;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,7 +12,7 @@ import javax.sql.DataSource;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class BesttmwuuApplicationTests {
+public class XmuuApplicationTests {
 
 	@Test
 	public void contextLoads() {

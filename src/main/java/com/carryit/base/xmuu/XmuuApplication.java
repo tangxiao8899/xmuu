@@ -9,14 +9,14 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 
 @SpringBootApplication
 @MapperScan("com.carryit.base.besttmwuu.dao")
-public class BesttmwuuApplication extends SpringBootServletInitializer {
+public class XmuuApplication extends SpringBootServletInitializer {
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(BesttmwuuApplication.class);
+        return application.sources(XmuuApplication.class);
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(BesttmwuuApplication.class, args);
+        SpringApplication.run(XmuuApplication.class, args);
     }
 }
