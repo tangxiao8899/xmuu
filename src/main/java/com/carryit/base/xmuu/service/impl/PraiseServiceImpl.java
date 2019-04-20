@@ -1,15 +1,14 @@
-package com.carryit.base.besttmwuu.service.impl;
+package com.carryit.base.xmuu.service.impl;
 
 import java.util.List;
 
+import com.carryit.base.xmuu.dao.TPraiseMapper;
+import com.carryit.base.xmuu.entity.TPraise;
+import com.carryit.base.xmuu.entity.TPraiseExample;
+import com.carryit.base.xmuu.service.PraiseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.carryit.base.besttmwuu.dao.TPraiseMapper;
-import com.carryit.base.besttmwuu.entity.TPraise;
-import com.carryit.base.besttmwuu.entity.TPraiseExample;
-import com.carryit.base.besttmwuu.entity.TPraiseExample.Criteria;
-import com.carryit.base.besttmwuu.service.PraiseService;
 
 @Service
 public class PraiseServiceImpl implements PraiseService {
@@ -20,7 +19,7 @@ public class PraiseServiceImpl implements PraiseService {
 	@Override
 	public boolean praise(TPraise praise) {
 		TPraiseExample example = new TPraiseExample();
-		Criteria criteria = example.createCriteria();
+		TPraiseExample.Criteria criteria = example.createCriteria();
 //		查询同一个用户，同一个动态id是否存在
 		criteria.andUidEqualTo(praise.getUid());
 		criteria.andImsEweiShopSnsPostIdEqualTo(praise.getImsEweiShopSnsPostId());

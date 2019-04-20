@@ -1,7 +1,7 @@
-package com.carryit.base.besttmwuu.dao;
+package com.carryit.base.xmuu.dao;
 
-import com.carryit.base.besttmwuu.entity.imsEweiShopSnsBoard;
-import com.carryit.base.besttmwuu.entity.imsEweiShopSnsBoardWithBLOBs;
+import com.carryit.base.xmuu.entity.imsEweiShopSnsBoard;
+import com.carryit.base.xmuu.entity.imsEweiShopSnsBoardWithBLOBs;
 
 public interface imsEweiShopSnsBoardMapper {
     int deleteByPrimaryKey(Integer id);

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.carryit.base.besttmwuu.dao.TPraiseMapper" >
-  <resultMap id="BaseResultMap" type="com.carryit.base.besttmwuu.entity.TPraise" >
+<mapper namespace="com.carryit.base.xmuu.dao.TPraiseMapper" >
+  <resultMap id="BaseResultMap" type="com.carryit.base.xmuu.entity.TPraise" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="ims_ewei_shop_sns_post_id" property="imsEweiShopSnsPostId" jdbcType="INTEGER" />
     <result column="uid" property="uid" jdbcType="INTEGER" />
@@ -68,7 +68,7 @@
   <sql id="Base_Column_List" >
     id, ims_ewei_shop_sns_post_id, uid, createtime
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.carryit.base.besttmwuu.entity.TPraiseExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.carryit.base.xmuu.entity.TPraiseExample" >
     select
     <if test="distinct" >
       distinct
@@ -92,19 +92,19 @@
     delete from t_praise
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.carryit.base.besttmwuu.entity.TPraiseExample" >
+  <delete id="deleteByExample" parameterType="com.carryit.base.xmuu.entity.TPraiseExample" >
     delete from t_praise
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.carryit.base.besttmwuu.entity.TPraise" >
+  <insert id="insert" parameterType="com.carryit.base.xmuu.entity.TPraise" >
     insert into t_praise (id, ims_ewei_shop_sns_post_id, uid, 
       createtime)
     values (#{id,jdbcType=INTEGER}, #{imsEweiShopSnsPostId,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, 
       #{createtime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.carryit.base.besttmwuu.entity.TPraise" >
+  <insert id="insertSelective" parameterType="com.carryit.base.xmuu.entity.TPraise" >
     insert into t_praise
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -135,7 +135,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.carryit.base.besttmwuu.entity.TPraiseExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.carryit.base.xmuu.entity.TPraiseExample" resultType="java.lang.Integer" >
     select count(*) from t_praise
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -171,7 +171,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.carryit.base.besttmwuu.entity.TPraise" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.carryit.base.xmuu.entity.TPraise" >
     update t_praise
     <set >
       <if test="imsEweiShopSnsPostId != null" >
@@ -186,7 +186,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.carryit.base.besttmwuu.entity.TPraise" >
+  <update id="updateByPrimaryKey" parameterType="com.carryit.base.xmuu.entity.TPraise" >
     update t_praise
     set ims_ewei_shop_sns_post_id = #{imsEweiShopSnsPostId,jdbcType=INTEGER},
       uid = #{uid,jdbcType=INTEGER},
@@ -202,7 +202,7 @@
     select m.avatar from t_praise p LEFT JOIN ims_ewei_shop_member m on p.uid = m.uid where p.ims_ewei_shop_sns_post_id =#{id}
   </select>
 
-  <select id="getPraise" resultType="com.carryit.base.besttmwuu.entity.TPraise" >
+  <select id="getPraise" resultType="com.carryit.base.xmuu.entity.TPraise" >
     select id,ims_ewei_shop_sns_post_id imsEweiShopSnsPostId,uid from t_praise where ims_ewei_shop_sns_post_id =#{id} and uid=#{uid}
   </select>
 

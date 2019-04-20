@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.carryit.base.besttmwuu.dao.imsEweiShopOrderMapper">
-  <resultMap id="BaseResultMap" type="com.carryit.base.besttmwuu.entity.imsEweiShopOrder">
+<mapper namespace="com.carryit.base.xmuu.dao.imsEweiShopOrderMapper">
+  <resultMap id="BaseResultMap" type="com.carryit.base.xmuu.entity.imsEweiShopOrder">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="uniacid" jdbcType="INTEGER" property="uniacid" />
     <result column="openid" jdbcType="VARCHAR" property="openid" />
@@ -109,7 +109,7 @@
     <result column="betweenprice" jdbcType="DECIMAL" property="betweenprice" />
     <result column="isshare" jdbcType="INTEGER" property="isshare" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.carryit.base.besttmwuu.entity.imsEweiShopOrderWithBLOBs">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.carryit.base.xmuu.entity.imsEweiShopOrderWithBLOBs">
     <result column="carrier" jdbcType="LONGVARCHAR" property="carrier" />
     <result column="virtual_info" jdbcType="LONGVARCHAR" property="virtualInfo" />
     <result column="virtual_str" jdbcType="LONGVARCHAR" property="virtualStr" />
@@ -159,7 +159,7 @@
     delete from ims_ewei_shop_order
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopOrderWithBLOBs">
+  <insert id="insert" parameterType="com.carryit.base.xmuu.entity.imsEweiShopOrderWithBLOBs">
     insert into ims_ewei_shop_order (id, uniacid, openid, 
       agentid, ordersn, price, 
       goodsprice, discountprice, status, 
@@ -243,7 +243,7 @@
       #{remarksend,jdbcType=LONGVARCHAR}, #{virtualsendInfo,jdbcType=LONGVARCHAR}, #{verifyinfo,jdbcType=LONGVARCHAR}, 
       #{verifycodes,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopOrderWithBLOBs">
+  <insert id="insertSelective" parameterType="com.carryit.base.xmuu.entity.imsEweiShopOrderWithBLOBs">
     insert into ims_ewei_shop_order
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -970,7 +970,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopOrderWithBLOBs">
+  <update id="updateByPrimaryKeySelective" parameterType="com.carryit.base.xmuu.entity.imsEweiShopOrderWithBLOBs">
     update ims_ewei_shop_order
     <set>
       <if test="uniacid != null">
@@ -1333,7 +1333,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopOrderWithBLOBs">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.carryit.base.xmuu.entity.imsEweiShopOrderWithBLOBs">
     update ims_ewei_shop_order
     set uniacid = #{uniacid,jdbcType=INTEGER},
       openid = #{openid,jdbcType=VARCHAR},
@@ -1456,7 +1456,7 @@
       verifycodes = #{verifycodes,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopOrder">
+  <update id="updateByPrimaryKey" parameterType="com.carryit.base.xmuu.entity.imsEweiShopOrder">
     update ims_ewei_shop_order
     set uniacid = #{uniacid,jdbcType=INTEGER},
       openid = #{openid,jdbcType=VARCHAR},

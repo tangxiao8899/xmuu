@@ -1,7 +1,7 @@
-package com.carryit.base.besttmwuu.dao;
+package com.carryit.base.xmuu.dao;
 
-import com.carryit.base.besttmwuu.entity.CashApply;
-import com.carryit.base.besttmwuu.entity.CashDataDTO;
+import com.carryit.base.xmuu.entity.CashApply;
+import com.carryit.base.xmuu.entity.CashDataDTO;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -33,7 +33,7 @@ public interface CashApplyDao {
      * @param phone 提现手机号
      * @return
      */
-    List<CashDataDTO> cashData(@Param("phone") String phone,@Param("page") int page,@Param("limit") int limit);
+    List<CashDataDTO> cashData(@Param("phone") String phone, @Param("page") int page, @Param("limit") int limit);
 
     int count(@Param("phone") String phone);
 }

@@ -1,12 +1,14 @@
-package com.carryit.base.besttmwuu.web;
+package com.carryit.base.xmuu.web;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
+import com.carryit.base.xmuu.entity.ImsUsers;
+import com.carryit.base.xmuu.entity.imsEweiShopMember;
+import com.carryit.base.xmuu.service.ContactService;
+import com.carryit.base.xmuu.service.ImsEweiShopMemberService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.configurationprocessor.json.JSONArray;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,13 +18,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.base.BaseController;
 import com.bean.ContactUserResp;
 import com.bean.req.ContactsWithoudAddReq;
-import com.carryit.base.besttmwuu.entity.ImsUsers;
-import com.carryit.base.besttmwuu.entity.imsEweiShopMember;
-import com.carryit.base.besttmwuu.entity.imsMcMembersWithBLOBs;
-import com.carryit.base.besttmwuu.service.ContactService;
-import com.carryit.base.besttmwuu.service.ImsEweiShopMemberService;
-import com.carryit.base.besttmwuu.service.ImsMcMemberService;
-
 /**
  * 联系人相关controller
  * */

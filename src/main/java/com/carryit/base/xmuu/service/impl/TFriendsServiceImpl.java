@@ -1,16 +1,16 @@
-package com.carryit.base.besttmwuu.service.impl;
+package com.carryit.base.xmuu.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.base.ResultPojo;
 import com.bean.req.FriendsReq;
-import com.carryit.base.besttmwuu.dao.TFriendsDao;
-import com.carryit.base.besttmwuu.entity.Member;
-import com.carryit.base.besttmwuu.entity.TFriends;
-import com.carryit.base.besttmwuu.entity.User;
-import com.carryit.base.besttmwuu.service.MemberService;
-import com.carryit.base.besttmwuu.service.TFriendsService;
-import com.carryit.base.besttmwuu.service.UserService;
+import com.carryit.base.xmuu.dao.TFriendsDao;
+import com.carryit.base.xmuu.entity.Member;
+import com.carryit.base.xmuu.entity.TFriends;
+import com.carryit.base.xmuu.entity.User;
+import com.carryit.base.xmuu.service.MemberService;
+import com.carryit.base.xmuu.service.TFriendsService;
+import com.carryit.base.xmuu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

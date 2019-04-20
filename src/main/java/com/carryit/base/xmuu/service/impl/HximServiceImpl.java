@@ -1,12 +1,15 @@
-package com.carryit.base.besttmwuu.service.impl;
+package com.carryit.base.xmuu.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.base.ResultPojo;
-import com.carryit.base.besttmwuu.dao.MemberDao;
-import com.carryit.base.besttmwuu.entity.*;
-import com.carryit.base.besttmwuu.service.HximService;
+import com.carryit.base.xmuu.dao.MemberDao;
+import com.carryit.base.xmuu.entity.FriendResp;
+import com.carryit.base.xmuu.entity.FriendRespUser;
+import com.carryit.base.xmuu.entity.Member;
+import com.carryit.base.xmuu.entity.TFriends;
+import com.carryit.base.xmuu.service.HximService;
 import com.util.JerseyClientUtil;
 import com.util.PropertyUtil;
 import org.springframework.beans.factory.annotation.Autowired;

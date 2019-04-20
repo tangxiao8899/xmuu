@@ -1,9 +1,8 @@
-package com.carryit.base.besttmwuu.service;
+package com.carryit.base.xmuu.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.bean.LoginReq;
 
-import javax.servlet.http.HttpServletRequest;
 
 public interface LoginService {
 

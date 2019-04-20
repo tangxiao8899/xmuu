@@ -1,8 +1,9 @@
-package com.carryit.base.besttmwuu.dao;
+package com.carryit.base.xmuu.dao;
 
-import com.carryit.base.besttmwuu.entity.ImsUsers;
-import com.carryit.base.besttmwuu.entity.ImsUsersExample;
 import java.util.List;
+
+import com.carryit.base.xmuu.entity.ImsUsers;
+import com.carryit.base.xmuu.entity.ImsUsersExample;
 import org.apache.ibatis.annotations.Param;
 
 public interface ImsUsersMapper {

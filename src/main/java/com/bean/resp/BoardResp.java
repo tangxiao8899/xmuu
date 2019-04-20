@@ -1,7 +1,7 @@
 package com.bean.resp;
 
-import com.carryit.base.besttmwuu.entity.Board;
-import com.carryit.base.besttmwuu.entity.UserDTO;
+import com.carryit.base.xmuu.entity.Board;
+import com.carryit.base.xmuu.entity.UserDTO;
 
 import java.io.Serializable;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.carryit.base.besttmwuu.web;
+package com.carryit.base.xmuu.web;
 
 
 import com.alibaba.fastjson.JSONObject;
@@ -33,7 +33,7 @@ public class ImageController extends BaseController {
                              HttpServletResponse response) {
         try {
             //服务器临时路径
-            String path ="/opt/soft/apache-tomcat-8.5.31/webapps/besttmwuu-0.0.1/WEB-INF/classes/static/index_img/";
+            String path ="/opt/soft/apache-tomcat-8.5.31/webapps/xmuu-0.0.1/WEB-INF/classes/static/index_img/";
             String realPath ="/opt/image/";
             //本地路径临时路径
 //            String path = "E:\\";

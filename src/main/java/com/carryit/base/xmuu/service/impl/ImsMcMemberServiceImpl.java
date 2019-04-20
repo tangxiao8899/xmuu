@@ -1,11 +1,10 @@
-package com.carryit.base.besttmwuu.service.impl;
+package com.carryit.base.xmuu.service.impl;
 
+import com.carryit.base.xmuu.dao.imsMcMembersMapper;
+import com.carryit.base.xmuu.entity.imsMcMembersWithBLOBs;
+import com.carryit.base.xmuu.service.ImsMcMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.carryit.base.besttmwuu.dao.imsMcMembersMapper;
-import com.carryit.base.besttmwuu.entity.imsMcMembersWithBLOBs;
-import com.carryit.base.besttmwuu.service.ImsMcMemberService;
 
 @Service
 public class ImsMcMemberServiceImpl implements ImsMcMemberService {

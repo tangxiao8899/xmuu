@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.carryit.base.besttmwuu.dao.TFriendsDao">
+<mapper namespace="com.carryit.base.xmuu.dao.TFriendsDao">
 
     <!--保存好友请求-->
    <insert id="save">
@@ -17,7 +17,7 @@
     </update>
 
     <!--获取好友列表-->
-    <select id="getFriends" resultType="com.carryit.base.besttmwuu.entity.TFriends">
+    <select id="getFriends" resultType="com.carryit.base.xmuu.entity.TFriends">
         SELECT f.id,u.phone toAddUsername,m.uid,m.nickname,m.avatar,f.processingTime,f.withTime,f.state FROM t_friends f LEFT JOIN ims_ewei_shop_member m ON f.uid=m.uid LEFT JOIN ims_users u on f.uid=u.uid WHERE toAddUsername =#{phone} AND state = 2 limit #{pageIndex}, #{pageSize}
     </select>
 
@@ -28,7 +28,7 @@
     </select>
 
     <!--获取好友列表-->
-    <select id="isFriends" resultType="com.carryit.base.besttmwuu.entity.TFriends">
+    <select id="isFriends" resultType="com.carryit.base.xmuu.entity.TFriends">
         select * from t_friends
         where uid = #{loginUid} and toAddUsername = #{phone} AND state = 1
     </select>

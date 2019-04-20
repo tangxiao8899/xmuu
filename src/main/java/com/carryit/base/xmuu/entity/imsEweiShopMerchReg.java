@@ -1,4 +1,4 @@
-package com.carryit.base.besttmwuu.entity;
+package com.carryit.base.xmuu.entity;
 
 public class imsEweiShopMerchReg {
     private Integer id;

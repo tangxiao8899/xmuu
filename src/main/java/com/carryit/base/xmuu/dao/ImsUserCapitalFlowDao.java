@@ -1,6 +1,6 @@
-package com.carryit.base.besttmwuu.dao;
+package com.carryit.base.xmuu.dao;
 
-import com.carryit.base.besttmwuu.entity.ImsUserCapitalFlowEntity;
+import com.carryit.base.xmuu.entity.ImsUserCapitalFlowEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

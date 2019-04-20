@@ -1,15 +1,15 @@
-package com.carryit.base.besttmwuu.service.impl;
+package com.carryit.base.xmuu.service.impl;
 
-import com.carryit.base.besttmwuu.service.LikeService;
-import com.carryit.base.besttmwuu.service.MemberService;
-import com.carryit.base.besttmwuu.service.SincerityService;
+import com.carryit.base.xmuu.service.LikeService;
+import com.carryit.base.xmuu.service.MemberService;
+import com.carryit.base.xmuu.service.SincerityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
 @Service("likeService")
-public class LikeServiceImpl implements LikeService{
+public class LikeServiceImpl implements LikeService {
     @Autowired
     private SincerityService sincerityService;
 

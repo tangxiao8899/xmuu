@@ -1,13 +1,13 @@
-package com.carryit.base.besttmwuu.service.impl;
+package com.carryit.base.xmuu.service.impl;
 
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.carryit.base.besttmwuu.dao.MessageCodeDao;
-import com.carryit.base.besttmwuu.entity.MessageCode;
-import com.carryit.base.besttmwuu.entity.User;
-import com.carryit.base.besttmwuu.service.MessageCodeService;
-import com.carryit.base.besttmwuu.service.UserService;
+import com.carryit.base.xmuu.dao.MessageCodeDao;
+import com.carryit.base.xmuu.entity.MessageCode;
+import com.carryit.base.xmuu.entity.User;
+import com.carryit.base.xmuu.service.MessageCodeService;
+import com.carryit.base.xmuu.service.UserService;
 import com.util.PropertyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ import org.springframework.util.StringUtils;
 import java.util.Date;
 
 @Service("messageCodeService")
-public class MessageCodeServiceImpl implements MessageCodeService{
+public class MessageCodeServiceImpl implements MessageCodeService {
     @Autowired
     public MessageCodeDao messageCodeDao;
 

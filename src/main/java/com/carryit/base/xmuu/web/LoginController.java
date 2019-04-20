@@ -1,9 +1,9 @@
-package com.carryit.base.besttmwuu.web;
+package com.carryit.base.xmuu.web;
 
 import com.alibaba.fastjson.JSONObject;
 import com.base.BaseController;
 import com.bean.LoginReq;
-import com.carryit.base.besttmwuu.service.LoginService;
+import com.carryit.base.xmuu.service.LoginService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

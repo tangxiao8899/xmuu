@@ -1,9 +1,9 @@
-package com.carryit.base.besttmwuu.service.impl;
+package com.carryit.base.xmuu.service.impl;
 
-import com.carryit.base.besttmwuu.dao.SincerityDao;
-import com.carryit.base.besttmwuu.entity.Sincerity;
-import com.carryit.base.besttmwuu.entity.UserDTO;
-import com.carryit.base.besttmwuu.service.SincerityService;
+import com.carryit.base.xmuu.dao.SincerityDao;
+import com.carryit.base.xmuu.entity.Sincerity;
+import com.carryit.base.xmuu.entity.UserDTO;
+import com.carryit.base.xmuu.service.SincerityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

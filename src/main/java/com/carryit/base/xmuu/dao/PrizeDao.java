@@ -1,7 +1,7 @@
-package com.carryit.base.besttmwuu.dao;
+package com.carryit.base.xmuu.dao;
 
-import com.carryit.base.besttmwuu.entity.Prize;
 
+import com.carryit.base.xmuu.entity.Prize;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

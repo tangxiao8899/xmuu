@@ -1,4 +1,4 @@
-package com.carryit.base.besttmwuu.exception;
+package com.carryit.base.xmuu.exception;
 
 import java.io.Serializable;
 

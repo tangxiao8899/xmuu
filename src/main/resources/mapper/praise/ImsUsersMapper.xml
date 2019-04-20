@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.carryit.base.besttmwuu.dao.ImsUsersMapper" >
-  <resultMap id="BaseResultMap" type="com.carryit.base.besttmwuu.entity.ImsUsers" >
+<mapper namespace="com.carryit.base.xmuu.dao.ImsUsersMapper" >
+  <resultMap id="BaseResultMap" type="com.carryit.base.xmuu.entity.ImsUsers" >
     <id column="uid" property="uid" jdbcType="INTEGER" />
     <result column="groupid" property="groupid" jdbcType="INTEGER" />
     <result column="username" property="username" jdbcType="VARCHAR" />
@@ -100,7 +100,7 @@
     founder_groupid, agentid, register_type, openid, age, idCard, phone, address, speciality, 
     need, education, isSingle, corporateName, mailbox
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.carryit.base.besttmwuu.entity.ImsUsersExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.carryit.base.xmuu.entity.ImsUsersExample" >
     select
     <if test="distinct" >
       distinct
@@ -124,13 +124,13 @@
     delete from ims_users
     where uid = #{uid,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.carryit.base.besttmwuu.entity.ImsUsersExample" >
+  <delete id="deleteByExample" parameterType="com.carryit.base.xmuu.entity.ImsUsersExample" >
     delete from ims_users
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.carryit.base.besttmwuu.entity.ImsUsers" >
+  <insert id="insert" parameterType="com.carryit.base.xmuu.entity.ImsUsers" >
     insert into ims_users (uid, groupid, username, 
       password, salt, status, 
       joindate, joinip, lastvisit, 
@@ -156,7 +156,7 @@
       #{issingle,jdbcType=VARCHAR}, #{corporatename,jdbcType=VARCHAR}, #{mailbox,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.carryit.base.besttmwuu.entity.ImsUsers" >
+  <insert id="insertSelective" parameterType="com.carryit.base.xmuu.entity.ImsUsers" >
     insert into ims_users
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="uid != null" >
@@ -367,7 +367,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.carryit.base.besttmwuu.entity.ImsUsersExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.carryit.base.xmuu.entity.ImsUsersExample" resultType="java.lang.Integer" >
     select count(*) from ims_users
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -519,7 +519,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.carryit.base.besttmwuu.entity.ImsUsers" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.carryit.base.xmuu.entity.ImsUsers" >
     update ims_users
     <set >
       <if test="groupid != null" >
@@ -621,7 +621,7 @@
     </set>
     where uid = #{uid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.carryit.base.besttmwuu.entity.ImsUsers" >
+  <update id="updateByPrimaryKey" parameterType="com.carryit.base.xmuu.entity.ImsUsers" >
     update ims_users
     set groupid = #{groupid,jdbcType=INTEGER},
       username = #{username,jdbcType=VARCHAR},

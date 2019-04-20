@@ -1,4 +1,4 @@
-package com.carryit.base.besttmwuu.entity;
+package com.carryit.base.xmuu.entity;
 
 import java.io.Serializable;
 import java.util.Date;

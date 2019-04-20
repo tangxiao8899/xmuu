@@ -1,11 +1,11 @@
-package com.carryit.base.besttmwuu.dao;
+package com.carryit.base.xmuu.dao;
 
-import com.carryit.base.besttmwuu.entity.ImsUsers;
-import com.carryit.base.besttmwuu.entity.imsEweiShopMember;
-import com.carryit.base.besttmwuu.entity.imsEweiShopMemberWithBLOBs;
 
 import java.util.List;
 
+import com.carryit.base.xmuu.entity.ImsUsers;
+import com.carryit.base.xmuu.entity.imsEweiShopMember;
+import com.carryit.base.xmuu.entity.imsEweiShopMemberWithBLOBs;
 import org.springframework.stereotype.Repository;
 
 @Repository

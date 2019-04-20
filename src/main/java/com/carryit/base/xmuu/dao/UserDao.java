@@ -1,7 +1,6 @@
-package com.carryit.base.besttmwuu.dao;
+package com.carryit.base.xmuu.dao;
 
-import com.carryit.base.besttmwuu.entity.User;
-import org.apache.ibatis.annotations.Mapper;
+import com.carryit.base.xmuu.entity.User;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 

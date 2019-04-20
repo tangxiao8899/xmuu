@@ -1,8 +1,7 @@
-package com.carryit.base.besttmwuu.service;
+package com.carryit.base.xmuu.service;
 
-import com.bean.req.TredsReq;
-import com.carryit.base.besttmwuu.entity.ImsEweiShopSnsPostWithBLOBs;
-import com.carryit.base.besttmwuu.entity.Post;
+import com.carryit.base.xmuu.entity.ImsEweiShopSnsPostWithBLOBs;
+import com.carryit.base.xmuu.entity.Post;
 
 import java.util.List;
 

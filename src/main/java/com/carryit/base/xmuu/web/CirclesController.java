@@ -1,13 +1,11 @@
-package com.carryit.base.besttmwuu.web;
+package com.carryit.base.xmuu.web;
 
 import com.alibaba.fastjson.JSONObject;
 import com.base.BaseController;
-import com.base.ServiceConfig;
 import com.bean.Page;
 import com.bean.req.BoardReq;
-import com.carryit.base.besttmwuu.entity.*;
-import com.carryit.base.besttmwuu.service.*;
-import com.util.Log;
+import com.carryit.base.xmuu.entity.*;
+import com.carryit.base.xmuu.service.*;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

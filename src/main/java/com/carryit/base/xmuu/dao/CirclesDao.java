@@ -1,10 +1,7 @@
-package com.carryit.base.besttmwuu.dao;
+package com.carryit.base.xmuu.dao;
 
-import com.bean.Page;
-import com.bean.req.PageParam;
-import com.carryit.base.besttmwuu.entity.Board;
-import com.carryit.base.besttmwuu.entity.Circles;
-import com.carryit.base.besttmwuu.entity.Culturewall;
+import com.carryit.base.xmuu.entity.Circles;
+import com.carryit.base.xmuu.entity.Culturewall;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 

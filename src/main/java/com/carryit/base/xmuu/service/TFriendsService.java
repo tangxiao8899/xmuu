@@ -1,4 +1,4 @@
-package com.carryit.base.besttmwuu.service;
+package com.carryit.base.xmuu.service;
 
 import com.base.ResultPojo;
 import com.bean.req.FriendsReq;

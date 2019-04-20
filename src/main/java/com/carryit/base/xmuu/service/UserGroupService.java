@@ -1,7 +1,7 @@
-package com.carryit.base.besttmwuu.service;
+package com.carryit.base.xmuu.service;
 
-import com.carryit.base.besttmwuu.entity.Member;
-import com.carryit.base.besttmwuu.entity.UserGroup;
+import com.carryit.base.xmuu.entity.Member;
+import com.carryit.base.xmuu.entity.UserGroup;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
-package com.carryit.base.besttmwuu.service;
+package com.carryit.base.xmuu.service;
 
-import com.carryit.base.besttmwuu.entity.ImsUserCapitalFlowEntity;
+import com.carryit.base.xmuu.entity.ImsUserCapitalFlowEntity;
 
 import java.util.List;
 

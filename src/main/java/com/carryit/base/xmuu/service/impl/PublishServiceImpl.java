@@ -1,8 +1,8 @@
-package com.carryit.base.besttmwuu.service.impl;
+package com.carryit.base.xmuu.service.impl;
 
-import com.carryit.base.besttmwuu.dao.ImsEweiShopSnsPostMapper;
-import com.carryit.base.besttmwuu.entity.ImsEweiShopSnsPostWithBLOBs;
-import com.carryit.base.besttmwuu.service.PublishService;
+import com.carryit.base.xmuu.dao.ImsEweiShopSnsPostMapper;
+import com.carryit.base.xmuu.entity.ImsEweiShopSnsPostWithBLOBs;
+import com.carryit.base.xmuu.service.PublishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

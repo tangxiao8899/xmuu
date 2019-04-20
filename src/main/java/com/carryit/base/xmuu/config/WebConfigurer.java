@@ -1,6 +1,6 @@
-package com.carryit.base.besttmwuu.config;
+package com.carryit.base.xmuu.config;
 
-import com.carryit.base.besttmwuu.config.interceptors.LoginInterceptor;
+import com.carryit.base.xmuu.config.interceptors.LoginInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

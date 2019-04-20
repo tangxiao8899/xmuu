@@ -1,6 +1,6 @@
-package com.carryit.base.besttmwuu.dao;
+package com.carryit.base.xmuu.dao;
 
-import com.carryit.base.besttmwuu.entity.imsEweiShopMemberLevel;
+import com.carryit.base.xmuu.entity.imsEweiShopMemberLevel;
 
 public interface imsEweiShopMemberLevelMapper {
     int deleteByPrimaryKey(Integer id);

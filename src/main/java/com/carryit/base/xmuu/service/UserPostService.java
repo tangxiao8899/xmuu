@@ -1,6 +1,6 @@
-package com.carryit.base.besttmwuu.service;
+package com.carryit.base.xmuu.service;
 
-import com.carryit.base.besttmwuu.entity.UserPost;
+import com.carryit.base.xmuu.entity.UserPost;
 
 public interface UserPostService {
 

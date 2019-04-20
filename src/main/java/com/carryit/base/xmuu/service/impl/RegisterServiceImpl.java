@@ -1,15 +1,15 @@
-package com.carryit.base.besttmwuu.service.impl;
+package com.carryit.base.xmuu.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.base.ResultPojo;
 import com.bean.RegisterReq;
-import com.carryit.base.besttmwuu.dao.UserDao;
-import com.carryit.base.besttmwuu.entity.Member;
-import com.carryit.base.besttmwuu.entity.User;
-import com.carryit.base.besttmwuu.service.HximService;
-import com.carryit.base.besttmwuu.service.MemberService;
-import com.carryit.base.besttmwuu.service.UserService;
+import com.carryit.base.xmuu.dao.UserDao;
+import com.carryit.base.xmuu.entity.Member;
+import com.carryit.base.xmuu.entity.User;
+import com.carryit.base.xmuu.service.HximService;
+import com.carryit.base.xmuu.service.MemberService;
+import com.carryit.base.xmuu.service.UserService;
 import com.util.NameUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,7 +59,7 @@ public class RegisterServiceImpl implements UserService {
             member.setZhuquanzi(record.getBid());
             member.setUid(record.getUid());
             member.setCreatetime(new Date().getTime()+"");
-            member.setAvatar("http://47.105.163.51/besttmwuu-0.0.1/index_img/logo.jpg");
+            member.setAvatar("http://47.105.163.51/xmuu-0.0.1/index_img/logo.jpg");
             member.setLevel("5");
             memberService.addMember(member);
             //同步注册到环信

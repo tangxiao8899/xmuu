@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.carryit.base.besttmwuu.dao.ImsEweiShopSnsPostMapper">
-  <resultMap id="BaseResultMap" type="com.carryit.base.besttmwuu.entity.imsEweiShopSnsPost">
+<mapper namespace="com.carryit.base.xmuu.dao.ImsEweiShopSnsPostMapper">
+  <resultMap id="BaseResultMap" type="com.carryit.base.xmuu.entity.imsEweiShopSnsPost">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="uniacid" jdbcType="INTEGER" property="uniacid" />
     <result column="bid" jdbcType="INTEGER" property="bid" />
@@ -27,7 +27,7 @@
     <result column="checktime" jdbcType="INTEGER" property="checktime" />
     <result column="isadmin" jdbcType="TINYINT" property="isadmin" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.carryit.base.besttmwuu.entity.ImsEweiShopSnsPostWithBLOBs">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.carryit.base.xmuu.entity.ImsEweiShopSnsPostWithBLOBs">
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
     <result column="images" jdbcType="LONGVARCHAR" property="images" />
   </resultMap>
@@ -51,7 +51,7 @@
     delete from ims_ewei_shop_sns_post
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.carryit.base.besttmwuu.entity.ImsEweiShopSnsPostWithBLOBs">
+  <insert id="insert" parameterType="com.carryit.base.xmuu.entity.ImsEweiShopSnsPostWithBLOBs">
     insert into ims_ewei_shop_sns_post (id, uniacid, bid, uid,
       pid, rpid, openid, 
       avatar, nickname, title, 
@@ -71,7 +71,7 @@
       #{checktime,jdbcType=INTEGER}, #{isadmin,jdbcType=TINYINT}, #{content,jdbcType=LONGVARCHAR}, 
       #{images,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.carryit.base.besttmwuu.entity.ImsEweiShopSnsPostWithBLOBs">
+  <insert id="insertSelective" parameterType="com.carryit.base.xmuu.entity.ImsEweiShopSnsPostWithBLOBs">
     insert into ims_ewei_shop_sns_post
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -234,7 +234,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.carryit.base.besttmwuu.entity.ImsEweiShopSnsPostWithBLOBs">
+  <update id="updateByPrimaryKeySelective" parameterType="com.carryit.base.xmuu.entity.ImsEweiShopSnsPostWithBLOBs">
     update ims_ewei_shop_sns_post
     <set>
       <if test="uniacid != null">
@@ -315,7 +315,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.carryit.base.besttmwuu.entity.ImsEweiShopSnsPostWithBLOBs">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.carryit.base.xmuu.entity.ImsEweiShopSnsPostWithBLOBs">
     update ims_ewei_shop_sns_post
     set uniacid = #{uniacid,jdbcType=INTEGER},
       bid = #{bid,jdbcType=INTEGER},
@@ -344,7 +344,7 @@
       images = #{images,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopSnsPost">
+  <update id="updateByPrimaryKey" parameterType="com.carryit.base.xmuu.entity.imsEweiShopSnsPost">
     update ims_ewei_shop_sns_post
     set uniacid = #{uniacid,jdbcType=INTEGER},
       bid = #{bid,jdbcType=INTEGER},
@@ -381,11 +381,11 @@
     where id=2
   </select>
 
-  <select id="getcommentBypid" resultType="com.carryit.base.besttmwuu.entity.Post">
+  <select id="getcommentBypid" resultType="com.carryit.base.xmuu.entity.Post">
     select sp.id,sp.content,m.nickname,sp.createtime from ims_ewei_shop_sns_post sp JOIN ims_ewei_shop_member m on sp.uid=m.uid where sp.pid =#{id} ORDER by sp.createtime ASC
   </select>
 
-  <select id="getTredsList" resultType="com.carryit.base.besttmwuu.entity.Post">
+  <select id="getTredsList" resultType="com.carryit.base.xmuu.entity.Post">
     select sp.id,sp.bid,m.avatar,sp.content,sp.image,m.nickname,sp.createtime,b.title from ims_ewei_shop_sns_post sp left JOIN ims_ewei_shop_member m on sp.uid=m.uid left JOIN ims_ewei_shop_sns_board b on sp.bid=b.id
     where sp.pid is null and sp.uid = #{uid} ORDER by sp.createtime desc
 </select>

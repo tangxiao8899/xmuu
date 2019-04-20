@@ -1,6 +1,6 @@
-package com.carryit.base.besttmwuu.service;
+package com.carryit.base.xmuu.service;
 
-import com.carryit.base.besttmwuu.entity.TPraise;
+import com.carryit.base.xmuu.entity.TPraise;
 
 import java.util.List;
 

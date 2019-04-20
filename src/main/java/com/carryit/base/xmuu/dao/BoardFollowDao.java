@@ -1,9 +1,9 @@
-package com.carryit.base.besttmwuu.dao;
+package com.carryit.base.xmuu.dao;
 
-import com.carryit.base.besttmwuu.entity.Board;
-import com.carryit.base.besttmwuu.entity.BoardFollow;
-import com.carryit.base.besttmwuu.entity.Member;
-import com.carryit.base.besttmwuu.entity.Post;
+import com.carryit.base.xmuu.entity.Board;
+import com.carryit.base.xmuu.entity.BoardFollow;
+import com.carryit.base.xmuu.entity.Member;
+import com.carryit.base.xmuu.entity.Post;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Repository;

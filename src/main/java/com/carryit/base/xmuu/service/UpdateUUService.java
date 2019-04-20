@@ -1,6 +1,6 @@
-package com.carryit.base.besttmwuu.service;
+package com.carryit.base.xmuu.service;
 
-import com.carryit.base.besttmwuu.entity.UpdateUU;
+import com.carryit.base.xmuu.entity.UpdateUU;
 
 public interface UpdateUUService {
 

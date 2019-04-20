@@ -1,11 +1,10 @@
-package com.carryit.base.besttmwuu.web;
+package com.carryit.base.xmuu.web;
 
 import com.alibaba.fastjson.JSONObject;
-import com.carryit.base.besttmwuu.entity.CashApply;
-import com.carryit.base.besttmwuu.entity.CashDataDTO;
-import com.carryit.base.besttmwuu.entity.User;
-import com.carryit.base.besttmwuu.service.CashApplyService;
-import com.carryit.base.besttmwuu.service.UserService;
+import com.carryit.base.xmuu.entity.CashDataDTO;
+import com.carryit.base.xmuu.entity.User;
+import com.carryit.base.xmuu.service.CashApplyService;
+import com.carryit.base.xmuu.service.UserService;
 import com.util.PropertyUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

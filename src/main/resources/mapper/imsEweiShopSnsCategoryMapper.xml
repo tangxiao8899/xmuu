@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.carryit.base.besttmwuu.dao.imsEweiShopSnsCategoryMapper">
-  <resultMap id="BaseResultMap" type="com.carryit.base.besttmwuu.entity.imsEweiShopSnsCategory">
+<mapper namespace="com.carryit.base.xmuu.dao.imsEweiShopSnsCategoryMapper">
+  <resultMap id="BaseResultMap" type="com.carryit.base.xmuu.entity.imsEweiShopSnsCategory">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="uniacid" jdbcType="INTEGER" property="uniacid" />
     <result column="name" jdbcType="VARCHAR" property="name" />
@@ -25,7 +25,7 @@
     delete from ims_ewei_shop_sns_category
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopSnsCategory">
+  <insert id="insert" parameterType="com.carryit.base.xmuu.entity.imsEweiShopSnsCategory">
     insert into ims_ewei_shop_sns_category (id, uniacid, name, 
       thumb, displayorder, enabled, 
       advimg, advurl, isrecommand
@@ -35,7 +35,7 @@
       #{advimg,jdbcType=VARCHAR}, #{advurl,jdbcType=VARCHAR}, #{isrecommand,jdbcType=TINYINT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopSnsCategory">
+  <insert id="insertSelective" parameterType="com.carryit.base.xmuu.entity.imsEweiShopSnsCategory">
     insert into ims_ewei_shop_sns_category
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -96,7 +96,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopSnsCategory">
+  <update id="updateByPrimaryKeySelective" parameterType="com.carryit.base.xmuu.entity.imsEweiShopSnsCategory">
     update ims_ewei_shop_sns_category
     <set>
       <if test="uniacid != null">
@@ -126,7 +126,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopSnsCategory">
+  <update id="updateByPrimaryKey" parameterType="com.carryit.base.xmuu.entity.imsEweiShopSnsCategory">
     update ims_ewei_shop_sns_category
     set uniacid = #{uniacid,jdbcType=INTEGER},
       name = #{name,jdbcType=VARCHAR},

@@ -1,4 +1,4 @@
-package com.carryit.base.besttmwuu.dao;
+package com.carryit.base.xmuu.dao;
 
 public interface SignInDao {
 

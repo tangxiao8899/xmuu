@@ -1,13 +1,11 @@
-package com.carryit.base.besttmwuu.service.impl;
+package com.carryit.base.xmuu.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.bean.Page;
-import com.carryit.base.besttmwuu.dao.CirclesDao;
-import com.carryit.base.besttmwuu.entity.Board;
-import com.carryit.base.besttmwuu.entity.Circles;
-import com.carryit.base.besttmwuu.entity.Culturewall;
-import com.carryit.base.besttmwuu.service.CirclesService;
+import com.carryit.base.xmuu.dao.CirclesDao;
+import com.carryit.base.xmuu.entity.Circles;
+import com.carryit.base.xmuu.entity.Culturewall;
+import com.carryit.base.xmuu.service.CirclesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;

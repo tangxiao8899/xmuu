@@ -1,7 +1,7 @@
-package com.carryit.base.besttmwuu.service;
+package com.carryit.base.xmuu.service;
 
 import com.alibaba.fastjson.JSONObject;
-import com.carryit.base.besttmwuu.entity.MessageCode;
+import com.carryit.base.xmuu.entity.MessageCode;
 
 public interface MessageCodeService {
     String getByPhone(String phoneNumber);

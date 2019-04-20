@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.carryit.base.besttmwuu.dao.CirclesDao">
+<mapper namespace="com.carryit.base.xmuu.dao.CirclesDao">
 
 
-    <select id="getCircles" resultType="com.carryit.base.besttmwuu.entity.Circles">
+    <select id="getCircles" resultType="com.carryit.base.xmuu.entity.Circles">
         select id,name from ims_ewei_shop_sns_category
 
     </select>
@@ -18,7 +18,7 @@
 
 
     <!--根据圈子ID更新文化墙-->
-    <update id="updateCulturewallByBid" parameterType="com.carryit.base.besttmwuu.entity.Culturewall">
+    <update id="updateCulturewallByBid" parameterType="com.carryit.base.xmuu.entity.Culturewall">
         UPDATE ims_ewei_shop_sns_board
         <set>
             <if test="culturewall != null">

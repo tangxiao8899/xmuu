@@ -1,19 +1,16 @@
-package com.carryit.base.besttmwuu.web;
+package com.carryit.base.xmuu.web;
 
 import com.alibaba.fastjson.JSONObject;
 import com.base.BaseController;
-import com.carryit.base.besttmwuu.entity.Prize;
-import com.carryit.base.besttmwuu.entity.UserPrize;
-import com.carryit.base.besttmwuu.service.PrizeService;
-import com.carryit.base.besttmwuu.service.UserPrizeService;
 
+import com.carryit.base.xmuu.entity.Prize;
+import com.carryit.base.xmuu.entity.UserPrize;
+import com.carryit.base.xmuu.service.PrizeService;
+import com.carryit.base.xmuu.service.UserPrizeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;

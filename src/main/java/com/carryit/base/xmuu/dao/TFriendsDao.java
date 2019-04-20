@@ -1,7 +1,7 @@
-package com.carryit.base.besttmwuu.dao;
+package com.carryit.base.xmuu.dao;
 
 import com.bean.req.FriendsReq;
-import com.carryit.base.besttmwuu.entity.TFriends;
+import com.carryit.base.xmuu.entity.TFriends;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -23,7 +23,7 @@ public interface TFriendsDao {
 
     /**
      * 分页好友列表
-     * @param uid 用户ID
+     * @param phone 用户ID
      * @param pageIndex 当前页
      * @param pageSize 每页数量
      * @return 好友列表
@@ -32,7 +32,7 @@ public interface TFriendsDao {
 
     /**
      * 统计好友请求数
-     * @param uid 用户ID
+     * @param phone 用户ID
      * @return 总的好友请求数
      */
     int totalFriends(String phone);

@@ -1,4 +1,4 @@
-package com.carryit.base.besttmwuu.web;
+package com.carryit.base.xmuu.web;
 
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -12,7 +12,8 @@ import java.util.List;
 import com.alibaba.fastjson.JSON;
 import com.bean.Page;
 import com.bean.req.TredsReq;
-import com.carryit.base.besttmwuu.entity.*;
+import com.carryit.base.xmuu.entity.*;
+import com.carryit.base.xmuu.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +27,6 @@ import com.base.BaseController;
 import com.bean.req.BoardReq;
 import com.bean.req.CommentReq;
 import com.bean.req.PraiseReq;
-import com.carryit.base.besttmwuu.service.ImsEweiShopSnsPostService;
-import com.carryit.base.besttmwuu.service.LikeService;
-import com.carryit.base.besttmwuu.service.PraiseService;
-import com.carryit.base.besttmwuu.service.SignInService;
-import com.carryit.base.besttmwuu.service.UserPostService;
 
 @RestController
 @RequestMapping("/likes")

@@ -1,6 +1,6 @@
-package com.carryit.base.besttmwuu.dao;
+package com.carryit.base.xmuu.dao;
 
-import com.carryit.base.besttmwuu.entity.UpdateUU;
+import com.carryit.base.xmuu.entity.UpdateUU;
 import org.springframework.stereotype.Repository;
 
 @Repository

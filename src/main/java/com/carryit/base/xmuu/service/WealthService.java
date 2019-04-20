@@ -1,6 +1,6 @@
-package com.carryit.base.besttmwuu.service;
+package com.carryit.base.xmuu.service;
 
-import com.carryit.base.besttmwuu.entity.UserDTO;
+import com.carryit.base.xmuu.entity.UserDTO;
 
 import java.util.List;
 

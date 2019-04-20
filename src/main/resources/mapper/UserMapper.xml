@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.carryit.base.besttmwuu.dao.UserDao">
-	<!--<resultMap id="BaseResultMap" type="com.carryit.base.besttmwuu.entity.User">-->
+<mapper namespace="com.carryit.base.xmuu.dao.UserDao">
+	<!--<resultMap id="BaseResultMap" type="com.carryit.base.xmuu.entity.User">-->
 		<!--<id column="id" property="id" jdbcType="INTEGER" />-->
 		<!--<result column="user_name" property="userName" jdbcType="VARCHAR" />-->
 		<!--<result column="password" property="password" jdbcType="VARCHAR" />-->
@@ -10,7 +10,7 @@
 	<sql id="Base_Column_List">
 		uid, phone, password, age
 	</sql>
-	<select id="selectByPrimaryKey" resultType="com.carryit.base.besttmwuu.entity.User"
+	<select id="selectByPrimaryKey" resultType="com.carryit.base.xmuu.entity.User"
 		>
 		select
 		uid,phone,hideSincerity
@@ -18,14 +18,14 @@
 		where uid = #{uid}
 	</select>
 	<!--后台登录用户匹配数据库-->
-	<select id="getUserByPoneAndPassword" resultType="com.carryit.base.besttmwuu.entity.User">
+	<select id="getUserByPoneAndPassword" resultType="com.carryit.base.xmuu.entity.User">
 
 		SELECT * from ims_users where phone=#{phone} or username = #{phone}
 
 
 	</select>
 
-	<insert id="insertSelective" parameterType="com.carryit.base.besttmwuu.entity.User" useGeneratedKeys="true" keyProperty="uid" keyColumn="uid">
+	<insert id="insertSelective" parameterType="com.carryit.base.xmuu.entity.User" useGeneratedKeys="true" keyProperty="uid" keyColumn="uid">
 		insert into ims_users
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 
@@ -124,7 +124,7 @@
 			</if>
 		</trim>
 	</insert>
-	<update id="updateUser"  parameterType="com.carryit.base.besttmwuu.entity.User">
+	<update id="updateUser"  parameterType="com.carryit.base.xmuu.entity.User">
 		update ims_users
 		<set>
 			<if test="userName != null">
@@ -174,7 +174,7 @@
 		</set>
 		where uid = #{uid,jdbcType=INTEGER}
 	</update>
-<!--	<update id="updateByPrimaryKey" parameterType="com.carryit.base.besttmwuu.entity.User">
+<!--	<update id="updateByPrimaryKey" parameterType="com.carryit.base.xmuu.entity.User">
 		update t_user
 		set user_name = #{userName,jdbcType=VARCHAR},
 		password = #{password,jdbcType=VARCHAR},
@@ -183,7 +183,7 @@
 	</update>-->
 
 	<!-- 根据手机号查表  -->
-	<select id="selectByPhone" resultType="com.carryit.base.besttmwuu.entity.User"
+	<select id="selectByPhone" resultType="com.carryit.base.xmuu.entity.User"
 		parameterType="java.lang.String">
 		select
 		<include refid="Base_Column_List" />
@@ -198,7 +198,7 @@
 	</update>
 
 	<!--通过ID查-->
-	<select id="getUserById" resultType="com.carryit.base.besttmwuu.entity.User">
+	<select id="getUserById" resultType="com.carryit.base.xmuu.entity.User">
 		select * from ims_users where uid = #{id}
 
 	</select>

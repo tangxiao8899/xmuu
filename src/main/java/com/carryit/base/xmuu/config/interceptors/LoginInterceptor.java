@@ -1,6 +1,5 @@
-package com.carryit.base.besttmwuu.config.interceptors;
+package com.carryit.base.xmuu.config.interceptors;
 
-import com.carryit.base.besttmwuu.entity.User;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;

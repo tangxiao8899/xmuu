@@ -1,6 +1,6 @@
-package com.carryit.base.besttmwuu.dao;
+package com.carryit.base.xmuu.dao;
 
-import com.carryit.base.besttmwuu.entity.imsEweiShopZrbglobonus;
+import com.carryit.base.xmuu.entity.imsEweiShopZrbglobonus;
 
 public interface imsEweiShopZrbglobonusMapper {
     int deleteByPrimaryKey(Integer id);

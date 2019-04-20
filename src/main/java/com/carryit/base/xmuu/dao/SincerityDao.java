@@ -1,10 +1,10 @@
-package com.carryit.base.besttmwuu.dao;
+package com.carryit.base.xmuu.dao;
 
-import com.carryit.base.besttmwuu.entity.Sincerity;
 
 import java.util.List;
 
-import com.carryit.base.besttmwuu.entity.UserDTO;
+import com.carryit.base.xmuu.entity.Sincerity;
+import com.carryit.base.xmuu.entity.UserDTO;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 

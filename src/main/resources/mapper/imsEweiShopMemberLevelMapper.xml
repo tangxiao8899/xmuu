@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.carryit.base.besttmwuu.dao.imsEweiShopMemberLevelMapper">
-  <resultMap id="BaseResultMap" type="com.carryit.base.besttmwuu.entity.imsEweiShopMemberLevel">
+<mapper namespace="com.carryit.base.xmuu.dao.imsEweiShopMemberLevelMapper">
+  <resultMap id="BaseResultMap" type="com.carryit.base.xmuu.entity.imsEweiShopMemberLevel">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="uniacid" jdbcType="INTEGER" property="uniacid" />
     <result column="level" jdbcType="INTEGER" property="level" />
@@ -18,7 +18,7 @@
     <result column="totalpeople" jdbcType="INTEGER" property="totalpeople" />
     <result column="teampercent" jdbcType="DECIMAL" property="teampercent" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.carryit.base.besttmwuu.entity.imsEweiShopMemberLevel">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.carryit.base.xmuu.entity.imsEweiShopMemberLevel">
     <result column="goodsids" jdbcType="LONGVARCHAR" property="goodsids" />
   </resultMap>
   <sql id="Base_Column_List">
@@ -40,7 +40,7 @@
     delete from ims_ewei_shop_member_level
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopMemberLevel">
+  <insert id="insert" parameterType="com.carryit.base.xmuu.entity.imsEweiShopMemberLevel">
     insert into ims_ewei_shop_member_level (id, uniacid, level, 
       levelname, ordermoney, ordercount, 
       discount, enabled, enabledadd, 
@@ -54,7 +54,7 @@
       #{percent,jdbcType=DECIMAL}, #{totalpeople,jdbcType=INTEGER}, #{teampercent,jdbcType=DECIMAL}, 
       #{goodsids,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopMemberLevel">
+  <insert id="insertSelective" parameterType="com.carryit.base.xmuu.entity.imsEweiShopMemberLevel">
     insert into ims_ewei_shop_member_level
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -157,7 +157,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopMemberLevel">
+  <update id="updateByPrimaryKeySelective" parameterType="com.carryit.base.xmuu.entity.imsEweiShopMemberLevel">
     update ims_ewei_shop_member_level
     <set>
       <if test="uniacid != null">
@@ -208,7 +208,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopMemberLevel">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.carryit.base.xmuu.entity.imsEweiShopMemberLevel">
     update ims_ewei_shop_member_level
     set uniacid = #{uniacid,jdbcType=INTEGER},
       level = #{level,jdbcType=INTEGER},
@@ -227,7 +227,7 @@
       goodsids = #{goodsids,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopMemberLevel">
+  <update id="updateByPrimaryKey" parameterType="com.carryit.base.xmuu.entity.imsEweiShopMemberLevel">
     update ims_ewei_shop_member_level
     set uniacid = #{uniacid,jdbcType=INTEGER},
       level = #{level,jdbcType=INTEGER},

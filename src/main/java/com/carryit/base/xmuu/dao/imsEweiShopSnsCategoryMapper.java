@@ -1,6 +1,6 @@
-package com.carryit.base.besttmwuu.dao;
+package com.carryit.base.xmuu.dao;
 
-import com.carryit.base.besttmwuu.entity.imsEweiShopSnsCategory;
+import com.carryit.base.xmuu.entity.imsEweiShopSnsCategory;
 
 public interface imsEweiShopSnsCategoryMapper {
     int deleteByPrimaryKey(Integer id);

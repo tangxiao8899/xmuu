@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.carryit.base.besttmwuu.dao.imsEweiShopSnsBoardMapper">
-  <resultMap id="BaseResultMap" type="com.carryit.base.besttmwuu.entity.imsEweiShopSnsBoard">
+<mapper namespace="com.carryit.base.xmuu.dao.imsEweiShopSnsBoardMapper">
+  <resultMap id="BaseResultMap" type="com.carryit.base.xmuu.entity.imsEweiShopSnsBoard">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="uniacid" jdbcType="INTEGER" property="uniacid" />
     <result column="cid" jdbcType="INTEGER" property="cid" />
@@ -36,7 +36,7 @@
     <result column="notpartner" jdbcType="TINYINT" property="notpartner" />
     <result column="notpartnerpost" jdbcType="TINYINT" property="notpartnerpost" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.carryit.base.besttmwuu.entity.imsEweiShopSnsBoardWithBLOBs">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.carryit.base.xmuu.entity.imsEweiShopSnsBoardWithBLOBs">
     <result column="showgroups" jdbcType="LONGVARCHAR" property="showgroups" />
     <result column="showlevels" jdbcType="LONGVARCHAR" property="showlevels" />
     <result column="postgroups" jdbcType="LONGVARCHAR" property="postgroups" />
@@ -71,7 +71,7 @@
     delete from ims_ewei_shop_sns_board
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopSnsBoardWithBLOBs">
+  <insert id="insert" parameterType="com.carryit.base.xmuu.entity.imsEweiShopSnsBoardWithBLOBs">
     insert into ims_ewei_shop_sns_board (id, uniacid, cid, 
       title, logo, desc, 
       displayorder, enabled, postcredit, 
@@ -103,7 +103,7 @@
       #{showsnslevels,jdbcType=LONGVARCHAR}, #{postsnslevels,jdbcType=LONGVARCHAR}, #{showpartnerlevels,jdbcType=LONGVARCHAR}, 
       #{postpartnerlevels,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopSnsBoardWithBLOBs">
+  <insert id="insertSelective" parameterType="com.carryit.base.xmuu.entity.imsEweiShopSnsBoardWithBLOBs">
     insert into ims_ewei_shop_sns_board
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -368,7 +368,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopSnsBoardWithBLOBs">
+  <update id="updateByPrimaryKeySelective" parameterType="com.carryit.base.xmuu.entity.imsEweiShopSnsBoardWithBLOBs">
     update ims_ewei_shop_sns_board
     <set>
       <if test="uniacid != null">
@@ -500,7 +500,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopSnsBoardWithBLOBs">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.carryit.base.xmuu.entity.imsEweiShopSnsBoardWithBLOBs">
     update ims_ewei_shop_sns_board
     set uniacid = #{uniacid,jdbcType=INTEGER},
       cid = #{cid,jdbcType=INTEGER},
@@ -546,7 +546,7 @@
       postpartnerlevels = #{postpartnerlevels,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopSnsBoard">
+  <update id="updateByPrimaryKey" parameterType="com.carryit.base.xmuu.entity.imsEweiShopSnsBoard">
     update ims_ewei_shop_sns_board
     set uniacid = #{uniacid,jdbcType=INTEGER},
       cid = #{cid,jdbcType=INTEGER},

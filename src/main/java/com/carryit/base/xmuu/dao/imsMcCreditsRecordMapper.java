@@ -1,6 +1,6 @@
-package com.carryit.base.besttmwuu.dao;
+package com.carryit.base.xmuu.dao;
 
-import com.carryit.base.besttmwuu.entity.imsMcCreditsRecord;
+import com.carryit.base.xmuu.entity.imsMcCreditsRecord;
 
 public interface imsMcCreditsRecordMapper {
     int deleteByPrimaryKey(Integer id);

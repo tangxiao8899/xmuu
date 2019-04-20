@@ -1,8 +1,8 @@
-package com.carryit.base.besttmwuu.service;
+package com.carryit.base.xmuu.service;
 
 import java.util.List;
 
-import com.carryit.base.besttmwuu.entity.ImsUsers;
+import com.carryit.base.xmuu.entity.ImsUsers;
 
 /**
  * 及时通讯相关服务

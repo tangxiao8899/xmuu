@@ -1,6 +1,6 @@
-package com.carryit.base.besttmwuu.dao;
+package com.carryit.base.xmuu.dao;
 
-import com.carryit.base.besttmwuu.entity.imsEweiShopSnsBoardFollow;
+import com.carryit.base.xmuu.entity.imsEweiShopSnsBoardFollow;
 
 public interface imsEweiShopSnsBoardFollowMapper {
     int deleteByPrimaryKey(Integer id);

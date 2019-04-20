@@ -1,6 +1,6 @@
-package com.carryit.base.besttmwuu.dao;
+package com.carryit.base.xmuu.dao;
 
-import com.carryit.base.besttmwuu.entity.imsEweiShopSnsLevel;
+import com.carryit.base.xmuu.entity.imsEweiShopSnsLevel;
 
 public interface imsEweiShopSnsLevelMapper {
     int deleteByPrimaryKey(Integer id);

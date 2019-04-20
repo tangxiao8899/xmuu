@@ -1,8 +1,8 @@
-package com.carryit.base.besttmwuu.service.impl;
+package com.carryit.base.xmuu.service.impl;
 
-import com.carryit.base.besttmwuu.dao.ImsUserCapitalFlowDao;
-import com.carryit.base.besttmwuu.entity.ImsUserCapitalFlowEntity;
-import com.carryit.base.besttmwuu.service.ImsUserCapitalFlowService;
+import com.carryit.base.xmuu.dao.ImsUserCapitalFlowDao;
+import com.carryit.base.xmuu.entity.ImsUserCapitalFlowEntity;
+import com.carryit.base.xmuu.service.ImsUserCapitalFlowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

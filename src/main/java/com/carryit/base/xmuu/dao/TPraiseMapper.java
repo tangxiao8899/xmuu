@@ -1,8 +1,9 @@
-package com.carryit.base.besttmwuu.dao;
+package com.carryit.base.xmuu.dao;
 
-import com.carryit.base.besttmwuu.entity.TPraise;
-import com.carryit.base.besttmwuu.entity.TPraiseExample;
 import java.util.List;
+
+import com.carryit.base.xmuu.entity.TPraise;
+import com.carryit.base.xmuu.entity.TPraiseExample;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 

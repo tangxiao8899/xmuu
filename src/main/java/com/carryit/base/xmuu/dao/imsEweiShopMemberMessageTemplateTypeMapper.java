@@ -1,6 +1,6 @@
-package com.carryit.base.besttmwuu.dao;
+package com.carryit.base.xmuu.dao;
 
-import com.carryit.base.besttmwuu.entity.imsEweiShopMemberMessageTemplateType;
+import com.carryit.base.xmuu.entity.imsEweiShopMemberMessageTemplateType;
 
 public interface imsEweiShopMemberMessageTemplateTypeMapper {
     int deleteByPrimaryKey(Integer id);

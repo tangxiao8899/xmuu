@@ -1,8 +1,8 @@
-package com.carryit.base.besttmwuu.service;
+package com.carryit.base.xmuu.service;
 
-import com.alibaba.fastjson.JSONObject;
+
 import com.base.ResultPojo;
-import com.carryit.base.besttmwuu.entity.User;
+
 
 public interface HximService {
 

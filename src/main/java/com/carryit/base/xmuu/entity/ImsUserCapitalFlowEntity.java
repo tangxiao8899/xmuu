@@ -1,6 +1,4 @@
-package com.carryit.base.besttmwuu.entity;
-
-import java.util.Date;
+package com.carryit.base.xmuu.entity;
 
 /**
  * 账户资金流水实体

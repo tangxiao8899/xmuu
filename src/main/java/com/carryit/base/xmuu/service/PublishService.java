@@ -1,6 +1,6 @@
-package com.carryit.base.besttmwuu.service;
+package com.carryit.base.xmuu.service;
 
-import com.carryit.base.besttmwuu.entity.ImsEweiShopSnsPostWithBLOBs;
+import com.carryit.base.xmuu.entity.ImsEweiShopSnsPostWithBLOBs;
 
 import java.util.List;
 

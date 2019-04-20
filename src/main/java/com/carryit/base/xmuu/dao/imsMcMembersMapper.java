@@ -1,7 +1,7 @@
-package com.carryit.base.besttmwuu.dao;
+package com.carryit.base.xmuu.dao;
 
-import com.carryit.base.besttmwuu.entity.imsMcMembers;
-import com.carryit.base.besttmwuu.entity.imsMcMembersWithBLOBs;
+import com.carryit.base.xmuu.entity.imsMcMembers;
+import com.carryit.base.xmuu.entity.imsMcMembersWithBLOBs;
 
 public interface imsMcMembersMapper {
     int deleteByPrimaryKey(Integer uid);

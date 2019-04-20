@@ -1,14 +1,14 @@
-package com.carryit.base.besttmwuu.web;
+package com.carryit.base.xmuu.web;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 import com.alibaba.fastjson.JSON;
-import com.carryit.base.besttmwuu.entity.MessageCode;
-import com.carryit.base.besttmwuu.service.MessageCodeService;
-import com.carryit.base.besttmwuu.service.UserService;
-import com.carryit.base.besttmwuu.service.impl.MessageService;
+import com.carryit.base.xmuu.entity.MessageCode;
+import com.carryit.base.xmuu.entity.User;
+import com.carryit.base.xmuu.service.MessageCodeService;
+import com.carryit.base.xmuu.service.UserService;
+import com.carryit.base.xmuu.service.impl.MessageService;
+import com.carryit.base.xmuu.service.impl.RegisterServiceImpl;
 import com.util.PropertyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
@@ -20,10 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSONObject;
 import com.base.BaseController;
-import com.base.ServiceConfig;
-import com.bean.RegisterReq;
-import com.carryit.base.besttmwuu.entity.User;
-import com.carryit.base.besttmwuu.service.impl.RegisterServiceImpl;
 import com.util.Log;
 
 @RestController

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.carryit.base.besttmwuu.dao.CashApplyDao">
+<mapper namespace="com.carryit.base.xmuu.dao.CashApplyDao">
 
     <!--保存-->
     <insert id="save">
@@ -23,7 +23,7 @@
     </select>
 
     <!--提现数据-->
-    <select id="cashData" resultType="com.carryit.base.besttmwuu.entity.CashDataDTO">
+    <select id="cashData" resultType="com.carryit.base.xmuu.entity.CashDataDTO">
         SELECT
         l.id,
         m.uid,

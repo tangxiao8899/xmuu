@@ -1,6 +1,6 @@
-package com.carryit.base.besttmwuu.web;
+package com.carryit.base.xmuu.web;
 
-import com.carryit.base.besttmwuu.entity.Prize;
+import com.carryit.base.xmuu.entity.Prize;
 
 import java.util.Collections;
 import java.util.LinkedList;

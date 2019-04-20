@@ -1,7 +1,6 @@
-package com.carryit.base.besttmwuu.dao;
+package com.carryit.base.xmuu.dao;
 
-
-import com.carryit.base.besttmwuu.entity.UserLevel;
+import com.carryit.base.xmuu.entity.UserLevel;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

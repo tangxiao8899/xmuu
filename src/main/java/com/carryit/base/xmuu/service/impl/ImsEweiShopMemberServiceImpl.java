@@ -1,19 +1,19 @@
-package com.carryit.base.besttmwuu.service.impl;
+package com.carryit.base.xmuu.service.impl;
 
 import java.util.List;
 
+import com.carryit.base.xmuu.dao.imsEweiShopMemberMapper;
+import com.carryit.base.xmuu.entity.imsEweiShopMember;
+import com.carryit.base.xmuu.service.ImsEweiShopMemberService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
-import com.carryit.base.besttmwuu.dao.imsEweiShopMemberMapper;
-import com.carryit.base.besttmwuu.entity.imsEweiShopMember;
-import com.carryit.base.besttmwuu.service.ImsEweiShopMemberService;
 
 @Service
-public class ImsEweiShopMemberServiceImpl implements ImsEweiShopMemberService{
+public class ImsEweiShopMemberServiceImpl implements ImsEweiShopMemberService {
 	private final Logger log = LoggerFactory.getLogger(ImsEweiShopMemberServiceImpl.class);
 	
 	@Autowired

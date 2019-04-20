@@ -1,8 +1,8 @@
-package com.carryit.base.besttmwuu.service;
+package com.carryit.base.xmuu.service;
 
-import com.carryit.base.besttmwuu.entity.Activity;
-import com.carryit.base.besttmwuu.entity.SignUp;
-import com.carryit.base.besttmwuu.entity.SignUpDTO;
+import com.carryit.base.xmuu.entity.Activity;
+import com.carryit.base.xmuu.entity.SignUp;
+import com.carryit.base.xmuu.entity.SignUpDTO;
 
 import java.util.List;
 

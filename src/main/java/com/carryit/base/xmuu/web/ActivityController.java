@@ -1,14 +1,12 @@
-package com.carryit.base.besttmwuu.web;
+package com.carryit.base.xmuu.web;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.base.BaseController;
 import com.bean.Page;
-import com.bean.req.BoardReq;
-import com.carryit.base.besttmwuu.entity.*;
-import com.carryit.base.besttmwuu.service.ActivityService;
-import com.carryit.base.besttmwuu.service.MemberService;
-import com.carryit.base.besttmwuu.service.UserLevelService;
+import com.carryit.base.xmuu.entity.*;
+import com.carryit.base.xmuu.service.ActivityService;
+import com.carryit.base.xmuu.service.MemberService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -255,7 +253,7 @@ public class ActivityController extends BaseController {
                                 }
                                 if (member.getLevel().equals(act.getLevel())) {
                                     ////判断人员是否满员,参加人数小于总人数
-                                    if (act.getPeopleNumber()==0) {
+                                    if (act.getPeopleNumber() == 0) {
                                         activityService.signUpRelease(signUp);
                                         return doObjRespSuccess("报名成功");
                                     } else if (act.getJoinNumber() < act.getPeopleNumber()) {
@@ -418,3 +416,4 @@ public class ActivityController extends BaseController {
         return null;
     }
 }
+

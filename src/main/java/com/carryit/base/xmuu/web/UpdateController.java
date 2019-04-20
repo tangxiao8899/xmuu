@@ -1,11 +1,9 @@
-package com.carryit.base.besttmwuu.web;
+package com.carryit.base.xmuu.web;
 
 import com.alibaba.fastjson.JSONObject;
 import com.base.BaseController;
-import com.bean.req.BoardReq;
-import com.carryit.base.besttmwuu.entity.Member;
-import com.carryit.base.besttmwuu.entity.UpdateUU;
-import com.carryit.base.besttmwuu.service.UpdateUUService;
+import com.carryit.base.xmuu.entity.UpdateUU;
+import com.carryit.base.xmuu.service.UpdateUUService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

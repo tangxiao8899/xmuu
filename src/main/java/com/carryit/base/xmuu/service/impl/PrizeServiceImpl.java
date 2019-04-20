@@ -1,9 +1,9 @@
-package com.carryit.base.besttmwuu.service.impl;
+package com.carryit.base.xmuu.service.impl;
 
-import com.carryit.base.besttmwuu.dao.PrizeDao;
-import com.carryit.base.besttmwuu.entity.Prize;
-import com.carryit.base.besttmwuu.service.PrizeService;
 
+import com.carryit.base.xmuu.dao.PrizeDao;
+import com.carryit.base.xmuu.entity.Prize;
+import com.carryit.base.xmuu.service.PrizeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

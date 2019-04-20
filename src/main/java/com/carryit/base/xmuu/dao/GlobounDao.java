@@ -1,6 +1,6 @@
-package com.carryit.base.besttmwuu.dao;
+package com.carryit.base.xmuu.dao;
 
-import com.carryit.base.besttmwuu.entity.Globouns;
+import com.carryit.base.xmuu.entity.Globouns;
 import org.springframework.stereotype.Repository;
 
 @Repository

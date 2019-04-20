@@ -1,11 +1,10 @@
-package com.carryit.base.besttmwuu.service.impl;
+package com.carryit.base.xmuu.service.impl;
 
-import com.carryit.base.besttmwuu.dao.ActivityDao;
-import com.carryit.base.besttmwuu.dao.BoardDao;
-import com.carryit.base.besttmwuu.entity.Activity;
-import com.carryit.base.besttmwuu.entity.SignUp;
-import com.carryit.base.besttmwuu.entity.SignUpDTO;
-import com.carryit.base.besttmwuu.service.ActivityService;
+import com.carryit.base.xmuu.dao.ActivityDao;
+import com.carryit.base.xmuu.entity.Activity;
+import com.carryit.base.xmuu.entity.SignUp;
+import com.carryit.base.xmuu.entity.SignUpDTO;
+import com.carryit.base.xmuu.service.ActivityService;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

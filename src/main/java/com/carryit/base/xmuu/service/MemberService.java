@@ -1,7 +1,7 @@
-package com.carryit.base.besttmwuu.service;
+package com.carryit.base.xmuu.service;
 
 import com.alibaba.fastjson.JSONObject;
-import com.carryit.base.besttmwuu.entity.*;
+import com.carryit.base.xmuu.entity.*;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.carryit.base.besttmwuu.dao.PrizeDao">
-    <resultMap id="Prize" type="com.carryit.base.besttmwuu.entity.Prize">
+<mapper namespace="com.carryit.base.xmuu.dao.PrizeDao">
+    <resultMap id="Prize" type="com.carryit.base.xmuu.entity.Prize">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="phone" property="phone" jdbcType="VARCHAR"/>
@@ -10,27 +10,27 @@
         <result column="createTime" property="createTime" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <insert id="addPrize" parameterType="com.carryit.base.besttmwuu.entity.Prize">
+    <insert id="addPrize" parameterType="com.carryit.base.xmuu.entity.Prize">
         insert into t_prize(name,phone,number) values(#{name},#{phone},#{number})
     </insert>
 
     <select id="getAllPrize" resultMap="Prize"
-            parameterType="com.carryit.base.besttmwuu.entity.Prize">
+            parameterType="com.carryit.base.xmuu.entity.Prize">
 		select id,name,phone,number,createTime
 		from t_prize
 	</select>
 
     <select id="getPrizeById" resultMap="Prize"
-            parameterType="com.carryit.base.besttmwuu.entity.Prize">
+            parameterType="com.carryit.base.xmuu.entity.Prize">
         select id,name,phone,number,createTime
         from t_prize
         where id=#{id}
     </select>
-    <delete id="deletePrizeById" parameterType="com.carryit.base.besttmwuu.entity.Prize">
+    <delete id="deletePrizeById" parameterType="com.carryit.base.xmuu.entity.Prize">
         delete from t_prize where id=#{id}
     </delete>
 
-    <update id="updatePrizeById" parameterType="com.carryit.base.besttmwuu.entity.Prize">
+    <update id="updatePrizeById" parameterType="com.carryit.base.xmuu.entity.Prize">
 		update t_prize set
 		name = #{name},
 		phone = #{phone},

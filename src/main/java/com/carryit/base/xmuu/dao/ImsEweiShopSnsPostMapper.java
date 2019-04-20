@@ -1,9 +1,8 @@
-package com.carryit.base.besttmwuu.dao;
+package com.carryit.base.xmuu.dao;
 
-import com.bean.req.TredsReq;
-import com.carryit.base.besttmwuu.entity.Post;
-import com.carryit.base.besttmwuu.entity.imsEweiShopSnsPost;
-import com.carryit.base.besttmwuu.entity.ImsEweiShopSnsPostWithBLOBs;
+import com.carryit.base.xmuu.entity.ImsEweiShopSnsPostWithBLOBs;
+import com.carryit.base.xmuu.entity.Post;
+import com.carryit.base.xmuu.entity.imsEweiShopSnsPost;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Repository;
 

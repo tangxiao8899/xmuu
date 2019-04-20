@@ -1,8 +1,8 @@
-package com.carryit.base.besttmwuu.service.impl;
+package com.carryit.base.xmuu.service.impl;
 
-import com.carryit.base.besttmwuu.dao.BoardDao;
-import com.carryit.base.besttmwuu.entity.Board;
-import com.carryit.base.besttmwuu.service.BoardService;
+import com.carryit.base.xmuu.dao.BoardDao;
+import com.carryit.base.xmuu.entity.Board;
+import com.carryit.base.xmuu.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

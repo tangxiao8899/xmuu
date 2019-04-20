@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.carryit.base.besttmwuu.dao.MessageCodeDao">
+<mapper namespace="com.carryit.base.xmuu.dao.MessageCodeDao">
 
 
-    <select id="getIdByPhone" resultType="com.carryit.base.besttmwuu.entity.MessageCode" parameterType="string">
+    <select id="getIdByPhone" resultType="com.carryit.base.xmuu.entity.MessageCode" parameterType="string">
         select * FROM ims_message WHERE phone=#{phoneNumber}
     </select>
 

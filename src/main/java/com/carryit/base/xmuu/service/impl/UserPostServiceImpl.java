@@ -1,8 +1,8 @@
-package com.carryit.base.besttmwuu.service.impl;
+package com.carryit.base.xmuu.service.impl;
 
-import com.carryit.base.besttmwuu.dao.UserPostDao;
-import com.carryit.base.besttmwuu.entity.UserPost;
-import com.carryit.base.besttmwuu.service.UserPostService;
+import com.carryit.base.xmuu.dao.UserPostDao;
+import com.carryit.base.xmuu.entity.UserPost;
+import com.carryit.base.xmuu.service.UserPostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

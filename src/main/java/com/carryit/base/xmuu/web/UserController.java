@@ -1,31 +1,23 @@
-package com.carryit.base.besttmwuu.web;
+package com.carryit.base.xmuu.web;
 
-import com.carryit.base.besttmwuu.entity.User;
-import com.carryit.base.besttmwuu.entity.UserGroup;
 import com.alibaba.fastjson.JSONObject;
 import com.base.BaseController;
 import com.bean.UserGroupReq;
 import com.bean.resp.PersonInfo;
-import com.carryit.base.besttmwuu.entity.ImsEweiShopSnsPostWithBLOBs;
-import com.carryit.base.besttmwuu.service.PublishService;
-import com.carryit.base.besttmwuu.service.UserService;
+import com.carryit.base.xmuu.entity.ImsEweiShopSnsPostWithBLOBs;
+import com.carryit.base.xmuu.entity.User;
+import com.carryit.base.xmuu.service.PublishService;
+import com.carryit.base.xmuu.service.UserService;
 import com.util.Log;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 @RestController
 @RequestMapping("/user")
 public class UserController extends BaseController {

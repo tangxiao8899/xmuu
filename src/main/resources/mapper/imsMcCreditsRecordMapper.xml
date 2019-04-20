@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.carryit.base.besttmwuu.dao.imsMcCreditsRecordMapper">
-  <resultMap id="BaseResultMap" type="com.carryit.base.besttmwuu.entity.imsMcCreditsRecord">
+<mapper namespace="com.carryit.base.xmuu.dao.imsMcCreditsRecordMapper">
+  <resultMap id="BaseResultMap" type="com.carryit.base.xmuu.entity.imsMcCreditsRecord">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="uid" jdbcType="INTEGER" property="uid" />
     <result column="uniacid" jdbcType="INTEGER" property="uniacid" />
@@ -29,7 +29,7 @@
     delete from ims_mc_credits_record
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.carryit.base.besttmwuu.entity.imsMcCreditsRecord">
+  <insert id="insert" parameterType="com.carryit.base.xmuu.entity.imsMcCreditsRecord">
     insert into ims_mc_credits_record (id, uid, uniacid, 
       credittype, num, operator, 
       createtime, remark, module, 
@@ -41,7 +41,7 @@
       #{clerkId,jdbcType=INTEGER}, #{storeId,jdbcType=INTEGER}, #{clerkType,jdbcType=TINYINT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.carryit.base.besttmwuu.entity.imsMcCreditsRecord">
+  <insert id="insertSelective" parameterType="com.carryit.base.xmuu.entity.imsMcCreditsRecord">
     insert into ims_mc_credits_record
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -120,7 +120,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.carryit.base.besttmwuu.entity.imsMcCreditsRecord">
+  <update id="updateByPrimaryKeySelective" parameterType="com.carryit.base.xmuu.entity.imsMcCreditsRecord">
     update ims_mc_credits_record
     <set>
       <if test="uid != null">
@@ -159,7 +159,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.carryit.base.besttmwuu.entity.imsMcCreditsRecord">
+  <update id="updateByPrimaryKey" parameterType="com.carryit.base.xmuu.entity.imsMcCreditsRecord">
     update ims_mc_credits_record
     set uid = #{uid,jdbcType=INTEGER},
       uniacid = #{uniacid,jdbcType=INTEGER},

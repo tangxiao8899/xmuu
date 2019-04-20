@@ -1,4 +1,4 @@
-package com.carryit.base.besttmwuu;
+package com.carryit.base.xmuu;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -8,7 +8,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-@MapperScan("com.carryit.base.besttmwuu.dao")
+@MapperScan("com.carryit.base.xmuu.dao")
 public class XmuuApplication extends SpringBootServletInitializer {
 
     @Override

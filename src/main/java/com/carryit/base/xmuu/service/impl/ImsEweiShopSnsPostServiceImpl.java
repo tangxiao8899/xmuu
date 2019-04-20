@@ -1,15 +1,16 @@
-package com.carryit.base.besttmwuu.service.impl;
+package com.carryit.base.xmuu.service.impl;
 
-import com.bean.req.TredsReq;
-import com.carryit.base.besttmwuu.dao.MemberDao;
-import com.carryit.base.besttmwuu.entity.*;
+import com.carryit.base.xmuu.dao.ImsEweiShopSnsPostMapper;
+import com.carryit.base.xmuu.dao.MemberDao;
+import com.carryit.base.xmuu.dao.imsEweiShopMemberMapper;
+import com.carryit.base.xmuu.entity.ImsEweiShopSnsPostWithBLOBs;
+import com.carryit.base.xmuu.entity.Member;
+import com.carryit.base.xmuu.entity.Post;
+import com.carryit.base.xmuu.service.ImsEweiShopSnsPostService;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.carryit.base.besttmwuu.dao.ImsEweiShopSnsPostMapper;
-import com.carryit.base.besttmwuu.dao.imsEweiShopMemberMapper;
-import com.carryit.base.besttmwuu.service.ImsEweiShopSnsPostService;
 
 import java.util.List;
 

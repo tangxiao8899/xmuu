@@ -1,8 +1,7 @@
-package com.carryit.base.besttmwuu.service;
+package com.carryit.base.xmuu.service;
 
+import com.carryit.base.xmuu.entity.imsMcMembersWithBLOBs;
 import org.springframework.stereotype.Service;
-
-import com.carryit.base.besttmwuu.entity.imsMcMembersWithBLOBs;
 
 @Service
 public interface ImsMcMemberService {

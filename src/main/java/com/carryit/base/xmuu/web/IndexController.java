@@ -1,16 +1,13 @@
-package com.carryit.base.besttmwuu.web;
+package com.carryit.base.xmuu.web;
 
 import com.alibaba.fastjson.JSONObject;
 import com.base.BaseController;
-import com.bean.Page;
-import com.bean.req.BoardReq;
-import com.bean.req.PageParam;
 import com.bean.resp.BoardResp;
-import com.carryit.base.besttmwuu.entity.Board;
-import com.carryit.base.besttmwuu.entity.UserDTO;
-import com.carryit.base.besttmwuu.service.BoardService;
-import com.carryit.base.besttmwuu.service.SincerityService;
-import com.carryit.base.besttmwuu.service.WealthService;
+import com.carryit.base.xmuu.entity.Board;
+import com.carryit.base.xmuu.entity.UserDTO;
+import com.carryit.base.xmuu.service.BoardService;
+import com.carryit.base.xmuu.service.SincerityService;
+import com.carryit.base.xmuu.service.WealthService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;

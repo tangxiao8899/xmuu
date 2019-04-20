@@ -1,9 +1,9 @@
-package com.carryit.base.besttmwuu.service.impl;
+package com.carryit.base.xmuu.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
-import com.carryit.base.besttmwuu.dao.MemberDao;
-import com.carryit.base.besttmwuu.entity.*;
-import com.carryit.base.besttmwuu.service.MemberService;
+import com.carryit.base.xmuu.dao.MemberDao;
+import com.carryit.base.xmuu.entity.*;
+import com.carryit.base.xmuu.service.MemberService;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.carryit.base.besttmwuu.dao.imsEweiShopGoodsMapper">
-  <resultMap id="BaseResultMap" type="com.carryit.base.besttmwuu.entity.imsEweiShopGoods">
+<mapper namespace="com.carryit.base.xmuu.dao.imsEweiShopGoodsMapper">
+  <resultMap id="BaseResultMap" type="com.carryit.base.xmuu.entity.imsEweiShopGoods">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="uniacid" jdbcType="INTEGER" property="uniacid" />
     <result column="pcate" jdbcType="INTEGER" property="pcate" />
@@ -183,7 +183,7 @@
     <result column="beforehours" jdbcType="INTEGER" property="beforehours" />
     <result column="vipendtime" jdbcType="INTEGER" property="vipendtime" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.carryit.base.besttmwuu.entity.imsEweiShopGoodsWithBLOBs">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.carryit.base.xmuu.entity.imsEweiShopGoodsWithBLOBs">
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
     <result column="thumb_url" jdbcType="LONGVARCHAR" property="thumbUrl" />
     <result column="showlevels" jdbcType="LONGVARCHAR" property="showlevels" />
@@ -255,7 +255,7 @@
     delete from ims_ewei_shop_goods
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopGoodsWithBLOBs">
+  <insert id="insert" parameterType="com.carryit.base.xmuu.entity.imsEweiShopGoodsWithBLOBs">
     insert into ims_ewei_shop_goods (id, uniacid, pcate, 
       ccate, type, status, displayorder, 
       title, thumb, unit, 
@@ -395,7 +395,7 @@
       #{buyagainCommission,jdbcType=LONGVARCHAR}, #{edareasCode,jdbcType=LONGVARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopGoodsWithBLOBs">
+  <insert id="insertSelective" parameterType="com.carryit.base.xmuu.entity.imsEweiShopGoodsWithBLOBs">
     insert into ims_ewei_shop_goods
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -1626,7 +1626,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopGoodsWithBLOBs">
+  <update id="updateByPrimaryKeySelective" parameterType="com.carryit.base.xmuu.entity.imsEweiShopGoodsWithBLOBs">
     update ims_ewei_shop_goods
     <set>
       <if test="uniacid != null">
@@ -2241,7 +2241,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopGoodsWithBLOBs">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.carryit.base.xmuu.entity.imsEweiShopGoodsWithBLOBs">
     update ims_ewei_shop_goods
     set uniacid = #{uniacid,jdbcType=INTEGER},
       pcate = #{pcate,jdbcType=INTEGER},
@@ -2448,7 +2448,7 @@
       edareas_code = #{edareasCode,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.carryit.base.besttmwuu.entity.imsEweiShopGoods">
+  <update id="updateByPrimaryKey" parameterType="com.carryit.base.xmuu.entity.imsEweiShopGoods">
     update ims_ewei_shop_goods
     set uniacid = #{uniacid,jdbcType=INTEGER},
       pcate = #{pcate,jdbcType=INTEGER},

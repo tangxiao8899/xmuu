@@ -1,18 +1,13 @@
-package com.carryit.base.besttmwuu.web;
+package com.carryit.base.xmuu.web;
 
-import com.alibaba.fastjson.JSONObject;
-import com.base.BaseController;
 import com.base.ResultPojo;
-import com.carryit.base.besttmwuu.entity.User;
-import com.carryit.base.besttmwuu.service.HximService;
+import com.carryit.base.xmuu.service.HximService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import static com.base.BaseController.p;
 
 @RestController
 @RequestMapping("/hx")

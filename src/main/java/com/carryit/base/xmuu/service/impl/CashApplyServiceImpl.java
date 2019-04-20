@@ -1,11 +1,11 @@
-package com.carryit.base.besttmwuu.service.impl;
+package com.carryit.base.xmuu.service.impl;
 
-import com.carryit.base.besttmwuu.dao.CashApplyDao;
-import com.carryit.base.besttmwuu.entity.CashApply;
-import com.carryit.base.besttmwuu.entity.CashDataDTO;
-import com.carryit.base.besttmwuu.entity.Member;
-import com.carryit.base.besttmwuu.service.CashApplyService;
-import com.carryit.base.besttmwuu.service.MemberService;
+import com.carryit.base.xmuu.dao.CashApplyDao;
+import com.carryit.base.xmuu.entity.CashApply;
+import com.carryit.base.xmuu.entity.CashDataDTO;
+import com.carryit.base.xmuu.entity.Member;
+import com.carryit.base.xmuu.service.CashApplyService;
+import com.carryit.base.xmuu.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,7 +38,7 @@ public class CashApplyServiceImpl implements CashApplyService {
     }
 
     @Override
-    public List<CashDataDTO> cashData(String phone,int page,int limit) {
+    public List<CashDataDTO> cashData(String phone, int page, int limit) {
         int size = limit*(page-1);
         return cashApplyDao.cashData(phone,size,limit);
     }

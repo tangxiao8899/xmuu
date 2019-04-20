@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.carryit.base.besttmwuu.dao.OrderDao">
+<mapper namespace="com.carryit.base.xmuu.dao.OrderDao">
 
     <insert id="save" >
         insert into ims_ewei_shop_order
@@ -109,7 +109,7 @@
     </update>
 
     <!--根据订单号查询订单-->
-    <select id="queryOrder" resultType="com.carryit.base.besttmwuu.entity.Order">
+    <select id="queryOrder" resultType="com.carryit.base.xmuu.entity.Order">
         select id,ordersn,price,level
         from
         ims_ewei_shop_order

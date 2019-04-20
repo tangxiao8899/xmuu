@@ -1,8 +1,8 @@
-package com.carryit.base.besttmwuu.web;
+package com.carryit.base.xmuu.web;
 
 import com.base.ResultPojo;
 import com.bean.req.FriendsReq;
-import com.carryit.base.besttmwuu.service.TFriendsService;
+import com.carryit.base.xmuu.service.TFriendsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

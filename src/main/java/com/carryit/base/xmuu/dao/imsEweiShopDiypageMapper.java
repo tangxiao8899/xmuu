@@ -1,6 +1,6 @@
-package com.carryit.base.besttmwuu.dao;
+package com.carryit.base.xmuu.dao;
 
-import com.carryit.base.besttmwuu.entity.imsEweiShopDiypage;
+import com.carryit.base.xmuu.entity.imsEweiShopDiypage;
 
 public interface imsEweiShopDiypageMapper {
     int deleteByPrimaryKey(Integer id);

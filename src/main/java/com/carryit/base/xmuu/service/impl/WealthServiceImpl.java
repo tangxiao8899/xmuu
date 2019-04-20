@@ -1,9 +1,8 @@
-package com.carryit.base.besttmwuu.service.impl;
+package com.carryit.base.xmuu.service.impl;
 
-import com.carryit.base.besttmwuu.dao.WealthDao;
-import com.carryit.base.besttmwuu.entity.UserDTO;
-import com.carryit.base.besttmwuu.service.WealthService;
-import org.apache.ibatis.session.RowBounds;
+import com.carryit.base.xmuu.dao.WealthDao;
+import com.carryit.base.xmuu.entity.UserDTO;
+import com.carryit.base.xmuu.service.WealthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

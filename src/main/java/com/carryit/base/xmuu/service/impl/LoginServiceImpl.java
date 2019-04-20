@@ -1,18 +1,15 @@
-package com.carryit.base.besttmwuu.service.impl;
+package com.carryit.base.xmuu.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.bean.LoginReq;
-import com.carryit.base.besttmwuu.entity.Member;
-import com.carryit.base.besttmwuu.entity.MemberData;
-import com.carryit.base.besttmwuu.entity.User;
-import com.carryit.base.besttmwuu.service.LoginService;
-import com.carryit.base.besttmwuu.service.MemberService;
-import com.carryit.base.besttmwuu.service.UserService;
+import com.carryit.base.xmuu.entity.MemberData;
+import com.carryit.base.xmuu.entity.User;
+import com.carryit.base.xmuu.service.LoginService;
+import com.carryit.base.xmuu.service.MemberService;
+import com.carryit.base.xmuu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.*;
 
