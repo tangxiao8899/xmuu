@@ -43,12 +43,13 @@ public class WxPayServiceImpl implements WxPayService {
     @Autowired
     ImsUserCapitalFlowService imsUserCapitalFlowService;
 
-    private static final String UUqz = "0";//UU圈主
+    private static final String UUQZ = "0";//UU圈主
     private static final String CWQZ = "1";//常务圈主
-    private static final String Fqz = "2";//副圈主
-    private static final String UCgly = "3";//UU管理员
+    private static final String FQZ = "2";//副圈主
+    private static final String UUGLY = "3";//UU管理员
     private static final String GVIP = "4";//高级VIP
     private static final String MVIP = "5";//梦想VIP
+    private static final String ZSVIP = "6"; //钻石VIP
 
 
     @Override
@@ -141,7 +142,7 @@ public class WxPayServiceImpl implements WxPayService {
 
             //根据圈子id,职位level查询member表中该圈子有多少职位
             int orderCount = memberService.getMemberByUIdAndLevel(parmJo.getInteger("bid"), product.getLevel());
-            if (UUqz.equals(product.getLevel())) {
+            if (UUQZ.equals(product.getLevel())) {
                 if (orderCount >= 1) {
                     jo.put("code", 404);
                     jo.put("msg", "圈主名额已满");
@@ -155,14 +156,14 @@ public class WxPayServiceImpl implements WxPayService {
                     jo.put("data", null);
                     return jo;
                 }
-            } else if (Fqz.equals(product.getLevel())) {
+            } else if (FQZ.equals(product.getLevel())) {
                 if (orderCount >= 10) {
                     jo.put("code", 404);
                     jo.put("msg", "副圈主名额已满");
                     jo.put("data", null);
                     return jo;
                 }
-            } else if (UCgly.equals(product.getLevel())) {
+            } else if (UUGLY.equals(product.getLevel())) {
                 if (orderCount >= 50) {
                     jo.put("code", 404);
                     jo.put("msg", "管理员名额已满");
@@ -990,6 +991,119 @@ public class WxPayServiceImpl implements WxPayService {
         jo.put("msg", "SUCCESS");
         jo.put("data", 0);
         return jo;
+    }
+
+    @Override
+    public void royalty(String iCode, Order od) {
+        Member member=memberService.getLevelByICode(iCode);
+        String level = od.getLevel(); //用户等级
+        double price = od.getPrice();
+        String tlevel = member.getLevel();//推荐人等级
+
+        switch (level){
+            case MVIP:
+                if(MVIP.equals(tlevel) || GVIP.equals(tlevel) || ZSVIP.equals(tlevel)){
+                    updateDirectpushInfo(member.getUid(), (float) (price * Double.valueOf(PropertyUtil.getProperty("m_vip"))));
+                }
+                if(UUGLY.equals(tlevel) || FQZ.equals(tlevel) || CWQZ.equals(tlevel)){
+                    updateDirectpushInfo(member.getUid(), (float) (price * Double.valueOf(PropertyUtil.getProperty("m_qz"))));
+                }
+                if(UUQZ.equals(tlevel)){
+                    updateDirectpushInfo(member.getUid(), (float)(price * Double.valueOf(PropertyUtil.getProperty("m_uu"))));
+                }
+                break;
+            case GVIP:
+                if(MVIP.equals(tlevel) || GVIP.equals(tlevel) || ZSVIP.equals(tlevel)){
+                    updateDirectpushInfo(member.getUid(), (float) (price * Double.valueOf(PropertyUtil.getProperty("g_vip"))));
+                }
+                if(UUGLY.equals(tlevel) || FQZ.equals(tlevel) || CWQZ.equals(tlevel)){
+                    updateDirectpushInfo(member.getUid(), (float) (price * Double.valueOf(PropertyUtil.getProperty("g_qz"))));
+                }
+                if(UUQZ.equals(tlevel)){
+                    updateDirectpushInfo(member.getUid(), (float) (price * Double.valueOf(PropertyUtil.getProperty("g_uu"))));
+                }
+                break;
+            case ZSVIP:
+                if(MVIP.equals(tlevel) || GVIP.equals(tlevel) || ZSVIP.equals(tlevel)){
+                    updateDirectpushInfo(member.getUid(), (float)(price * Double.valueOf(PropertyUtil.getProperty("z_vip"))));
+                }
+                if(UUGLY.equals(tlevel) || FQZ.equals(tlevel) || CWQZ.equals(tlevel)){
+                    updateDirectpushInfo(member.getUid(), (float) (price * Double.valueOf(PropertyUtil.getProperty("z_qz"))));
+                }
+                if(UUQZ.equals(tlevel)){
+                    updateDirectpushInfo(member.getUid(), (float) (price * Double.valueOf(PropertyUtil.getProperty("z_uu"))));
+                }
+                break;
+            case UUGLY:
+                if(MVIP.equals(tlevel) || GVIP.equals(tlevel) || ZSVIP.equals(tlevel)){
+                    updateDirectpushInfo(member.getUid(), (float) (price * Double.valueOf(PropertyUtil.getProperty("gl_vip"))));
+                }
+                if(UUGLY.equals(tlevel) || FQZ.equals(tlevel) || CWQZ.equals(tlevel)){
+                    updateDirectpushInfo(member.getUid(), (float) (price * Double.valueOf(PropertyUtil.getProperty("gl_qz"))));
+                }
+                if(UUQZ.equals(tlevel)){
+                    updateDirectpushInfo(member.getUid(), (float)(price * Double.valueOf(PropertyUtil.getProperty("gl_uu"))));
+                }
+                break;
+            case FQZ:
+                if(MVIP.equals(tlevel) || GVIP.equals(tlevel) || ZSVIP.equals(tlevel)){
+                    updateDirectpushInfo(member.getUid(), (float) (price * Double.valueOf(PropertyUtil.getProperty("fqz_vip"))));
+                }
+                if(UUGLY.equals(tlevel) || FQZ.equals(tlevel) || CWQZ.equals(tlevel)){
+                    updateDirectpushInfo(member.getUid(), (float) (price * Double.valueOf(PropertyUtil.getProperty("fqz_qz"))));
+                }
+                if(UUQZ.equals(tlevel)){
+                    updateDirectpushInfo(member.getUid(), (float) (price * Double.valueOf(PropertyUtil.getProperty("fqz_uu"))));
+                }
+                break;
+            case CWQZ:
+                if(MVIP.equals(tlevel) || GVIP.equals(tlevel) || ZSVIP.equals(tlevel)){
+                    updateDirectpushInfo(member.getUid(), (float) (price * Double.valueOf(PropertyUtil.getProperty("cw_vip"))));
+                }
+                if(UUGLY.equals(tlevel) || FQZ.equals(tlevel) || CWQZ.equals(tlevel)){
+                    updateDirectpushInfo(member.getUid(), (float) (price * Double.valueOf(PropertyUtil.getProperty("cw_qz"))));
+                }
+                if(UUQZ.equals(tlevel)){
+                    updateDirectpushInfo(member.getUid(), (float) (price * Double.valueOf(PropertyUtil.getProperty("cw_uu"))));
+                }
+                break;
+            case UUQZ:
+                if(MVIP.equals(tlevel) || GVIP.equals(tlevel) || ZSVIP.equals(tlevel)){
+                    updateDirectpushInfo(member.getUid(), (float) (price * Double.valueOf(PropertyUtil.getProperty("uu_vip"))));
+                }
+                if(UUGLY.equals(tlevel) || FQZ.equals(tlevel) || CWQZ.equals(tlevel)){
+                    updateDirectpushInfo(member.getUid(), (float)(price * Double.valueOf(PropertyUtil.getProperty("uu_qz"))));
+                }
+                if(UUQZ.equals(tlevel)){
+                    updateDirectpushInfo(member.getUid(), (float) (price * Double.valueOf(PropertyUtil.getProperty("uu_uu"))));
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+
+    //直推
+    @Transactional
+    public void updateDirectpushInfo(Integer uid, Float total_fee) {
+
+        //查询Member表账户信息
+        Member fmember = memberService.getMemberById(uid);
+
+        float Creditf = fmember.getCredit2() + total_fee;
+
+        //更新用户账户情况
+        memberService.updateMemberByUid(uid, Creditf);
+
+        //记录资金流水
+        ImsUserCapitalFlowEntity entity = new ImsUserCapitalFlowEntity();
+        entity.setUid(uid);
+        entity.setPrice(total_fee);
+        entity.setSource(4); //打赏
+        entity.setType(0); //收入
+
+        imsUserCapitalFlowService.save(entity);
     }
 }
 

@@ -2,6 +2,7 @@ package com.carryit.base.xmuu.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.base.ResultPojo;
+import com.carryit.base.xmuu.entity.Order;
 
 /**
  * 微信支付服务
@@ -70,4 +71,11 @@ public interface WxPayService {
     JSONObject getBillsbyUid(String json);
 
     JSONObject manualCash(String json);
+
+    /**
+     * 给用户提成
+     * @param iCode
+     * @param od
+     */
+    void royalty(String iCode, Order od);
 }
