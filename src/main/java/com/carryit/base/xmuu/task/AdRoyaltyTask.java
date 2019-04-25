@@ -31,7 +31,7 @@ public class AdRoyaltyTask {
     }
 
     //每月1号凌晨2点分发收益
-    @Scheduled(cron="59 59 23 L * ?")
+    @Scheduled(cron="0 0 2 1 * ? *")
     private void configureTasks() {
         System.err.println("=========================开始执行收益分红=========================");
         //TODO
