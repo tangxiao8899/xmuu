@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.carryit.base.xmuu.dao.AdStatisticsDao">
+
+
+    <!--统计当月广告收益-->
+    <select id="totalMoneyForMonth" resultType="double" >
+        SELECT SUM(ad_profit) FROM t_ad_profit WHERE DATE_FORMAT(ad_time, '%Y%m') = DATE_FORMAT(CURDATE() , '%Y%m')
+    </select>
+
+    <!--插入统计表-->
+    <insert id="saveData"  parameterType="com.carryit.base.xmuu.entity.AdStatistics">
+        INSERT INTO t_ad_statistics(id,ad_statistics_date,ad_statistics_money)
+        VALUES(#{id},#{adStatisticsDate},#{adStatisticsMoney})
+    </insert>
+
+    <!--查询上月的统计数-->
+    <select id="adMoneyForMonth" resultType="double" >
+        SELECT SUM(ad_profit) FROM t_ad_statistics WHERE
+        PERIOD_DIFF(date_format(now() , '%Y%m' ),date_format(ad_statistics_date, '%Y%m')) =1
+    </select>
+</mapper>

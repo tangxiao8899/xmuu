@@ -1,12 +1,24 @@
 package com.carryit.base.xmuu.task;
 
+import com.carryit.base.xmuu.service.AdStatisticsService;
+import com.carryit.base.xmuu.service.MemberUpgradeStatisticsService;
+import com.carryit.base.xmuu.service.MerchantProfitStatisticsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
 
 @Component
 public class AdRoyaltyTask {
+
+    @Autowired
+    AdStatisticsService adStatisticsService;
+
+    @Autowired
+    MemberUpgradeStatisticsService memberUpgradeStatisticsService;
+
+    @Autowired
+    MerchantProfitStatisticsService merchantProfitStatisticsService;
 
     private static final int UUQZ = 0;//UU圈主
     private static final int CWQZ = 1;//常务圈主
@@ -20,12 +32,12 @@ public class AdRoyaltyTask {
     @Scheduled(cron="59 59 23 L * ?")
     private void statisticsTasks() {
         System.err.println("=========================开始执行收益统计=========================");
-        //TODO
         //统计当月广告总收益
-
+        adStatisticsService.statisticsAdMoneyForMonth();
         //统计当月同城商家净利润
-
+        merchantProfitStatisticsService.statisticsAdMoneyForMonth();
         //统计当月该区域会员升级数总额
+        memberUpgradeStatisticsService.statisticsAdMoneyForMonth();
 
         System.out.println("=========================收益统计执行结束=========================");
     }
@@ -34,6 +46,7 @@ public class AdRoyaltyTask {
     @Scheduled(cron="0 0 2 1 * ? *")
     private void configureTasks() {
         System.err.println("=========================开始执行收益分红=========================");
+        //记录分红分配情况
         //TODO
         //分发广告收益，【高级VIP30%、钻石VIP10%】
 

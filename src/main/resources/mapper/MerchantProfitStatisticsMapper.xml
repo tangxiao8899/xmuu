@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.carryit.base.xmuu.dao.MerchantProfitStatisticsDao">
+
+
+    <!--统计当月城市收益-->
+    <select id="totalMoneyForMonth" resultType="com.carryit.base.xmuu.entity.MerchantProfit" >
+        SELECT
+        SUM(merchant_profit) AS merchant_profit,city
+        FROM
+        t_merchant_profit
+        WHERE
+        DATE_FORMAT(profit_date, '%Y%m') = DATE_FORMAT(CURDATE(), '%Y%m')
+        GROUP BY city;
+    </select>
+
+    <!--插入统计表-->
+    <insert id="saveData"  parameterType="com.carryit.base.xmuu.entity.MerchantProfitStatistics">
+        INSERT INTO t_merchant_profit_statistics(id,city,profit,profit_date)
+        VALUES(#{id},#{city},#{profit},#{profitDate})
+    </insert>
+
+
+    <!--查询上月同城收益-->
+    <select id="t_merchant_profit_statistics" resultType="double" >
+        SELECT
+        SUM(profit)
+        FROM
+        t_merchant_profit_statistics
+        WHERE
+        WHERE PERIOD_DIFF(date_format(now() , '%Y%m' ),date_format(profit_date, '%Y%m')) =1
+        AND city = #{city}
+    </select>
+</mapper>
