@@ -162,6 +162,12 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public List<Member> getMemberForLevel(Integer level) {
+
+        return memberDao.getMemberForLevel(level);
+    }
+
+    @Override
     public String getICodeByUid(Integer uid) {
         return memberDao.getICodeByUid(uid);
     }

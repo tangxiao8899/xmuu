@@ -25,4 +25,7 @@ public interface MemberUpgradeStatisticsService {
      */
     Double areaCircleUpgradeMoney(@Param("city") String city, @Param("circle") String circle);
 
+
+    void saveUpgradeInfo(MemberUpgrade entity);
+
 }

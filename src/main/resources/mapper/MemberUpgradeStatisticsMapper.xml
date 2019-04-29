@@ -40,4 +40,10 @@
 
     </select>
 
+    <!--保存升级信息-->
+    <insert id="saveUpgradeInfo">
+        INSERT INTO t_member_upgrade(id,city,circle,money,upgrade_date,member_id)
+        VALUES(#{id},#{city},#{circle},#{money},now(),#{memberId})
+    </insert>
+
 </mapper>

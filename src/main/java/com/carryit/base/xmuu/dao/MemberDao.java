@@ -69,4 +69,6 @@ public interface MemberDao {
     String getICodeByUid(Integer uid);
 
     Member getLevelByICode(String iCode);
+
+    List<Member> getMemberForLevel(@Param("level") Integer level);
 }

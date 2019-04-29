@@ -15,4 +15,6 @@ public interface MemberUpgradeStatisticsDao {
     Double areaUpgradeMoney(@Param("city") String city);
 
     Double areaCircleUpgradeMoney(@Param("city") String city, @Param("circle") String circle);
+
+    void saveUpgradeInfo(MemberUpgrade entity);
 }

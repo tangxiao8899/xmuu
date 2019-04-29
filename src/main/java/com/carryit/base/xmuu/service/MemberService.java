@@ -62,4 +62,11 @@ public interface MemberService {
     String getICodeByUid(Integer uid);
 
     Member getLevelByICode(String iCode);
+
+    /**
+     * 查询当前等级下的所有会员
+     * @param level
+     * @return
+     */
+    List<Member> getMemberForLevel(Integer level);
 }

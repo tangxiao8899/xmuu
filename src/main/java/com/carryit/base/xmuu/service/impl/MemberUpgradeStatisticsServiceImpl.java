@@ -46,4 +46,9 @@ public class MemberUpgradeStatisticsServiceImpl implements MemberUpgradeStatisti
     public Double areaCircleUpgradeMoney(String city, String circle) {
         return dao.areaCircleUpgradeMoney(city,circle);
     }
+
+    @Override
+    public void saveUpgradeInfo(MemberUpgrade entity) {
+        dao.saveUpgradeInfo(entity);
+    }
 }

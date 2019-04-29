@@ -43,6 +43,9 @@ public class WxPayServiceImpl implements WxPayService {
     @Autowired
     ImsUserCapitalFlowService imsUserCapitalFlowService;
 
+    @Autowired
+    MemberUpgradeStatisticsService memberUpgradeStatisticsService;
+
     private static final String UUQZ = "0";//UU圈主
     private static final String CWQZ = "1";//常务圈主
     private static final String FQZ = "2";//副圈主
@@ -994,11 +997,21 @@ public class WxPayServiceImpl implements WxPayService {
     }
 
     @Override
+    @Transactional
     public void royalty(String iCode, Order od) {
         Member member=memberService.getLevelByICode(iCode);
         String level = od.getLevel(); //用户等级
         double price = od.getPrice();
         String tlevel = member.getLevel();//推荐人等级
+
+        MemberUpgrade mu = new MemberUpgrade();
+        mu.setId(UUID.randomUUID().toString().replace("-",""));
+        mu.setCity(member.getCity());
+        mu.setCircle(String.valueOf(member.getZhuquanzi()));
+        mu.setMoney(price);
+        mu.setMemberId(String.valueOf(member.getId()));
+        //保存升级信息
+        this.memberUpgradeStatisticsService.saveUpgradeInfo(mu);
 
         switch (level){
             case MVIP:
