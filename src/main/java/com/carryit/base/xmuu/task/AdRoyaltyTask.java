@@ -88,6 +88,21 @@ public class AdRoyaltyTask {
 
 
         //分发同城商家净利润【钻石VIP15%、管理员15%、副圈主10%、常务圈主5%、  UU圈主5%】
+        //同城的钻石VIP
+        List<Member> list = memberService.getMemberByCityAndLevel(ZSVIP);
+
+        //同城的管理员
+
+        //同城的副圈主
+
+        //同城的常务圈主
+
+        //同城的UU圈主
+
+        for(Member m : zhList){
+
+        }
+
         //this.merchantProfitStatisticsService.sameCityMoney();
 
 

@@ -315,4 +315,11 @@
 	<select id="getMemberForLevel" resultType="com.carryit.base.xmuu.entity.Member">
 		SELECT id,zhuquanzi,`level`,city,uid FROM ims_ewei_shop_member WHERE `level` =#{level};
 	</select>
+
+	<select id="getMemberByCityAndLevel" resultType="com.carryit.base.xmuu.entity.Member">
+		SELECT id,zhuquanzi,`level`,city,uid FROM ims_ewei_shop_member WHERE `level` =#{level}
+		group by city;
+
+
+	</select>
 </mapper>

@@ -69,4 +69,11 @@ public interface MemberService {
      * @return
      */
     List<Member> getMemberForLevel(Integer level);
+
+    /**
+     * 查询同城，当前等级下的所有会员
+     * @param level
+     * @return
+     */
+    List<Member> getMemberByCityAndLevel(Integer level);
 }

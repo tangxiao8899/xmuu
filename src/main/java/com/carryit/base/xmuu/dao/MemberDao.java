@@ -71,4 +71,6 @@ public interface MemberDao {
     Member getLevelByICode(String iCode);
 
     List<Member> getMemberForLevel(@Param("level") Integer level);
+
+    List<Member> getMemberByCityAndLevel(@Param("level") Integer level);
 }
