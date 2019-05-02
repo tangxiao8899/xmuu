@@ -316,10 +316,46 @@
 		SELECT id,zhuquanzi,`level`,city,uid FROM ims_ewei_shop_member WHERE `level` =#{level};
 	</select>
 
-	<select id="getMemberByCityAndLevel" resultType="com.carryit.base.xmuu.entity.Member">
-		SELECT id,zhuquanzi,`level`,city,uid FROM ims_ewei_shop_member WHERE `level` =#{level}
+	<!--查询所有城市-->
+	<select id="getMemberCity" resultType="com.carryit.base.xmuu.entity.Member">
+		SELECT id,city FROM ims_ewei_shop_member
 		group by city;
+	</select>
 
+	<!--查询同城，当前等级下会员-->
+	<select id="getMemberByCityAndLevel" resultType="com.carryit.base.xmuu.entity.Member">
+		SELECT id,zhuquanzi,`level`,city,uid FROM ims_ewei_shop_member WHERE `level` =#{level} and city = #{city};
+	</select>
+
+	<select id="getMemberByCityAndQz" resultType="com.carryit.base.xmuu.entity.Member">
+		SELECT id,city,zhuquanzi FROM ims_ewei_shop_member
+		group by city,zhuquanzi;
+	</select>
+
+	<select id="getMemberByCityAndQzAndLevel" resultType="com.carryit.base.xmuu.entity.Member">
+		SELECT id,zhuquanzi,`level`,city,uid FROM ims_ewei_shop_member
+		WHERE   city = #{city} and zhuquanzi =#{zhuquanzi}
+		order by id desc
+		<if test="level == 6">
+		limit 250
+		</if>
+		<if test="level == 3">
+			limit 50
+		</if>
+		<if test="level == 2">
+			limit 10
+		</if>
+		<if test="level == 1">
+			limit 2
+		</if>
+		<if test="level == 0">
+			limit 1
+		</if>
 
 	</select>
+
+
+
+
+
 </mapper>

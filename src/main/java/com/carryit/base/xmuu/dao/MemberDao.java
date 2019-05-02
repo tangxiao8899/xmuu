@@ -72,5 +72,11 @@ public interface MemberDao {
 
     List<Member> getMemberForLevel(@Param("level") Integer level);
 
-    List<Member> getMemberByCityAndLevel(@Param("level") Integer level);
+    List<Member> getMemberCity();
+
+    List<Member> getMemberByCityAndLevel(@Param("city") String city,@Param("level") Integer level);
+
+    List<Member> getMemberByCityAndQz();
+
+    List<Member> getMemberByCityAndQzAndLevel(@Param("city")String city, @Param("zhuquanzi") Integer zhuquanzi ,@Param("level")Integer level);
 }

@@ -168,9 +168,24 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public List<Member> getMemberByCityAndLevel(Integer level) {
+    public List<Member> getMemberByCityAndLevel(String city, Integer level) {
+        return memberDao.getMemberByCityAndLevel(city,level);
+    }
 
-        return memberDao.getMemberByCityAndLevel(level);
+    @Override
+    public List<Member> getMemberByCityAndQz() {
+        return memberDao.getMemberByCityAndQz();
+    }
+
+    @Override
+    public List<Member> getMemberByCityAndQzAndLevel(String city, Integer zhuquanzi, Integer level) {
+        return memberDao.getMemberByCityAndQzAndLevel(city,zhuquanzi,level);
+    }
+
+    @Override
+    public List<Member> getMemberCity() {
+
+        return memberDao.getMemberCity();
     }
 
     @Override

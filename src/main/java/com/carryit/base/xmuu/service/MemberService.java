@@ -71,9 +71,24 @@ public interface MemberService {
     List<Member> getMemberForLevel(Integer level);
 
     /**
-     * 查询同城，当前等级下的所有会员
+     * 查询所有城市
+     * @return
+     */
+    List<Member> getMemberCity();
+
+    /**
+     *查询同城，当前等级下的所有会员
+     * @param city
      * @param level
      * @return
      */
-    List<Member> getMemberByCityAndLevel(Integer level);
+    List<Member> getMemberByCityAndLevel(String city,Integer level);
+
+    /**
+     * 查询所有城市、圈子
+     * @return
+     */
+    List<Member> getMemberByCityAndQz();
+
+    List<Member> getMemberByCityAndQzAndLevel(String city,Integer zhuquanzi,Integer level);
 }
