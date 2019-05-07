@@ -602,6 +602,23 @@ public class CirclesController extends BaseController {
                     e.printStackTrace();
                     return faild("失败~",false);
                 }
+            case 16:
+                List<BoardAll> boardAllList = new ArrayList<>();
+
+                BoardAll brq = p(json, BoardAll.class);
+                try {
+                    if (brq != null) {
+                        boardAllList = boardFollowService.getBoardAll(brq.getUid(),brq.getPage(),brq.getPageSize());
+
+                        return doObjResp(boardAllList);
+
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return faild("失败~",false);
+                }
+                return doObjResp(boardAllList);
         }
         return null;
     }
@@ -753,4 +770,15 @@ public class CirclesController extends BaseController {
     public JSONObject isQuanZhu(@RequestBody(required = false) String json) {
         return callHttpReqTask(json, 15);
     }
+
+    /**
+     * 文化强列表
+     * @param json
+     * @return
+     */
+    @RequestMapping(value = "/getCulturewallAll", method = {RequestMethod.GET,
+            RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public JSONObject getCulturewallAll(@RequestBody(required = false) String json) {
+        return callHttpReqTask(json, 16);}
+
 }

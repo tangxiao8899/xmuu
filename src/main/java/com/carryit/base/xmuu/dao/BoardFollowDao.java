@@ -1,9 +1,6 @@
 package com.carryit.base.xmuu.dao;
 
-import com.carryit.base.xmuu.entity.Board;
-import com.carryit.base.xmuu.entity.BoardFollow;
-import com.carryit.base.xmuu.entity.Member;
-import com.carryit.base.xmuu.entity.Post;
+import com.carryit.base.xmuu.entity.*;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Repository;
@@ -38,4 +35,6 @@ public interface BoardFollowDao {
     List<Post> getNewAllBoardTopic(@Param("boardIDList") List<Integer> boardIDList, RowBounds rowBounds);
 
     long getNewAllBoardTopicCount(@Param("boardIDList") List<Integer> boardIDList);
+
+    List<BoardAll> getBoardAll(@Param("uid") int uid,@Param("page") int page,@Param("pageSize") int pageSize);
 }

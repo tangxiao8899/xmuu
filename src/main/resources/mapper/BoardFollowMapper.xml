@@ -82,4 +82,15 @@
 
     </select>
 
+    <!--文化墙列表-->
+    <select id="getBoardAll" resultType="com.carryit.base.xmuu.entity.BoardAll">
+        SELECT m.level,m.nickname,m.avatar,m.zhuquanzi,b.id as bid,b.logo,b.title,b.culturewall,b.updatetime,m.uid FROM ims_ewei_shop_member m
+        LEFT JOIN ims_ewei_shop_sns_board b ON m.zhuquanzi=b.id
+        WHERE m.level= 0 
+        ORDER BY b.updatetime DESC
+        limit #{page},#{pageSize}
+
+    </select>
+
+
 </mapper>

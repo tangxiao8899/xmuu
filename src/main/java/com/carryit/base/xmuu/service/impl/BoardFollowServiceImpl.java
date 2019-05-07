@@ -1,15 +1,13 @@
 package com.carryit.base.xmuu.service.impl;
 
 import com.carryit.base.xmuu.dao.BoardFollowDao;
-import com.carryit.base.xmuu.entity.Board;
-import com.carryit.base.xmuu.entity.BoardFollow;
-import com.carryit.base.xmuu.entity.Member;
-import com.carryit.base.xmuu.entity.Post;
+import com.carryit.base.xmuu.entity.*;
 import com.carryit.base.xmuu.service.BoardFollowService;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service("boardFollowService")
@@ -80,5 +78,31 @@ public class BoardFollowServiceImpl implements BoardFollowService {
     @Override
     public long getNewAllBoardTopicCount(List<Integer> boardIDList) {
         return boardFollowDao.getNewAllBoardTopicCount(boardIDList);
+    }
+
+    @Override
+    public List<BoardAll> getBoardAll(Integer uid, int page, int pageSize) {
+
+        if(page == 0){
+            page = 1;
+        }
+        int p = (page - 1) * pageSize;
+        List<BoardAll>  list = this.boardFollowDao.getBoardAll(uid,p,pageSize);
+
+        List<BoardAll> blist = new ArrayList<>();
+
+        for(BoardAll ba : list){
+                int bid =  ba.getBid();
+                BoardFollow b = this.boardFollowDao.getBoardByUid(uid,bid);
+                if(b != null){
+                    ba.setFoucus(1);
+                }else{
+                    ba.setFoucus(0);
+                }
+
+            blist.add(ba);
+
+        }
+        return  blist;
     }
 }

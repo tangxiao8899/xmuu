@@ -1,9 +1,6 @@
 package com.carryit.base.xmuu.service;
 
-import com.carryit.base.xmuu.entity.Board;
-import com.carryit.base.xmuu.entity.BoardFollow;
-import com.carryit.base.xmuu.entity.Member;
-import com.carryit.base.xmuu.entity.Post;
+import com.carryit.base.xmuu.entity.*;
 
 import java.util.List;
 
@@ -34,4 +31,6 @@ public interface BoardFollowService {
     List<Post> getNewAllBoardTopic(List<Integer> boardIDList, int i, int pageSize);
 
     long getNewAllBoardTopicCount(List<Integer> boardIDList);
+
+    List<BoardAll> getBoardAll(Integer uid,int page,int pageSize);
 }
