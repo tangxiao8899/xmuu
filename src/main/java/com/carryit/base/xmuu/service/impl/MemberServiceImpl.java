@@ -2,11 +2,13 @@ package com.carryit.base.xmuu.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.carryit.base.xmuu.dao.MemberDao;
+import com.carryit.base.xmuu.dao.UserDao;
 import com.carryit.base.xmuu.entity.*;
 import com.carryit.base.xmuu.service.MemberService;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,6 +17,9 @@ public class MemberServiceImpl implements MemberService {
 
     @Autowired
     private MemberDao memberDao;
+
+    @Autowired
+    UserDao userDao;
 
     @Override
     public Member getMemberById(int uid) {
@@ -191,5 +196,28 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public String getICodeByUid(Integer uid) {
         return memberDao.getICodeByUid(uid);
+    }
+
+    @Override
+    @Transactional
+    public void updateMemberDataInfo(MemberInfo req) {
+
+        Member member=new Member();
+        member.setUid(req.getUid());
+        member.setAvatar(req.getAvatar());
+        member.setAutograph(req.getAutograph());
+        member.setCity(req.getCity());
+        member.setNickName(req.getNickname());
+        memberDao.updateMemberInfo(member);
+
+        User user=new User();
+        user.setUid(req.getUid());
+        user.setIdCard(req.getIdCord());
+        user.setNeed(req.getNeed());
+        user.setMailbox(req.getMailbox());
+        user.setEducation(req.getEducation());
+        user.setMarriage(req.getMarriage());
+        userDao.updateUserInfo(user);
+
     }
 }

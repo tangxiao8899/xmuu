@@ -103,6 +103,18 @@ public class MemberController extends BaseController {
             RequestMethod.POST}, produces = "application/json;charset=UTF-8")
     public JSONObject subordinate(@RequestBody(required = false) String json) {
         return callHttpReqTask(json, 10);}
+
+    /**
+     * 编辑个人信息
+     * @param json
+     * @return
+     */
+    @RequestMapping(value = "/updateMemberInfo",method = {RequestMethod.GET,
+            RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public JSONObject updateMemberInfo(@RequestBody(required = false) String json) {
+        return callHttpReqTask(json, 11);}
+
+
     @Override
     public JSONObject runTask(String json, int cmd) {
         switch (cmd) {
@@ -273,6 +285,18 @@ public class MemberController extends BaseController {
                     e.printStackTrace();
                     return faild("失败~",false);
                 }
+            case 11:
+                try {
+                    MemberInfo req = p(json, MemberInfo.class);
+                    if (req != null) {
+                        memberService.updateMemberDataInfo(req);
+                        return doObjRespSuccess("更新成功");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return faild("失败~", false);
+                }
+
 
         }
         return null;

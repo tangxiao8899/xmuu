@@ -26,5 +26,7 @@ public interface UserDao {
 
     User getUserByPoneAndPassword(String phone);
 
+    void updateUserInfo(User user);
+
     //void updateByPhone(User user);
 }

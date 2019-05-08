@@ -202,4 +202,28 @@
 		select * from ims_users where uid = #{id}
 
 	</select>
+
+	<!--修改个人信息-->
+	<update id="updateUserInfo"  parameterType="com.carryit.base.xmuu.entity.User">
+		update ims_users
+		<set>
+			<if test="mailbox != null">
+				mailbox = #{mailbox},
+			</if>
+			<if test="idCard != null">
+                idCard = #{idCard},
+			</if>
+			<if test="education != null">
+				education = #{education},
+			</if>
+			<if test="marriage != null">
+				marriage = #{marriage},
+			</if>
+			<if test="need != null">
+				need = #{need},
+			</if>
+		</set>
+		where uid = #{uid}
+	</update>
+
 </mapper>
