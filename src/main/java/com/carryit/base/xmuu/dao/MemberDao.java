@@ -81,4 +81,6 @@ public interface MemberDao {
     List<Member> getMemberByCityAndQzAndLevel(@Param("city")String city, @Param("zhuquanzi") Integer zhuquanzi ,@Param("level")Integer level);
 
     void updateMemberInfo(Member member);
+
+    String getSincerityInfo(int uid);
 }

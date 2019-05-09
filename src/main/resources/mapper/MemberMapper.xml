@@ -374,5 +374,9 @@
         where uid = #{uid}
 	</update>
 
+	<!--诚信值说明-->
+	<select id="getSincerityInfo" resultType="String">
+		select sincerityInfo from ims_ewei_shop_member where uid = #{uid}
+	</select>
 
 </mapper>

@@ -220,4 +220,9 @@ public class MemberServiceImpl implements MemberService {
         userDao.updateUserInfo(user);
 
     }
+
+    @Override
+    public String getSincerityInfo(int uid) {
+        return this.memberDao.getSincerityInfo(uid);
+    }
 }

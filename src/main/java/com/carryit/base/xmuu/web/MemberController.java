@@ -151,24 +151,34 @@ public class MemberController extends BaseController {
             case 2:
 //                Sincerity sincerity=new Sincerity();
                 String sincerity = "0";
+                JSONObject jo = new JSONObject();
                 try {
                     User user=new User();
                     BoardReq req = p(json, BoardReq.class);
+
                     if (req != null) {
+                        //查询诚信值
+//                        this.sincerityService.getNumberById(req.uid);
                         user=userService.getUserById(req.uid);
+
+                        //诚信值说明
+                        jo.put("sincerityInfo",this.memberService.getSincerityInfo(req.uid));
+
                         if (user.getHideSincerity()==1){
                             sincerity="******";
-                        }
-                        else if (user.getHideSincerity()==2) {
+                            jo.put("sincerity",sincerity);
+
+                        }else if (user.getHideSincerity()==2) {
                             sincerity = String.valueOf(sincerityService.getNumberById(req.uid)+".0");
 //                            sincerityService.getNumberById(req.uid);
+                            jo.put("sincerity",sincerity);
                         }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                     return faild("失败~", false);
                 }
-                return doObjResp(sincerity);
+                return doObjResp(jo);
             case 3:
                 Globouns globouns = new Globouns();
                 try {

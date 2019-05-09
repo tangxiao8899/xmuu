@@ -93,4 +93,6 @@ public interface MemberService {
     List<Member> getMemberByCityAndQzAndLevel(String city,Integer zhuquanzi,Integer level);
 
     void updateMemberDataInfo(MemberInfo req);
+
+    String getSincerityInfo(int uid);
 }
