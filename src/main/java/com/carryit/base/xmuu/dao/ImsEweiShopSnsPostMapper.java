@@ -3,10 +3,13 @@ package com.carryit.base.xmuu.dao;
 import com.carryit.base.xmuu.entity.ImsEweiShopSnsPostWithBLOBs;
 import com.carryit.base.xmuu.entity.Post;
 import com.carryit.base.xmuu.entity.imsEweiShopSnsPost;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
+
 @Repository
 public interface ImsEweiShopSnsPostMapper {
     int deleteByPrimaryKey(Integer id);
@@ -32,4 +35,6 @@ public interface ImsEweiShopSnsPostMapper {
     long getTredsCount(int uid);
 
     void delTreds(Integer id);
+
+    List<Map<String, Object>> receiveTreds(@Param("id") Integer id,@Param("page") int page,@Param("pageSize") int pageSize);
 }

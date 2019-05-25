@@ -86,6 +86,12 @@ public class LikesController extends BaseController {
         return callHttpReqTask(json, 5);
     }
 
+    //收到的赞接口
+    @RequestMapping(value = "/receiveTreds", method = {RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public JSONObject receiveTreds(@RequestBody(required = false) String json) {
+        return callHttpReqTask(json, 6);
+    }
+
 
     @Override
     public JSONObject runTask(String json, int cmd) {
@@ -249,6 +255,21 @@ public class LikesController extends BaseController {
 
                         postService.delTreds(parmJo.getInteger("id"));
                         return doObjRespSuccess("删除成功");
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return faild("失败~", false);
+                }
+            case 6:
+//            	收到的赞
+                try {
+                    JSONObject parmJo = JSON.parseObject(json);
+                    if (!parmJo.containsKey("uid")) { //用户ID
+                        return faild("参数异常~", false);
+                    }
+
+                   JSONObject jo = postService.receiveTreds(parmJo.getInteger("uid"),parmJo.getInteger("page"),parmJo.getInteger("pageSize"));
+                    return jo;
 
                 } catch (Exception e) {
                     e.printStackTrace();

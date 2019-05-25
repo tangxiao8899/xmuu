@@ -1,5 +1,6 @@
 package com.carryit.base.xmuu.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.carryit.base.xmuu.dao.ImsEweiShopSnsPostMapper;
 import com.carryit.base.xmuu.dao.MemberDao;
 import com.carryit.base.xmuu.dao.imsEweiShopMemberMapper;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ImsEweiShopSnsPostServiceImpl implements ImsEweiShopSnsPostService {
@@ -67,6 +69,22 @@ public class ImsEweiShopSnsPostServiceImpl implements ImsEweiShopSnsPostService 
 	@Override
 	public void delTreds(Integer id) {
 		postMapper.delTreds(id);
+	}
+
+	@Override
+	public JSONObject receiveTreds(Integer id,int page,int pageSize) {
+		JSONObject jo = new JSONObject();
+		try {
+			int index = pageSize*(page-1);
+			List<Map<String,Object>> list = postMapper.receiveTreds(id,index,pageSize);
+			jo.put("code","200");
+			jo.put("data",list);
+			jo.put("message","操作成功");
+		}catch (Exception e){
+			jo.put("code","500");
+			jo.put("message",e.getMessage());
+		}
+		return jo;
 	}
 
 }

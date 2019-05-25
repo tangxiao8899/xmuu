@@ -400,4 +400,15 @@
     where id = #{id} OR pid = #{id}
   </delete>
 
+  <!--收到的赞-->
+  <select id="receiveTreds" resultType="Map">
+    SELECT tp.id,tp.createtime,m.nickname,p.content,m.avatar,tp.uid FROM t_praise tp
+    LEFT JOIN ims_ewei_shop_sns_post p ON tp.ims_ewei_shop_sns_post_id = p.id
+    LEFT JOIN ims_ewei_shop_member m ON tp.uid = m.uid
+    WHERE p.uid = #{id}
+    ORDER BY tp.createtime desc
+    LIMIT #{page},#{pageSize}
+
+  </select>
+
 </mapper>
