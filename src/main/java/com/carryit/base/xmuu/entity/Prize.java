@@ -6,6 +6,15 @@ public class Prize {
     private String phone;
     private Integer number;
     private String createTime;
+    private String images;
+
+    public String getImages() {
+        return images;
+    }
+
+    public void setImages(String images) {
+        this.images = images;
+    }
 
     public Integer getId() {
         return id;

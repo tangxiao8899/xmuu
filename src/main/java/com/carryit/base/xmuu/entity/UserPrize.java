@@ -6,6 +6,15 @@ public class UserPrize {
     private String uid;
     private Integer pid;
     private String createTime;
+    private String images;
+
+    public String getImages() {
+        return images;
+    }
+
+    public void setImages(String images) {
+        this.images = images;
+    }
 
     public String getCreateTime() {
         return createTime;

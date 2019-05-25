@@ -16,13 +16,13 @@
 
     <select id="getAllPrize" resultMap="Prize"
             parameterType="com.carryit.base.xmuu.entity.Prize">
-		select id,name,phone,number,createTime
+		select id,name,phone,number,createTime,images
 		from t_prize
 	</select>
 
     <select id="getPrizeById" resultMap="Prize"
             parameterType="com.carryit.base.xmuu.entity.Prize">
-        select id,name,phone,number,createTime
+        select id,name,phone,number,createTime,images
         from t_prize
         where id=#{id}
     </select>

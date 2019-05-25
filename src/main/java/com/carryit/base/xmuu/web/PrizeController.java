@@ -82,11 +82,13 @@ public class PrizeController extends BaseController {
                 res.put("prizeName", prize.getName());
                 res.put("prizePhone", prize.getPhone());
                 res.put("uid", userId);
+                res.put("images",prize.getImages());
                 if (prize.getName() != null) {
                     ContextData.addShakedUid(userId);
                     UserPrize userPrize = new UserPrize();
                     userPrize.setPid(prize.getId());
                     userPrize.setUid(userId);
+                    userPrize.setImages(prize.getImages());
                     userPrizeService.addUserPrize(userPrize);
                 }
             } else {
