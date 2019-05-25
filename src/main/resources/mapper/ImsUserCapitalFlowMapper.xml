@@ -14,4 +14,18 @@
         left join ims_ewei_shop_member m on cf.uid  = m.uid where cf.uid = #{uid}
     </select>
 
+    <!--我的收益-->
+    <select id="getMyProfit" resultType="double">
+        SELECT IFNULL(sum(price),0) as profit FROM ims_user_capital_flow where  uid =#{uid} and source in(4,5,6,7)
+    </select>
+
+    <!--我的账单-->
+    <select id="getMyBill" resultType="com.carryit.base.xmuu.entity.ImsUserCapitalFlowEntity">
+        SELECT price,type,source,createTime FROM ims_user_capital_flow
+        where uid = #{uid}
+        ORDER BY createTime DESC
+        limit #{page},#{pageSize}
+
+    </select>
+
 </mapper>
