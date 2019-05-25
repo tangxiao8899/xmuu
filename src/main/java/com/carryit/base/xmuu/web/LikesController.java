@@ -92,6 +92,12 @@ public class LikesController extends BaseController {
         return callHttpReqTask(json, 6);
     }
 
+    //收到评论接口
+    @RequestMapping(value = "/receiveComment", method = {RequestMethod.POST}, produces = "application/json;charset=UTF-8")
+    public JSONObject receiveComment(@RequestBody(required = false) String json) {
+        return callHttpReqTask(json, 7);
+    }
+
 
     @Override
     public JSONObject runTask(String json, int cmd) {
@@ -269,6 +275,21 @@ public class LikesController extends BaseController {
                     }
 
                    JSONObject jo = postService.receiveTreds(parmJo.getInteger("uid"),parmJo.getInteger("page"),parmJo.getInteger("pageSize"));
+                    return jo;
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return faild("失败~", false);
+                }
+            case 7:
+//            	收到的评论
+                try {
+                    JSONObject parmJo = JSON.parseObject(json);
+                    if (!parmJo.containsKey("uid")) { //用户ID
+                        return faild("参数异常~", false);
+                    }
+
+                    JSONObject jo = postService.receiveComment(parmJo.getInteger("uid"),parmJo.getInteger("page"),parmJo.getInteger("pageSize"));
                     return jo;
 
                 } catch (Exception e) {

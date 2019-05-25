@@ -87,4 +87,20 @@ public class ImsEweiShopSnsPostServiceImpl implements ImsEweiShopSnsPostService 
 		return jo;
 	}
 
+	@Override
+	public JSONObject receiveComment(Integer uid, Integer page, Integer pageSize) {
+		JSONObject jo = new JSONObject();
+		try {
+			int index = pageSize*(page-1);
+			List<Map<String,Object>> list = postMapper.receiveComment(uid,index,pageSize);
+			jo.put("code","200");
+			jo.put("data",list);
+			jo.put("message","操作成功");
+		}catch (Exception e){
+			jo.put("code","500");
+			jo.put("message",e.getMessage());
+		}
+		return jo;
+	}
+
 }

@@ -37,4 +37,6 @@ public interface ImsEweiShopSnsPostMapper {
     void delTreds(Integer id);
 
     List<Map<String, Object>> receiveTreds(@Param("id") Integer id,@Param("page") int page,@Param("pageSize") int pageSize);
+
+    List<Map<String, Object>> receiveComment(@Param("uid")Integer uid, @Param("page") int index,@Param("pageSize") Integer pageSize);
 }

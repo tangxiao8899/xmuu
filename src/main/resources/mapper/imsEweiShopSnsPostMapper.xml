@@ -411,4 +411,13 @@
 
   </select>
 
+  <!--收到的评论-->
+  <select id="receiveComment" resultType="Map">
+    SELECT p2.avatar,p2.nickname,p2.content,p2.createtime,p1.content as dongtai,p2.uid FROM ims_ewei_shop_sns_post p1
+    INNER JOIN ims_ewei_shop_sns_post p2 ON p1.id = p2.pid
+    WHERE p1.uid =#{uid}
+    ORDER BY p2.createtime DESC
+    LIMIT #{page},#{pageSize}
+
+  </select>
 </mapper>

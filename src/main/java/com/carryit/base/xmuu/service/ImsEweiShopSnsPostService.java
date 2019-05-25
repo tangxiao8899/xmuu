@@ -29,4 +29,13 @@ public interface ImsEweiShopSnsPostService {
 	 * @return
 	 */
     JSONObject receiveTreds(Integer id,int page,int pageSize);
+
+	/**
+	 * 收到的评论
+	 * @param uid 用户ID
+	 * @param page 页码
+	 * @param pageSize 每页数量
+	 * @return
+	 */
+	JSONObject receiveComment(Integer uid, Integer page, Integer pageSize);
 }
